@@ -234,6 +234,36 @@ class NESService {
   }
 
   /**
+   * 切换canvas全屏显示尺寸
+   * @param {boolean} isFullscreen 是否为全屏模式
+   */
+  toggleCanvasFullscreen(isFullscreen) {
+    console.log(`NESService: 切换canvas全屏模式: ${isFullscreen}`);
+    
+    const canvas = document.querySelector('.nes-screen');
+    if (!canvas) {
+      console.warn('NESService: 找不到.nes-screen canvas元素');
+      return;
+    }
+
+    if (isFullscreen) {
+      // 全屏模式：放大到更大尺寸，充满屏幕
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.objectFit = 'contain';
+      canvas.style.imageRendering = 'pixelated';
+      console.log('NESService: 已切换到全屏显示模式');
+    } else {
+      // 普通模式：恢复到2倍大小
+      canvas.style.width = '512px';
+      canvas.style.height = '480px';
+      canvas.style.objectFit = 'initial';
+      canvas.style.imageRendering = 'pixelated';
+      console.log('NESService: 已切换到普通显示模式');
+    }
+  }
+
+  /**
    * 释放资源
    */
   destroy() {

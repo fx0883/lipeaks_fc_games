@@ -38,63 +38,25 @@ if (typeof jQuery !== 'undefined') {
                 self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
                 self.root = $('<div></div>');
                 self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo(self.root);
+                
+                // 放大游戏画面一倍
+                self.screen.css({
+                    'width': '512px',
+                    'height': '480px',
+                    'image-rendering': 'pixelated'
+                });
 
                 if (!self.screen[0].getContext) {
                     parent.html("Your browser doesn't support the <code>&lt;canvas&gt;</code> tag. Try Google Chrome, Safari, Opera or Firefox!");
                     return;
                 }
-                self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
-                self.romSelect = $('<select></select>').appendTo(self.romContainer);
-                self.controls = $('<div class="nes-controls"></div>').appendTo(self.root);
-                self.buttons = {
-                    pause: $('<input type="button" value="暂停" class="nes-pause" disabled="disabled">').appendTo(self.controls),
-                    restart: $('<input type="button" value="重启" class="nes-restart" disabled="disabled">').appendTo(self.controls),
-                    sound: $('<input type="button" value="开启声音" class="nes-enablesound">').appendTo(self.controls),
-                    zoom: $('<input type="button" value="放大" class="nes-zoom">').appendTo(self.controls)
-                };
                 self.root.appendTo(parent);
 
-                /*
-                 * ROM loading
-                 */
-                self.romSelect.change(function() {
-                    self.loadROM();
-                });
+
 
                 /*
-                 * Buttons
+                 * Screen sizing
                  */
-                self.buttons.pause.click(function() {
-                    if (self.nes.isRunning) {
-                        self.nes.stop();
-                        self.updateStatus("Paused");
-                        self.buttons.pause.attr("value", "继续");
-                    } else {
-                        self.nes.start();
-                        self.buttons.pause.attr("value", "暂停");
-                    }
-                });
-
-                self.buttons.restart.click(function() {
-                    self.nes.reloadRom();
-                    self.nes.start();
-                });
-
-                self.buttons.sound.click(function() {
-                    if (self.nes.opts.emulateSound) {
-                        self.nes.opts.emulateSound = false;
-                        self.buttons.sound.attr("value", "打开声音");
-                    } else {
-                        self.nes.opts.emulateSound = true;
-                        self.buttons.sound.attr("value", "关闭声音");
-
-                        var source = self.audio.createBufferSource();
-                        source.connect(self.audio.destination); // Output to sound
-                        source.start();
-                    }
-                });
-
-                self.zoomed = false;
                 $('.nes-screen').css({
                     'max-height': document.documentElement.clientHeight,
                 })
@@ -103,51 +65,6 @@ if (typeof jQuery !== 'undefined') {
                         'max-height': document.documentElement.clientHeight,
                     })
                 })
-                if (/(IPHONE|IPAD|ANDROID)/i.test(navigator.userAgent)) {
-                    $('#pc-controlls').hide();
-                } else {
-                    $('.nes-zoom').hide();
-                    $('#mobile-controlls').hide();
-                    $('.shang').removeClass('anim_m').addClass('pc');
-                }
-
-                self.buttons.zoom.click(function() {
-                    if (self.zoomed) {
-                        //                        self.screen.animate({
-                        //                            width: '512px',
-                        //                            height: '480px'
-                        //                        });
-                        $('body').addClass('放大');
-                        if (document.documentElement.clientHeight < screen.availHeight) {
-                            $('body').css({
-                                width: document.documentElement.clientHeight,
-                            })
-                        }
-                        $('.big .nes-screen').css({
-                            height: document.documentElement.clientWidth,
-                            width: 'auto'
-                        })
-                        self.buttons.zoom.attr("value", "放大");
-                        self.zoomed = true;
-                    } else {
-                        //                        self.screen.animate({
-                        //                            width: '256px',
-                        //                            height: '240px'
-                        //                        });
-                        self.buttons.zoom.attr("value", "缩小");
-                        $('body').removeClass('big');
-                        $('.nes-screen').css({
-                            height: 'auto',
-                            width: '100%',
-                            'max-width': document.documentElement.clientWidth,
-                            'max-height': document.documentElement.clientHeight
-                        })
-                        $('body').css({
-                            width: 'auto'
-                        })
-                        self.zoomed = false;
-                    }
-                });
 
                 /*
                  * Lightgun experiments with mouse
@@ -172,9 +89,7 @@ if (typeof jQuery !== 'undefined') {
                     });
                 }
 
-                if (typeof roms != 'undefined') {
-                    self.setRoms(roms);
-                }
+
 
                 /*
                  * Canvas
@@ -723,40 +638,14 @@ if (typeof jQuery !== 'undefined') {
                  * Enable and reset UI elements
                  */
                 enable: function() {
-                    this.buttons.pause.attr("disabled", null);
-                    if (this.nes.isRunning) {
-                        this.buttons.pause.attr("value", "暂停");
-                    } else {
-                        this.buttons.pause.attr("value", "继续");
-                    }
-                    this.buttons.restart.attr("disabled", null);
-                    if (this.nes.opts.emulateSound) {
-                        this.buttons.sound.attr("value", "关闭声音");
-                    } else {
-                        this.buttons.sound.attr("value", "打开声音");
-                    }
+                    // UI elements are now managed by Vue.js components
                 },
 
                 updateStatus: function(s) {
                     this.status.text(s);
                 },
 
-                setRoms: function(roms) {
-                    this.romSelect.children().remove();
-                    $("<option>选择游戏...</option>").appendTo(this.romSelect);
-                    for (var groupName in roms) {
-                        if (roms.hasOwnProperty(groupName)) {
-                            var optgroup = $('<optgroup></optgroup>').
-                            attr("label", groupName);
-                            for (var i = 0; i < roms[groupName].length; i++) {
-                                $('<option>' + roms[groupName][i][0] + '</option>')
-                                    .attr("value", roms[groupName][i][1])
-                                    .appendTo(optgroup);
-                            }
-                            this.romSelect.append(optgroup);
-                        }
-                    }
-                },
+
 
                 writeAudio: function(samples) {
                     //return this.dynamicaudio.writeInt(samples);
@@ -811,6 +700,10 @@ if (typeof jQuery !== 'undefined') {
             };
 
             return UI;
+       
+       
+
+
         };
     })(jQuery);
 }

@@ -8,6 +8,59 @@
         <button class="control-btn" @click="restart">重启</button>
         <button class="control-btn" @click="toggleSound">{{ isSoundEnabled ? '关闭声音' : '开启声音' }}</button>
         <button class="control-btn" @click="toggleFullscreen">全屏</button>
+        <button class="control-btn" @click="showKeyHelp = true">按键说明</button>
+      </div>
+      
+      <!-- 按键说明弹窗 -->
+      <div v-if="showKeyHelp" class="key-help-modal" @click.self="showKeyHelp = false">
+        <div class="key-help-content">
+          <div class="key-help-header">
+            <h3>游戏按键说明</h3>
+            <button class="close-btn" @click="showKeyHelp = false">×</button>
+          </div>
+          <div class="key-help-body">
+            <div class="key-item">
+              <span class="key-name">上</span>
+              <span class="key-value">W</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">下</span>
+              <span class="key-value">S</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">左</span>
+              <span class="key-value">A</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">右</span>
+              <span class="key-value">D</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">A</span>
+              <span class="key-value">J</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">AA</span>
+              <span class="key-value">Z</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">B</span>
+              <span class="key-value">K</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">BB</span>
+              <span class="key-value">X</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">Start</span>
+              <span class="key-value">Enter</span>
+            </div>
+            <div class="key-item">
+              <span class="key-name">Select</span>
+              <span class="key-value">Ctrl</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -56,12 +109,18 @@ export default {
       isGameLoaded: false,
       isPaused: false,
       isSoundEnabled: false,
-      isFullscreen: false
+      isFullscreen: false,
+      showKeyHelp: false
     }
   },
   mounted() {
     console.log('FCEmulator: 组件挂载，开始初始化模拟器');
     this.initEmulator();
+    
+    // 监听全屏状态变化
+    document.addEventListener('fullscreenchange', this.handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', this.handleFullscreenChange);
   },
   methods: {
     async initEmulator() {
@@ -123,6 +182,7 @@ export default {
       const emulatorEl = this.$refs.emulatorRef;
 
       if (!document.fullscreenElement) {
+        // 进入全屏
         if (emulatorEl.requestFullscreen) {
           emulatorEl.requestFullscreen();
         } else if (emulatorEl.webkitRequestFullscreen) {
@@ -131,7 +191,10 @@ export default {
           emulatorEl.msRequestFullscreen();
         }
         this.isFullscreen = true;
+        // 调用nesService切换canvas到全屏尺寸
+        nesService.toggleCanvasFullscreen(true);
       } else {
+        // 退出全屏
         if (document.exitFullscreen) {
           document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
@@ -140,11 +203,24 @@ export default {
           document.msExitFullscreen();
         }
         this.isFullscreen = false;
+        // 调用nesService切换canvas到普通尺寸
+        nesService.toggleCanvasFullscreen(false);
+      }
+    },
+    handleFullscreenChange() {
+      // 当全屏状态改变时（比如按ESC键退出全屏）
+      if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        this.isFullscreen = false;
+        nesService.toggleCanvasFullscreen(false);
       }
     }
   },
   beforeUnmount() {
     console.log('FCEmulator: 组件卸载，释放资源');
+    // 移除全屏事件监听器
+    document.removeEventListener('fullscreenchange', this.handleFullscreenChange);
+    document.removeEventListener('webkitfullscreenchange', this.handleFullscreenChange);
+    document.removeEventListener('msfullscreenchange', this.handleFullscreenChange);
     // 停止游戏并完全清除NES实例
     nesService.destroy();
   }
@@ -164,10 +240,15 @@ export default {
 
 #emulator {
   width: 100%;
-  height: 480px;
+  height: 500px;
   background-color: #000;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
 
 .game-controls {
   display: flex;
@@ -212,6 +293,92 @@ export default {
 }
 
 .key {
+  font-weight: bold;
+}
+
+/* 按键说明弹窗样式 */
+.key-help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.key-help-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.key-help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.key-help-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #333;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+}
+
+.key-help-body {
+  display: grid;
+  gap: 10px;
+}
+
+.key-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.key-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.key-value {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
   font-weight: bold;
 }
 </style> 
