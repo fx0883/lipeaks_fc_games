@@ -1,0 +1,28 @@
+[
+  {
+    "id": "luyu-18",
+    "name": "爆笑三国",
+    "version": "",
+    "author": "外星科技 (147201688转简体版)",
+    "region": "CN",
+    "category": "slg",
+    "size": "8Mb",
+    "romPath": "/roms/luyu(18).nes",
+    "cover": "/images/games/default.png",
+    "description": "爆笑三国是一款以三国为背景的策略游戏，由外星科技开发并由147201688转为简体版。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-19",
+    "name": "爆笑三国",
+    "version": "",
+    "author": "外星科技",
+    "region": "CN",
+    "category": "slg",
+    "size": "8Mb",
+    "romPath": "/roms/luyu(19).nes",
+    "cover": "/images/games/default.png",
+    "description": "爆笑三国是一款以三国为背景的策略游戏，由外星科技开发。",
+    "playCount": 0
+  }
+] 

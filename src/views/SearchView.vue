@@ -1,0 +1,148 @@
+<template>
+  <div class="search-view">
+    <div class="search-header">
+      <h1>搜索结果: "{{ searchQuery }}"</h1>
+      <p>共找到 {{ searchResults.length }} 个结果</p>
+    </div>
+
+    <div class="search-results" v-if="searchResults.length > 0">
+      <div class="game-card" v-for="game in searchResults" :key="game.id">
+        <router-link :to="`/game/${game.id}`">
+          <div class="game-image">
+            <img :src="game.cover" :alt="game.name">
+          </div>
+          <div class="game-info">
+            <h3>{{ game.name }}</h3>
+            <div class="game-meta">
+              <span class="category" v-if="getCategoryName(game.category)">{{ getCategoryName(game.category) }}</span>
+              <span class="author" v-if="game.author">{{ game.author }}</span>
+            </div>
+            <p>{{ game.description }}</p>
+          </div>
+        </router-link>
+      </div>
+    </div>
+
+    <div class="no-results" v-else-if="!loading">
+      <p>未找到与 "{{ searchQuery }}" 相关的游戏</p>
+      <p>请尝试其他关键词或浏览<router-link to="/">所有游戏</router-link></p>
+    </div>
+
+    <div class="loading" v-if="loading">
+      <p>正在搜索...</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useGameStore } from '../stores/game'
+
+const route = useRoute()
+const router = useRouter()
+const gameStore = useGameStore()
+
+const searchQuery = computed(() => route.query.q || '')
+const searchResults = computed(() => gameStore.searchResults)
+const loading = computed(() => gameStore.loading)
+
+// 获取分类名称
+const getCategoryName = (categoryId) => {
+  if (!categoryId) return ''
+  const category = gameStore.getCategoryById(categoryId)
+  return category ? category.name : categoryId
+}
+
+// 执行搜索
+const performSearch = async () => {
+  if (searchQuery.value) {
+    await gameStore.searchGames(searchQuery.value)
+  }
+}
+
+// 监听路由参数变化，重新搜索
+watch(() => route.query.q, () => {
+  performSearch()
+})
+
+// 组件挂载时执行搜索
+onMounted(() => {
+  performSearch()
+})
+</script>
+
+<style scoped>
+.search-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-header {
+  margin-bottom: 30px;
+}
+
+.search-header p {
+  color: var(--color-text-light);
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+}
+
+.game-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.game-info {
+  padding: 15px;
+}
+
+.game-info h3 {
+  margin: 0 0 10px;
+}
+
+.game-meta {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.game-meta span {
+  margin-right: 15px;
+  font-size: 0.9em;
+  color: var(--color-text-light);
+}
+
+.game-info p {
+  margin: 0;
+  color: var(--color-text-light);
+  font-size: 0.9em;
+}
+
+.no-results, .loading {
+  text-align: center;
+  padding: 50px 0;
+  color: var(--color-text-light);
+}
+
+.no-results a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+</style> 

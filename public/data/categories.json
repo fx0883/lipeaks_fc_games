@@ -1,0 +1,72 @@
+[
+  {
+    "id": "action",
+    "name": "动作",
+    "description": "包含平台跳跃、射击等需要反应和操作的游戏",
+    "cover": "/images/categories/action.png",
+    "gamesUrl": "/data/games/action.json"
+  },
+  {
+    "id": "rpg",
+    "name": "角色",
+    "description": "扮演角色进行冒险和故事发展的游戏",
+    "cover": "/images/categories/rpg.png",
+    "gamesUrl": "/data/games/rpg.json"
+  },
+  {
+    "id": "puzzle",
+    "name": "益智",
+    "description": "需要思考和解谜的游戏",
+    "cover": "/images/categories/puzzle.png",
+    "gamesUrl": "/data/games/puzzle.json"
+  },
+  {
+    "id": "stg",
+    "name": "射击",
+    "description": "以射击为主要玩法的游戏",
+    "cover": "/images/categories/stg.png",
+    "gamesUrl": "/data/games/stg.json"
+  },
+  {
+    "id": "slg",
+    "name": "策略",
+    "description": "需要战略思维和规划的游戏",
+    "cover": "/images/categories/slg.png",
+    "gamesUrl": "/data/games/slg.json"
+  },
+  {
+    "id": "ftg",
+    "name": "格斗",
+    "description": "以格斗对战为主的游戏",
+    "cover": "/images/categories/ftg.png",
+    "gamesUrl": "/data/games/ftg.json"
+  },
+  {
+    "id": "tab",
+    "name": "桌游",
+    "description": "棋牌、桌面类游戏",
+    "cover": "/images/categories/tab.png",
+    "gamesUrl": "/data/games/tab.json"
+  },
+  {
+    "id": "rac",
+    "name": "赛车",
+    "description": "以赛车为主题的游戏",
+    "cover": "/images/categories/rac.png",
+    "gamesUrl": "/data/games/rac.json"
+  },
+  {
+    "id": "spg",
+    "name": "体育",
+    "description": "以体育运动为主题的游戏",
+    "cover": "/images/categories/spg.png",
+    "gamesUrl": "/data/games/spg.json"
+  },
+  {
+    "id": "etc",
+    "name": "其他",
+    "description": "其他类型的游戏",
+    "cover": "/images/categories/etc.png",
+    "gamesUrl": "/data/games/etc.json"
+  }
+] 

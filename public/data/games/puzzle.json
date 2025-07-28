@@ -1,0 +1,54 @@
+[
+  {
+    "id": "luyu-4",
+    "name": "埃及",
+    "version": "",
+    "author": "MS汉化",
+    "region": "JP",
+    "category": "puzzle",
+    "size": "0.5Mb",
+    "romPath": "/roms/luyu(4).nes",
+    "cover": "/images/games/default.png",
+    "description": "埃及是一款以古埃及为主题的益智游戏，由MS汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-16",
+    "name": "暴走淘金者2",
+    "version": "",
+    "author": "九班汉化",
+    "region": "JP",
+    "category": "puzzle",
+    "size": "0.18Mb",
+    "romPath": "/roms/luyu(16).nes",
+    "cover": "/images/games/default.png",
+    "description": "暴走淘金者2是一款淘金主题的益智游戏，由九班汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-17",
+    "name": "暴走淘金者",
+    "version": "",
+    "author": "九班汉化",
+    "region": "US",
+    "category": "puzzle",
+    "size": "0.18Mb",
+    "romPath": "/roms/luyu(17).nes",
+    "cover": "/images/games/default.png",
+    "description": "暴走淘金者是一款淘金主题的益智游戏，由九班汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-27",
+    "name": "仓库世家 & 动脑筋",
+    "version": "",
+    "author": "小霸王",
+    "region": "CN",
+    "category": "puzzle",
+    "size": "4Mb",
+    "romPath": "/roms/luyu(27).nes",
+    "cover": "/images/games/default.png",
+    "description": "仓库世家 & 动脑筋是一款益智类游戏，由小霸王开发。",
+    "playCount": 0
+  }
+] 

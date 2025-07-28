@@ -1,0 +1,28 @@
+[
+  {
+    "id": "luyu-12",
+    "name": "八德汉卡王",
+    "version": "",
+    "author": "八德",
+    "region": "CN",
+    "category": "etc",
+    "size": "4Mb",
+    "romPath": "/roms/luyu(12).nes",
+    "cover": "/images/games/default.png",
+    "description": "八德汉卡王是一款学习卡片游戏，由八德开发。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-20",
+    "name": "奔力电脑学习机",
+    "version": "",
+    "author": "奔力",
+    "region": "CN",
+    "category": "etc",
+    "size": "8Mb",
+    "romPath": "/roms/luyu(20).nes",
+    "cover": "/images/games/default.png",
+    "description": "奔力电脑学习机是一款教育类游戏，由奔力开发。",
+    "playCount": 0
+  }
+] 

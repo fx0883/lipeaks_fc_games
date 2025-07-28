@@ -1,0 +1,67 @@
+[
+  {
+    "id": "luyu-6",
+    "name": "暗黑破坏神",
+    "version": "",
+    "author": "南晶科技",
+    "region": "CN",
+    "category": "rpg",
+    "size": "16Mb",
+    "romPath": "/roms/luyu(6).nes",
+    "cover": "/images/games/default.png",
+    "description": "暗黑破坏神是一款经典角色扮演游戏，由南晶科技开发。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-8",
+    "name": "傲剑江湖",
+    "version": "",
+    "author": "南晶科技",
+    "region": "CN",
+    "category": "rpg",
+    "size": "4Mb",
+    "romPath": "/roms/luyu(8).nes",
+    "cover": "/images/games/default.png",
+    "description": "傲剑江湖是一款武侠题材的角色扮演游戏，由南晶科技开发。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-9",
+    "name": "傲视三国志",
+    "version": "",
+    "author": "南晶科技",
+    "region": "CN",
+    "category": "rpg",
+    "size": "16Mb",
+    "romPath": "/roms/luyu(9).nes",
+    "cover": "/images/games/default.png",
+    "description": "傲视三国志是一款以三国时期为背景的角色扮演游戏，由南晶科技开发。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-10",
+    "name": "傲视天地",
+    "version": "",
+    "author": "晶科泰",
+    "region": "CN",
+    "category": "rpg",
+    "size": "8Mb",
+    "romPath": "/roms/luyu(10).nes",
+    "cover": "/images/games/default.png",
+    "description": "傲视天地是一款宏大的角色扮演游戏，由晶科泰开发。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-11",
+    "name": "八宝奇珠",
+    "version": "",
+    "author": "外星科技汉化",
+    "region": "JP",
+    "category": "rpg",
+    "size": "4Mb",
+    "romPath": "/roms/luyu(11).nes",
+    "cover": "/images/games/default.png",
+    "description": "八宝奇珠是一款寻宝冒险的角色扮演游戏，由外星科技汉化。",
+    "playCount": 0
+  }
+] 

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "luyu-30",
+    "name": "超级冲刺赛",
+    "version": "",
+    "author": "快乐的龙汉化",
+    "region": "JP",
+    "category": "rac",
+    "size": "1Mb",
+    "romPath": "/roms/luyu(30).nes",
+    "cover": "/images/games/default.png",
+    "description": "超级冲刺赛是一款刺激的赛车游戏，由快乐的龙汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-173",
+    "name": "公路赛车",
+    "version": "",
+    "author": "阿渊汉化",
+    "region": "JP",
+    "category": "rac",
+    "size": "0.5Mb",
+    "romPath": "/roms/luyu(173).nes",
+    "cover": "/images/games/default.png",
+    "description": "公路赛车是一款经典赛车游戏，由阿渊汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-174",
+    "name": "公路之星",
+    "version": "v1.0",
+    "author": "九班汉化",
+    "region": "US",
+    "category": "rac",
+    "size": "1Mb",
+    "romPath": "/roms/luyu(174).nes",
+    "cover": "/images/games/default.png",
+    "description": "公路之星是一款经典赛车游戏，由九班汉化。",
+    "playCount": 0
+  },
+  {
+    "id": "luyu-175",
+    "name": "公路之星2",
+    "version": "v1.0",
+    "author": "九班汉化",
+    "region": "US",
+    "category": "rac",
+    "size": "1Mb",
+    "romPath": "/roms/luyu(175).nes",
+    "cover": "/images/games/default.png",
+    "description": "公路之星2是一款经典赛车游戏续作，由九班汉化。",
+    "playCount": 0
+  }
+] 
