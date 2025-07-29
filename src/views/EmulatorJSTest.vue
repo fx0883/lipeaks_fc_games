@@ -375,79 +375,70 @@ async function loadEmulator() {
     // 清除之前的模拟器实例
     await clearEmulator()
 
-    // 设置EmulatorJS配置 - 使用官方支持的参数
+    // EmulatorJS 标准配置 - 使用默认英语设置
     window.EJS_player = '#emulatorjs-test-container'
     window.EJS_gameUrl = selectedRom.value
-    window.EJS_core = 'nes'
-    window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'
+    window.EJS_core = 'fceumm'
+    window.EJS_pathtodata = '/emulatorjs/data/'
     
-    // 官方支持的配置选项
-    window.EJS_gameName = 'FC Game Test'  // 游戏名称
-    window.EJS_volume = 0.8  // 音量设置 (0-1)
-    window.EJS_startOnLoaded = true  // 自动开始游戏！
-    window.EJS_fullscreenOnLoaded = false  // 不自动全屏
+    // 基本配置
+    window.EJS_gameName = 'NES Game'
+    window.EJS_language = ''  // 空字符串 = 默认英语
+    window.EJS_startOnLoaded = true
     
-    // 启用调试模式查看详细错误
-    window.EJS_DEBUG_XX = true
-    
-    // 可选配置
-    window.EJS_lightgun = false
-    window.EJS_multitap = false
-    window.EJS_mouse = false
-    
-    // 界面颜色主题
-    window.EJS_color = '#1AAFFF'
-    
-    // 高级配置 - 默认选项
-    window.EJS_defaultOptions = {
-      'save-state-slot': 0,
-      'save-state-location': 'browser'
-    }
-    
-    // 添加EmulatorJS事件监听
+    // 标准EmulatorJS事件监听
     window.EJS_ready = function() {
-      console.log('✅ EmulatorJS准备完成!')
+      console.log('EmulatorJS ready')
+      isLoaded.value = true
     }
     
     window.EJS_onGameStart = function() {
-      console.log('✅ 游戏开始运行!')
-      // 游戏开始后启动FPS监控
-      setTimeout(() => {
-        if (!isMonitoring.value) {
-          startPerformanceMonitoring()
-        }
-      }, 1000)
+      console.log('Game started')
+      isLoading.value = false
+      
+      // 启动性能监控
+      if (!isMonitoring.value) {
+        setTimeout(() => startPerformanceMonitoring(), 1000)
+      }
     }
 
-    console.log('EmulatorJS配置（官方参数）:', {
+    console.log('EmulatorJS配置:', {
       player: window.EJS_player,
       gameUrl: window.EJS_gameUrl,
       core: window.EJS_core,
       pathtodata: window.EJS_pathtodata,
-      gameName: window.EJS_gameName,
-      volume: window.EJS_volume,
-      theme: window.EJS_color,
-      debug: window.EJS_DEBUG_XX
+      language: window.EJS_language
     })
 
-    // 加载EmulatorJS脚本
-    await loadEmulatorJSScript()
-    
-    // 等待模拟器初始化
-    await waitForEmulatorInitialization()
+    // 动态加载本地EmulatorJS脚本 - 使用Promise包装
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = '/emulatorjs/data/loader.js'  // 使用本地loader.js
+      
+      script.onload = () => {
+        console.log('EmulatorJS script loaded')
+        clearInterval(progressInterval)
+        loadingProgress.value = 100
+        
+        // 等待模拟器初始化
+        waitForEmulatorInitialization()
+          .then(() => {
+            loadTime.value = Date.now() - startTime
+            isLoading.value = false
+            resolve()
+          })
+          .catch(reject)
+      }
+      
+      script.onerror = () => {
+        clearInterval(progressInterval)
+        reject(new Error('本地EmulatorJS脚本加载失败'))
+      }
+      
+      document.head.appendChild(script)
+    })
 
-    clearInterval(progressInterval)
-    loadingProgress.value = 100
-    
-    loadTime.value = Date.now() - startTime
-    isLoaded.value = true
-    
-    // 记录测试结果
-    addTestResult('模拟器加载', `${loadTime.value}ms`, 'pass')
-    addTestResult('ROM兼容性', '兼容', 'pass')
-    
-    console.log('EmulatorJS加载成功，耗时:', loadTime.value, 'ms')
-
+    // 不要在这里设置isLoading = false，等待初始化完成后再设置
   } catch (err) {
     clearInterval(progressInterval)
     const errorMessage = err.message || '加载失败'
@@ -480,63 +471,21 @@ async function loadEmulator() {
   }
 }
 
-function loadEmulatorJSScript() {
-  return new Promise((resolve, reject) => {
-    // 移除已存在的脚本
-    const existingScript = document.querySelector('script[src*="emulatorjs"]')
-    if (existingScript) {
-      existingScript.remove()
-    }
-
-    const script = document.createElement('script')
-    script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js'
-    script.onload = () => {
-      console.log('EmulatorJS脚本加载完成')
-      resolve()
-    }
-    script.onerror = () => {
-      reject(new Error('EmulatorJS脚本加载失败'))
-    }
-    
-    document.head.appendChild(script)
-  })
-}
-
 function waitForEmulatorInitialization() {
   return new Promise((resolve, reject) => {
     let attempts = 0
-    const maxAttempts = 150 // 30秒超时 (150 * 200ms)
-    
-    console.log('⏳ 等待EmulatorJS初始化...')
+    const maxAttempts = 100 // 20秒超时
     
     const checkInterval = setInterval(() => {
       attempts++
       
-      console.log(`🔍 检查EmulatorJS状态 (尝试 ${attempts}/${maxAttempts})`)
-      
-      // 检查是否有错误信息
-      const errorElements = document.querySelectorAll('.error, .ejs-error, [class*="error"]')
-      if (errorElements.length > 0) {
-        clearInterval(checkInterval)
-        const errorText = Array.from(errorElements).map(el => el.textContent).join('; ')
-        reject(new Error(`EmulatorJS错误: ${errorText}`))
-        return
-      }
-      
-      // 检查EmulatorJS是否成功加载
       if (window.EJS_emulator) {
         clearInterval(checkInterval)
-        console.log('✅ EmulatorJS初始化完成')
+        console.log('EmulatorJS initialized')
         resolve()
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval)
-        console.error('❌ EmulatorJS初始化超时')
-        console.log('调试信息:')
-        console.log('- window.EJS_emulator:', window.EJS_emulator)
-        console.log('- DOM容器:', document.getElementById('emulatorjs-test-container'))
-        console.log('- 脚本元素:', document.querySelectorAll('script[src*="loader.js"]'))
-        console.log('- 控制台错误请查看Network标签')
-        reject(new Error('EmulatorJS初始化超时 - 请检查控制台和Network标签查看详细错误'))
+        reject(new Error('EmulatorJS initialization timeout'))
       }
     }, 200)
   })
@@ -1154,46 +1103,24 @@ button:disabled {
 .emulator-container {
   position: relative;
   width: 100%;
-  min-height: 600px; /* 增加最小高度 */
-  height: auto; /* 改为自动高度 */
+  min-height: 600px;
   background: #000;
   border-radius: 8px;
-  overflow: hidden;
   margin-bottom: 24px;
-  /* 添加硬件加速 */
-  transform: translateZ(0);
-  will-change: transform;
 }
 
+/* 基本EmulatorJS容器样式 */
+#emulatorjs-test-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* 简化的模拟器播放器样式 */
 .emulator-player {
   width: 100%;
   height: 100%;
-  min-height: 600px; /* 确保最小高度 */
-  /* 优化渲染性能 */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  /* 在支持的浏览器中启用像素完美渲染 */
-  image-rendering: pixelated;
-}
-
-/* EmulatorJS canvas优化 */
-.emulator-player canvas {
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100%;
-  /* 保持宽高比 */
-  aspect-ratio: 4/3;
-  /* 优化缩放算法 */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-  /* 硬件加速 */
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  /* 平滑渲染 */
-  filter: contrast(1.1) saturate(1.1);
+  min-height: 600px;
 }
 
 /* 高DPI屏幕优化 */
@@ -1277,7 +1204,7 @@ button:disabled {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  z-index: 10;
+  z-index: 5; /* 低于EmulatorJS菜单的z-index(9999) */
 }
 
 .loading-content {
