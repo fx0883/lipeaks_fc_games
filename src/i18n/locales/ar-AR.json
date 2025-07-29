@@ -75,6 +75,7 @@
     "save": "حفظ",
     "load": "تحميل",
     "keyHelp": "أزرار التحكم",
+    "controls": "التحكم",
     "settings": "الإعدادات",
     "volume": "مستوى الصوت",
     "mute": "كتم الصوت",
@@ -87,6 +88,7 @@
     "saveTooltip": "حفظ حالة اللعبة",
     "loadTooltip": "تحميل حالة اللعبة",
     "keyHelpTooltip": "إظهار/إخفاء مساعدة أزرار التحكم",
+    "controlsTooltip": "إظهار/إخفاء خريطة أزرار التحكم",
     "settingsTooltip": "فتح إعدادات المحاكي",
     "settingsOpened": "تم فتح قائمة إعدادات المحاكي",
     "settingsClosed": "تم إغلاق قائمة إعدادات المحاكي",
@@ -97,6 +99,7 @@
     "unmuteTooltip": "إلغاء كتم الصوت"
   },
   "controls": {
+    "controls": "التحكم",
     "keyMappings": "تخطيط الأزرار",
     "up": "أعلى",
     "down": "أسفل",

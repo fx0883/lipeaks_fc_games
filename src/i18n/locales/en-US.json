@@ -75,6 +75,7 @@
     "save": "Save",
     "load": "Load",
     "keyHelp": "Controls",
+    "controls": "Controls",
     "settings": "Settings",
     "volume": "Volume",
     "mute": "Mute",
@@ -87,6 +88,7 @@
     "saveTooltip": "Save game state",
     "loadTooltip": "Load game state",
     "keyHelpTooltip": "Show/hide controls help",
+    "controlsTooltip": "Show/hide control mappings",
     "settingsTooltip": "Open emulator settings",
     "settingsOpened": "Emulator settings menu opened",
     "settingsClosed": "Emulator settings menu closed",
@@ -97,6 +99,7 @@
     "unmuteTooltip": "Unmute"
   },
   "controls": {
+    "controls": "Controls",
     "keyMappings": "Key Mappings",
     "up": "Up",
     "down": "Down",

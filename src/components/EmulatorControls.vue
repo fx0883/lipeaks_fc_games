@@ -25,7 +25,9 @@
         <span class="btn-icon">🔄</span>
         <span class="btn-text">{{ $t('emulator.restart') }}</span>
       </button>
-      
+    </div>
+    
+    <div v-if="showSecondaryControls" class="controls-group secondary-controls">
       <!-- 全屏按钮 -->
       <button 
         v-if="showFullscreen"
@@ -38,9 +40,7 @@
         <span class="btn-icon">{{ isFullscreen ? '🗗' : '⛶' }}</span>
         <span class="btn-text">{{ isFullscreen ? $t('emulator.exitFullscreen') : $t('emulator.fullscreen') }}</span>
       </button>
-    </div>
-    
-    <div v-if="showSecondaryControls" class="controls-group secondary-controls">
+      
       <!-- 音量控制 -->
       <div v-if="showVolumeControl" class="volume-control">
         <button 
@@ -91,6 +91,16 @@
       <!-- 控制设置按钮 -->
       <button 
         v-if="showKeyHelp"
+        @click="toggleControlHelp" 
+        class="control-btn controls-btn"
+        :title="$t('emulator.controlsTooltip')"
+      >
+        <span class="btn-icon">🎮</span>
+        <span class="btn-text">{{ $t('emulator.controls') }}</span>
+      </button>
+      
+      <!-- 模拟器设置按钮 -->
+      <button 
         @click="toggleSettings" 
         class="control-btn settings-btn"
         :title="$t('emulator.settingsTooltip')"
@@ -212,7 +222,8 @@ const emit = defineEmits([
   'mute-toggle',
   'save-state',
   'load-state',
-  'settings-toggle'
+  'settings-toggle',
+  'control-help-toggle'
 ])
 
 // 响应式数据
@@ -290,6 +301,10 @@ const handleLoadState = () => {
 
 const toggleSettings = () => {
   emit('settings-toggle')
+}
+
+const toggleControlHelp = () => {
+  emit('control-help-toggle')
 }
 </script>
 

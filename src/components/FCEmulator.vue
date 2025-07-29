@@ -24,7 +24,7 @@
         v-if="showControls"
         :show-controls="isGameLoaded"
         :show-restart="false"
-        :show-fullscreen="false"
+        :show-fullscreen="true"
         :show-save-controls="false"
         :status="status"
         :volume="volume"
@@ -47,6 +47,7 @@
         @save-state="handleSaveState"
         @load-state="handleLoadState"
         @settings-toggle="toggleSettings"
+        @control-help-toggle="toggleControlHelp"
       />
       
       <!-- 按键说明弹窗 -->
@@ -332,6 +333,25 @@ const toggleSettings = () => {
   // 调用EmulatorJS的设置菜单
   if (emulatorService.value) {
     openEmulatorSettings()
+  }
+}
+
+const toggleControlHelp = () => {
+  // 打开EmulatorJS的控制设置菜单
+  openEmulatorControlSettings()
+}
+
+const openEmulatorControlSettings = () => {
+  // 使用EmulatorService打开控制设置菜单
+  if (emulatorService.value) {
+    const success = emulatorService.value.openControlSettings()
+    if (success) {
+      console.log('控制设置菜单已打开')
+    } else {
+      console.warn('无法打开控制设置菜单')
+    }
+  } else {
+    console.warn('模拟器服务未就绪')
   }
 }
 

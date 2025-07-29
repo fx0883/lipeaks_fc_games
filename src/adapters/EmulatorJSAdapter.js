@@ -301,11 +301,27 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
    * @returns {boolean}
    */
   enterFullscreen() {
-    if (this.emulatorInstance && typeof this.emulatorInstance.enterFullscreen === 'function') {
-      this.emulatorInstance.enterFullscreen()
+    try {
+      // 获取模拟器容器元素
+      const container = document.querySelector(`#${this.config.containerId}`) || 
+                       document.querySelector('#emulator-container') ||
+                       document.documentElement
+      
+      if (container.requestFullscreen) {
+        container.requestFullscreen()
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen()
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen()
+      } else {
+        console.warn('当前浏览器不支持全屏API')
+        return false
+      }
       return true
+    } catch (error) {
+      console.error('进入全屏失败:', error)
+      return false
     }
-    return false
   }
 
   /**
@@ -324,6 +340,25 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       return true
     } catch (error) {
       console.error('退出全屏失败:', error)
+      return false
+    }
+  }
+
+  /**
+   * 打开控制设置
+   * @returns {boolean}
+   */
+  openControlSettings() {
+    try {
+      if (this.emulatorInstance && this.emulatorInstance.controlMenu) {
+        this.emulatorInstance.controlMenu.style.display = ""
+        return true
+      } else {
+        console.warn('控制设置菜单不可用')
+        return false
+      }
+    } catch (error) {
+      console.error('打开控制设置失败:', error)
       return false
     }
   }

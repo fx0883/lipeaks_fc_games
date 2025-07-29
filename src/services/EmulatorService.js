@@ -308,6 +308,15 @@ export class EmulatorService {
   }
 
   /**
+   * 打开控制设置
+   * @returns {boolean}
+   */
+  openControlSettings() {
+    this.ensureInitialized()
+    return this.adapter.openControlSettings()
+  }
+
+  /**
    * 保存游戏状态
    * @param {string} slotName 存档槽名称
    * @returns {Promise<boolean>}

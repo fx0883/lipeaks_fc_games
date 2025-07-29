@@ -75,6 +75,7 @@
     "save": "保存",
     "load": "読み込み",
     "keyHelp": "操作方法",
+    "controls": "コントロール",
     "settings": "設定",
     "volume": "音量",
     "mute": "ミュート",
@@ -87,6 +88,7 @@
     "saveTooltip": "ゲーム状態を保存",
     "loadTooltip": "ゲーム状態を読み込み",
     "keyHelpTooltip": "操作説明を表示/非表示",
+    "controlsTooltip": "コントロールマッピングを表示/非表示",
     "settingsTooltip": "エミュレーター設定を開く",
     "settingsOpened": "エミュレーター設定メニューを開きました",
     "settingsClosed": "エミュレーター設定メニューを閉じました",
@@ -97,6 +99,7 @@
     "unmuteTooltip": "ミュート解除"
   },
   "controls": {
+    "controls": "コントロール",
     "keyMappings": "キーマッピング",
     "up": "上",
     "down": "下",
