@@ -14,8 +14,19 @@
     </div>
 
     <div class="game-container" v-if="game">
-      <!-- 使用FC模拟器组件 -->
-      <FCEmulator :romPath="game.romPath" @game-loaded="onGameLoaded" />
+      <!-- 使用重构后的FC模拟器组件 -->
+      <FCEmulator 
+        :rom-path="game.romPath" 
+        :game-name="game.name"
+        :show-controls="true"
+        :show-status-info="true"
+        @game-loaded="onGameLoaded"
+        @game-started="onGameStarted"
+        @paused="onGamePaused"
+        @resumed="onGameResumed"
+        @error="onGameError"
+        @state-changed="onStateChanged"
+      />
     </div>
 
     <div class="game-loading" v-else>
@@ -50,9 +61,33 @@ const categoryName = computed(() => {
   return category ? category.name : game.value.category
 })
 
-// 游戏加载完成
+// 游戏事件处理
 const onGameLoaded = () => {
+  console.log('Game loaded:', game.value?.name)
+}
+
+const onGameStarted = () => {
+  // 游戏开始时增加播放次数
   gameStore.incrementPlayCount(gameId.value)
+  console.log('Game started:', game.value?.name)
+}
+
+const onGamePaused = () => {
+  console.log('Game paused:', game.value?.name)
+}
+
+const onGameResumed = () => {
+  console.log('Game resumed:', game.value?.name)
+}
+
+const onGameError = (error) => {
+  console.error('Game error:', error)
+  // 可以在这里显示用户友好的错误提示
+}
+
+const onStateChanged = (stateChange) => {
+  console.log('Game state changed:', stateChange)
+  // 可以在这里处理状态变化，如更新UI等
 }
 
 // 加载游戏数据

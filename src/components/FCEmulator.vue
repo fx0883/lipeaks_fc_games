@@ -74,17 +74,17 @@ import { EmulatorConfig } from '../interfaces/IEmulatorAdapter.js'
 
 // Props
 const props = defineProps({
-  romPath: {
-    type: String,
-    required: true
-  },
-  containerId: {
-    type: String,
-    default: 'emulator'
-  },
-  dataPath: {
-    type: String,
-    default: '/emulatorjs/data/'
+    romPath: {
+      type: String,
+      required: true
+    },
+    containerId: {
+      type: String,
+      default: 'emulator'
+    },
+    dataPath: {
+      type: String,
+      default: '/emulatorjs/data/'
   },
   gameName: {
     type: String,
@@ -375,7 +375,7 @@ onMounted(async () => {
 onBeforeUnmount(async () => {
   console.log('FCEmulator: 组件卸载，释放资源')
   
-  // 移除全屏事件监听器
+    // 移除全屏事件监听器
   document.removeEventListener('fullscreenchange', handleFullscreenChange)
   document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
   document.removeEventListener('msfullscreenchange', handleFullscreenChange)

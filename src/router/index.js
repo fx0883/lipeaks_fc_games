@@ -35,10 +35,7 @@ const routes = [
     meta: { title: '搜索结果 - FC游戏乐园' }
   },
 
-  {
-    path: '/emulator-test',
-    redirect: '/emulatorjs-test'
-  },
+
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
