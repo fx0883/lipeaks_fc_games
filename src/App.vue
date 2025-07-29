@@ -33,7 +33,7 @@ const stagwiseConfig = {
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* 最小高度，允许内容超出时滚动 */
 }
 
 .main-content {

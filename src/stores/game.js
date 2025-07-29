@@ -51,10 +51,9 @@ export const useGameStore = defineStore('game', {
       // 去重
       const uniqueGames = Array.from(new Map(allGames.map(game => [game.id, game])).values())
       
-      // 按播放次数排序，取前3个
+      // 按播放次数排序，显示所有游戏而不限制数量
       return uniqueGames
         .sort((a, b) => b.playCount - a.playCount)
-        .slice(0, 3)
     },
 
     getCategoryById: (state) => {

@@ -49,10 +49,9 @@ const loadInitialData = async () => {
   // 加载分类数据
   await gameStore.fetchCategories()
   
-  // 加载几个主要分类的游戏，以便显示热门游戏
-  // 这里我们选择加载action和rpg分类，因为它们通常包含较多热门游戏
-  const mainCategories = ['action', 'rpg']
-  for (const categoryId of mainCategories) {
+  // 加载所有分类的游戏数据，以便显示完整的热门游戏列表
+  const allCategories = gameStore.categories.map(cat => cat.id)
+  for (const categoryId of allCategories) {
     await gameStore.fetchGamesByCategory(categoryId)
   }
 }

@@ -38,7 +38,7 @@ if (typeof jQuery !== 'undefined') {
                 self.status = $('<p class="nes-status">Booting up...</p>').appendTo(self.root);
                 self.root = $('<div></div>');
                 self.screen = $('<canvas class="nes-screen" width="256" height="240"></canvas>').appendTo(self.root);
-                
+
                 // 放大游戏画面一倍
                 self.screen.css({
                     'width': '512px',
@@ -698,7 +698,7 @@ if (typeof jQuery !== 'undefined') {
                     this.canvasContext.putImageData(this.canvasImageData, 0, 0);
                 }
             };
-
+  
             return UI;
        
        
