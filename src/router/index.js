@@ -6,7 +6,7 @@ const GameView = () => import('../views/GameView.vue')
 const CategoryView = () => import('../views/CategoryView.vue')
 const SearchView = () => import('../views/SearchView.vue')
 const NotFoundView = () => import('../views/NotFoundView.vue')
-const EmulatorJSTest = () => import('../views/EmulatorJSTest.vue')
+
 
 // 路由配置
 const routes = [
@@ -34,12 +34,7 @@ const routes = [
     component: SearchView,
     meta: { title: '搜索结果 - FC游戏乐园' }
   },
-  {
-    path: '/emulatorjs-test',
-    name: 'emulatorjs-test',
-    component: EmulatorJSTest,
-    meta: { title: 'EmulatorJS 集成测试 - FC游戏乐园' }
-  },
+
   {
     path: '/emulator-test',
     redirect: '/emulatorjs-test'
