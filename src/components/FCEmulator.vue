@@ -275,8 +275,14 @@ export default {
       if (window.EJS_emulator) {
         // EmulatorJS的音量控制
         this.isSoundEnabled = !this.isSoundEnabled;
-        // 这里可以根据EmulatorJS的实际API调整
-        console.log('Sound toggled:', this.isSoundEnabled);
+        
+        // 使用EmulatorJS API控制声音
+        if (typeof window.EJS_emulator.setVolume === 'function') {
+          window.EJS_emulator.setVolume(this.isSoundEnabled ? 1 : 0);
+          console.log('Sound toggled:', this.isSoundEnabled ? 'on' : 'off');
+        } else {
+          console.warn('EmulatorJS setVolume方法不可用');
+        }
       }
     },
     toggleFullscreen() {
