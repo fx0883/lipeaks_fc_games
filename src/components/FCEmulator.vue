@@ -23,7 +23,15 @@
         </div>
       </div>
       
-      <div id="emulator"></div>
+      <div :id="containerId"></div>
+      
+      <!-- 控制按钮 -->
+      <div v-if="isGameLoaded" class="emulator-controls">
+        <button @click="toggleKeyHelp" class="control-btn" title="按键说明">
+          <span class="btn-icon">🎮</span>
+          <span class="btn-text">按键说明</span>
+        </button>
+      </div>
       
       <!-- 按键说明弹窗 -->
       <div v-if="showKeyHelp" class="key-help-modal" @click.self="showKeyHelp = false">
@@ -87,6 +95,14 @@ export default {
     romPath: {
       type: String,
       required: true
+    },
+    containerId: {
+      type: String,
+      default: 'emulator'
+    },
+    dataPath: {
+      type: String,
+      default: '/emulatorjs/data/'
     }
   },
   data() {
@@ -119,7 +135,7 @@ export default {
         this.loadingProgress = 0;
         
         // 清除之前的模拟器实例
-        await this.clearEmulator();
+        this.clearEmulator();
         
         // 调整ROM路径
         const romPath = this.romPath.startsWith('/') ? this.romPath : `/${this.romPath}`;
@@ -137,10 +153,10 @@ export default {
         }
         
         // 设置EmulatorJS配置
-        window.EJS_player = '#emulator'
+        window.EJS_player = `#${this.containerId}`
         window.EJS_gameUrl = romPath
         window.EJS_core = 'fceumm'
-        window.EJS_pathtodata = '/emulatorjs/data/'
+        window.EJS_pathtodata = this.dataPath
         window.EJS_gameName = 'NES Game'
         window.EJS_language = ''  // 默认英语
         window.EJS_startOnLoaded = true
@@ -171,6 +187,7 @@ export default {
         console.error('FCEmulator: 初始化模拟器失败:', error);
         this.error = error.message;
         this.isLoading = false;
+        this.$emit('error', error.message);
       }
     },
     
@@ -227,7 +244,7 @@ export default {
       });
     },
     
-    async clearEmulator() {
+    clearEmulator() {
       try {
         if (window.EJS_emulator) {
           // 清除全局变量
@@ -235,7 +252,7 @@ export default {
         }
         
         // 清理DOM
-        const container = document.getElementById('emulator');
+        const container = document.getElementById(this.containerId);
         if (container) {
           container.innerHTML = '';
         }
@@ -285,6 +302,11 @@ export default {
         }
       }
     },
+    
+    toggleKeyHelp() {
+      this.showKeyHelp = !this.showKeyHelp;
+    },
+    
     toggleFullscreen() {
       if (window.EJS_emulator && typeof window.EJS_emulator.enterFullscreen === 'function') {
         if (!this.isFullscreen) {
@@ -308,6 +330,27 @@ export default {
       if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
         this.isFullscreen = false;
       }
+    },
+    
+    // 提供给父组件使用的公共方法
+    getControls() {
+      return {
+        pause: () => this.togglePause(),
+        resume: () => {
+          if (this.isPaused) {
+            this.togglePause();
+          }
+        },
+        restart: () => this.restart(),
+        toggleSound: () => this.toggleSound(),
+        toggleFullscreen: () => this.toggleFullscreen(),
+        showKeyHelp: () => {
+          this.showKeyHelp = true;
+        },
+        hideKeyHelp: () => {
+          this.showKeyHelp = false;
+        }
+      };
     }
   },
   beforeUnmount() {
@@ -334,7 +377,7 @@ export default {
   position: relative;
 }
 
-#emulator {
+#emulator, [id^="emulator"] {
   width: 100%;
   height: 500px;
   background-color: #000;
@@ -343,10 +386,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
-
-
-
 
 /* 按键说明弹窗样式 */
 .key-help-modal {
@@ -538,5 +577,39 @@ export default {
 
 .retry-btn:hover {
   background: #e0a800;
+}
+
+/* 控制按钮样式 */
+.emulator-controls {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.control-btn:hover {
+  background-color: #e9ecef;
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+.btn-text {
+  font-size: 14px;
 }
 </style> 
