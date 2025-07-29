@@ -224,46 +224,7 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
     }
   }
 
-  /**
-   * 暂停游戏
-   * @returns {boolean}
-   */
-  pause() {
-    if (this.emulatorInstance && typeof this.emulatorInstance.pause === 'function') {
-      this.emulatorInstance.pause()
-      this.status = EmulatorStatus.PAUSED
-      this.emit(EmulatorEvents.PAUSED)
-      return true
-    }
-    return false
-  }
 
-  /**
-   * 恢复游戏
-   * @returns {boolean}
-   */
-  resume() {
-    if (this.emulatorInstance && typeof this.emulatorInstance.resume === 'function') {
-      this.emulatorInstance.resume()
-      this.status = EmulatorStatus.RUNNING
-      this.emit(EmulatorEvents.RESUMED)
-      return true
-    }
-    return false
-  }
-
-  /**
-   * 重启游戏
-   * @returns {boolean}
-   */
-  restart() {
-    if (this.emulatorInstance && typeof this.emulatorInstance.restart === 'function') {
-      this.emulatorInstance.restart()
-      this.status = EmulatorStatus.RUNNING
-      return true
-    }
-    return false
-  }
 
   /**
    * 设置音量

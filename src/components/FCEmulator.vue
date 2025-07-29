@@ -23,7 +23,7 @@
       <EmulatorControls
         v-if="showControls"
         :show-controls="isGameLoaded"
-        :show-restart="false"
+
         :show-fullscreen="true"
         :show-save-controls="false"
         :status="status"
@@ -31,15 +31,11 @@
         :is-muted="isMuted"
         :is-fullscreen="isFullscreen"
         :showing-key-help="showKeyHelp"
-        :can-pause="canPause"
-        :can-resume="canResume"
-        :can-restart="canRestart"
+
         :can-fullscreen="canFullscreen"
         :can-save-state="canSaveState"
         :can-load-state="canLoadState"
-        @pause="handlePause"
-        @resume="handleResume"
-        @restart="handleRestart"
+
         @fullscreen-enter="handleFullscreenEnter"
         @fullscreen-exit="handleFullscreenExit"
         @volume-change="handleVolumeChange"
@@ -157,9 +153,7 @@ watch(currentLanguageConfig, (newConfig) => {
 }, { immediate: true })
 
 // 计算属性
-const canPause = computed(() => status.value === 'running')
-const canResume = computed(() => status.value === 'paused')
-const canRestart = computed(() => status.value === 'running' || status.value === 'paused')
+
 const canFullscreen = computed(() => isGameLoaded.value)
 const canSaveState = computed(() => status.value === 'running' || status.value === 'paused')
 const canLoadState = computed(() => status.value === 'running' || status.value === 'paused')
@@ -217,8 +211,7 @@ const setupEventListeners = () => {
   
   emulatorService.value.addEventListener('ready', handleReady)
   emulatorService.value.addEventListener('gameStarted', handleGameStarted)
-  emulatorService.value.addEventListener('paused', handlePaused)
-  emulatorService.value.addEventListener('resumed', handleResumed)
+  
   emulatorService.value.addEventListener('error', handleError)
   emulatorService.value.addEventListener('loadingProgress', handleLoadingProgress)
   emulatorService.value.addEventListener('stateChanged', handleStateChanged)
@@ -232,15 +225,8 @@ const handleReady = () => {
 }
 
 const handleGameStarted = () => {
+  status.value = 'running'
   emit('game-started')
-}
-
-const handlePaused = () => {
-  emit('paused')
-}
-
-const handleResumed = () => {
-  emit('resumed')
 }
 
 const handleError = (data) => {
@@ -265,24 +251,6 @@ const handleRetry = async () => {
   hasError.value = false
   errorMessage.value = ''
   await initEmulator()
-}
-
-const handlePause = async () => {
-  if (emulatorService.value) {
-    emulatorService.value.pause()
-  }
-}
-
-const handleResume = async () => {
-  if (emulatorService.value) {
-    emulatorService.value.resume()
-  }
-}
-
-const handleRestart = async () => {
-  if (emulatorService.value) {
-    emulatorService.value.restart()
-  }
 }
 
 const handleFullscreenEnter = () => {
@@ -397,9 +365,6 @@ const handleFullscreenChange = () => {
 // 获取控制器（向后兼容）
 const getControls = () => {
   return {
-    pause: handlePause,
-    resume: handleResume,
-    restart: handleRestart,
     toggleSound: handleMuteToggle,
     toggleFullscreen: () => {
       if (isFullscreen.value) {

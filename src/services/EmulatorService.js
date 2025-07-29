@@ -198,62 +198,7 @@ export class EmulatorService {
     }
   }
 
-  /**
-   * 暂停游戏
-   * @returns {boolean}
-   */
-  pause() {
-    this.ensureInitialized()
-    
-    if (!this.stateManager.canPerformOperation('pause')) {
-      console.warn('Cannot pause in current state:', this.stateManager.getCurrentStatus())
-      return false
-    }
-    
-    const result = this.adapter.pause()
-    if (result) {
-      console.log('EmulatorService: Game paused')
-    }
-    return result
-  }
 
-  /**
-   * 恢复游戏
-   * @returns {boolean}
-   */
-  resume() {
-    this.ensureInitialized()
-    
-    if (!this.stateManager.canPerformOperation('resume')) {
-      console.warn('Cannot resume in current state:', this.stateManager.getCurrentStatus())
-      return false
-    }
-    
-    const result = this.adapter.resume()
-    if (result) {
-      console.log('EmulatorService: Game resumed')
-    }
-    return result
-  }
-
-  /**
-   * 重启游戏
-   * @returns {boolean}
-   */
-  restart() {
-    this.ensureInitialized()
-    
-    if (!this.stateManager.canPerformOperation('restart')) {
-      console.warn('Cannot restart in current state:', this.stateManager.getCurrentStatus())
-      return false
-    }
-    
-    const result = this.adapter.restart()
-    if (result) {
-      console.log('EmulatorService: Game restarted')
-    }
-    return result
-  }
 
   /**
    * 设置音量

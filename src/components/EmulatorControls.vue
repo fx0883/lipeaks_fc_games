@@ -1,30 +1,7 @@
 <template>
   <div class="emulator-controls" v-if="showControls">
     <div class="controls-group primary-controls">
-      <!-- 播放/暂停按钮 -->
-      <button 
-        v-if="canPause || canResume"
-        @click="togglePlayPause" 
-        class="control-btn play-pause-btn"
-        :class="{ active: isRunning }"
-        :disabled="!canPause && !canResume"
-        :title="isRunning ? $t('emulator.pauseTooltip') : $t('emulator.resumeTooltip')"
-      >
-        <span class="btn-icon">{{ isRunning ? '⏸️' : '▶️' }}</span>
-        <span class="btn-text">{{ isRunning ? $t('emulator.pause') : $t('emulator.resume') }}</span>
-      </button>
-      
-      <!-- 重启按钮 -->
-      <button 
-        v-if="showRestart"
-        @click="handleRestart" 
-        class="control-btn restart-btn"
-        :disabled="!canRestart"
-        :title="$t('emulator.restartTooltip')"
-      >
-        <span class="btn-icon">🔄</span>
-        <span class="btn-text">{{ $t('emulator.restart') }}</span>
-      </button>
+
     </div>
     
     <div v-if="showSecondaryControls" class="controls-group secondary-controls">
@@ -137,10 +114,6 @@ const props = defineProps({
   },
   
   // 具体控制项显示
-  showRestart: {
-    type: Boolean,
-    default: true
-  },
   showFullscreen: {
     type: Boolean,
     default: true
@@ -185,18 +158,6 @@ const props = defineProps({
   },
   
   // 能力控制
-  canPause: {
-    type: Boolean,
-    default: false
-  },
-  canResume: {
-    type: Boolean,
-    default: false
-  },
-  canRestart: {
-    type: Boolean,
-    default: false
-  },
   canFullscreen: {
     type: Boolean,
     default: true
@@ -213,9 +174,7 @@ const props = defineProps({
 
 // Emits
 const emit = defineEmits([
-  'pause',
-  'resume', 
-  'restart',
+  
   'fullscreen-enter',
   'fullscreen-exit',
   'volume-change',
@@ -235,14 +194,6 @@ watch(() => props.volume, (newVolume) => {
 })
 
 // 计算属性
-const isRunning = computed(() => {
-  return props.status === 'running'
-})
-
-const isPaused = computed(() => {
-  return props.status === 'paused'
-})
-
 const volumeIcon = computed(() => {
   if (props.isMuted || volumeValue.value === 0) {
     return '🔇'
@@ -256,19 +207,6 @@ const volumeIcon = computed(() => {
 })
 
 // 方法
-const togglePlayPause = () => {
-  if (isRunning.value && props.canPause) {
-    emit('pause')
-  } else if (isPaused.value && props.canResume) {
-    emit('resume')
-  }
-}
-
-const handleRestart = () => {
-  if (props.canRestart) {
-    emit('restart')
-  }
-}
 
 const toggleFullscreen = () => {
   if (props.isFullscreen) {
@@ -315,7 +253,7 @@ const toggleControlHelp = () => {
   gap: 12px;
   padding: 12px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
+
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -352,7 +290,7 @@ const toggleControlHelp = () => {
   gap: 6px;
   padding: 8px 12px;
   border: none;
-  border-radius: 8px;
+
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   color: #495057;
   font-weight: 500;
@@ -389,27 +327,6 @@ const toggleControlHelp = () => {
 }
 
 /* 特定按钮样式 */
-.play-pause-btn {
-  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-  color: white;
-  border-color: #1e7e34;
-  font-weight: 600;
-  min-width: 80px;
-}
-
-.play-pause-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #218838 0%, #1c7430 100%);
-}
-
-.restart-btn {
-  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
-  color: #212529;
-  border-color: #e0a800;
-}
-
-.restart-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #e0a800 0%, #d39e00 100%);
-}
 
 .fullscreen-btn.active {
   background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
@@ -468,7 +385,7 @@ const toggleControlHelp = () => {
 .volume-slider {
   width: 80px;
   height: 4px;
-  border-radius: 2px;
+
   background: #dee2e6;
   outline: none;
   cursor: pointer;
@@ -479,7 +396,6 @@ const toggleControlHelp = () => {
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
-  border-radius: 50%;
   background: #007bff;
   cursor: pointer;
   border: 2px solid white;
@@ -489,7 +405,6 @@ const toggleControlHelp = () => {
 .volume-slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
   background: #007bff;
   cursor: pointer;
   border: 2px solid white;
