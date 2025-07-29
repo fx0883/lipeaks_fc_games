@@ -2,16 +2,16 @@
   <header class="app-header">
     <div class="container">
       <div class="logo">
-        <router-link to="/">
+        <a href="/" @click.prevent="openInNewTab('/')">
           <h1>FC游戏乐园</h1>
-        </router-link>
+        </a>
       </div>
       
       <nav class="main-nav">
         <ul>
-          <li><router-link to="/">首页</router-link></li>
+          <li><a href="/" @click.prevent="openInNewTab('/')">首页</a></li>
           <li v-for="category in categories" :key="category.id">
-            <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
+            <a :href="`/category/${category.id}`" @click.prevent="openInNewTab(`/category/${category.id}`)">{{ category.name }}</a>
           </li>
         </ul>
       </nav>
@@ -21,16 +21,16 @@
           type="text" 
           placeholder="搜索游戏..." 
           v-model="searchQuery"
-          @keyup.enter="handleSearch"
+          @keyup.enter="handleSearchInNewTab"
         >
-        <button @click="handleSearch">搜索</button>
+        <button @click="handleSearchInNewTab">搜索</button>
       </div>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 
@@ -55,6 +55,20 @@ const handleSearch = () => {
       query: { q: searchQuery.value.trim() } 
     })
   }
+}
+
+// 在新标签页中处理搜索
+const handleSearchInNewTab = () => {
+  if (searchQuery.value.trim()) {
+    const baseUrl = window.location.origin
+    window.open(`${baseUrl}/search?q=${encodeURIComponent(searchQuery.value.trim())}`, '_blank')
+  }
+}
+
+// 在新标签页打开链接
+const openInNewTab = (path) => {
+  const baseUrl = window.location.origin
+  window.open(baseUrl + path, '_blank')
 }
 
 // 组件挂载时加载分类数据
