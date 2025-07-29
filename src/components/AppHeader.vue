@@ -3,13 +3,13 @@
     <div class="container">
       <div class="logo">
         <a href="/" @click.prevent="openInNewTab('/')">
-          <h1>FC游戏乐园</h1>
+          <h1>{{ $t('app.title') }}</h1>
         </a>
       </div>
       
       <nav class="main-nav">
         <ul>
-          <li><a href="/" @click.prevent="openInNewTab('/')">首页</a></li>
+          <li><a href="/" @click.prevent="openInNewTab('/')">{{ $t('nav.home') }}</a></li>
           <li v-for="category in categories" :key="category.id">
             <a :href="`/category/${category.id}`" @click.prevent="openInNewTab(`/category/${category.id}`)">{{ category.name }}</a>
           </li>
@@ -19,11 +19,11 @@
       <div class="search-box">
         <input 
           type="text" 
-          placeholder="搜索游戏..." 
+          :placeholder="$t('nav.searchPlaceholder')" 
           v-model="searchQuery"
           @keyup.enter="handleSearchInNewTab"
         >
-        <button @click="handleSearchInNewTab">搜索</button>
+        <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
       </div>
     </div>
   </header>

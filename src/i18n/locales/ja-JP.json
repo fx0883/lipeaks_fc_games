@@ -1,0 +1,127 @@
+{
+  "app": {
+    "title": "Lipeaksゲームパラダイス",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "retry": "再試行",
+    "close": "閉じる",
+    "confirm": "確認",
+    "cancel": "キャンセル"
+  },
+  "nav": {
+    "home": "ホーム",
+    "search": "検索",
+    "searchPlaceholder": "ゲームを検索...",
+    "searchButton": "検索"
+  },
+  "footer": {
+    "aboutUs": "私たちについて",
+    "aboutUsDesc": "Lipeaksゲームパラダイスは、懐かしいレトロゲームのオンラインプラットフォームで、クラシックゲームの楽しさを再体験できます。",
+    "quickLinks": "クイックリンク",
+    "contactUs": "お問い合わせ",
+    "email": "メール: contact@fcgame.com",
+    "copyright": "© {year} Lipeaksゲームパラダイス. 全著作権所有."
+  },
+  "home": {
+    "title": "Lipeaksゲームパラダイス",
+    "gameCategories": "ゲームカテゴリ",
+    "popularGames": "人気ゲーム",
+    "loadingPopularGames": "人気ゲームを読み込み中...",
+    "noPopularGames": "人気ゲームがありません"
+  },
+  "game": {
+    "loading": "読み込み中...",
+    "playCount": "{count}回プレイ済み",
+    "category": "カテゴリ",
+    "author": "作者",
+    "size": "サイズ",
+    "version": "バージョン",
+    "region": "地域",
+    "description": "ゲームの説明",
+    "gameLoaded": "ゲームがロードされました: {name}",
+    "gameStarted": "ゲームが開始されました: {name}",
+    "gamePaused": "ゲームが一時停止されました: {name}",
+    "gameResumed": "ゲームが再開されました: {name}",
+    "gameError": "ゲームエラーが発生しました"
+  },
+  "category": {
+    "gamesCount": "合計{count}ゲーム",
+    "noGames": "このカテゴリにはゲームがありません",
+    "loadingGames": "ゲームデータを読み込み中..."
+  },
+  "search": {
+    "resultsTitle": "検索結果: \"{query}\"",
+    "resultsCount": "{count}件の結果が見つかりました",
+    "noResults": "\"{query}\"に関連するゲームが見つかりませんでした",
+    "noResultsHelp": "他のキーワードを試すか、",
+    "allGames": "すべてのゲーム",
+    "searching": "検索中..."
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "message": "申し訳ございませんが、お探しのページは存在しません。",
+    "backHome": "ホームに戻る"
+  },
+  "emulator": {
+    "initializing": "エミュレータを初期化中...",
+    "loadingGame": "ゲームを読み込み中...",
+    "gameLoaded": "ゲームの読み込みが完了しました",
+    "gameError": "ゲームの読み込みに失敗しました",
+    "pause": "一時停止",
+    "resume": "再開",
+    "restart": "再起動",
+    "fullscreen": "フルスクリーン",
+    "exitFullscreen": "フルスクリーン終了",
+    "save": "保存",
+    "load": "読み込み",
+    "keyHelp": "操作方法",
+    "volume": "音量",
+    "mute": "ミュート",
+    "unmute": "ミュート解除",
+    "pauseTooltip": "ゲームを一時停止",
+    "resumeTooltip": "ゲームを再開",
+    "restartTooltip": "ゲームを再起動",
+    "fullscreenTooltip": "フルスクリーンに入る",
+    "exitFullscreenTooltip": "フルスクリーンを終了",
+    "saveTooltip": "ゲーム状態を保存",
+    "loadTooltip": "ゲーム状態を読み込み",
+    "keyHelpTooltip": "操作説明を表示/非表示",
+    "muteTooltip": "ミュート",
+    "unmuteTooltip": "ミュート解除"
+  },
+  "controls": {
+    "keyMappings": "キーマッピング",
+    "up": "上",
+    "down": "下",
+    "left": "左",
+    "right": "右",
+    "buttonA": "A",
+    "buttonAA": "AA",
+    "buttonB": "B",
+    "buttonBB": "BB",
+    "start": "スタート",
+    "select": "セレクト"
+  },
+  "errors": {
+    "fetchCategories": "カテゴリの取得に失敗しました",
+    "fetchGames": "カテゴリ {category} のゲーム取得に失敗しました",
+    "fetchGameById": "ゲーム {id} の取得に失敗しました",
+    "searchError": "検索エラーが発生しました",
+    "emulatorInit": "エミュレータの初期化に失敗しました",
+    "gameLoad": "ゲームの読み込みに失敗しました",
+    "networkError": "ネットワークエラーが発生しました",
+    "unknownError": "不明なエラーが発生しました"
+  },
+  "language": {
+    "switch": "言語",
+    "current": "現在の言語: {language}"
+  },
+  "routes": {
+    "home": "ホーム - Lipeaksゲームパラダイス",
+    "game": "ゲーム - Lipeaksゲームパラダイス",
+    "category": "カテゴリ - Lipeaksゲームパラダイス",
+    "search": "検索結果 - Lipeaksゲームパラダイス",
+    "searchWithQuery": "検索\"{query}\" - Lipeaksゲームパラダイス",
+    "notFound": "ページが見つかりません - Lipeaksゲームパラダイス"
+  }
+} 

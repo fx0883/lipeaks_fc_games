@@ -8,10 +8,10 @@
         class="control-btn play-pause-btn"
         :class="{ active: isRunning }"
         :disabled="!canPause && !canResume"
-        :title="isRunning ? '暂停游戏' : '继续游戏'"
+        :title="isRunning ? $t('emulator.pauseTooltip') : $t('emulator.resumeTooltip')"
       >
         <span class="btn-icon">{{ isRunning ? '⏸️' : '▶️' }}</span>
-        <span class="btn-text">{{ isRunning ? '暂停' : '继续' }}</span>
+        <span class="btn-text">{{ isRunning ? $t('emulator.pause') : $t('emulator.resume') }}</span>
       </button>
       
       <!-- 重启按钮 -->
@@ -20,10 +20,10 @@
         @click="handleRestart" 
         class="control-btn restart-btn"
         :disabled="!canRestart"
-        title="重新开始游戏"
+        :title="$t('emulator.restartTooltip')"
       >
         <span class="btn-icon">🔄</span>
-        <span class="btn-text">重启</span>
+        <span class="btn-text">{{ $t('emulator.restart') }}</span>
       </button>
       
       <!-- 全屏按钮 -->
@@ -33,10 +33,10 @@
         class="control-btn fullscreen-btn"
         :class="{ active: isFullscreen }"
         :disabled="!canFullscreen"
-        :title="isFullscreen ? '退出全屏' : '进入全屏'"
+        :title="isFullscreen ? $t('emulator.exitFullscreenTooltip') : $t('emulator.fullscreenTooltip')"
       >
         <span class="btn-icon">{{ isFullscreen ? '🗗' : '⛶' }}</span>
-        <span class="btn-text">{{ isFullscreen ? '退出全屏' : '全屏' }}</span>
+        <span class="btn-text">{{ isFullscreen ? $t('emulator.exitFullscreen') : $t('emulator.fullscreen') }}</span>
       </button>
     </div>
     
@@ -47,7 +47,7 @@
           @click="toggleMute" 
           class="control-btn volume-btn"
           :class="{ muted: isMuted }"
-          :title="isMuted ? '取消静音' : '静音'"
+          :title="isMuted ? $t('emulator.unmuteTooltip') : $t('emulator.muteTooltip')"
         >
           <span class="btn-icon">{{ volumeIcon }}</span>
         </button>
@@ -72,19 +72,19 @@
           @click="handleSaveState" 
           class="control-btn save-btn"
           :disabled="!canSaveState"
-          title="保存游戏状态"
+          :title="$t('emulator.saveTooltip')"
         >
           <span class="btn-icon">💾</span>
-          <span class="btn-text">保存</span>
+          <span class="btn-text">{{ $t('emulator.save') }}</span>
         </button>
         <button 
           @click="handleLoadState" 
           class="control-btn load-btn"
           :disabled="!canLoadState"
-          title="加载游戏状态"
+          :title="$t('emulator.loadTooltip')"
         >
           <span class="btn-icon">📁</span>
-          <span class="btn-text">加载</span>
+          <span class="btn-text">{{ $t('emulator.load') }}</span>
         </button>
       </div>
       
@@ -94,10 +94,10 @@
         @click="toggleKeyHelp" 
         class="control-btn key-help-btn"
         :class="{ active: showingKeyHelp }"
-        title="显示/隐藏按键说明"
+        :title="$t('emulator.keyHelpTooltip')"
       >
         <span class="btn-icon">🎮</span>
-        <span class="btn-text">按键</span>
+        <span class="btn-text">{{ $t('emulator.keyHelp') }}</span>
       </button>
     </div>
     

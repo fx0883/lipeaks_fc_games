@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import i18n from '../i18n'
 
 // 导入视图组件
 const HomeView = () => import('../views/HomeView.vue')
@@ -14,33 +15,31 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { title: '首页 - FC游戏乐园' }
+    meta: { titleKey: 'routes.home' }
   },
   {
     path: '/game/:id',
     name: 'game',
     component: GameView,
-    meta: { title: '游戏 - FC游戏乐园' }
+    meta: { titleKey: 'routes.game' }
   },
   {
     path: '/category/:id',
     name: 'category',
     component: CategoryView,
-    meta: { title: '分类 - FC游戏乐园' }
+    meta: { titleKey: 'routes.category' }
   },
   {
     path: '/search',
     name: 'search',
     component: SearchView,
-    meta: { title: '搜索结果 - FC游戏乐园' }
+    meta: { titleKey: 'routes.search' }
   },
-
-
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView,
-    meta: { title: '页面未找到 - FC游戏乐园' }
+    meta: { titleKey: 'routes.notFound' }
   }
 ]
 
@@ -52,11 +51,15 @@ const router = createRouter({
 
 // 全局前置守卫，用于设置页面标题
 router.beforeEach((to, from, next) => {
+  const { t } = i18n.global
+  
   // 为搜索页面动态设置标题
   if (to.name === 'search' && to.query.q) {
-    document.title = `搜索"${to.query.q}" - FC游戏乐园`
+    document.title = t('routes.searchWithQuery', { query: to.query.q })
+  } else if (to.meta.titleKey) {
+    document.title = t(to.meta.titleKey)
   } else {
-    document.title = to.meta.title || 'FC游戏乐园'
+    document.title = t('app.title')
   }
   next()
 })

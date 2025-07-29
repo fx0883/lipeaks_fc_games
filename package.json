@@ -1,5 +1,5 @@
 {
-  "name": "vue-fc-game",
+  "name": "vue-lipeaks-game",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
   "dependencies": {
     "pinia": "^3.0.3",
     "vue": "^3.5.17",
+    "vue-i18n": "^9.9.1",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {

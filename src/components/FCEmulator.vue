@@ -23,6 +23,9 @@
       <EmulatorControls
         v-if="showControls"
         :show-controls="isGameLoaded"
+        :show-restart="false"
+        :show-fullscreen="false"
+        :show-save-controls="false"
         :status="status"
         :volume="volume"
         :is-muted="isMuted"
@@ -114,7 +117,7 @@ const emit = defineEmits([
 const emulatorService = ref(null)
 const isGameLoaded = ref(false)
 const isLoading = ref(false)
-const loadingMessage = ref('正在初始化模拟器...')
+const loadingMessage = ref('')
 const loadingProgress = ref(0)
 const hasError = ref(false)
 const errorMessage = ref('')
@@ -127,19 +130,30 @@ const isMuted = ref(false)
 const isFullscreen = ref(false)
 const showKeyHelp = ref(false)
 
-// 按键映射配置
-const keyMappings = ref([
-  { name: '上', key: 'W' },
-  { name: '下', key: 'S' },
-  { name: '左', key: 'A' },
-  { name: '右', key: 'D' },
-  { name: 'A', key: 'J' },
-  { name: 'AA', key: 'Z' },
-  { name: 'B', key: 'K' },
-  { name: 'BB', key: 'X' },
-  { name: 'Start', key: 'Enter' },
-  { name: 'Select', key: 'Ctrl' }
+// 按键映射配置 - 使用扩展的i18n
+import { useExtendedI18n } from '../composables/useI18n'
+const { t, updateEmulatorJSLanguage, currentLanguageConfig } = useExtendedI18n()
+
+const keyMappings = computed(() => [
+  { name: t('controls.up'), key: 'W' },
+  { name: t('controls.down'), key: 'S' },
+  { name: t('controls.left'), key: 'A' },
+  { name: t('controls.right'), key: 'D' },
+  { name: t('controls.buttonA'), key: 'J' },
+  { name: t('controls.buttonAA'), key: 'Z' },
+  { name: t('controls.buttonB'), key: 'K' },
+  { name: t('controls.buttonBB'), key: 'X' },
+  { name: t('controls.start'), key: 'Enter' },
+  { name: t('controls.select'), key: 'Ctrl' }
 ])
+
+// EmulatorJS语言同步
+watch(currentLanguageConfig, (newConfig) => {
+  if (emulatorService.value) {
+    // 更新EmulatorJS语言
+    updateEmulatorJSLanguage(newConfig.emulatorjsCode)
+  }
+}, { immediate: true })
 
 // 计算属性
 const canPause = computed(() => status.value === 'running')
@@ -161,7 +175,7 @@ const initEmulator = async () => {
   try {
     isLoading.value = true
     hasError.value = false
-    loadingMessage.value = '正在初始化模拟器...'
+    loadingMessage.value = t('emulator.initializing')
     loadingProgress.value = 0
 
     // 创建模拟器服务

@@ -1,11 +1,11 @@
 <template>
   <div class="game-view">
     <div class="game-header">
-      <h1>{{ game ? game.name : '加载中...' }}</h1>
+      <h1>{{ game ? game.name : $t('game.loading') }}</h1>
       <div class="game-meta" v-if="game">
         <span class="category">{{ categoryName }}</span>
         <span class="separator">|</span>
-        <span class="play-count">已玩 {{ game.playCount }} 次</span>
+        <span class="play-count">{{ $t('game.playCount', { count: game.playCount }) }}</span>
         <span class="separator">|</span>
         <span class="author">{{ game.author }}</span>
         <span class="separator">|</span>
@@ -30,14 +30,14 @@
     </div>
 
     <div class="game-loading" v-else>
-      <p>正在加载游戏...</p>
+      <p>{{ $t('game.loading') }}</p>
     </div>
 
     <div class="game-description" v-if="game">
-      <h2>游戏介绍</h2>
+      <h2>{{ $t('game.description') }}</h2>
       <p>{{ game.description }}</p>
-      <p v-if="game.version">版本: {{ game.version }}</p>
-      <p>地区: {{ game.region }}</p>
+      <p v-if="game.version">{{ $t('game.version') }}: {{ game.version }}</p>
+      <p>{{ $t('game.region') }}: {{ game.region }}</p>
     </div>
   </div>
 </template>
@@ -45,10 +45,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useGameStore } from '../stores/game'
 import FCEmulator from '../components/FCEmulator.vue'
 
 const route = useRoute()
+const { t } = useI18n()
 const gameStore = useGameStore()
 const gameId = computed(() => route.params.id)
 const game = computed(() => gameStore.currentGame)
@@ -63,25 +65,25 @@ const categoryName = computed(() => {
 
 // 游戏事件处理
 const onGameLoaded = () => {
-  console.log('Game loaded:', game.value?.name)
+  console.log(t('game.gameLoaded', { name: game.value?.name }))
 }
 
 const onGameStarted = () => {
   // 游戏开始时增加播放次数
   gameStore.incrementPlayCount(gameId.value)
-  console.log('Game started:', game.value?.name)
+  console.log(t('game.gameStarted', { name: game.value?.name }))
 }
 
 const onGamePaused = () => {
-  console.log('Game paused:', game.value?.name)
+  console.log(t('game.gamePaused', { name: game.value?.name }))
 }
 
 const onGameResumed = () => {
-  console.log('Game resumed:', game.value?.name)
+  console.log(t('game.gameResumed', { name: game.value?.name }))
 }
 
 const onGameError = (error) => {
-  console.error('Game error:', error)
+  console.error(t('game.gameError'), error)
   // 可以在这里显示用户友好的错误提示
 }
 

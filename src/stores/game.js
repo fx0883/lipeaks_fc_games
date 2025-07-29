@@ -59,11 +59,11 @@ export const useGameStore = defineStore('game', {
         this.categories = await response.json()
       } catch (error) {
         console.error('Failed to fetch categories:', error)
-        // 加载失败时使用默认分类
+        // 加载失败时使用默认分类（保持原有中文，数据不国际化）
         this.categories = [
-          { id: 'action', name: '动作游戏', description: '动作类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/action.json' },
-          { id: 'rpg', name: '角色扮演', description: '角色扮演类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/rpg.json' },
-          { id: 'puzzle', name: '益智游戏', description: '益智类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/puzzle.json' }
+          { id: 'action', name: '动作', description: '动作类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/action.json' },
+          { id: 'rpg', name: '角色', description: '角色扮演类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/rpg.json' },
+          { id: 'puzzle', name: '益智', description: '益智类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/puzzle.json' }
         ]
       } finally {
         this.loading = false

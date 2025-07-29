@@ -1,6 +1,7 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
+import LanguageSwitcher from './components/LanguageSwitcher.vue'
 import { StagewiseToolbar } from '@stagewise/toolbar-vue'
 import VuePlugin from '@stagewise-plugins/vue'
 
@@ -15,6 +16,12 @@ const stagwiseConfig = {
 <template>
   <div class="app">
     <AppHeader />
+    
+    <!-- 语言切换器 - 浮动在右上角 -->
+    <div class="language-switcher-container">
+      <LanguageSwitcher />
+    </div>
+    
     <main class="main-content">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
@@ -49,5 +56,19 @@ const stagwiseConfig = {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* 语言切换器容器 */
+.language-switcher-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+/* RTL布局下调整语言切换器位置 */
+:global(.rtl) .language-switcher-container {
+  left: 20px;
+  right: auto;
 }
 </style>

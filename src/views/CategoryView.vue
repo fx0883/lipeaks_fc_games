@@ -3,7 +3,7 @@
     <div class="category-header">
       <h1>{{ category ? category.name : categoryId }}</h1>
       <p v-if="category">{{ category.description }}</p>
-      <p>共 {{ games.length }} 款游戏</p>
+      <p>{{ $t('category.gamesCount', { count: games.length }) }}</p>
     </div>
 
     <div class="game-list" v-if="games.length > 0">
@@ -21,11 +21,11 @@
     </div>
 
     <div class="no-games" v-else-if="!loading">
-      <p>该分类下暂无游戏</p>
+      <p>{{ $t('category.noGames') }}</p>
     </div>
 
     <div class="loading" v-else>
-      <p>正在加载游戏数据...</p>
+      <p>{{ $t('category.loadingGames') }}</p>
     </div>
   </div>
 </template>

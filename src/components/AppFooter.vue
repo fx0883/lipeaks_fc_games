@@ -3,14 +3,14 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h3>关于我们</h3>
-          <p>FC游戏乐园是一个怀旧FC游戏在线平台，让您重温经典游戏的乐趣。</p>
+          <h3>{{ $t('footer.aboutUs') }}</h3>
+          <p>{{ $t('footer.aboutUsDesc') }}</p>
         </div>
         
         <div class="footer-section">
-          <h3>快速链接</h3>
+          <h3>{{ $t('footer.quickLinks') }}</h3>
           <ul>
-            <li><router-link to="/">首页</router-link></li>
+            <li><router-link to="/">{{ $t('nav.home') }}</router-link></li>
             <li><router-link to="/category/action">动作游戏</router-link></li>
             <li><router-link to="/category/adventure">冒险游戏</router-link></li>
             <li><router-link to="/category/puzzle">益智游戏</router-link></li>
@@ -18,13 +18,13 @@
         </div>
         
         <div class="footer-section">
-          <h3>联系我们</h3>
-          <p>邮箱：contact@fcgame.com</p>
+          <h3>{{ $t('footer.contactUs') }}</h3>
+          <p>{{ $t('footer.email') }}</p>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} FC游戏乐园. 保留所有权利.</p>
+        <p>{{ $t('footer.copyright', { year: currentYear }) }}</p>
       </div>
     </div>
   </footer>

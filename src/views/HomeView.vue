@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1>FC游戏乐园</h1>
+    <h1>{{ $t('home.title') }}</h1>
     <div class="game-categories">
-      <h2>游戏分类</h2>
+      <h2>{{ $t('home.gameCategories') }}</h2>
       <div class="category-list">
         <div class="category-item" v-for="category in categories" :key="category.id">
           <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
@@ -11,7 +11,7 @@
     </div>
     
     <div class="popular-games">
-      <h2>热门游戏</h2>
+      <h2>{{ $t('home.popularGames') }}</h2>
       <div class="game-list" v-if="popularGames.length > 0">
         <div class="game-card" v-for="game in popularGames" :key="game.id">
           <router-link :to="`/game/${game.id}`">
@@ -26,10 +26,10 @@
         </div>
       </div>
       <div class="loading" v-else-if="loading">
-        <p>正在加载热门游戏...</p>
+        <p>{{ $t('home.loadingPopularGames') }}</p>
       </div>
       <div class="no-games" v-else>
-        <p>暂无热门游戏</p>
+        <p>{{ $t('home.noPopularGames') }}</p>
       </div>
     </div>
   </div>

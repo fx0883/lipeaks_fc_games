@@ -1,10 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FC/小霸王在线游戏机</title>
+    <title>Lipeaks Game Paradise</title>
+    <style>
+      /* RTL支持的CSS变量和基础样式 */
+      :root {
+        --color-primary-rgb: 64, 158, 255;
+      }
+      
+      /* RTL布局样式 */
+      html.rtl {
+        direction: rtl;
+      }
+      
+      html.rtl body {
+        text-align: right;
+      }
+      
+      /* RTL下的基础组件样式调整 */
+      html.rtl .main-nav ul {
+        justify-content: flex-end;
+      }
+      
+      html.rtl .search-box {
+        flex-direction: row-reverse;
+      }
+      
+      html.rtl .search-box input {
+        border-radius: 0 4px 4px 0;
+      }
+      
+      html.rtl .search-box button {
+        border-radius: 4px 0 0 4px;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

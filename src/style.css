@@ -28,6 +28,9 @@
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
   
+  /* 国际化相关变量 */
+  --color-primary-rgb: 79, 70, 229;
+  
   /* 尺寸变量 */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -139,5 +142,153 @@ button:hover, .btn:hover {
 @media (min-width: 769px) {
   .hide-desktop {
     display: none !important;
+  }
+}
+
+/* RTL布局支持 */
+html.rtl {
+  direction: rtl;
+}
+
+html.rtl body {
+  text-align: right;
+}
+
+/* RTL下的通用样式调整 */
+html.rtl .flex-row {
+  flex-direction: row-reverse;
+}
+
+html.rtl .text-left {
+  text-align: right;
+}
+
+html.rtl .text-right {
+  text-align: left;
+}
+
+html.rtl .margin-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html.rtl .margin-right {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html.rtl .padding-left {
+  padding-left: 0;
+  padding-right: var(--spacing, 1rem);
+}
+
+html.rtl .padding-right {
+  padding-right: 0;
+  padding-left: var(--spacing, 1rem);
+}
+
+/* RTL下的导航和布局 */
+html.rtl .main-nav ul {
+  justify-content: flex-end;
+}
+
+html.rtl .search-box {
+  flex-direction: row-reverse;
+}
+
+html.rtl .search-box input {
+  border-radius: 0 4px 4px 0;
+}
+
+html.rtl .search-box button {
+  border-radius: 4px 0 0 4px;
+}
+
+html.rtl .footer-content {
+  text-align: right;
+}
+
+html.rtl .game-meta {
+  flex-direction: row-reverse;
+}
+
+html.rtl .game-card {
+  text-align: right;
+}
+
+/* RTL下的控制组件 */
+html.rtl .emulator-controls .controls-group {
+  flex-direction: row-reverse;
+}
+
+html.rtl .emulator-controls .control-btn {
+  flex-direction: row-reverse;
+}
+
+html.rtl .volume-control {
+  flex-direction: row-reverse;
+}
+
+html.rtl .save-controls {
+  flex-direction: row-reverse;
+}
+
+/* RTL下的按键帮助 */
+html.rtl .key-help-modal {
+  text-align: right;
+}
+
+html.rtl .key-item {
+  flex-direction: row-reverse;
+}
+
+/* RTL下的语言切换器 */
+html.rtl .language-switcher {
+  direction: rtl;
+}
+
+html.rtl .current-language {
+  flex-direction: row-reverse;
+}
+
+html.rtl .language-dropdown {
+  left: auto;
+  right: 0;
+}
+
+html.rtl .language-option {
+  flex-direction: row-reverse;
+}
+
+/* 阿拉伯文字体优化 */
+html[lang^="ar"] {
+  font-family: 'Segoe UI', Tahoma, Arial, Helvetica, sans-serif;
+}
+
+html[lang^="ar"] .language-switcher,
+html[lang^="ar"] .current-language,
+html[lang^="ar"] .language-dropdown {
+  font-family: 'Segoe UI', Tahoma, Arial, Helvetica, sans-serif;
+}
+
+/* 日文字体优化 */
+html[lang^="ja"] {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+/* 中文字体优化 */
+html[lang^="zh"] {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* 响应式RTL调整 */
+@media (max-width: 768px) {
+  html.rtl .container {
+    padding: 0 15px;
+  }
+  
+  html.rtl .language-switcher-container {
+    left: 15px;
+    right: auto;
   }
 }

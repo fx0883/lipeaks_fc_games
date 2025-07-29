@@ -1,0 +1,127 @@
+{
+  "app": {
+    "title": "Lipeaks游戏乐园",
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "close": "关闭",
+    "confirm": "确认",
+    "cancel": "取消"
+  },
+  "nav": {
+    "home": "首页",
+    "search": "搜索",
+    "searchPlaceholder": "搜索游戏...",
+    "searchButton": "搜索"
+  },
+  "footer": {
+    "aboutUs": "关于我们",
+    "aboutUsDesc": "Lipeaks游戏乐园是一个怀旧复古游戏在线平台，让您重温经典游戏的乐趣。",
+    "quickLinks": "快速链接",
+    "contactUs": "联系我们",
+    "email": "邮箱：contact@fcgame.com",
+    "copyright": "© {year} Lipeaks游戏乐园. 保留所有权利."
+  },
+  "home": {
+    "title": "Lipeaks游戏乐园",
+    "gameCategories": "游戏分类",
+    "popularGames": "热门游戏",
+    "loadingPopularGames": "正在加载热门游戏...",
+    "noPopularGames": "暂无热门游戏"
+  },
+  "game": {
+    "loading": "加载中...",
+    "playCount": "已玩 {count} 次",
+    "category": "分类",
+    "author": "作者",
+    "size": "大小",
+    "version": "版本",
+    "region": "地区",
+    "description": "游戏介绍",
+    "gameLoaded": "游戏已加载：{name}",
+    "gameStarted": "游戏已开始：{name}",
+    "gamePaused": "游戏已暂停：{name}",
+    "gameResumed": "游戏已恢复：{name}",
+    "gameError": "游戏发生错误"
+  },
+  "category": {
+    "gamesCount": "共 {count} 款游戏",
+    "noGames": "该分类下暂无游戏",
+    "loadingGames": "正在加载游戏数据..."
+  },
+  "search": {
+    "resultsTitle": "搜索结果: \"{query}\"",
+    "resultsCount": "共找到 {count} 个结果",
+    "noResults": "未找到与 \"{query}\" 相关的游戏",
+    "noResultsHelp": "请尝试其他关键词或浏览",
+    "allGames": "所有游戏",
+    "searching": "正在搜索..."
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "message": "抱歉，您访问的页面不存在。",
+    "backHome": "返回首页"
+  },
+  "emulator": {
+    "initializing": "正在初始化模拟器...",
+    "loadingGame": "正在加载游戏...",
+    "gameLoaded": "游戏加载成功",
+    "gameError": "游戏加载失败",
+    "pause": "暂停",
+    "resume": "继续",
+    "restart": "重启",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "save": "保存",
+    "load": "加载",
+    "keyHelp": "按键",
+    "volume": "音量",
+    "mute": "静音",
+    "unmute": "取消静音",
+    "pauseTooltip": "暂停游戏",
+    "resumeTooltip": "继续游戏",
+    "restartTooltip": "重新开始游戏",
+    "fullscreenTooltip": "进入全屏",
+    "exitFullscreenTooltip": "退出全屏",
+    "saveTooltip": "保存游戏状态",
+    "loadTooltip": "加载游戏状态",
+    "keyHelpTooltip": "显示/隐藏按键说明",
+    "muteTooltip": "静音",
+    "unmuteTooltip": "取消静音"
+  },
+  "controls": {
+    "keyMappings": "按键映射",
+    "up": "上",
+    "down": "下",
+    "left": "左",
+    "right": "右",
+    "buttonA": "A",
+    "buttonAA": "AA",
+    "buttonB": "B",
+    "buttonBB": "BB",
+    "start": "Start",
+    "select": "Select"
+  },
+  "errors": {
+    "fetchCategories": "获取分类失败",
+    "fetchGames": "获取分类 {category} 的游戏失败",
+    "fetchGameById": "获取游戏 {id} 失败",
+    "searchError": "搜索错误",
+    "emulatorInit": "模拟器初始化失败",
+    "gameLoad": "游戏加载失败",
+    "networkError": "网络错误",
+    "unknownError": "未知错误"
+  },
+  "language": {
+    "switch": "语言",
+    "current": "当前语言：{language}"
+  },
+  "routes": {
+    "home": "首页 - Lipeaks游戏乐园",
+    "game": "游戏 - Lipeaks游戏乐园",
+    "category": "分类 - Lipeaks游戏乐园",
+    "search": "搜索结果 - Lipeaks游戏乐园",
+    "searchWithQuery": "搜索\"{query}\" - Lipeaks游戏乐园",
+    "notFound": "页面未找到 - Lipeaks游戏乐园"
+  }
+} 
