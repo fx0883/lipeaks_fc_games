@@ -88,16 +88,15 @@
         </button>
       </div>
       
-      <!-- 按键说明按钮 -->
+      <!-- 控制设置按钮 -->
       <button 
         v-if="showKeyHelp"
-        @click="toggleKeyHelp" 
-        class="control-btn key-help-btn"
-        :class="{ active: showingKeyHelp }"
-        :title="$t('emulator.keyHelpTooltip')"
+        @click="toggleSettings" 
+        class="control-btn settings-btn"
+        :title="$t('emulator.settingsTooltip')"
       >
-        <span class="btn-icon">🎮</span>
-        <span class="btn-text">{{ $t('emulator.keyHelp') }}</span>
+        <span class="btn-icon">⚙️</span>
+        <span class="btn-text">{{ $t('emulator.settings') }}</span>
       </button>
     </div>
     
@@ -213,7 +212,7 @@ const emit = defineEmits([
   'mute-toggle',
   'save-state',
   'load-state',
-  'key-help-toggle'
+  'settings-toggle'
 ])
 
 // 响应式数据
@@ -289,8 +288,8 @@ const handleLoadState = () => {
   }
 }
 
-const toggleKeyHelp = () => {
-  emit('key-help-toggle')
+const toggleSettings = () => {
+  emit('settings-toggle')
 }
 </script>
 
@@ -421,7 +420,7 @@ const toggleKeyHelp = () => {
   border-color: #e55a00;
 }
 
-.key-help-btn.active {
+.settings-btn.active {
   background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
   color: white;
   border-color: #5a6268;

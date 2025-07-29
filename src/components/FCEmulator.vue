@@ -46,7 +46,7 @@
         @mute-toggle="handleMuteToggle"
         @save-state="handleSaveState"
         @load-state="handleLoadState"
-        @key-help-toggle="toggleKeyHelp"
+        @settings-toggle="toggleSettings"
       />
       
       <!-- 按键说明弹窗 -->
@@ -328,8 +328,28 @@ const handleLoadState = async () => {
   }
 }
 
-const toggleKeyHelp = () => {
-  showKeyHelp.value = !showKeyHelp.value
+const toggleSettings = () => {
+  // 调用EmulatorJS的设置菜单
+  if (emulatorService.value) {
+    openEmulatorSettings()
+  }
+}
+
+const openEmulatorSettings = () => {
+  // 使用EmulatorJS的正确API来切换设置菜单
+  try {
+    if (window.EJS_emulator && window.EJS_emulator.settingsMenu) {
+      // 直接切换EmulatorJS的设置菜单显示状态
+      window.EJS_emulator.settingsMenuOpen = !window.EJS_emulator.settingsMenuOpen
+      window.EJS_emulator.settingsMenu.style.display = window.EJS_emulator.settingsMenuOpen ? "" : "none"
+      
+      console.log(window.EJS_emulator.settingsMenuOpen ? t('emulator.settingsOpened') : t('emulator.settingsClosed'))
+    } else {
+      console.warn(t('emulator.emulatorNotReady'))
+    }
+  } catch (error) {
+    console.error(t('emulator.settingsError'), error)
+  }
 }
 
 const hideKeyHelp = () => {
