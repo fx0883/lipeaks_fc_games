@@ -1,7 +1,29 @@
 <template>
   <div class="fc-emulator">
     <div class="emulator-container">
-      <div id="emulator" ref="emulatorRef"></div>
+      <!-- 加载状态显示 -->
+      <div v-if="isLoading" class="loading-overlay">
+        <div class="loading-content">
+          <div class="spinner"></div>
+          <p>正在加载模拟器...</p>
+          <div class="progress-bar">
+            <div class="progress-fill" :style="{ width: loadingProgress + '%' }"></div>
+          </div>
+          <span class="progress-text">{{ loadingProgress.toFixed(0) }}%</span>
+        </div>
+      </div>
+      
+      <!-- 错误状态显示 -->
+      <div v-if="error" class="error-display">
+        <div class="error-content">
+          <div class="error-icon">⚠️</div>
+          <h3>加载失败</h3>
+          <p>{{ error }}</p>
+          <button @click="initEmulator" class="retry-btn">重试</button>
+        </div>
+      </div>
+      
+      <div id="emulator"></div>
       
       <div class="game-controls" v-if="isGameLoaded">
         <button class="control-btn" @click="togglePause">{{ isPaused ? '继续' : '暂停' }}</button>
@@ -91,11 +113,6 @@
 </template>
 
 <script>
-import nesService from '../services/nesService';
-
-// 使用index.html中已加载的jQuery，不再重复导入
-// jQuery已在index.html中全局加载为window.jQuery
-
 export default {
   name: 'FCEmulator',
   props: {
@@ -108,13 +125,16 @@ export default {
     return {
       isGameLoaded: false,
       isPaused: false,
-      isSoundEnabled: false,
+      isSoundEnabled: true,
       isFullscreen: false,
-      showKeyHelp: false
+      showKeyHelp: false,
+      isLoading: false,
+      error: '',
+      loadingProgress: 0
     }
   },
   mounted() {
-    console.log('FCEmulator: 组件挂载，开始初始化模拟器');
+    console.log('FCEmulator: 组件挂载，开始初始化EmulatorJS');
     this.initEmulator();
     
     // 监听全屏状态变化
@@ -125,93 +145,194 @@ export default {
   methods: {
     async initEmulator() {
       try {
-        console.log('FCEmulator: 开始初始化模拟器');
+        console.log('FCEmulator: 开始初始化EmulatorJS');
+        this.isLoading = true;
+        this.error = '';
+        this.loadingProgress = 0;
         
-        // 检查JSNES和jQuery是否已加载
-        if (typeof window.JSNES === 'undefined') {
-          console.error('FCEmulator: JSNES未加载，请确保在index.html中正确加载了JSNES脚本');
-          console.log('FCEmulator: jQuery状态:', typeof window.jQuery !== 'undefined' ? '已加载' : '未加载');
-          console.log('FCEmulator: JSNES状态:', typeof window.JSNES !== 'undefined' ? '已加载' : '未加载');
-          if (typeof window.JSNES !== 'undefined') {
-            console.log('FCEmulator: JSNES对象内容:', window.JSNES);
-          }
-          return;
-        }
+        // 清除之前的模拟器实例
+        await this.clearEmulator();
         
-        // 检查jQuery JSNESUI插件是否可用
-        if (typeof window.jQuery !== 'undefined' && typeof window.jQuery.fn.JSNESUI === 'undefined') {
-          console.error('FCEmulator: jQuery JSNESUI插件未加载，请确保ui.js正确加载');
-          return;
-        }
-        
-        console.log('FCEmulator: JSNES已加载，继续初始化');
-        
-        // 设置游戏加载完成回调
-        nesService.onGameLoaded(() => {
-          console.log('FCEmulator: 游戏加载完成回调触发');
-          this.isGameLoaded = true;
-          this.$emit('game-loaded');
-        });
-        
-        // 初始化NES模拟器
-        console.log('FCEmulator: 调用nesService.init');
-        await nesService.init('emulator');
-        
-        // 调整ROM路径 - 移除./public前缀，确保路径正确
+        // 调整ROM路径
         const romPath = this.romPath.startsWith('/') ? this.romPath : `/${this.romPath}`;
         
-        // 加载ROM
-        console.log(`FCEmulator: 开始加载ROM: ${romPath}`);
-        await nesService.loadROM(romPath);
-        console.log('FCEmulator: ROM加载完成');
+        // 验证ROM文件是否可访问
+        try {
+          const response = await fetch(romPath, { method: 'HEAD' });
+          if (!response.ok) {
+            throw new Error(`ROM文件无法访问 (状态码: ${response.status})`);
+          }
+          console.log('FCEmulator: ROM文件验证成功');
+        } catch (romError) {
+          console.error('FCEmulator: ROM文件验证失败:', romError);
+          throw new Error(`ROM文件验证失败: ${romError.message}`);
+        }
+        
+        // 设置EmulatorJS配置
+        window.EJS_player = '#emulator'
+        window.EJS_gameUrl = romPath
+        window.EJS_core = 'fceumm'
+        window.EJS_pathtodata = '/emulatorjs/data/'
+        window.EJS_gameName = 'NES Game'
+        window.EJS_language = ''  // 默认英语
+        window.EJS_startOnLoaded = true
+        
+        // EmulatorJS事件监听
+        window.EJS_ready = () => {
+          console.log('FCEmulator: EmulatorJS ready');
+          this.isGameLoaded = true;
+          this.$emit('game-loaded');
+        }
+        
+        window.EJS_onGameStart = () => {
+          console.log('FCEmulator: Game started');
+          this.isLoading = false;
+        }
+        
+        console.log('FCEmulator: EmulatorJS配置:', {
+          player: window.EJS_player,
+          gameUrl: window.EJS_gameUrl,
+          core: window.EJS_core,
+          pathtodata: window.EJS_pathtodata
+        });
+        
+        // 加载EmulatorJS脚本
+        await this.loadEmulatorJSScript();
+        
       } catch (error) {
         console.error('FCEmulator: 初始化模拟器失败:', error);
+        this.error = error.message;
+        this.isLoading = false;
+      }
+    },
+    
+    async loadEmulatorJSScript() {
+      return new Promise((resolve, reject) => {
+        // 模拟加载进度
+        const progressInterval = setInterval(() => {
+          this.loadingProgress = Math.min(this.loadingProgress + Math.random() * 20, 90);
+        }, 200);
+        
+        const script = document.createElement('script');
+        script.src = '/emulatorjs/data/loader.js';
+        
+        script.onload = () => {
+          console.log('FCEmulator: EmulatorJS script loaded');
+          clearInterval(progressInterval);
+          this.loadingProgress = 100;
+          
+          // 等待模拟器初始化
+          this.waitForEmulatorInitialization()
+            .then(() => {
+              this.isLoading = false;
+              resolve();
+            })
+            .catch(reject);
+        };
+        
+        script.onerror = () => {
+          clearInterval(progressInterval);
+          reject(new Error('EmulatorJS脚本加载失败'));
+        };
+        
+        document.head.appendChild(script);
+      });
+    },
+    
+    waitForEmulatorInitialization() {
+      return new Promise((resolve, reject) => {
+        let attempts = 0;
+        const maxAttempts = 100; // 20秒超时
+        
+        const checkInterval = setInterval(() => {
+          attempts++;
+          
+          if (window.EJS_emulator) {
+            clearInterval(checkInterval);
+            console.log('FCEmulator: EmulatorJS initialized');
+            resolve();
+          } else if (attempts >= maxAttempts) {
+            clearInterval(checkInterval);
+            reject(new Error('EmulatorJS初始化超时'));
+          }
+        }, 200);
+      });
+    },
+    
+    async clearEmulator() {
+      try {
+        if (window.EJS_emulator) {
+          // 清除全局变量
+          delete window.EJS_emulator;
+        }
+        
+        // 清理DOM
+        const container = document.getElementById('emulator');
+        if (container) {
+          container.innerHTML = '';
+        }
+        
+        // 移除之前的脚本
+        const scripts = document.querySelectorAll('script[src*="emulatorjs"]');
+        scripts.forEach(script => script.remove());
+        
+        this.isGameLoaded = false;
+        console.log('FCEmulator: 模拟器已清除');
+      } catch (err) {
+        console.error('FCEmulator: 清除模拟器失败:', err);
       }
     },
     togglePause() {
-      this.isPaused = nesService.togglePause();
+      if (window.EJS_emulator) {
+        if (this.isPaused) {
+          if (typeof window.EJS_emulator.resume === 'function') {
+            window.EJS_emulator.resume();
+            this.isPaused = false;
+          }
+        } else {
+          if (typeof window.EJS_emulator.pause === 'function') {
+            window.EJS_emulator.pause();
+            this.isPaused = true;
+          }
+        }
+      }
     },
     restart() {
-      nesService.restart();
-      this.isPaused = false;
+      if (window.EJS_emulator && typeof window.EJS_emulator.restart === 'function') {
+        window.EJS_emulator.restart();
+        this.isPaused = false;
+      }
     },
     toggleSound() {
-      this.isSoundEnabled = nesService.toggleSound();
+      if (window.EJS_emulator) {
+        // EmulatorJS的音量控制
+        this.isSoundEnabled = !this.isSoundEnabled;
+        // 这里可以根据EmulatorJS的实际API调整
+        console.log('Sound toggled:', this.isSoundEnabled);
+      }
     },
     toggleFullscreen() {
-      const emulatorEl = this.$refs.emulatorRef;
-
-      if (!document.fullscreenElement) {
-        // 进入全屏
-        if (emulatorEl.requestFullscreen) {
-          emulatorEl.requestFullscreen();
-        } else if (emulatorEl.webkitRequestFullscreen) {
-          emulatorEl.webkitRequestFullscreen();
-        } else if (emulatorEl.msRequestFullscreen) {
-          emulatorEl.msRequestFullscreen();
+      if (window.EJS_emulator && typeof window.EJS_emulator.enterFullscreen === 'function') {
+        if (!this.isFullscreen) {
+          window.EJS_emulator.enterFullscreen();
+          this.isFullscreen = true;
+        } else {
+          // EmulatorJS通常会自动处理退出全屏
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+          this.isFullscreen = false;
         }
-        this.isFullscreen = true;
-        // 调用nesService切换canvas到全屏尺寸
-        nesService.toggleCanvasFullscreen(true);
-      } else {
-        // 退出全屏
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-        this.isFullscreen = false;
-        // 调用nesService切换canvas到普通尺寸
-        nesService.toggleCanvasFullscreen(false);
       }
     },
     handleFullscreenChange() {
       // 当全屏状态改变时（比如按ESC键退出全屏）
       if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
         this.isFullscreen = false;
-        nesService.toggleCanvasFullscreen(false);
       }
     }
   },
@@ -221,8 +342,8 @@ export default {
     document.removeEventListener('fullscreenchange', this.handleFullscreenChange);
     document.removeEventListener('webkitfullscreenchange', this.handleFullscreenChange);
     document.removeEventListener('msfullscreenchange', this.handleFullscreenChange);
-    // 停止游戏并完全清除NES实例
-    nesService.destroy();
+    // 清除EmulatorJS实例
+    this.clearEmulator();
   }
 }
 </script>
@@ -236,6 +357,7 @@ export default {
 
 .emulator-container {
   margin-bottom: 20px;
+  position: relative;
 }
 
 #emulator {
@@ -380,5 +502,111 @@ export default {
   border-radius: 4px;
   font-family: monospace;
   font-weight: bold;
+}
+
+/* 加载状态样式 */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  z-index: 5;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #007bff;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.progress-bar {
+  width: 200px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 12px auto 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #007bff;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* 错误状态样式 */
+.error-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(220, 53, 69, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 2px dashed #dc3545;
+}
+
+.error-content {
+  text-align: center;
+  color: #dc3545;
+  padding: 24px;
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-content h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+}
+
+.error-content p {
+  margin: 0 0 16px 0;
+  color: #721c24;
+  font-size: 14px;
+  max-width: 400px;
+}
+
+.retry-btn {
+  padding: 10px 20px;
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.retry-btn:hover {
+  background: #e0a800;
 }
 </style> 
