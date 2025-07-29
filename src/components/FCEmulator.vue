@@ -25,14 +25,6 @@
       
       <div id="emulator"></div>
       
-      <div class="game-controls" v-if="isGameLoaded">
-        <button class="control-btn" @click="togglePause">{{ isPaused ? '继续' : '暂停' }}</button>
-        <button class="control-btn" @click="restart">重启</button>
-        <button class="control-btn" @click="toggleSound">{{ isSoundEnabled ? '关闭声音' : '开启声音' }}</button>
-        <button class="control-btn" @click="toggleFullscreen">全屏</button>
-        <button class="control-btn" @click="showKeyHelp = true">按键说明</button>
-      </div>
-      
       <!-- 按键说明弹窗 -->
       <div v-if="showKeyHelp" class="key-help-modal" @click.self="showKeyHelp = false">
         <div class="key-help-content">
@@ -83,30 +75,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <div class="key-mapping">
-      <h3>操作说明</h3>
-      <div class="key-item">
-        <span class="key">方向键</span>
-        <span class="action">移动</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Z</span>
-        <span class="action">A按钮</span>
-      </div>
-      <div class="key-item">
-        <span class="key">X</span>
-        <span class="action">B按钮</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Enter</span>
-        <span class="action">开始</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Space</span>
-        <span class="action">选择</span>
       </div>
     </div>
   </div>
@@ -372,51 +340,7 @@ export default {
 
 
 
-.game-controls {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
 
-.control-btn {
-  padding: 8px 16px;
-  background-color: var(--color-primary, #4a5568);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.control-btn:hover {
-  background-color: var(--color-primary-dark, #2d3748);
-}
-
-.key-mapping {
-  margin-top: 20px;
-  border: 1px solid #eaeaea;
-  border-radius: 4px;
-  padding: 15px;
-}
-
-.key-mapping h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.key-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.key-item:last-child {
-  border-bottom: none;
-}
-
-.key {
-  font-weight: bold;
-}
 
 /* 按键说明弹窗样式 */
 .key-help-modal {
