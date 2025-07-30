@@ -381,7 +381,7 @@ const getControls = () => {
 // 生命周期
 onMounted(async () => {
   // 组件挂载，开始初始化 - 生产环境不输出日志
-
+  
   // 监听全屏状态变化
   document.addEventListener('fullscreenchange', handleFullscreenChange)
   document.addEventListener('webkitfullscreenchange', handleFullscreenChange)

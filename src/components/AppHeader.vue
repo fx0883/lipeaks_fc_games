@@ -7,32 +7,36 @@
         </a>
       </div>
       
-      <nav class="main-nav">
-        <ul>
-          <li><a href="/" @click.prevent="openInNewTab('/')">{{ $t('nav.home') }}</a></li>
-          <li v-for="category in categories" :key="category.id">
-            <a :href="`/category/${category.id}`" @click.prevent="openInNewTab(`/category/${category.id}`)">{{ category.name }}</a>
-          </li>
-        </ul>
-      </nav>
+              <nav class="main-nav">
+          <ul>
+            <li v-for="category in categories" :key="category.id">
+              <a :href="`/category/${category.id}`" @click.prevent="openInNewTab(`/category/${category.id}`)">{{ category.name }}</a>
+            </li>
+          </ul>
+        </nav>
       
-      <div class="search-box">
-        <input 
-          type="text" 
-          :placeholder="$t('nav.searchPlaceholder')" 
-          v-model="searchQuery"
-          @keyup.enter="handleSearchInNewTab"
-        >
-        <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
+              <div class="search-box">
+          <input 
+            type="text" 
+            :placeholder="$t('nav.searchPlaceholder')" 
+            v-model="searchQuery"
+            @keyup.enter="handleSearchInNewTab"
+          >
+          <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
+        </div>
+        
+        <div class="header-actions">
+          <LanguageSwitcher />
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const router = useRouter()
 const gameStore = useGameStore()
@@ -78,77 +82,120 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.app-header {
-  background-color: var(--color-background-soft);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+ .app-header {
+   background-color: white;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+   border-bottom: 1px solid #e1e5e9;
+ }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+ .container {
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 0 20px;
+   height: 64px;
+   display: flex;
+   align-items: center;
+   gap: 20px;
+ }
 
-.logo a {
-  text-decoration: none;
-  color: var(--color-text);
-}
+ .logo {
+   flex-shrink: 0;
+ }
+ 
+ .logo a {
+   text-decoration: none;
+   color: var(--color-text);
+ }
+ 
+ .logo h1 {
+   margin: 0;
+   font-size: 1.6rem;
+   font-weight: 600;
+   color: var(--color-primary);
+ }
 
-.logo h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.main-nav ul {
+  .main-nav {
+   flex-shrink: 0;
+ }
+ 
+ .main-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 4px;
 }
+ 
+ .main-nav li {
+   position: relative;
+   flex-shrink: 0;
+ }
 
-.main-nav li {
-  margin-right: 15px;
-  position: relative;
-}
+ .main-nav a {
+   text-decoration: none;
+   color: var(--color-text);
+   font-weight: 500;
+   padding: 10px 16px;
+   border-radius: 20px;
+   transition: all 0.3s ease;
+   font-size: 14px;
+   white-space: nowrap;
+ }
+ 
+ .main-nav a:hover {
+   color: var(--color-primary);
+   background-color: var(--color-background-soft);
+   transform: translateY(-1px);
+ }
 
-.main-nav a {
-  text-decoration: none;
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.main-nav a:hover {
-  color: var(--color-primary);
-}
-
-.search-box {
+ .search-box {
   display: flex;
+  flex: 1;
+  max-width: 300px;
+  margin: 0 auto;
 }
-
-.search-box input {
+ 
+ .search-box input {
+  flex: 1;
   padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px 0 0 4px;
+  border: 2px solid #e1e5e9;
+  border-radius: 20px 0 0 20px;
   outline: none;
+  font-size: 14px;
+  background-color: #f6f7f8;
+  transition: all 0.3s ease;
 }
-
-.search-box button {
-  padding: 8px 12px;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
+ 
+ .search-box input:focus {
+   border-color: var(--color-primary);
+   background-color: white;
+ }
+ 
+ .search-box button {
+  padding: 8px 16px;
+  background-color: #f6f7f8;
+  color: var(--color-text);
+  border: 2px solid #e1e5e9;
+  border-left: none;
+  border-radius: 0 20px 20px 0;
   cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
-
-.search-box button:hover {
-  background-color: var(--color-primary-dark);
-}
+ 
+   .search-box button:hover {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+  
+  .header-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
 
 @media (max-width: 768px) {
   .container {
