@@ -2,34 +2,61 @@
   <header class="app-header">
     <div class="container">
       <div class="logo">
-        <a href="/" @click.prevent="openInNewTab('/')">
+        <router-link to="/">
           <h1>{{ $t('app.title') }}</h1>
-        </a>
+        </router-link>
       </div>
       
-              <nav class="main-nav">
-          <ul>
-            <li v-for="category in categories" :key="category.id">
-              <a :href="`/category/${category.id}`" @click.prevent="openInNewTab(`/category/${category.id}`)">{{ category.name }}</a>
-            </li>
-          </ul>
-        </nav>
+      <!-- 桌面端导航 -->
+      <nav class="main-nav desktop-nav">
+        <ul>
+          <li v-for="category in categories" :key="category.id">
+            <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
+          </li>
+        </ul>
+      </nav>
       
-              <div class="search-box">
-          <input 
-            type="text" 
-            :placeholder="$t('nav.searchPlaceholder')" 
-            v-model="searchQuery"
-            @keyup.enter="handleSearchInNewTab"
-          >
-          <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
-        </div>
-        
-        <div class="header-actions">
-          <LanguageSwitcher />
-        </div>
+      <div class="search-box desktop-search">
+        <input 
+          type="text" 
+          :placeholder="$t('nav.searchPlaceholder')" 
+          v-model="searchQuery"
+          @keyup.enter="handleSearchInNewTab"
+        >
+        <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
       </div>
-    </header>
+      
+      <div class="header-actions">
+        <LanguageSwitcher />
+        <!-- 移动端菜单按钮 -->
+        <button class="mobile-menu-btn" @click="toggleMobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" :class="{ 'active': isMobileMenuOpen }">
+      <div class="mobile-search">
+        <input 
+          type="text" 
+          :placeholder="$t('nav.searchPlaceholder')" 
+          v-model="searchQuery"
+          @keyup.enter="handleSearchInNewTab"
+        >
+        <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
+      </div>
+      <nav class="mobile-nav">
+        <ul>
+          <li v-for="category in categories" :key="category.id">
+            <router-link :to="`/category/${category.id}`" @click="closeMobileMenu">{{ category.name }}</router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 </template>
 
 <script setup>
@@ -42,6 +69,7 @@ const router = useRouter()
 const gameStore = useGameStore()
 const searchQuery = ref('')
 const categories = ref([])
+const isMobileMenuOpen = ref(false)
 
 // 加载分类数据
 const loadCategories = async () => {
@@ -73,6 +101,15 @@ const handleSearchInNewTab = () => {
 const openInNewTab = (path) => {
   const baseUrl = window.location.origin
   window.open(baseUrl + path, '_blank')
+}
+
+// 移动端菜单控制
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
 }
 
 // 组件挂载时加载分类数据
@@ -195,30 +232,131 @@ onMounted(() => {
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    gap: 12px;
+  }
+
+  /* 移动端菜单按钮 */
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  .mobile-menu-btn span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: all 0.3s ease;
+  }
+
+  /* 移动端菜单 */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-top: 1px solid #e1e5e9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .mobile-menu.active {
+    max-height: 500px;
+  }
+
+  .mobile-search {
+    padding: 16px;
+    border-bottom: 1px solid #e1e5e9;
+    display: flex;
+  }
+
+  .mobile-search input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    font-size: 14px;
+    background-color: #f6f7f8;
+  }
+
+  .mobile-search button {
+    padding: 8px 16px;
+    background-color: #f6f7f8;
+    color: var(--color-text);
+    border: 2px solid #e1e5e9;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-nav li {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .mobile-nav a {
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-nav a:hover {
+    background-color: #f6f7f8;
+    color: var(--color-primary);
   }
 
 @media (max-width: 768px) {
+  .app-header {
+    position: relative;
+  }
+
   .container {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 10px 20px;
+    height: 56px;
+    padding: 0 16px;
   }
-  
-  .logo {
-    margin-bottom: 10px;
+
+  .logo h1 {
+    font-size: 1.2rem;
   }
-  
-  .main-nav, .search-box {
-    width: 100%;
-    margin-bottom: 10px;
+
+  /* 隐藏桌面端元素 */
+  .desktop-nav,
+  .desktop-search {
+    display: none;
   }
-  
-  .main-nav ul {
-    justify-content: center;
+
+  /* 显示移动端元素 */
+  .mobile-menu-btn {
+    display: flex;
   }
-  
-  .search-box input {
-    flex-grow: 1;
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .header-actions {
+    margin-left: auto;
   }
 }
 </style> 
