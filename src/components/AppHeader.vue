@@ -239,13 +239,28 @@ onMounted(() => {
   .mobile-menu-btn {
     display: none;
     flex-direction: column;
-    width: 24px;
-    height: 24px;
-    background: none;
-    border: none;
+    width: 32px;
+    height: 32px;
+    background-color: #f6f7f8;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
     cursor: pointer;
-    padding: 0;
+    padding: 6px;
     justify-content: space-between;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .mobile-menu-btn:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .mobile-menu-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
   .mobile-menu-btn span {
@@ -253,6 +268,11 @@ onMounted(() => {
     height: 2px;
     background-color: var(--color-text);
     transition: all 0.3s ease;
+    border-radius: 1px;
+  }
+
+  .mobile-menu-btn:hover span {
+    background-color: white;
   }
 
   /* 移动端菜单 */
