@@ -192,7 +192,7 @@ const initEmulator = async () => {
     // 初始化服务
     await emulatorService.value.initialize(config)
     
-    console.log('FCEmulator: 模拟器初始化成功')
+    // 模拟器初始化成功 - 生产环境不输出日志
     
   } catch (error) {
     console.error('FCEmulator: 初始化失败:', error)
@@ -314,12 +314,12 @@ const openEmulatorControlSettings = () => {
   if (emulatorService.value) {
     const success = emulatorService.value.openControlSettings()
     if (success) {
-      console.log('控制设置菜单已打开')
+      // 控制设置菜单已打开 - 生产环境不输出日志
     } else {
-      console.warn('无法打开控制设置菜单')
+      // 无法打开控制设置菜单 - 生产环境不输出警告
     }
   } else {
-    console.warn('模拟器服务未就绪')
+    // 模拟器服务未就绪 - 生产环境不输出警告
   }
 }
 
@@ -331,9 +331,9 @@ const openEmulatorSettings = () => {
       window.EJS_emulator.settingsMenuOpen = !window.EJS_emulator.settingsMenuOpen
       window.EJS_emulator.settingsMenu.style.display = window.EJS_emulator.settingsMenuOpen ? "" : "none"
       
-      console.log(window.EJS_emulator.settingsMenuOpen ? t('emulator.settingsOpened') : t('emulator.settingsClosed'))
+      // 设置菜单状态变化 - 生产环境不输出日志
     } else {
-      console.warn(t('emulator.emulatorNotReady'))
+      // 模拟器未就绪 - 生产环境不输出警告
     }
   } catch (error) {
     console.error(t('emulator.settingsError'), error)
@@ -380,8 +380,8 @@ const getControls = () => {
 
 // 生命周期
 onMounted(async () => {
-  console.log('FCEmulator: 组件挂载，开始初始化')
-  
+  // 组件挂载，开始初始化 - 生产环境不输出日志
+
   // 监听全屏状态变化
   document.addEventListener('fullscreenchange', handleFullscreenChange)
   document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
@@ -392,7 +392,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(async () => {
-  console.log('FCEmulator: 组件卸载，释放资源')
+  // 组件卸载，释放资源 - 生产环境不输出日志
   
     // 移除全屏事件监听器
   document.removeEventListener('fullscreenchange', handleFullscreenChange)

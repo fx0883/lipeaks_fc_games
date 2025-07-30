@@ -67,7 +67,7 @@ export class EmulatorService {
       await this.adapter.initialize(this.config)
       
       this.isInitialized = true
-      console.log('EmulatorService: Initialized successfully')
+      // EmulatorService: 初始化成功 - 生产环境不输出日志
       
     } catch (error) {
       const errorInfo = this.errorHandler.createEmulatorError(
@@ -99,7 +99,7 @@ export class EmulatorService {
    * @param {*} data 事件数据
    */
   handleAdapterEvent(event, data) {
-    console.log(`EmulatorService: Adapter event ${event}`, data)
+          // EmulatorService: 适配器事件 - 生产环境不输出日志
     
     // 更新状态管理器的状态
     switch (event) {
@@ -140,7 +140,7 @@ export class EmulatorService {
    * @param {Object} stateChange 状态变化信息
    */
   handleStateChange(stateChange) {
-    console.log('EmulatorService: State change', stateChange)
+          // EmulatorService: 状态变化 - 生产环境不输出日志
     
     // 向外部监听器传播状态变化事件
     this.emit('stateChanged', stateChange)
@@ -186,7 +186,7 @@ export class EmulatorService {
       // 加载游戏到适配器
       await this.adapter.loadGame(romPath)
       
-      console.log(`EmulatorService: Game loaded successfully - ${romPath}`)
+      // EmulatorService: 游戏加载成功 - 生产环境不输出日志
       
     } catch (error) {
       const errorInfo = this.errorHandler.createResourceError(
@@ -214,7 +214,7 @@ export class EmulatorService {
     
     const result = this.adapter.setVolume(volume)
     if (result) {
-      console.log(`EmulatorService: Volume set to ${volume}`)
+      // EmulatorService: 音量设置 - 生产环境不输出日志
     }
     return result
   }
@@ -229,7 +229,7 @@ export class EmulatorService {
     
     const result = this.adapter.setMuted(muted)
     if (result) {
-      console.log(`EmulatorService: Muted ${muted ? 'enabled' : 'disabled'}`)
+      // EmulatorService: 静音设置 - 生产环境不输出日志
     }
     return result
   }
@@ -277,7 +277,7 @@ export class EmulatorService {
     try {
       const result = await this.adapter.saveState(slotName)
       if (result) {
-        console.log(`EmulatorService: State saved to slot ${slotName}`)
+        // EmulatorService: 状态已保存 - 生产环境不输出日志
       }
       return result
     } catch (error) {
@@ -306,7 +306,7 @@ export class EmulatorService {
     try {
       const result = await this.adapter.loadState(slotName)
       if (result) {
-        console.log(`EmulatorService: State loaded from slot ${slotName}`)
+        // EmulatorService: 状态已加载 - 生产环境不输出日志
       }
       return result
     } catch (error) {
@@ -432,7 +432,7 @@ export class EmulatorService {
    * @returns {Promise<void>}
    */
   async destroy() {
-    console.log('EmulatorService: Starting destruction...')
+          // EmulatorService: 开始销毁 - 生产环境不输出日志
     
     try {
       // 销毁适配器
@@ -453,7 +453,7 @@ export class EmulatorService {
       this.isInitialized = false
       this.config = null
       
-      console.log('EmulatorService: Destroyed successfully')
+              // EmulatorService: 销毁成功 - 生产环境不输出日志
       
     } catch (error) {
       console.error('EmulatorService: Error during destruction:', error)

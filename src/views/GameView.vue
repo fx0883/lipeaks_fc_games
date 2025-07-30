@@ -65,21 +65,21 @@ const categoryName = computed(() => {
 
 // 游戏事件处理
 const onGameLoaded = () => {
-  console.log(t('game.gameLoaded', { name: game.value?.name }))
+  // 游戏加载完成 - 生产环境不输出日志
 }
 
 const onGameStarted = () => {
   // 游戏开始时增加播放次数
   gameStore.incrementPlayCount(gameId.value)
-  console.log(t('game.gameStarted', { name: game.value?.name }))
+  // 游戏开始 - 生产环境不输出日志
 }
 
 const onGamePaused = () => {
-  console.log(t('game.gamePaused', { name: game.value?.name }))
+  // 游戏暂停 - 生产环境不输出日志
 }
 
 const onGameResumed = () => {
-  console.log(t('game.gameResumed', { name: game.value?.name }))
+  // 游戏恢复 - 生产环境不输出日志
 }
 
 const onGameError = (error) => {
@@ -88,7 +88,7 @@ const onGameError = (error) => {
 }
 
 const onStateChanged = (stateChange) => {
-  console.log('Game state changed:', stateChange)
+  // 状态变化 - 生产环境不输出日志
   // 可以在这里处理状态变化，如更新UI等
 }
 

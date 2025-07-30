@@ -401,7 +401,7 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       // 清理全局变量
       this.cleanupGlobalVariables()
 
-      console.log(`EmulatorJSAdapter[${this.namespace}]: 资源已清理`)
+      // EmulatorJSAdapter: 资源已清理 - 生产环境不输出日志
 
     } catch (error) {
       console.error(`EmulatorJSAdapter[${this.namespace}]: 清理资源时出错:`, error)
@@ -453,6 +453,6 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
     this.containerId = null
     this.loadingProgress = 0
     
-    console.log(`EmulatorJSAdapter[${this.namespace}]: 适配器已销毁`)
+          // EmulatorJSAdapter: 适配器已销毁 - 生产环境不输出日志
   }
 } 
