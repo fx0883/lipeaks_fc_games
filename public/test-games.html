@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当前游戏测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .game-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .game-info {
+            margin: 10px 0;
+            color: #666;
+        }
+        .game-description {
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .play-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .play-button:hover {
+            background: #45a049;
+        }
+        .direct-link {
+            color: #2196F3;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .direct-link:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 当前游戏测试页面</h1>
+    
+    <div id="status" class="status" style="display: none;"></div>
+    
+    <div class="game-grid">
+        <!-- FC游戏：魂斗罗 -->
+        <div class="game-card">
+            <div class="game-title">🔥 魂斗罗 (Contra)</div>
+            <div class="game-info">
+                <strong>平台:</strong> FC/NES<br>
+                <strong>核心:</strong> fceumm<br>
+                <strong>文件:</strong> Contra1(U)30.nes<br>
+                <strong>分类:</strong> 动作
+            </div>
+            <div class="game-description">
+                魂斗罗是Konami公司于1987年推出的经典横版射击游戏。玩家操控比尔和兰斯两名战士，使用各种武器对抗外星人入侵。
+            </div>
+            <button class="play-button" onclick="testFC()">测试FC游戏</button>
+            <a href="/fc-emulator.html" class="direct-link">直接测试页面</a>
+            <a href="/game/contra-fc" class="direct-link">Vue游戏页面</a>
+        </div>
+        
+        <!-- 街机游戏：19XX -->
+        <div class="game-card">
+            <div class="game-title">✈️ 19XX: The War Against Destiny</div>
+            <div class="game-info">
+                <strong>平台:</strong> Arcade<br>
+                <strong>核心:</strong> mame2003_plus<br>
+                <strong>文件:</strong> 19xx.zip<br>
+                <strong>分类:</strong> 街机
+            </div>
+            <div class="game-description">
+                19XX是Capcom于1995年推出的经典纵版射击街机游戏。设定在1999年，玩家驾驶先进战机对抗邪恶势力。
+            </div>
+            <button class="play-button" onclick="testMAME()">测试街机游戏</button>
+            <a href="/mame-emulator.html" class="direct-link">直接测试页面</a>
+            <a href="/game/19xx-arcade" class="direct-link">Vue游戏页面</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin: 40px 0;">
+        <h2>快速测试链接</h2>
+        <a href="/test-simple.html" class="direct-link" style="margin: 0 20px;">简单测试页面</a>
+        <a href="/debug-detailed.html" class="direct-link" style="margin: 0 20px;">详细调试页面</a>
+        <a href="/" class="direct-link" style="margin: 0 20px;">Vue主应用</a>
+    </div>
+
+    <script>
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        function testFC() {
+            showStatus('正在测试FC游戏访问...', 'success');
+            
+            // 测试ROM文件访问
+            fetch('/roms/Contra1(U)30.nes', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        showStatus('✅ FC ROM文件可访问，正在跳转测试页面...', 'success');
+                        setTimeout(() => {
+                            window.open('/fc-emulator.html', '_blank');
+                        }, 1000);
+                    } else {
+                        showStatus('❌ FC ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
+                    }
+                })
+                .catch(error => {
+                    showStatus('❌ FC ROM文件访问失败: ' + error.message, 'error');
+                });
+        }
+
+        function testMAME() {
+            showStatus('正在测试MAME游戏访问...', 'success');
+            
+            // 测试ROM文件访问
+            fetch('/roms/19xx.zip', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        showStatus('✅ MAME ROM文件可访问，正在跳转测试页面...', 'success');
+                        setTimeout(() => {
+                            window.open('/mame-emulator.html', '_blank');
+                        }, 1000);
+                    } else {
+                        showStatus('❌ MAME ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
+                    }
+                })
+                .catch(error => {
+                    showStatus('❌ MAME ROM文件访问失败: ' + error.message, 'error');
+                });
+        }
+
+        // 页面加载时检查EmulatorJS文件
+        window.addEventListener('load', () => {
+            Promise.all([
+                fetch('/emulatorjs/loader.js', { method: 'HEAD' }),
+                fetch('/emulatorjs/cores/fceumm-wasm.data', { method: 'HEAD' }),
+                fetch('/emulatorjs/cores/mame2003_plus-wasm.data', { method: 'HEAD' })
+            ]).then(responses => {
+                const allOk = responses.every(r => r.ok);
+                if (allOk) {
+                    showStatus('✅ EmulatorJS文件检查通过', 'success');
+                } else {
+                    showStatus('⚠️ 部分EmulatorJS文件可能缺失', 'error');
+                }
+            }).catch(error => {
+                showStatus('❌ EmulatorJS文件检查失败', 'error');
+            });
+        });
+    </script>
+</body>
+</html> 

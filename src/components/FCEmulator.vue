@@ -101,7 +101,7 @@ const props = defineProps({
     },
     dataPath: {
       type: String,
-      default: '/emulatorjs/data/'
+      default: '/emulatorjs/'
   },
   gameName: {
     type: String,

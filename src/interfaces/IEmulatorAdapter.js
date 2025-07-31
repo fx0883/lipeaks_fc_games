@@ -32,7 +32,7 @@ export class EmulatorConfig {
     containerId,
     romPath,
     core = 'fceumm',
-    dataPath = '/emulatorjs/data/',
+    dataPath = '/emulatorjs/',
     gameName = 'NES Game',
     language = '',
     startOnLoaded = true,

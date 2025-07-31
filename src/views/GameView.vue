@@ -253,8 +253,10 @@ const categoryName = computed(() => {
 // 根据游戏分类获取默认核心
 const getDefaultCore = (category) => {
   const coreMapping = {
+    'action': 'fceumm',  // FC动作游戏默认用fceumm
+    'arcade': 'mame2003_plus',  // 街机游戏默认用mame2003_plus
     'nes': 'fceumm',
-    'arcade': 'mame2003'
+    'mame': 'mame2003_plus'
   }
   return coreMapping[category] || 'fceumm'
 }

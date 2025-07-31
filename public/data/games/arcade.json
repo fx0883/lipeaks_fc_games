@@ -1,17 +1,17 @@
 [
   {
-    "id": "arcade-example-1",
-    "name": "街霸2",
+    "id": "19xx-arcade",
+    "name": "19XX: The War Against Destiny",
     "version": "",
     "author": "Capcom",
     "region": "JP",
     "category": "arcade",
-    "size": "8Mb",
+    "size": "22MB",
     "romPath": "/roms/19xx.zip",
-    "cover": "/images/games/default.png",
-    "description": "经典格斗游戏街头霸王2，由Capcom开发。",
-    "playCount": 0,
-    "core": "fbalpha2012_cps1"
+    "core": "mame2003_plus",
+    "cover": "/placeholder.png",
+    "description": "19XX: The War Against Destiny是Capcom于1995年推出的经典纵版射击街机游戏。设定在1999年，玩家驾驶先进战机对抗邪恶势力。游戏特色包括华丽的视觉效果、多样化的武器系统、巨大的BOSS战斗，以及出色的音效设计。这是街机射击游戏的经典之作。",
+    "playCount": 0
   },
   {
     "id": "arcade-example-2", 

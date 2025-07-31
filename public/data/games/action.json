@@ -1,16 +1,16 @@
 [
   {
-    "id": "luyu-1",
-    "name": "阿尔戈斯战士",
-    "version": "v1.11",
-    "author": "汉化你妹汉化组汉化",
-    "region": "JP",
+    "id": "contra-fc",
+    "name": "魂斗罗",
+    "version": "",
+    "author": "Konami",
+    "region": "US",
     "category": "action",
-    "size": "2Mb",
-    "romPath": "/roms/19xx.zip",
-    "core": "mame2003",
-    "cover": "/images/games/default.png",
-    "description": "阿尔戈斯战士是一款经典动作游戏，由汉化你妹汉化组汉化。",
+    "size": "128KB",
+    "romPath": "/roms/Contra1(U)30.nes",
+    "core": "fceumm",
+    "cover": "/placeholder.png",
+    "description": "魂斗罗是Konami公司于1987年推出的经典横版射击游戏。玩家操控比尔和兰斯两名战士，使用各种武器对抗外星人入侵。游戏以其出色的关卡设计、丰富的武器系统和双人合作模式而闻名，是FC平台上最受欢迎的动作游戏之一。",
     "playCount": 0
   },
   {
