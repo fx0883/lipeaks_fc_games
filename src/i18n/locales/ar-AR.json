@@ -20,7 +20,9 @@
     "quickLinks": "روابط سريعة",
     "contactUs": "اتصل بنا",
     "email": "البريد الإلكتروني: contact@fcgame.com",
-    "copyright": "© {year} جنة ألعاب Lipeaks. جميع الحقوق محفوظة."
+    "copyright": "© {year} Lipeaks. جميع الحقوق محفوظة.",
+    "licensedUnder": "مرخص بموجب {licenseName}.",
+    "sourceCode": "كود المصدر"
   },
   "home": {
     "title": "جنة ألعاب Lipeaks",

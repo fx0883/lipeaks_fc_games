@@ -21,7 +21,9 @@
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
     "email": "Email: contact@fcgame.com",
-    "copyright": "© {year} Lipeaks Game Paradise. All rights reserved."
+    "copyright": "© {year} Lipeaks. All rights reserved.",
+    "licensedUnder": "Licensed under the {licenseName}.",
+    "sourceCode": "Source Code"
   },
   "home": {
     "title": "Lipeaks Game Paradise",

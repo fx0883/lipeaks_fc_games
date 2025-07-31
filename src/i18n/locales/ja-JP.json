@@ -20,7 +20,9 @@
     "quickLinks": "クイックリンク",
     "contactUs": "お問い合わせ",
     "email": "メール: contact@fcgame.com",
-    "copyright": "© {year} Lipeaksゲームパラダイス. 全著作権所有."
+    "copyright": "© {year} Lipeaks. 全著作権所有。",
+    "licensedUnder": "{licenseName} の下でライセンスされています。",
+    "sourceCode": "ソースコード"
   },
   "home": {
     "title": "Lipeaksゲームパラダイス",

@@ -1,3 +1,20 @@
+<!--
+  Lipeaks FC Games
+  Copyright (C) 2024 Lipeaks
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <template>
   <header class="app-header">
     <div class="container">
@@ -44,9 +61,9 @@
           type="text" 
           :placeholder="$t('nav.searchPlaceholder')" 
           v-model="searchQuery"
-          @keyup.enter="handleSearchInNewTab"
+          @keyup.enter="handleMobileSearch"
         >
-        <button @click="handleSearchInNewTab">{{ $t('nav.searchButton') }}</button>
+        <button @click="handleMobileSearch">{{ $t('nav.searchButton') }}</button>
       </div>
       <nav class="mobile-nav">
         <ul>
@@ -89,11 +106,22 @@ const handleSearch = () => {
   }
 }
 
-// 在新标签页中处理搜索
+// 在新标签页中处理搜索（桌面端）
 const handleSearchInNewTab = () => {
   if (searchQuery.value.trim()) {
     const baseUrl = window.location.origin
     window.open(`${baseUrl}/search?q=${encodeURIComponent(searchQuery.value.trim())}`, '_blank')
+  }
+}
+
+// 移动端搜索处理（当前页面导航）
+const handleMobileSearch = () => {
+  if (searchQuery.value.trim()) {
+    router.push({ 
+      path: '/search', 
+      query: { q: searchQuery.value.trim() } 
+    })
+    closeMobileMenu() // 关闭移动菜单
   }
 }
 

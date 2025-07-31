@@ -20,8 +20,10 @@
     "aboutUsDesc": "Lipeaks游戏乐园是一个怀旧复古游戏在线平台，让您重温经典游戏的乐趣。",
     "quickLinks": "快速链接",
     "contactUs": "联系我们",
-    "email": "邮箱：contact@fcgame.com",
-    "copyright": "© {year} Lipeaks游戏乐园. 保留所有权利."
+    "email": "邮箱: contact@fcgame.com",
+    "copyright": "© {year} Lipeaks. 保留所有权利。",
+    "licensedUnder": "根据 {licenseName} 许可证授权。",
+    "sourceCode": "源代码"
   },
   "home": {
     "title": "Lipeaks游戏乐园",

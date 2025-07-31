@@ -1,3 +1,20 @@
+<!--
+  Lipeaks FC Games
+  Copyright (C) 2024 Lipeaks
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <template>
   <footer class="app-footer">
     <div class="container">
@@ -24,7 +41,21 @@
       </div>
       
       <div class="footer-bottom">
-        <p>{{ $t('footer.copyright', { year: currentYear }) }}</p>
+        <p>{{ $t('footer.copyright', { year: currentYear, author: 'Lipeaks' }) }}</p>
+        <p class="license-info">
+          <span>
+            {{ $t('footer.licensedUnder', { licenseName: 'GPL-3.0' }) }}
+            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">
+              GPL-3.0
+            </a>
+          </span>
+          <span class="separator">|</span>
+          <span>
+            <a href="https://github.com/fx0883/lipeaks_fc_games" target="_blank" rel="noopener noreferrer">
+              {{ $t('footer.sourceCode') }}
+            </a>
+          </span>
+        </p>
       </div>
     </div>
   </footer>
@@ -90,8 +121,25 @@ const currentYear = computed(() => new Date().getFullYear())
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
-  color: var(--color-text-light);
+}
+
+.license-info {
   font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-top: 8px;
+}
+
+.license-info a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.license-info a:hover {
+  text-decoration: underline;
+}
+
+.license-info .separator {
+  margin: 0 10px;
 }
 
 @media (max-width: 768px) {
