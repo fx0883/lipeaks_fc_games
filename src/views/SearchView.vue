@@ -1,8 +1,8 @@
 <template>
   <div class="search-view">
     <div class="search-header">
-      <h1>搜索结果: "{{ searchQuery }}"</h1>
-      <p>共找到 {{ searchResults.length }} 个结果</p>
+      <h1>{{ $t('search.resultsTitle', { query: searchQuery }) }}</h1>
+      <p>{{ $t('search.resultsCount', { count: searchResults.length }) }}</p>
     </div>
 
     <div class="search-results" v-if="searchResults.length > 0">
@@ -24,12 +24,12 @@
     </div>
 
     <div class="no-results" v-else-if="!loading">
-      <p>未找到与 "{{ searchQuery }}" 相关的游戏</p>
-      <p>请尝试其他关键词或浏览<router-link to="/">所有游戏</router-link></p>
+      <p>{{ $t('search.noResults', { query: searchQuery }) }}</p>
+      <p>{{ $t('search.noResultsHelp') }}<router-link to="/">{{ $t('search.allGames') }}</router-link></p>
     </div>
 
     <div class="loading" v-if="loading">
-      <p>正在搜索...</p>
+      <p>{{ $t('search.searching') }}</p>
     </div>
   </div>
 </template>

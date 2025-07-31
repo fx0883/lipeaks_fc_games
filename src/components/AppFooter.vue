@@ -1,16 +1,33 @@
+<!--
+  Lipeaks FC Games
+  Copyright (C) 2024 Lipeaks
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <template>
   <footer class="app-footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h3>关于我们</h3>
-          <p>FC游戏乐园是一个怀旧FC游戏在线平台，让您重温经典游戏的乐趣。</p>
+          <h3>{{ $t('footer.aboutUs') }}</h3>
+          <p>{{ $t('footer.aboutUsDesc') }}</p>
         </div>
         
         <div class="footer-section">
-          <h3>快速链接</h3>
+          <h3>{{ $t('footer.quickLinks') }}</h3>
           <ul>
-            <li><router-link to="/">首页</router-link></li>
+            <li><router-link to="/">{{ $t('nav.home') }}</router-link></li>
             <li><router-link to="/category/action">动作游戏</router-link></li>
             <li><router-link to="/category/adventure">冒险游戏</router-link></li>
             <li><router-link to="/category/puzzle">益智游戏</router-link></li>
@@ -18,13 +35,27 @@
         </div>
         
         <div class="footer-section">
-          <h3>联系我们</h3>
-          <p>邮箱：contact@fcgame.com</p>
+          <h3>{{ $t('footer.contactUs') }}</h3>
+          <p>{{ $t('footer.email') }}</p>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} FC游戏乐园. 保留所有权利.</p>
+        <p>{{ $t('footer.copyright', { year: currentYear, author: 'Lipeaks' }) }}</p>
+        <p class="license-info">
+          <span>
+            {{ $t('footer.licensedUnder', { licenseName: 'GPL-3.0' }) }}
+            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">
+              GPL-3.0
+            </a>
+          </span>
+          <span class="separator">|</span>
+          <span>
+            <a href="https://github.com/fx0883/lipeaks_fc_games" target="_blank" rel="noopener noreferrer">
+              {{ $t('footer.sourceCode') }}
+            </a>
+          </span>
+        </p>
       </div>
     </div>
   </footer>
@@ -90,8 +121,25 @@ const currentYear = computed(() => new Date().getFullYear())
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
-  color: var(--color-text-light);
+}
+
+.license-info {
   font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-top: 8px;
+}
+
+.license-info a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.license-info a:hover {
+  text-decoration: underline;
+}
+
+.license-info .separator {
+  margin: 0 10px;
 }
 
 @media (max-width: 768px) {

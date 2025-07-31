@@ -1,9 +1,9 @@
 <template>
   <div class="not-found">
     <h1>404</h1>
-    <h2>页面未找到</h2>
-    <p>抱歉，您访问的页面不存在。</p>
-    <router-link to="/" class="home-link">返回首页</router-link>
+    <h2>{{ $t('notFound.title') }}</h2>
+    <p>{{ $t('notFound.message') }}</p>
+    <router-link to="/" class="home-link">{{ $t('notFound.backHome') }}</router-link>
   </div>
 </template>
 

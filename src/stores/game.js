@@ -1,76 +1,66 @@
+// Lipeaks FC Games
+// Copyright (C) 2024 Lipeaks
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import { defineStore } from 'pinia'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
-    games: [],
+    // 统一的游戏数据存储 - 避免重复
+    allGames: new Map(), // 使用Map存储所有游戏，key为gameId
     categories: [],
     loading: false,
     currentGame: null,
-    categoryGames: {}, // 存储每个分类的游戏数据
+    loadedCategories: new Set(), // 记录已加载的分类
     searchResults: [], // 存储搜索结果
     searchQuery: '' // 当前搜索关键词
   }),
   
   getters: {
+    // 根据ID获取游戏 - 直接从Map中获取，O(1)复杂度
     getGameById: (state) => {
-      return (id) => {
-        // 先在已加载的游戏中查找
-        const game = state.games.find(game => game.id === id)
-        if (game) return game
-        
-        // 如果没找到，在所有分类的游戏中查找
-        for (const categoryId in state.categoryGames) {
-          const categoryGame = state.categoryGames[categoryId].find(game => game.id === id)
-          if (categoryGame) return categoryGame
-        }
-        
-        return null
-      }
+      return (id) => state.allGames.get(id) || null
     },
     
+    // 根据分类获取游戏 - 高效筛选
     getGamesByCategory: (state) => {
       return (categoryId) => {
-        // 如果已经加载了该分类的游戏，直接返回
-        if (state.categoryGames[categoryId]) {
-          return state.categoryGames[categoryId]
-        }
-        
-        // 否则返回空数组
-        return []
+        return Array.from(state.allGames.values())
+          .filter(game => game.category === categoryId)
       }
     },
     
+    // 热门游戏 - 简化逻辑，直接排序
     popularGames: (state) => {
-      // 合并所有分类的游戏
-      const allGames = [...state.games]
-      
-      for (const categoryId in state.categoryGames) {
-        allGames.push(...state.categoryGames[categoryId])
-      }
-      
-      // 去重
-      const uniqueGames = Array.from(new Map(allGames.map(game => [game.id, game])).values())
-      
-      // 按播放次数排序，取前3个
-      return uniqueGames
-        .sort((a, b) => b.playCount - a.playCount)
-        .slice(0, 3)
+      return Array.from(state.allGames.values())
+        .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
     },
 
+    // 根据分类ID获取分类信息
     getCategoryById: (state) => {
       return (id) => state.categories.find(category => category.id === id)
     },
     
-    // 获取所有游戏（用于搜索）
+    // 获取所有游戏 - 直接转换Map为数组
     getAllGames: (state) => {
-      const allGames = [...state.games]
-      
-      for (const categoryId in state.categoryGames) {
-        allGames.push(...state.categoryGames[categoryId])
-      }
-      
-      // 去重
-      return Array.from(new Map(allGames.map(game => [game.id, game])).values())
+      return Array.from(state.allGames.values())
+    },
+    
+    // 检查分类是否已加载
+    isCategoryLoaded: (state) => {
+      return (categoryId) => state.loadedCategories.has(categoryId)
     }
   },
   
@@ -85,51 +75,39 @@ export const useGameStore = defineStore('game', {
         this.categories = await response.json()
       } catch (error) {
         console.error('Failed to fetch categories:', error)
-        // 加载失败时使用默认分类
+        // 加载失败时使用默认分类（保持原有中文，数据不国际化）
         this.categories = [
-          { id: 'action', name: '动作游戏', description: '动作类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/action.json' },
-          { id: 'rpg', name: '角色扮演', description: '角色扮演类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/rpg.json' },
-          { id: 'puzzle', name: '益智游戏', description: '益智类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/puzzle.json' }
+          { id: 'action', name: '动作', description: '动作类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/action.json' },
+          { id: 'rpg', name: '角色', description: '角色扮演类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/rpg.json' },
+          { id: 'puzzle', name: '益智', description: '益智类游戏', cover: '/placeholder.png', gamesUrl: '/data/games/puzzle.json' }
         ]
       } finally {
         this.loading = false
       }
     },
 
-    async fetchGames() {
-      // 这个方法保留用于兼容性，但实际上我们将使用fetchGamesByCategory
-      this.loading = true
-      try {
-        const response = await fetch('/data/games.json')
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
-        }
-        this.games = await response.json()
-      } catch (error) {
-        console.error('Failed to fetch games:', error)
-        // 加载失败时使用默认游戏数据
-        this.games = [
-          { 
-            id: 'contra', 
-            name: '魂斗罗', 
-            cover: '/placeholder.png',
-            category: 'action',
-            description: '经典射击游戏',
-            romPath: '/roms/contra.nes',
-            playCount: 768
+    // 添加游戏到统一存储
+    addGames(games) {
+      if (!Array.isArray(games)) return
+      
+      games.forEach(game => {
+        if (game && game.id) {
+          // 确保游戏有基本属性
+          const gameData = {
+            playCount: 0,
+            ...game
           }
-        ]
-      } finally {
-        this.loading = false
-      }
+          this.allGames.set(game.id, gameData)
+        }
+      })
     },
 
     async fetchGamesByCategory(categoryId) {
       if (!categoryId) return []
       
       // 如果已经加载过该分类的游戏，直接返回
-      if (this.categoryGames[categoryId]) {
-        return this.categoryGames[categoryId]
+      if (this.isCategoryLoaded(categoryId)) {
+        return this.getGamesByCategory(categoryId)
       }
       
       this.loading = true
@@ -146,14 +124,14 @@ export const useGameStore = defineStore('game', {
           throw new Error(`HTTP error! Status: ${response.status}`)
         }
         
-        // 存储该分类的游戏数据
+        // 解析并添加游戏数据
         const games = await response.json()
-        this.categoryGames[categoryId] = games
+        this.addGames(games)
+        this.loadedCategories.add(categoryId)
         
-        return games
+        return this.getGamesByCategory(categoryId)
       } catch (error) {
         console.error(`Failed to fetch games for category ${categoryId}:`, error)
-        this.categoryGames[categoryId] = []
         return []
       } finally {
         this.loading = false
@@ -205,10 +183,10 @@ export const useGameStore = defineStore('game', {
     },
     
     incrementPlayCount(id) {
-      // 在所有已加载的游戏中查找并增加播放次数
-      const game = this.getGameById(id)
+      // 直接在Map中更新播放次数
+      const game = this.allGames.get(id)
       if (game) {
-        game.playCount++
+        game.playCount = (game.playCount || 0) + 1
       }
     },
     
@@ -219,7 +197,7 @@ export const useGameStore = defineStore('game', {
       return true
     },
     
-    // 搜索游戏
+    // 搜索游戏 - 优化版本
     async searchGames(query) {
       if (!query || query.trim() === '') {
         this.searchResults = []
@@ -236,18 +214,24 @@ export const useGameStore = defineStore('game', {
           await this.fetchCategories()
         }
         
-        // 加载所有分类的游戏数据
-        const loadPromises = this.categories.map(category => 
-          this.fetchGamesByCategory(category.id)
+        // 按需加载分类数据（避免一次性加载所有分类）
+        // 只在需要时加载尚未加载的分类
+        const unloadedCategories = this.categories.filter(
+          category => !this.isCategoryLoaded(category.id)
         )
-        await Promise.all(loadPromises)
         
-        // 获取所有游戏并进行搜索
-        const allGames = this.getAllGames
+        if (unloadedCategories.length > 0) {
+          const loadPromises = unloadedCategories.map(category => 
+            this.fetchGamesByCategory(category.id)
+          )
+          await Promise.all(loadPromises)
+        }
+        
+        // 直接从Map中搜索，性能更佳
         const lowerQuery = query.toLowerCase()
         
         // 在游戏名称、描述和作者中搜索
-        this.searchResults = allGames.filter(game => 
+        this.searchResults = this.getAllGames.filter(game => 
           game.name.toLowerCase().includes(lowerQuery) || 
           (game.description && game.description.toLowerCase().includes(lowerQuery)) ||
           (game.author && game.author.toLowerCase().includes(lowerQuery))

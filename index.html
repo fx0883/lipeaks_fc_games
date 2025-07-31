@@ -1,55 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FC/小霸王在线游戏机</title>
-    
-    <!-- 预加载NES模拟器相关CSS -->
-    <link href="/css/jsnes.css" rel="stylesheet" type="text/css">
-    
-    <!-- 预加载jQuery和相关库 -->
-    <script src="/js/lib/jquery-1.4.2.min.js" type="text/javascript"></script>
-    <script src="/js/lib/dynamicaudio-min.js" type="text/javascript"></script>
-    
-    <!-- 初始化JSNES对象 - 必须在加载JSNES脚本之前初始化 -->
-    <!-- <script type="text/javascript">
-      window.JSNES = {};
-      console.log('JSNES对象已初始化');
-    </script> -->
-
-    <!-- 按顺序加载JSNES核心脚本 -->
-
-    <script src="/js/source/nes.js" type="text/javascript"></script>
-    <script src="/js/source/ui.js" type="text/javascript"></script>
-    <script src="/js/source/cpu.js" type="text/javascript"></script>
-    <script src="/js/source/utils.js" type="text/javascript"></script>
-  
-    <script src="/js/source/keyboard.js" type="text/javascript"></script>
-    <script src="/js/source/mappers.js" type="text/javascript"></script>
-    <script src="/js/source/papu.js" type="text/javascript"></script>
-    <script src="/js/source/ppu.js" type="text/javascript"></script>
-    <script src="/js/source/rom.js" type="text/javascript"></script>
-    
-    <script type="text/javascript">
-      // 检查JSNES是否正确加载
-      document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM加载完成，检查JSNES加载状态:');
-        console.log('jQuery加载状态:', typeof jQuery !== 'undefined' ? '成功' : '失败');
-        console.log('JSNES加载状态:', typeof JSNES !== 'undefined' ? '成功' : '失败');
-        console.log('JSNES.UI加载状态:', typeof JSNES.UI !== 'undefined' ? '成功' : '失败');
-        
-        // 检查ROM文件是否可访问
-        fetch('/roms/Contra1(U)30.nes')
-          .then(response => {
-            console.log('测试ROM访问状态:', response.status, response.ok ? '成功' : '失败');
-          })
-          .catch(error => {
-            console.error('测试ROM访问错误:', error);
-          });
-      });
-    </script>
+    <meta name="description" content="Lipeaks FC Games - Play classic FC games online.">
+    <meta name="author" content="Lipeaks">
+    <title>Lipeaks FC Games</title>
+    <style>
+      /* RTL支持的CSS变量和基础样式 */
+      :root {
+        --color-primary-rgb: 64, 158, 255;
+      }
+      
+      /* RTL布局样式 */
+      html.rtl {
+        direction: rtl;
+      }
+      
+      html.rtl body {
+        text-align: right;
+      }
+      
+      /* RTL下的基础组件样式调整 */
+      html.rtl .main-nav ul {
+        justify-content: flex-end;
+      }
+      
+      html.rtl .search-box {
+        flex-direction: row-reverse;
+      }
+      
+      html.rtl .search-box input {
+        border-radius: 0 4px 4px 0;
+      }
+      
+      html.rtl .search-box button {
+        border-radius: 4px 0 0 4px;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

@@ -1,0 +1,22 @@
+# Add directories or file patterns to ignore during indexing (e.g. foo/ or *.csv)
+
+
+
+*.nes
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.bz2
+*.wim
+*.iso
+*.img
+*.bin
+node_modules/
+node_modules
+dist/
+dist
+.git/
+
+

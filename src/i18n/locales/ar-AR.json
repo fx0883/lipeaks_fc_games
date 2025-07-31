@@ -1,0 +1,139 @@
+{
+  "app": {
+    "title": "جنة ألعاب Lipeaks",
+    "loading": "جارٍ التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "close": "إغلاق",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "search": "بحث",
+    "searchPlaceholder": "البحث عن الألعاب...",
+    "searchButton": "بحث"
+  },
+  "footer": {
+    "aboutUs": "من نحن",
+    "aboutUsDesc": "جنة ألعاب Lipeaks هي منصة ألعاب كلاسيكية عبر الإنترنت، تتيح لك إعادة تجربة متعة الألعاب الكلاسيكية.",
+    "quickLinks": "روابط سريعة",
+    "contactUs": "اتصل بنا",
+    "email": "البريد الإلكتروني: contact@fcgame.com",
+    "copyright": "© {year} Lipeaks. جميع الحقوق محفوظة.",
+    "licensedUnder": "مرخص بموجب {licenseName}.",
+    "sourceCode": "كود المصدر"
+  },
+  "home": {
+    "title": "جنة ألعاب Lipeaks",
+    "gameCategories": "فئات الألعاب",
+    "popularGames": "الألعاب الشائعة",
+    "loadingPopularGames": "جارٍ تحميل الألعاب الشائعة...",
+    "noPopularGames": "لا توجد ألعاب شائعة متاحة"
+  },
+  "game": {
+    "loading": "جارٍ التحميل...",
+    "playCount": "تم اللعب {count} مرة",
+    "category": "الفئة",
+    "author": "المؤلف",
+    "size": "الحجم",
+    "version": "الإصدار",
+    "region": "المنطقة",
+    "description": "وصف اللعبة",
+    "gameLoaded": "تم تحميل اللعبة: {name}",
+    "gameStarted": "بدأت اللعبة: {name}",
+    "gamePaused": "تم إيقاف اللعبة مؤقتاً: {name}",
+    "gameResumed": "تم استئناف اللعبة: {name}",
+    "gameError": "حدث خطأ في اللعبة"
+  },
+  "category": {
+    "gamesCount": "إجمالي {count} ألعاب",
+    "noGames": "لا توجد ألعاب في هذه الفئة",
+    "loadingGames": "جارٍ تحميل بيانات الألعاب..."
+  },
+  "search": {
+    "resultsTitle": "نتائج البحث: \"{query}\"",
+    "resultsCount": "تم العثور على {count} نتيجة",
+    "noResults": "لم يتم العثور على ألعاب متعلقة بـ \"{query}\"",
+    "noResultsHelp": "يرجى تجربة كلمات مفتاحية أخرى أو تصفح",
+    "allGames": "جميع الألعاب",
+    "searching": "جارٍ البحث..."
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "message": "عذراً، الصفحة التي تبحث عنها غير موجودة.",
+    "backHome": "العودة للرئيسية"
+  },
+  "emulator": {
+    "initializing": "جارٍ تهيئة المحاكي...",
+    "loadingGame": "جارٍ تحميل اللعبة...",
+    "gameLoaded": "تم تحميل اللعبة بنجاح",
+    "gameError": "فشل في تحميل اللعبة",
+    "pause": "إيقاف مؤقت",
+    "resume": "استئناف",
+    "restart": "إعادة التشغيل",
+    "fullscreen": "ملء الشاشة",
+    "exitFullscreen": "إنهاء ملء الشاشة",
+    "save": "حفظ",
+    "load": "تحميل",
+    "keyHelp": "أزرار التحكم",
+    "controls": "التحكم",
+    "settings": "الإعدادات",
+    "volume": "مستوى الصوت",
+    "mute": "كتم الصوت",
+    "unmute": "إلغاء كتم الصوت",
+    "pauseTooltip": "إيقاف اللعبة مؤقتاً",
+    "resumeTooltip": "استئناف اللعبة",
+    "restartTooltip": "إعادة تشغيل اللعبة",
+    "fullscreenTooltip": "الدخول في وضع ملء الشاشة",
+    "exitFullscreenTooltip": "الخروج من وضع ملء الشاشة",
+    "saveTooltip": "حفظ حالة اللعبة",
+    "loadTooltip": "تحميل حالة اللعبة",
+    "keyHelpTooltip": "إظهار/إخفاء مساعدة أزرار التحكم",
+    "controlsTooltip": "إظهار/إخفاء خريطة أزرار التحكم",
+    "settingsTooltip": "فتح إعدادات المحاكي",
+    "settingsOpened": "تم فتح قائمة إعدادات المحاكي",
+    "settingsClosed": "تم إغلاق قائمة إعدادات المحاكي",
+    "settingsNotAvailable": "إعدادات المحاكي غير متوفرة",
+    "emulatorNotReady": "المحاكي غير جاهز",
+    "settingsError": "خطأ في فتح الإعدادات",
+    "muteTooltip": "كتم الصوت",
+    "unmuteTooltip": "إلغاء كتم الصوت"
+  },
+  "controls": {
+    "controls": "التحكم",
+    "keyMappings": "تخطيط الأزرار",
+    "up": "أعلى",
+    "down": "أسفل",
+    "left": "يسار",
+    "right": "يمين",
+    "buttonA": "أ",
+    "buttonAA": "أأ",
+    "buttonB": "ب",
+    "buttonBB": "بب",
+    "start": "بداية",
+    "select": "اختيار"
+  },
+  "errors": {
+    "fetchCategories": "فشل في جلب الفئات",
+    "fetchGames": "فشل في جلب ألعاب الفئة {category}",
+    "fetchGameById": "فشل في جلب اللعبة {id}",
+    "searchError": "حدث خطأ في البحث",
+    "emulatorInit": "فشل في تهيئة المحاكي",
+    "gameLoad": "فشل في تحميل اللعبة",
+    "networkError": "حدث خطأ في الشبكة",
+    "unknownError": "حدث خطأ غير معروف"
+  },
+  "language": {
+    "switch": "اللغة",
+    "current": "اللغة الحالية: {language}"
+  },
+  "routes": {
+    "home": "الرئيسية - جنة ألعاب Lipeaks",
+    "game": "لعبة - جنة ألعاب Lipeaks",
+    "category": "فئة - جنة ألعاب Lipeaks",
+    "search": "نتائج البحث - جنة ألعاب Lipeaks",
+    "searchWithQuery": "البحث عن \"{query}\" - جنة ألعاب Lipeaks",
+    "notFound": "الصفحة غير موجودة - جنة ألعاب Lipeaks"
+  }
+} 

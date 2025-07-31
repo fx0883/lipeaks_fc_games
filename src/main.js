@@ -1,9 +1,25 @@
+// Lipeaks FC Games
+// Copyright (C) 2024 Lipeaks
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router'
+import i18n from './i18n'
 import App from './App.vue'
 import './style.css'
-import nesService from './services/nesService'
 
 // 创建应用实例
 const app = createApp(App)
@@ -14,11 +30,8 @@ app.use(createPinia())
 // 使用Vue Router
 app.use(router)
 
+// 使用Vue I18n
+app.use(i18n)
+
 // 挂载应用
 app.mount('#app')
-
-// 添加浏览器关闭事件处理
-window.addEventListener('beforeunload', () => {
-  console.log('浏览器关闭事件触发，释放NES资源')
-  nesService.destroy()
-})

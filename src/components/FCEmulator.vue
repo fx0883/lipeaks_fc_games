@@ -1,154 +1,435 @@
+<!--
+  Lipeaks FC Games
+  Copyright (C) 2024 Lipeaks
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <template>
   <div class="fc-emulator">
     <div class="emulator-container">
-      <div id="emulator" ref="emulatorRef"></div>
+      <!-- 模拟器状态显示组件 -->
+      <EmulatorStatus
+        :is-loading="isLoading"
+        :loading-message="loadingMessage"
+        :progress="loadingProgress"
+        :has-error="hasError"
+        :error-message="errorMessage"
+        :error-details="errorDetails"
+        :error-type="errorType"
+        :status="status"
+        :status-duration="statusDuration"
+        :show-status-info="showStatusInfo"
+        @retry="handleRetry"
+      />
       
-      <div class="game-controls" v-if="isGameLoaded">
-        <button class="control-btn" @click="togglePause">{{ isPaused ? '继续' : '暂停' }}</button>
-        <button class="control-btn" @click="restart">重启</button>
-        <button class="control-btn" @click="toggleSound">{{ isSoundEnabled ? '关闭声音' : '开启声音' }}</button>
-        <button class="control-btn" @click="toggleFullscreen">全屏</button>
-      </div>
-    </div>
-    
-    <div class="key-mapping">
-      <h3>操作说明</h3>
-      <div class="key-item">
-        <span class="key">方向键</span>
-        <span class="action">移动</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Z</span>
-        <span class="action">A按钮</span>
-      </div>
-      <div class="key-item">
-        <span class="key">X</span>
-        <span class="action">B按钮</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Enter</span>
-        <span class="action">开始</span>
-      </div>
-      <div class="key-item">
-        <span class="key">Space</span>
-        <span class="action">选择</span>
+      <!-- 模拟器容器 -->
+      <div :id="containerId" class="emulator-viewport"></div>
+      
+      <!-- 模拟器控制组件 -->
+      <EmulatorControls
+        v-if="showControls"
+        :show-controls="isGameLoaded"
+
+        :show-fullscreen="true"
+        :show-save-controls="false"
+        :status="status"
+        :volume="volume"
+        :is-muted="isMuted"
+        :is-fullscreen="isFullscreen"
+        :showing-key-help="showKeyHelp"
+
+        :can-fullscreen="canFullscreen"
+        :can-save-state="canSaveState"
+        :can-load-state="canLoadState"
+
+        @fullscreen-enter="handleFullscreenEnter"
+        @fullscreen-exit="handleFullscreenExit"
+        @volume-change="handleVolumeChange"
+        @mute-toggle="handleMuteToggle"
+        @save-state="handleSaveState"
+        @load-state="handleLoadState"
+        @settings-toggle="toggleSettings"
+        @control-help-toggle="toggleControlHelp"
+      />
+      
+      <!-- 按键说明弹窗 -->
+      <div v-if="showKeyHelp" class="key-help-modal" @click.self="hideKeyHelp">
+        <div class="key-help-content">
+          <div class="key-help-header">
+            <h3>游戏按键说明</h3>
+            <button class="close-btn" @click="hideKeyHelp">×</button>
+          </div>
+          <div class="key-help-body">
+            <div class="key-item" v-for="keyMapping in keyMappings" :key="keyMapping.name">
+              <span class="key-name">{{ keyMapping.name }}</span>
+              <span class="key-value">{{ keyMapping.key }}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import nesService from '../services/nesService';
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import EmulatorStatus from './EmulatorStatus.vue'
+import EmulatorControls from './EmulatorControls.vue'
+import { EmulatorService } from '../services/EmulatorService.js'
+import { EmulatorConfig } from '../interfaces/IEmulatorAdapter.js'
 
-// 使用index.html中已加载的jQuery，不再重复导入
-// jQuery已在index.html中全局加载为window.jQuery
-
-export default {
-  name: 'FCEmulator',
-  props: {
+// Props
+const props = defineProps({
     romPath: {
       type: String,
       required: true
-    }
+    },
+    containerId: {
+      type: String,
+      default: 'emulator'
+    },
+    dataPath: {
+      type: String,
+      default: '/emulatorjs/data/'
   },
-  data() {
-    return {
-      isGameLoaded: false,
-      isPaused: false,
-      isSoundEnabled: false,
-      isFullscreen: false
-    }
+  gameName: {
+    type: String,
+    default: 'NES Game'
   },
-  mounted() {
-    console.log('FCEmulator: 组件挂载，开始初始化模拟器');
-    this.initEmulator();
+  showControls: {
+    type: Boolean,
+    default: true
   },
-  methods: {
-    async initEmulator() {
-      try {
-        console.log('FCEmulator: 开始初始化模拟器');
-        
-        // 检查JSNES和jQuery是否已加载
-        if (typeof window.JSNES === 'undefined') {
-          console.error('FCEmulator: JSNES未加载，请确保在index.html中正确加载了JSNES脚本');
-          console.log('FCEmulator: jQuery状态:', typeof window.jQuery !== 'undefined' ? '已加载' : '未加载');
-          console.log('FCEmulator: JSNES状态:', typeof window.JSNES !== 'undefined' ? '已加载' : '未加载');
-          if (typeof window.JSNES !== 'undefined') {
-            console.log('FCEmulator: JSNES对象内容:', window.JSNES);
-          }
-          return;
-        }
-        
-        // 检查jQuery JSNESUI插件是否可用
-        if (typeof window.jQuery !== 'undefined' && typeof window.jQuery.fn.JSNESUI === 'undefined') {
-          console.error('FCEmulator: jQuery JSNESUI插件未加载，请确保ui.js正确加载');
-          return;
-        }
-        
-        console.log('FCEmulator: JSNES已加载，继续初始化');
-        
-        // 设置游戏加载完成回调
-        nesService.onGameLoaded(() => {
-          console.log('FCEmulator: 游戏加载完成回调触发');
-          this.isGameLoaded = true;
-          this.$emit('game-loaded');
-        });
-        
-        // 初始化NES模拟器
-        console.log('FCEmulator: 调用nesService.init');
-        await nesService.init('emulator');
-        
-        // 调整ROM路径 - 移除./public前缀，确保路径正确
-        const romPath = this.romPath.startsWith('/') ? this.romPath : `/${this.romPath}`;
-        
-        // 加载ROM
-        console.log(`FCEmulator: 开始加载ROM: ${romPath}`);
-        await nesService.loadROM(romPath);
-        console.log('FCEmulator: ROM加载完成');
-      } catch (error) {
-        console.error('FCEmulator: 初始化模拟器失败:', error);
-      }
-    },
-    togglePause() {
-      this.isPaused = nesService.togglePause();
-    },
-    restart() {
-      nesService.restart();
-      this.isPaused = false;
-    },
-    toggleSound() {
-      this.isSoundEnabled = nesService.toggleSound();
-    },
-    toggleFullscreen() {
-      const emulatorEl = this.$refs.emulatorRef;
+  showStatusInfo: {
+    type: Boolean,
+    default: true
+  }
+})
 
-      if (!document.fullscreenElement) {
-        if (emulatorEl.requestFullscreen) {
-          emulatorEl.requestFullscreen();
-        } else if (emulatorEl.webkitRequestFullscreen) {
-          emulatorEl.webkitRequestFullscreen();
-        } else if (emulatorEl.msRequestFullscreen) {
-          emulatorEl.msRequestFullscreen();
-        }
-        this.isFullscreen = true;
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-        this.isFullscreen = false;
-      }
-    }
-  },
-  beforeUnmount() {
-    console.log('FCEmulator: 组件卸载，释放资源');
-    // 停止游戏并完全清除NES实例
-    nesService.destroy();
+// Emits
+const emit = defineEmits([
+  'game-loaded',
+  'game-started',
+  'paused',
+  'resumed',
+  'error',
+  'state-changed'
+])
+
+// 响应式数据
+const emulatorService = ref(null)
+const isGameLoaded = ref(false)
+const isLoading = ref(false)
+const loadingMessage = ref('')
+const loadingProgress = ref(0)
+const hasError = ref(false)
+const errorMessage = ref('')
+const errorDetails = ref('')
+const errorType = ref('unknown')
+const status = ref('idle')
+const statusDuration = ref(0)
+const volume = ref(100)
+const isMuted = ref(false)
+const isFullscreen = ref(false)
+const showKeyHelp = ref(false)
+
+// 按键映射配置 - 使用扩展的i18n
+import { useExtendedI18n } from '../composables/useI18n'
+const { t, updateEmulatorJSLanguage, currentLanguageConfig } = useExtendedI18n()
+
+const keyMappings = computed(() => [
+  { name: t('controls.up'), key: 'W' },
+  { name: t('controls.down'), key: 'S' },
+  { name: t('controls.left'), key: 'A' },
+  { name: t('controls.right'), key: 'D' },
+  { name: t('controls.buttonA'), key: 'J' },
+  { name: t('controls.buttonAA'), key: 'Z' },
+  { name: t('controls.buttonB'), key: 'K' },
+  { name: t('controls.buttonBB'), key: 'X' },
+  { name: t('controls.start'), key: 'Enter' },
+  { name: t('controls.select'), key: 'Ctrl' }
+])
+
+// EmulatorJS语言同步
+watch(currentLanguageConfig, (newConfig) => {
+  if (emulatorService.value) {
+    // 更新EmulatorJS语言
+    updateEmulatorJSLanguage(newConfig.emulatorjsCode)
+  }
+}, { immediate: true })
+
+// 计算属性
+
+const canFullscreen = computed(() => isGameLoaded.value)
+const canSaveState = computed(() => status.value === 'running' || status.value === 'paused')
+const canLoadState = computed(() => status.value === 'running' || status.value === 'paused')
+
+// 监听ROM路径变化
+watch(() => props.romPath, async (newRomPath, oldRomPath) => {
+  if (newRomPath !== oldRomPath && emulatorService.value) {
+    await loadGame(newRomPath)
+  }
+})
+
+// 初始化模拟器
+const initEmulator = async () => {
+  try {
+    isLoading.value = true
+    hasError.value = false
+    loadingMessage.value = t('emulator.initializing')
+    loadingProgress.value = 0
+
+    // 创建模拟器服务
+    emulatorService.value = new EmulatorService()
+    
+    // 设置事件监听器
+    setupEventListeners()
+    
+    // 创建配置
+    const config = new EmulatorConfig({
+      containerId: props.containerId,
+      romPath: props.romPath,
+      dataPath: props.dataPath,
+      gameName: props.gameName,
+      volume: volume.value / 100,
+      muted: isMuted.value
+    })
+    
+    // 初始化服务
+    await emulatorService.value.initialize(config)
+    
+    // 模拟器初始化成功 - 生产环境不输出日志
+    
+  } catch (error) {
+    console.error('FCEmulator: 初始化失败:', error)
+    hasError.value = true
+    errorMessage.value = error.message
+    errorDetails.value = error.stack
+    errorType.value = 'emulator'
+    isLoading.value = false
+    emit('error', error.message)
   }
 }
+
+// 设置事件监听器
+const setupEventListeners = () => {
+  if (!emulatorService.value) return
+  
+  emulatorService.value.addEventListener('ready', handleReady)
+  emulatorService.value.addEventListener('gameStarted', handleGameStarted)
+  
+  emulatorService.value.addEventListener('error', handleError)
+  emulatorService.value.addEventListener('loadingProgress', handleLoadingProgress)
+  emulatorService.value.addEventListener('stateChanged', handleStateChanged)
+}
+
+// 事件处理器
+const handleReady = () => {
+  isGameLoaded.value = true
+  isLoading.value = false
+  emit('game-loaded')
+}
+
+const handleGameStarted = () => {
+  status.value = 'running'
+  emit('game-started')
+}
+
+const handleError = (data) => {
+  hasError.value = true
+  errorMessage.value = data.error || '未知错误'
+  errorType.value = 'emulator'
+  isLoading.value = false
+}
+
+const handleLoadingProgress = (data) => {
+  loadingProgress.value = data.progress || 0
+}
+
+const handleStateChanged = (stateChange) => {
+  status.value = stateChange.to
+  statusDuration.value = Date.now() - stateChange.timestamp
+  emit('state-changed', stateChange)
+}
+
+// 控制方法
+const handleRetry = async () => {
+  hasError.value = false
+  errorMessage.value = ''
+  await initEmulator()
+}
+
+const handleFullscreenEnter = () => {
+  if (emulatorService.value) {
+    const success = emulatorService.value.enterFullscreen()
+    if (success) {
+      isFullscreen.value = true
+    }
+  }
+}
+
+const handleFullscreenExit = () => {
+  if (emulatorService.value) {
+    const success = emulatorService.value.exitFullscreen()
+    if (success) {
+      isFullscreen.value = false
+    }
+  }
+}
+
+const handleVolumeChange = (newVolume) => {
+  volume.value = newVolume
+  if (emulatorService.value) {
+    emulatorService.value.setVolume(newVolume / 100)
+  }
+}
+
+const handleMuteToggle = () => {
+  isMuted.value = !isMuted.value
+  if (emulatorService.value) {
+    emulatorService.value.setMuted(isMuted.value)
+  }
+}
+
+const handleSaveState = async () => {
+  if (emulatorService.value) {
+    await emulatorService.value.saveState()
+  }
+}
+
+const handleLoadState = async () => {
+  if (emulatorService.value) {
+    await emulatorService.value.loadState()
+  }
+}
+
+const toggleSettings = () => {
+  // 调用EmulatorJS的设置菜单
+  if (emulatorService.value) {
+    openEmulatorSettings()
+  }
+}
+
+const toggleControlHelp = () => {
+  // 打开EmulatorJS的控制设置菜单
+  openEmulatorControlSettings()
+}
+
+const openEmulatorControlSettings = () => {
+  // 使用EmulatorService打开控制设置菜单
+  if (emulatorService.value) {
+    const success = emulatorService.value.openControlSettings()
+    if (success) {
+      // 控制设置菜单已打开 - 生产环境不输出日志
+    } else {
+      // 无法打开控制设置菜单 - 生产环境不输出警告
+    }
+  } else {
+    // 模拟器服务未就绪 - 生产环境不输出警告
+  }
+}
+
+const openEmulatorSettings = () => {
+  // 使用EmulatorJS的正确API来切换设置菜单
+  try {
+    if (window.EJS_emulator && window.EJS_emulator.settingsMenu) {
+      // 直接切换EmulatorJS的设置菜单显示状态
+      window.EJS_emulator.settingsMenuOpen = !window.EJS_emulator.settingsMenuOpen
+      window.EJS_emulator.settingsMenu.style.display = window.EJS_emulator.settingsMenuOpen ? "" : "none"
+      
+      // 设置菜单状态变化 - 生产环境不输出日志
+    } else {
+      // 模拟器未就绪 - 生产环境不输出警告
+    }
+  } catch (error) {
+    console.error(t('emulator.settingsError'), error)
+  }
+}
+
+const hideKeyHelp = () => {
+  showKeyHelp.value = false
+}
+
+// 加载游戏
+const loadGame = async (romPath) => {
+  if (emulatorService.value) {
+    loadingMessage.value = '正在加载游戏...'
+    await emulatorService.value.loadGame(romPath)
+  }
+}
+
+// 全屏状态监听
+const handleFullscreenChange = () => {
+  const isInFullscreen = !!(document.fullscreenElement || 
+                           document.webkitFullscreenElement || 
+                           document.msFullscreenElement)
+  if (!isInFullscreen) {
+    isFullscreen.value = false
+  }
+}
+
+// 获取控制器（向后兼容）
+const getControls = () => {
+  return {
+    toggleSound: handleMuteToggle,
+    toggleFullscreen: () => {
+      if (isFullscreen.value) {
+        handleFullscreenExit()
+      } else {
+        handleFullscreenEnter()
+      }
+    },
+    showKeyHelp: () => { showKeyHelp.value = true },
+    hideKeyHelp: () => { showKeyHelp.value = false }
+  }
+}
+
+// 生命周期
+onMounted(async () => {
+  // 组件挂载，开始初始化 - 生产环境不输出日志
+  
+  // 监听全屏状态变化
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+  document.addEventListener('msfullscreenchange', handleFullscreenChange)
+  
+  // 初始化模拟器
+  await initEmulator()
+})
+
+onBeforeUnmount(async () => {
+  // 组件卸载，释放资源 - 生产环境不输出日志
+  
+    // 移除全屏事件监听器
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
+  document.removeEventListener('msfullscreenchange', handleFullscreenChange)
+  
+  // 销毁模拟器服务
+  if (emulatorService.value) {
+    await emulatorService.value.destroy()
+    emulatorService.value = null
+  }
+})
+
+// 暴露方法给父组件
+defineExpose({
+  getControls,
+  loadGame,
+  getStatus: () => status.value,
+  getService: () => emulatorService.value
+})
 </script>
 
 <style scoped>
@@ -156,62 +437,198 @@ export default {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .emulator-container {
-  margin-bottom: 20px;
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e9ecef;
 }
 
-#emulator {
+.emulator-viewport {
   width: 100%;
-  height: 480px;
+  height: 500px;
   background-color: #000;
   position: relative;
-}
-
-.game-controls {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
-.control-btn {
-  padding: 8px 16px;
-  background-color: var(--color-primary, #4a5568);
-  color: white;
-  border: none;
-  border-radius: 4px;
+/* 按键说明弹窗样式 */
+.key-help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.key-help-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 420px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.key-help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 12px;
+}
+
+.key-help-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  font-size: 20px;
   cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
-.control-btn:hover {
-  background-color: var(--color-primary-dark, #2d3748);
+.close-btn:hover {
+  color: #333;
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  transform: scale(1.1);
 }
 
-.key-mapping {
-  margin-top: 20px;
-  border: 1px solid #eaeaea;
-  border-radius: 4px;
-  padding: 15px;
-}
-
-.key-mapping h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
+.key-help-body {
+  display: grid;
+  gap: 8px;
 }
 
 .key-item {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eaeaea;
+  align-items: center;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
 }
 
-.key-item:last-child {
-  border-bottom: none;
+.key-item:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.key {
+.key-name {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+}
+
+.key-value {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
   font-weight: bold;
+  font-size: 12px;
+  min-width: 40px;
+  text-align: center;
+  border: 1px solid #0056b3;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .fc-emulator {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .emulator-viewport {
+    height: 300px;
+  }
+  
+  .key-help-content {
+    margin: 16px;
+    width: calc(100% - 32px);
+    padding: 20px;
+  }
+  
+  .key-item {
+    padding: 8px 12px;
+  }
+  
+  .key-name {
+    font-size: 13px;
+  }
+  
+  .key-value {
+    padding: 4px 8px;
+    font-size: 11px;
+    min-width: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .emulator-viewport {
+    height: 240px;
+  }
+  
+  .key-help-content {
+    margin: 8px;
+    width: calc(100% - 16px);
+    padding: 16px;
+  }
+  
+  .key-help-body {
+    gap: 6px;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.key-help-content {
+  animation: slideIn 0.3s ease-out;
 }
 </style> 
