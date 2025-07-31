@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最小化 EmulatorJS 测试</title>
+    <style>
+        body { margin: 0; background: #000; color: #fff; font-family: Arial, sans-serif; }
+        #emulator { width: 100vw; height: 100vh; background: #111; }
+        .info { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; z-index: 1000; }
+        .error { color: #ff4444; }
+        .success { color: #44ff44; }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div id="status">初始化中...</div>
+        <div id="config" style="font-size: 12px; margin-top: 10px;"></div>
+    </div>
+    <div id="emulator"></div>
+
+    <script>
+        // 设置EmulatorJS配置
+        window.EJS_player = '#emulator';
+        window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
+        window.EJS_system = 'nes';
+        window.EJS_pathtodata = '/emulatorjs/data/';
+        window.EJS_gameName = '魂斗罗';
+        
+        // 显示配置
+        document.getElementById('config').innerHTML = `
+            <strong>配置:</strong><br>
+            System: ${window.EJS_system}<br>
+            Game: ${window.EJS_gameUrl}<br>
+            Path: ${window.EJS_pathtodata}
+        `;
+        
+        // 状态更新函数
+        function updateStatus(message, isError = false) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = isError ? 'error' : 'success';
+            console.log(message);
+        }
+        
+        // 监听错误
+        window.addEventListener('error', (e) => {
+            updateStatus('错误: ' + (e.error?.message || e.message), true);
+        });
+        
+        // 监听未处理的Promise错误
+        window.addEventListener('unhandledrejection', (e) => {
+            updateStatus('Promise错误: ' + e.reason, true);
+        });
+        
+        // 加载EmulatorJS
+        updateStatus('加载EmulatorJS...');
+        
+        const script = document.createElement('script');
+        script.src = '/emulatorjs/data/loader.js';
+        script.onload = () => {
+            updateStatus('EmulatorJS已加载，等待初始化...');
+        };
+        script.onerror = () => {
+            updateStatus('EmulatorJS加载失败！', true);
+        };
+        
+        document.head.appendChild(script);
+        
+        // 检查EmulatorJS初始化
+        let checkCount = 0;
+        const checkInit = setInterval(() => {
+            checkCount++;
+            if (window.EJS_emulator) {
+                updateStatus('✅ EmulatorJS已初始化！');
+                clearInterval(checkInit);
+            } else if (checkCount > 100) { // 10秒后停止检查
+                updateStatus('⚠️ EmulatorJS初始化超时', true);
+                clearInterval(checkInit);
+            }
+        }, 100);
+    </script>
+</body>
+</html> 

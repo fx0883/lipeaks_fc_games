@@ -108,6 +108,7 @@
         <FCEmulator 
           :rom-path="game.romPath" 
           :game-name="game.name"
+          :core="game.core || getDefaultCore(game.category)"
           :show-controls="true"
           :show-status-info="true"
           @game-loaded="onGameLoaded"
@@ -248,6 +249,15 @@ const categoryName = computed(() => {
   const category = gameStore.getCategoryById(game.value.category)
   return category ? category.name : game.value.category
 })
+
+// 根据游戏分类获取默认核心
+const getDefaultCore = (category) => {
+  const coreMapping = {
+    'nes': 'fceumm',
+    'arcade': 'mame2003'
+  }
+  return coreMapping[category] || 'fceumm'
+}
 
 // 计算游戏统计数据
 const gamePlayTime = computed(() => {

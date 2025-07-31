@@ -1,5 +1,12 @@
 [
   {
+    "id": "arcade",
+    "name": "街机",
+    "description": "经典街机游戏，包括格斗、射击、动作等各类街机游戏",
+    "cover": "/images/categories/arcade.png",
+    "gamesUrl": "/data/games/arcade.json"
+  },
+  {
     "id": "action",
     "name": "动作",
     "description": "包含平台跳跃、射击等需要反应和操作的游戏",

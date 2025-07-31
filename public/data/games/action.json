@@ -7,7 +7,8 @@
     "region": "JP",
     "category": "action",
     "size": "2Mb",
-    "romPath": "/roms/luyu(1).nes",
+    "romPath": "/roms/19xx.zip",
+    "core": "mame2003",
     "cover": "/images/games/default.png",
     "description": "阿尔戈斯战士是一款经典动作游戏，由汉化你妹汉化组汉化。",
     "playCount": 0
@@ -20,7 +21,8 @@
     "region": "JP",
     "category": "action",
     "size": "1Mb",
-    "romPath": "/roms/luyu(2).nes",
+    "romPath": "/roms/20pacgal.zip",
+    "core": "mame2003",
     "cover": "/images/games/default.png",
     "description": "阿尔戈斯战士是一款经典动作游戏，由孔雀天汉化并经MS修正。",
     "playCount": 0
@@ -34,6 +36,7 @@
     "category": "action",
     "size": "4Mb",
     "romPath": "/roms/luyu(3).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "阿拉丁是一款改编自迪士尼同名电影的动作冒险游戏，由叶枫汉化。",
     "playCount": 0
@@ -47,6 +50,7 @@
     "category": "action",
     "size": "0.18Mb",
     "romPath": "/roms/luyu(5).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "爱的小屋是一款温馨的动作游戏，由MS汉化。",
     "playCount": 0
@@ -60,6 +64,7 @@
     "category": "action",
     "size": "4Mb",
     "romPath": "/roms/luyu(15).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "包青天是一款以古代名判官包拯为主题的动作游戏，由卡圣开发。",
     "playCount": 0
@@ -73,6 +78,7 @@
     "category": "action",
     "size": "0.18Mb",
     "romPath": "/roms/luyu(24).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "冰山登山者是一款动作冒险游戏，由未知开发。",
     "playCount": 0
@@ -86,6 +92,7 @@
     "category": "action",
     "size": "2Mb",
     "romPath": "/roms/luyu(26).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "餐厅争夺战是一款有趣的动作游戏，由九班汉化。",
     "playCount": 0
@@ -99,6 +106,7 @@
     "category": "action",
     "size": "0.5Mb",
     "romPath": "/roms/luyu(28).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "茶茶丸之大冒险是一款动作冒险游戏，由Nineswords汉化。",
     "playCount": 0
@@ -112,6 +120,7 @@
     "category": "action",
     "size": "2Mb",
     "romPath": "/roms/luyu(29).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "超惑星战记是一款科幻题材动作游戏，由樱组汉化并经MS修正。",
     "playCount": 0
@@ -125,6 +134,7 @@
     "category": "action",
     "size": "2Mb",
     "romPath": "/roms/Contra1(U)30.nes",
+    "core": "fceumm",
     "cover": "/images/games/contra.png",
     "description": "魂斗罗是一款经典的横版射击游戏，玩家需要控制士兵消灭敌人并打败最终Boss。",
     "playCount": 768
@@ -138,6 +148,7 @@
     "category": "action",
     "size": "2Mb",
     "romPath": "/roms/luyu(215).nes",
+    "core": "fceumm",
     "cover": "/images/games/default.png",
     "description": "魂斗罗是一款经典的横版射击游戏，由九班汉化。",
     "playCount": 0

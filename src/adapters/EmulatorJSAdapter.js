@@ -113,7 +113,7 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
     const globalConfig = {
       [`${this.namespace}_player`]: `#${this.containerId}`,
       [`${this.namespace}_gameUrl`]: this.config.romPath.startsWith('/') ? this.config.romPath : `/${this.config.romPath}`,
-      [`${this.namespace}_core`]: this.config.core,
+      [`${this.namespace}_system`]: this.config.core,
       [`${this.namespace}_pathtodata`]: this.config.dataPath,
       [`${this.namespace}_gameName`]: this.config.gameName,
       [`${this.namespace}_language`]: this.config.language,

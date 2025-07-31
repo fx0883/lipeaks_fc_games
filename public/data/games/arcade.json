@@ -1,0 +1,58 @@
+[
+  {
+    "id": "arcade-example-1",
+    "name": "街霸2",
+    "version": "",
+    "author": "Capcom",
+    "region": "JP",
+    "category": "arcade",
+    "size": "8Mb",
+    "romPath": "/roms/19xx.zip",
+    "cover": "/images/games/default.png",
+    "description": "经典格斗游戏街头霸王2，由Capcom开发。",
+    "playCount": 0,
+    "core": "fbalpha2012_cps1"
+  },
+  {
+    "id": "arcade-example-2", 
+    "name": "拳皇98",
+    "version": "",
+    "author": "SNK",
+    "region": "JP",
+    "category": "arcade",
+    "size": "64Mb",
+    "romPath": "/roms/19xx.zip",
+    "cover": "/images/games/default.png",
+    "description": "经典格斗游戏拳皇98，由SNK开发。",
+    "playCount": 0,
+    "core": "fbneo"
+  },
+  {
+    "id": "arcade-example-3",
+    "name": "合金弹头",
+    "version": "",
+    "author": "SNK",
+    "region": "JP", 
+    "category": "arcade",
+    "size": "32Mb",
+    "romPath": "/roms/19xx.zip",
+    "cover": "/images/games/default.png",
+    "description": "经典横版射击游戏合金弹头，由SNK开发。",
+    "playCount": 0,
+    "core": "fbneo"
+  },
+  {
+    "id": "arcade-example-4",
+    "name": "吃豆人",
+    "version": "",
+    "author": "Namco",
+    "region": "JP",
+    "category": "arcade",
+    "size": "4Mb", 
+    "romPath": "/roms/19xx.zip",
+    "cover": "/images/games/default.png",
+    "description": "经典迷宫游戏吃豆人，由Namco开发。",
+    "playCount": 0,
+    "core": "mame2003"
+  }
+] 

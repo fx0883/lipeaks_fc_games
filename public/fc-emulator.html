@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC游戏模拟器 - EmulatorJS 4.2.3</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        
+        .game-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        select, button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            background: #444;
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        select:hover, button:hover {
+            background: #555;
+        }
+        
+        #emulator {
+            width: 100%;
+            height: 600px;
+            background: #000;
+            border: 2px solid #444;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info {
+            background: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .status.loading { background: #FF9800; color: #000; }
+        .status.ready { background: #4CAF50; color: #fff; }
+        .status.error { background: #f44336; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 FC游戏模拟器</h1>
+        
+        <div class="info">
+            <h3>支持的游戏</h3>
+            <p>当前支持FC/NES游戏，使用FCEUmm和Nestopia核心</p>
+        </div>
+        
+        <div class="game-selector">
+            <label for="gameSelect">选择游戏:</label>
+            <select id="gameSelect">
+                <option value="">请选择游戏...</option>
+                <option value="Contra1(U)30.nes">魂斗罗 (Contra)</option>
+            </select>
+            
+            <label for="coreSelect">选择核心:</label>
+            <select id="coreSelect">
+                <option value="fceumm">FCEUmm (推荐)</option>
+                <option value="nestopia">Nestopia</option>
+            </select>
+            
+            <button onclick="loadGame()">加载游戏</button>
+            <button onclick="resetEmulator()">重置</button>
+        </div>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div id="emulator"></div>
+        
+        <div class="info">
+            <h3>操作说明</h3>
+            <ul>
+                <li>方向键：移动</li>
+                <li>Z键：A按钮</li>
+                <li>X键：B按钮</li>
+                <li>Enter键：Start</li>
+                <li>Shift键：Select</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let emulatorLoaded = false;
+        
+        function showStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            document.getElementById('status').style.display = 'none';
+        }
+        
+        function loadGame() {
+            const gameSelect = document.getElementById('gameSelect');
+            const coreSelect = document.getElementById('coreSelect');
+            
+            const gameName = gameSelect.value;
+            const core = coreSelect.value;
+            
+            if (!gameName) {
+                alert('请选择一个游戏！');
+                return;
+            }
+            
+            showStatus('正在加载游戏...', 'loading');
+            
+            // 清理之前的实例
+            resetEmulator();
+            
+            // 设置EmulatorJS全局配置
+            window.EJS_player = '#emulator';
+            window.EJS_gameUrl = `/roms/${gameName}`;
+            window.EJS_core = core;
+            window.EJS_pathtodata = '/emulatorjs/';
+            window.EJS_gameName = gameName.replace('.nes', '');
+            window.EJS_startOnLoaded = true;
+            window.EJS_DEBUG_XX = false;
+            window.EJS_disableDatabases = true;
+            window.EJS_volume = 0.8;
+            
+            // 设置事件监听
+            window.EJS_ready = function() {
+                showStatus('模拟器就绪！', 'ready');
+                setTimeout(hideStatus, 3000);
+            };
+            
+            window.EJS_onGameStart = function() {
+                showStatus('游戏开始！', 'ready');
+                setTimeout(hideStatus, 2000);
+            };
+            
+            // 加载EmulatorJS
+            const script = document.createElement('script');
+            script.src = '/emulatorjs/loader.js';
+            script.onload = function() {
+                console.log('EmulatorJS loader 加载成功');
+                emulatorLoaded = true;
+            };
+            script.onerror = function() {
+                showStatus('加载模拟器失败！', 'error');
+                console.error('EmulatorJS loader 加载失败');
+            };
+            
+            document.head.appendChild(script);
+        }
+        
+        function resetEmulator() {
+            // 清理DOM
+            const emulatorEl = document.getElementById('emulator');
+            emulatorEl.innerHTML = '';
+            
+            // 清理全局变量
+            if (window.EJS_emulator) {
+                delete window.EJS_emulator;
+            }
+            
+            // 移除之前的脚本
+            const scripts = document.querySelectorAll('script[src*="loader.js"]');
+            scripts.forEach(script => script.remove());
+            
+            emulatorLoaded = false;
+            hideStatus();
+        }
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('FC模拟器页面已加载');
+        });
+    </script>
+</body>
+</html> 
