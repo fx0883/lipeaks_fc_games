@@ -20,6 +20,12 @@ import {
   EmulatorStatus, 
   EmulatorConfig 
 } from '../interfaces/IEmulatorAdapter.js'
+import { 
+  isMobileDevice, 
+  isTouchDevice, 
+  getDeviceOrientation, 
+  getVirtualGamepadForCore 
+} from '../utils/mobileDetection.js'
 
 /**
  * EmulatorJS适配器实现
@@ -122,6 +128,17 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       [`${this.namespace}_mute`]: this.config.muted,
       [`${this.namespace}_ready`]: this.handleEmulatorReady,
       [`${this.namespace}_onGameStart`]: this.handleGameStart
+    }
+
+    // 检测移动设备并添加虚拟手柄配置
+    if (isMobileDevice() || isTouchDevice()) {
+      const orientation = getDeviceOrientation()
+      const virtualGamepadSettings = getVirtualGamepadForCore(this.config.core, orientation)
+      globalConfig[`${this.namespace}_VirtualGamepadSettings`] = virtualGamepadSettings
+      
+      // 启用触摸控制相关设置
+      globalConfig[`${this.namespace}_disableDatabases`] = true // 减少移动端加载时间
+      globalConfig[`${this.namespace}_noAutoFocus`] = true // 防止移动端自动聚焦问题
     }
 
     // 临时设置全局变量（仅在初始化期间）

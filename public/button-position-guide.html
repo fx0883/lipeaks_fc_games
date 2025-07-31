@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟手柄按钮位置调整指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Consolas', 'Monaco', monospace;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .file-section {
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .file-title {
+            color: #3498db;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .highlight {
+            background: #f39c12;
+            color: #2c3e50;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .position-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .demo-box {
+            background: #34495e;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            height: 200px;
+            color: white;
+        }
+        
+        .demo-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+        
+        .virtual-button {
+            position: absolute;
+            background: #e74c3c;
+            color: white;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 35px;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .virtual-dpad {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #95a5a6;
+            border-radius: 6px;
+            left: 12%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .virtual-dpad::before, .virtual-dpad::after {
+            content: '';
+            position: absolute;
+            background: #34495e;
+            border-radius: 2px;
+        }
+        
+        .virtual-dpad::before {
+            width: 60%;
+            height: 15%;
+            top: 42.5%;
+            left: 20%;
+        }
+        
+        .virtual-dpad::after {
+            width: 15%;
+            height: 60%;
+            top: 20%;
+            left: 42.5%;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .table th {
+            background: #3498db;
+            color: white;
+        }
+        
+        .table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tips {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            margin: 20px 0;
+        }
+        
+        .tips h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .warning {
+            background: #fdf2e9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+            margin: 20px 0;
+        }
+        
+        .warning h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .position-demo {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 虚拟手柄按钮位置调整指南</h1>
+        
+        <div class="intro">
+            <p><strong>说明：</strong>本指南将详细介绍如何修改虚拟手柄按钮的位置、大小和布局。所有配置都在 <span class="highlight">src/utils/mobileDetection.js</span> 文件中。</p>
+        </div>
+
+        <!-- 主配置文件 -->
+        <div class="file-section">
+            <h2 class="file-title">📁 主配置文件: src/utils/mobileDetection.js</h2>
+            
+            <p>这是虚拟手柄配置的核心文件，包含以下两个主要函数：</p>
+            <ul style="margin: 15px 0; padding-left: 30px;">
+                <li><code>getFCVirtualGamepadSettings(orientation)</code> - FC/NES游戏的按钮配置</li>
+                <li><code>getMAMEVirtualGamepadSettings(orientation)</code> - MAME街机游戏的按钮配置</li>
+            </ul>
+            
+            <div class="code-block">
+export function getFCVirtualGamepadSettings(orientation = 'landscape') {
+  const isPortrait = orientation === 'portrait'
+  
+  return [
+    // 方向键 (左侧)
+    {
+      type: "dpad",
+      location: "left",
+      <span class="highlight">left: isPortrait ? "8%" : "12%",</span>     // 水平位置
+      <span class="highlight">top: isPortrait ? "70%" : "55%",</span>      // 垂直位置
+      inputValues: [4, 5, 6, 7],
+      <span class="highlight">size: isPortrait ? 100 : 90</span>           // 大小
+    },
+    
+    // 右侧4按钮布局 (2x2)
+    // 上排: Y, X
+    {
+      type: "button",
+      text: "Y",
+      location: "right",
+      <span class="highlight">left: isPortrait ? 65 : 60,</span>           // 水平位置 (百分比)
+      <span class="highlight">top: isPortrait ? 60 : 50,</span>            // 垂直位置 (百分比)
+      input_value: 9,
+      <span class="highlight">size: isPortrait ? 50 : 45</span>            // 按钮大小
+    },
+    // ... 其他按钮
+  ]
+}
+            </div>
+            
+            <div class="position-demo">
+                <div class="demo-box">
+                    <div class="demo-title">横屏布局 (Landscape)</div>
+                    <div class="virtual-dpad"></div>
+                    <div class="virtual-button" style="left: 60%; top: 50%;">Y</div>
+                    <div class="virtual-button" style="left: 80%; top: 50%;">X</div>
+                    <div class="virtual-button" style="left: 60%; top: 70%;">B</div>
+                    <div class="virtual-button" style="left: 80%; top: 70%;">A</div>
+                </div>
+                <div class="demo-box">
+                    <div class="demo-title">竖屏布局 (Portrait)</div>
+                    <div class="virtual-dpad" style="left: 8%; top: 70%;"></div>
+                    <div class="virtual-button" style="left: 65%; top: 60%;">Y</div>
+                    <div class="virtual-button" style="left: 85%; top: 60%;">X</div>
+                    <div class="virtual-button" style="left: 65%; top: 80%;">B</div>
+                    <div class="virtual-button" style="left: 85%; top: 80%;">A</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 按钮属性说明 -->
+        <div class="file-section">
+            <h2 class="file-title">⚙️ 按钮属性详解</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>类型</th>
+                        <th>说明</th>
+                        <th>示例值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>left</td>
+                        <td>数字/字符串</td>
+                        <td>水平位置，可以是百分比或像素</td>
+                        <td>60, "12%"</td>
+                    </tr>
+                    <tr>
+                        <td>top</td>
+                        <td>数字/字符串</td>
+                        <td>垂直位置，可以是百分比或像素</td>
+                        <td>50, "70%"</td>
+                    </tr>
+                    <tr>
+                        <td>size</td>
+                        <td>数字</td>
+                        <td>按钮大小（像素）</td>
+                        <td>45, 50</td>
+                    </tr>
+                    <tr>
+                        <td>location</td>
+                        <td>字符串</td>
+                        <td>按钮区域："left", "right", "center"</td>
+                        <td>"right"</td>
+                    </tr>
+                    <tr>
+                        <td>input_value</td>
+                        <td>数字</td>
+                        <td>按钮映射值，对应EmulatorJS的按钮ID</td>
+                        <td>0, 8, 9</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 坐标系统 -->
+        <div class="file-section">
+            <h2 class="file-title">📐 坐标系统说明</h2>
+            
+            <p>虚拟手柄使用百分比坐标系统：</p>
+            <ul style="margin: 15px 0; padding-left: 30px;">
+                <li><strong>水平方向 (left):</strong> 0% = 屏幕最左边, 100% = 屏幕最右边</li>
+                <li><strong>垂直方向 (top):</strong> 0% = 屏幕最上边, 100% = 屏幕最下边</li>
+                <li><strong>大小 (size):</strong> 像素值，数字越大按钮越大</li>
+            </ul>
+            
+            <div class="code-block">
+// 示例：右下角的按钮
+{
+  type: "button",
+  text: "A",
+  location: "right",
+  left: 85,           // 距离左边85%的位置
+  top: 70,            // 距离顶部70%的位置  
+  size: 45            // 按钮大小45像素
+}
+            </div>
+        </div>
+
+        <!-- 修改步骤 -->
+        <div class="file-section">
+            <h2 class="file-title">✏️ 修改步骤</h2>
+            
+            <div class="warning">
+                <h4>⚠️ 修改前请备份</h4>
+                <p>在修改配置前，建议先备份 <code>src/utils/mobileDetection.js</code> 文件。</p>
+            </div>
+            
+            <h3 style="color: #e74c3c; margin: 20px 0 10px;">1. 调整按钮位置</h3>
+            <div class="code-block">
+// 原始配置
+{
+  type: "button",
+  text: "A",
+  left: isPortrait ? 85 : 80,
+  top: isPortrait ? 80 : 70,
+}
+
+// 向左移动：减少 left 值
+{
+  type: "button", 
+  text: "A",
+  left: isPortrait ? 75 : 70,    // 从 85/80 改为 75/70
+  top: isPortrait ? 80 : 70,
+}
+
+// 向上移动：减少 top 值
+{
+  type: "button",
+  text: "A", 
+  left: isPortrait ? 85 : 80,
+  top: isPortrait ? 70 : 60,     // 从 80/70 改为 70/60
+}
+            </div>
+            
+            <h3 style="color: #e74c3c; margin: 20px 0 10px;">2. 调整按钮大小</h3>
+            <div class="code-block">
+// 原始配置
+{
+  type: "button",
+  text: "A",
+  size: isPortrait ? 50 : 45
+}
+
+// 增大按钮：增加 size 值
+{
+  type: "button",
+  text: "A", 
+  size: isPortrait ? 60 : 55     // 从 50/45 改为 60/55
+}
+
+// 缩小按钮：减少 size 值
+{
+  type: "button",
+  text: "A",
+  size: isPortrait ? 40 : 35     // 从 50/45 改为 40/35
+}
+            </div>
+            
+            <h3 style="color: #e74c3c; margin: 20px 0 10px;">3. 调整按钮间距</h3>
+            <div class="code-block">
+// 增加按钮间的水平距离
+// Y按钮位置
+left: isPortrait ? 60 : 55,    // 从 65/60 改为 60/55 (向左移)
+
+// X按钮位置  
+left: isPortrait ? 90 : 85,    // 从 85/80 改为 90/85 (向右移)
+
+// 增加按钮间的垂直距离
+// 上排按钮
+top: isPortrait ? 55 : 45,     // 从 60/50 改为 55/45 (向上移)
+
+// 下排按钮
+top: isPortrait ? 85 : 75,     // 从 80/70 改为 85/75 (向下移)
+            </div>
+        </div>
+
+        <!-- 同步更新说明 -->
+        <div class="file-section">
+            <h2 class="file-title">🔄 同步更新其他文件</h2>
+            
+            <p>修改 <code>src/utils/mobileDetection.js</code> 后，还需要同步更新以下测试页面：</p>
+            
+            <div class="code-block">
+📁 需要同步更新的文件：
+├── public/fc-emulator.html
+├── public/mame-emulator.html  
+├── public/mobile-test.html
+└── public/emulator-controls-guide.html (文档页面)
+            </div>
+            
+            <div class="tips">
+                <h4>💡 自动同步技巧</h4>
+                <ul>
+                    <li>修改主配置文件后，Vue应用会自动使用新配置</li>
+                    <li>测试页面需要手动复制相同的配置函数</li>
+                    <li>建议保持所有文件的配置一致性</li>
+                    <li>每次修改后在移动设备上测试效果</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 按钮映射值 -->
+        <div class="file-section">
+            <h2 class="file-title">🎮 按钮映射值参考</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>input_value</th>
+                        <th>EmulatorJS按钮</th>
+                        <th>FC游戏中的作用</th>
+                        <th>MAME游戏中的作用</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>Button 1 / B</td><td>B按钮 (跑步/取消)</td><td>按钮1 (射击/轻拳)</td></tr>
+                    <tr><td>1</td><td>Button 2 / X</td><td>X按钮 (未使用)</td><td>按钮3 (重拳)</td></tr>
+                    <tr><td>8</td><td>Button 3 / A</td><td>A按钮 (跳跃/确认)</td><td>按钮2 (中拳)</td></tr>
+                    <tr><td>9</td><td>Button 4 / Y</td><td>Y按钮 (未使用)</td><td>按钮4 (轻腿)</td></tr>
+                    <tr><td>2</td><td>SELECT</td><td>选择键</td><td>投币 (COIN)</td></tr>
+                    <tr><td>3</td><td>START</td><td>开始键</td><td>开始游戏</td></tr>
+                    <tr><td>4</td><td>UP</td><td>上方向</td><td>上方向</td></tr>
+                    <tr><td>5</td><td>DOWN</td><td>下方向</td><td>下方向</td></tr>
+                    <tr><td>6</td><td>LEFT</td><td>左方向</td><td>左方向</td></tr>
+                    <tr><td>7</td><td>RIGHT</td><td>右方向</td><td>右方向</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="file-section">
+            <h2 class="file-title">❓ 常见问题解决</h2>
+            
+            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 按钮位置重叠怎么办？</h3>
+            <p><strong>A:</strong> 调整 <code>left</code> 和 <code>top</code> 值，确保按钮之间有足够间距。一般建议水平间距至少20%，垂直间距至少15%。</p>
+            
+            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 按钮显示在屏幕外面？</h3>
+            <p><strong>A:</strong> 检查 <code>left</code> 和 <code>top</code> 值，确保不超过100。考虑按钮大小，实际可用范围约为5%-95%。</p>
+            
+            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 横屏和竖屏效果不一致？</h3>
+            <p><strong>A:</strong> 分别调整 <code>isPortrait ? 竖屏值 : 横屏值</code> 的两个数值，根据实际设备测试效果。</p>
+            
+            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 修改后不生效？</h3>
+            <p><strong>A:</strong> 清除浏览器缓存，重启开发服务器，或者强制刷新页面 (Ctrl+F5)。</p>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/test-games.html" class="back-link">← 返回测试页面</a>
+            <a href="/mobile-test.html" class="back-link">📱 移动端测试</a>
+            <a href="/emulator-controls-guide.html" class="back-link">🎮 控制说明</a>
+            <a href="/" class="back-link">🏠 返回主页</a>
+        </div>
+    </div>
+</body>
+</html> 
