@@ -6,20 +6,18 @@
     </div>
 
     <div class="search-results" v-if="searchResults.length > 0">
-      <div class="game-card" v-for="game in searchResults" :key="game.id">
-        <router-link :to="`/game/${game.id}`">
-          <div class="game-image">
-            <img :src="game.cover" :alt="game.name">
+      <div class="game-card" v-for="game in searchResults" :key="game.id" @click="navigateToGame(game.id)">
+        <div class="game-image">
+          <img :src="game.cover" :alt="game.name">
+        </div>
+        <div class="game-info">
+          <h3>{{ game.name }}</h3>
+          <div class="game-meta">
+            <span class="category" v-if="getCategoryName(game.category)">{{ getCategoryName(game.category) }}</span>
+            <span class="author" v-if="game.author">{{ game.author }}</span>
           </div>
-          <div class="game-info">
-            <h3>{{ game.name }}</h3>
-            <div class="game-meta">
-              <span class="category" v-if="getCategoryName(game.category)">{{ getCategoryName(game.category) }}</span>
-              <span class="author" v-if="game.author">{{ game.author }}</span>
-            </div>
-            <p>{{ game.description }}</p>
-          </div>
-        </router-link>
+          <p>{{ game.description }}</p>
+        </div>
       </div>
     </div>
 
@@ -52,6 +50,13 @@ const getCategoryName = (categoryId) => {
   if (!categoryId) return ''
   const category = gameStore.getCategoryById(categoryId)
   return category ? category.name : categoryId
+}
+
+// 导航到游戏页面
+const navigateToGame = (gameId) => {
+  // 在新窗口/新标签页中打开游戏
+  const baseUrl = window.location.origin
+  window.open(`${baseUrl}/game/${gameId}`, '_blank')
 }
 
 // 执行搜索
@@ -102,6 +107,7 @@ onMounted(() => {
 
 .game-card:hover {
   transform: translateY(-5px);
+  cursor: pointer;
 }
 
 .game-image img {

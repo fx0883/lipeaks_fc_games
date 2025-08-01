@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对称测试页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-info {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background: #2d5a3d; }
+        .error { background: #5a2d2d; }
+        .warning { background: #5a4d2d; }
+        
+        .coordinates {
+            font-family: monospace;
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .refresh-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        .refresh-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 虚拟手柄对称性测试</h1>
+        
+        <div class="test-info">
+            <h2>📱 当前配置检测</h2>
+            <div id="device-info"></div>
+            <div id="config-info"></div>
+        </div>
+        
+        <div class="test-info">
+            <h2>📐 坐标对比分析</h2>
+            <div id="coordinates"></div>
+        </div>
+        
+        <button class="refresh-btn" onclick="location.reload()">🔄 强制刷新页面</button>
+        
+        <div class="test-info">
+            <h2>🎮 测试链接</h2>
+            <p><a href="/mobile-test.html?t=<?= time() ?>" style="color: #4CAF50;">移动端测试 (带时间戳)</a></p>
+            <p><a href="/fc-emulator.html?t=<?= time() ?>" style="color: #4CAF50;">FC游戏测试 (带时间戳)</a></p>
+            <p><a href="/mame-emulator.html?t=<?= time() ?>" style="color: #4CAF50;">MAME游戏测试 (带时间戳)</a></p>
+        </div>
+    </div>
+
+    <script>
+        function updateDeviceInfo() {
+            const isPortrait = window.innerHeight > window.innerWidth;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            document.getElementById('device-info').innerHTML = `
+                <div class="status ${isMobile ? 'success' : 'warning'}">
+                    📱 设备类型: ${isMobile ? '移动设备' : '桌面设备'}
+                </div>
+                <div class="status success">
+                    📏 屏幕方向: ${isPortrait ? '竖屏 (Portrait)' : '横屏 (Landscape)'}
+                </div>
+                <div class="status success">
+                    📐 屏幕尺寸: ${window.innerWidth} x ${window.innerHeight}
+                </div>
+            `;
+        }
+        
+        function analyzeCoordinates() {
+            const isPortrait = window.innerHeight > window.innerWidth;
+            
+            // 当前配置的坐标
+            const dpadLeft = isPortrait ? 8 : 12;
+            const dpadTop = isPortrait ? 68 : 58;
+            
+            const btnCenterLeft = isPortrait ? 75 : 72;
+            const btnCenterTop = isPortrait ? 68 : 58;
+            
+            // 计算对称性
+            const isSymmetric = dpadTop === btnCenterTop;
+            const horizontalDistance = Math.abs(dpadLeft - (100 - btnCenterLeft));
+            
+            document.getElementById('coordinates').innerHTML = `
+                <div class="coordinates">
+                    左侧方向键位置: (${dpadLeft}%, ${dpadTop}%)
+                    右侧按钮中心: (${btnCenterLeft}%, ${btnCenterTop}%)
+                    
+                    垂直对齐: ${isSymmetric ? '✅ 已对齐' : '❌ 未对齐'}
+                    水平距离差: ${horizontalDistance.toFixed(1)}%
+                </div>
+                <div class="status ${isSymmetric ? 'success' : 'error'}">
+                    ${isSymmetric ? '✅ 配置正确：左右控制元素已在同一水平线' : '❌ 配置错误：左右控制元素未对齐'}
+                </div>
+            `;
+        }
+        
+        function checkConfiguration() {
+            // 检查是否有缓存问题
+            const timestamp = new Date().getTime();
+            const cacheInfo = localStorage.getItem('gamepad-config') || '无缓存';
+            
+            document.getElementById('config-info').innerHTML = `
+                <div class="status warning">
+                    ⏰ 页面加载时间: ${new Date().toLocaleTimeString()}
+                </div>
+                <div class="status warning">
+                    💾 浏览器缓存: ${cacheInfo}
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>如果看到的布局还没有更新，请:</strong><br>
+                    1. 按 Ctrl+F5 强制刷新<br>
+                    2. 清除浏览器缓存<br>
+                    3. 使用隐私/无痕模式访问
+                </div>
+            `;
+        }
+        
+        // 页面加载时执行检测
+        window.onload = function() {
+            updateDeviceInfo();
+            analyzeCoordinates();
+            checkConfiguration();
+        };
+        
+        // 屏幕旋转时重新检测
+        window.onresize = function() {
+            setTimeout(() => {
+                updateDeviceInfo();
+                analyzeCoordinates();
+            }, 100);
+        };
+    </script>
+</body>
+</html> 

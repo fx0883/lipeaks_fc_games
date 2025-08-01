@@ -181,7 +181,9 @@ const navigateToCategory = (categoryId) => {
 }
 
 const navigateToGame = (gameId) => {
-  router.push(`/game/${gameId}`)
+  // 在新窗口/新标签页中打开游戏
+  const baseUrl = window.location.origin
+  window.open(`${baseUrl}/game/${gameId}`, '_blank')
 }
 
 const scrollToGames = () => {

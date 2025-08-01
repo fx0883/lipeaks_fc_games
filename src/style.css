@@ -743,3 +743,37 @@ html[lang^="zh"] {
     right: auto;
   }
 }
+
+/* EmulatorJS 虚拟按钮自定义样式 */
+/* SELECT、START 和 COIN 按钮设置为圆角长方形 */
+.ejs_virtualGamepad_button.b_select,
+.ejs_virtualGamepad_button.b_start,
+.ejs_virtualGamepad_button.b_coin {
+  border-radius: 8px !important; /* 圆角长方形 */
+  width: 55px !important;
+  height: 25px !important;
+  line-height: 25px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 按下状态 */
+.ejs_virtualGamepad_button.b_select.ejs_virtualGamepad_button_down,
+.ejs_virtualGamepad_button.b_start.ejs_virtualGamepad_button_down,
+.ejs_virtualGamepad_button.b_coin.ejs_virtualGamepad_button_down {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 移动端竖屏时的尺寸调整 */
+@media (orientation: portrait) and (max-width: 768px) {
+  .ejs_virtualGamepad_button.b_select,
+  .ejs_virtualGamepad_button.b_start {
+    width: 60px !important;
+    height: 25px !important;
+    line-height: 25px !important;
+    font-size: 11px !important;
+  }
+}

@@ -159,7 +159,7 @@ export const useGameStore = defineStore('game', {
           
           // 尝试加载每个分类的游戏，直到找到目标游戏
           for (const category of this.categories) {
-            if (!this.categoryGames[category.id]) {
+            if (!this.isCategoryLoaded(category.id)) {
               await this.fetchGamesByCategory(category.id)
               game = this.getGameById(id)
               if (game) break

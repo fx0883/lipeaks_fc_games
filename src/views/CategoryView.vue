@@ -308,7 +308,9 @@ const filteredGames = computed(() => {
 
 // 导航到游戏页面
 const navigateToGame = (gameId) => {
-  router.push(`/game/${gameId}`)
+  // 在新窗口/新标签页中打开游戏
+  const baseUrl = window.location.origin
+  window.open(`${baseUrl}/game/${gameId}`, '_blank')
 }
 
 // 显示游戏详情（可以实现为模态框）

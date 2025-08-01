@@ -38,28 +38,28 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
   const isPortrait = orientation === 'portrait'
   
   return [
-    // 方向键 (左侧)
+    // 方向键 (左侧，与右侧按钮对称)
     {
       type: "dpad",
       location: "left",
-      left: isPortrait ? "8%" : "12%",
-      top: isPortrait ? "70%" : "55%",
+      left: isPortrait ? "18%" : "22%",
+      top: isPortrait ? "69%" : "59%", 
       inputValues: [4, 5, 6, 7], // 上下左右
       size: isPortrait ? 100 : 90
     },
     
-    // 右侧4按钮布局 (十字形)
+    // 右侧4按钮布局 (十字形，与左侧方向键对称)
     // 上按钮: Y
     {
       type: "button",
       text: "Y",
       id: "y",
       location: "right",
-      left: isPortrait ? 75 : 70,
-      top: isPortrait ? 55 : 45,
+      left: isPortrait ? 75 : 72,
+      top: isPortrait ? 50 : 40,
       bold: true,
       input_value: 9, // Y按钮
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 45 : 42
     },
     
     // 左按钮: X
@@ -68,11 +68,11 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "X",
       id: "x",
       location: "right",
-      left: isPortrait ? 60 : 55,
-      top: isPortrait ? 70 : 60,
+      left: isPortrait ? 58 : 55,
+      top: isPortrait ? 68 : 58, // 与方向键中心对齐
       bold: true,
       input_value: 1, // X按钮
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 45 : 42
     },
     
     // 右按钮: A (FC传统布局)
@@ -81,11 +81,11 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "A",
       id: "a",
       location: "right",
-      left: isPortrait ? 90 : 85,
-      top: isPortrait ? 70 : 60,
+      left: isPortrait ? 92 : 89,
+      top: isPortrait ? 68 : 58, // 与方向键中心对齐
       bold: true,
       input_value: 8, // A按钮
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 45 : 42
     },
     
     // 下按钮: B
@@ -94,14 +94,14 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "B",
       id: "b",
       location: "right",
-      left: isPortrait ? 75 : 70,
-      top: isPortrait ? 85 : 75,
+      left: isPortrait ? 75 : 72,
+      top: isPortrait ? 86 : 76,
       bold: true,
       input_value: 0, // B按钮
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 45 : 42
     },
     
-    // 系统按钮 (圆角长方形)
+    // 系统按钮 (通过CSS样式设置为圆角长方形)
     {
       type: "button",
       text: "SELECT",
@@ -111,10 +111,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       top: isPortrait ? 35 : 20,
       bold: false,
       input_value: 2,
-      size: isPortrait ? 35 : 30,
-      shape: "rounded-rect", // 圆角长方形
-      width: isPortrait ? 60 : 55,
-      height: isPortrait ? 25 : 20
+      size: isPortrait ? 35 : 30
     },
     {
       type: "button",
@@ -125,10 +122,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       top: isPortrait ? 35 : 20,
       bold: false,
       input_value: 3,
-      size: isPortrait ? 35 : 30,
-      shape: "rounded-rect", // 圆角长方形
-      width: isPortrait ? 60 : 55,
-      height: isPortrait ? 25 : 20
+      size: isPortrait ? 35 : 30
     }
   ]
 }
@@ -142,28 +136,28 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
   const isPortrait = orientation === 'portrait'
   
   return [
-    // 摇杆 (左侧)
+    // 摇杆 (左侧，与右侧按钮对称)
     {
       type: "dpad",
       location: "left",
-      left: isPortrait ? "8%" : "12%",
-      top: isPortrait ? "65%" : "50%",
+      left: isPortrait ? "18%" : "22%",
+      top: isPortrait ? "69%" : "59%", // 与右侧按钮中心对齐
       inputValues: [4, 5, 6, 7], // 上下左右
       size: isPortrait ? 110 : 100
     },
     
-    // 右侧4按钮布局 (十字形)
+    // 右侧4按钮布局 (十字形，与左侧摇杆对称)
     // 上按钮: 1
     {
       type: "button",
       text: "1",
       id: "btn1",
       location: "right",
-      left: isPortrait ? 75 : 70,
-      top: isPortrait ? 55 : 45,
+      left: isPortrait ? 45 : 42,
+      top: isPortrait ? 10 : 0,
       bold: true,
       input_value: 0, // 按钮1
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 25 : 22
     },
     
     // 左按钮: 4
@@ -172,11 +166,11 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "4",
       id: "btn4",
       location: "right",
-      left: isPortrait ? 60 : 55,
-      top: isPortrait ? 70 : 60,
+      left: isPortrait ? 3 : 0,
+      top: isPortrait ? 50 : 40, // 与摇杆中心对齐
       bold: true,
       input_value: 9, // 按钮4
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 25 : 22
     },
     
     // 右按钮: 2
@@ -185,11 +179,11 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "2",
       id: "btn2",
       location: "right",
-      left: isPortrait ? 90 : 85,
-      top: isPortrait ? 70 : 60,
+      left: isPortrait ? 85 : 82,
+      top: isPortrait ? 50 : 40, // 与摇杆中心对齐
       bold: true,
       input_value: 8, // 按钮2
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 25 : 22
     },
     
     // 下按钮: 3
@@ -198,14 +192,14 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "3",
       id: "btn3",
       location: "right",
-      left: isPortrait ? 75 : 70,
-      top: isPortrait ? 85 : 75,
+      left: isPortrait ? 45 : 42,
+      top: isPortrait ? 90 : 80,
       bold: true,
       input_value: 1, // 按钮3
-      size: isPortrait ? 50 : 45
+      size: isPortrait ? 25 : 22  
     },
     
-    // 系统按钮 (圆角长方形)
+    // 系统按钮 (通过CSS样式设置为圆角长方形)
     {
       type: "button",
       text: "COIN",
@@ -215,10 +209,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       top: isPortrait ? 20 : 15,
       bold: false,
       input_value: 2, // SELECT键作为投币
-      size: isPortrait ? 35 : 30,
-      shape: "rounded-rect", // 圆角长方形
-      width: isPortrait ? 60 : 55,
-      height: isPortrait ? 25 : 20
+      size: isPortrait ? 35 : 30
     },
     {
       type: "button",
@@ -229,10 +220,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       top: isPortrait ? 20 : 15,
       bold: false,
       input_value: 3,
-      size: isPortrait ? 35 : 30,
-      shape: "rounded-rect", // 圆角长方形
-      width: isPortrait ? 60 : 55,
-      height: isPortrait ? 25 : 20
+      size: isPortrait ? 35 : 30
     }
   ]
 }
