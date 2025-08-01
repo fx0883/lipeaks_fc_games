@@ -139,6 +139,7 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       // 启用触摸控制相关设置
       globalConfig[`${this.namespace}_disableDatabases`] = true // 减少移动端加载时间
       globalConfig[`${this.namespace}_noAutoFocus`] = true // 防止移动端自动聚焦问题
+      globalConfig[`${this.namespace}_volume`] = 0 // 初始静音，避免AudioContext警告
     }
 
     // 临时设置全局变量（仅在初始化期间）

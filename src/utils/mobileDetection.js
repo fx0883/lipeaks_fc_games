@@ -42,7 +42,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
     {
       type: "dpad",
       location: "left",
-      left: isPortrait ? "22%" : "30%",
+      left: isPortrait ? "52%" : "30%",
       top: isPortrait ? "69%" : "59%", 
       inputValues: [4, 5, 6, 7], // 上下左右
       size: isPortrait ? 100 : 90
@@ -55,8 +55,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "Y",
       id: "y",
       location: "right",
-      left: isPortrait ? 75 : 52,
-      top: isPortrait ? 50 : 40,
+      left: isPortrait ? 35 : 2,
+      top: isPortrait ? 10 : 0,
       bold: true,
       input_value: 9, // Y按钮
       size: isPortrait ? 45 : 42
@@ -68,8 +68,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "X",
       id: "x",
       location: "right",
-      left: isPortrait ? 58 : 35,
-      top: isPortrait ? 68 : 58, // 与方向键中心对齐
+      left: isPortrait ? -10 : -40,
+      top: isPortrait ? 50 : 40, // 与方向键中心对齐
       bold: true,
       input_value: 1, // X按钮
       size: isPortrait ? 45 : 42
@@ -81,8 +81,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "A",
       id: "a",
       location: "right",
-      left: isPortrait ? 92 : 69,
-      top: isPortrait ? 68 : 58, // 与方向键中心对齐
+      left: isPortrait ? 82 : 49,
+      top: isPortrait ? 50 : 40, // 与方向键中心对齐
       bold: true,
       input_value: 8, // A按钮
       size: isPortrait ? 45 : 42
@@ -94,8 +94,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "B",
       id: "b",
       location: "right",
-      left: isPortrait ? 75 : 52,
-      top: isPortrait ? 86 : 76,
+      left: isPortrait ? 35 : 2,
+      top: isPortrait ? 90 : 80,
       bold: true,
       input_value: 0, // B按钮
       size: isPortrait ? 45 : 42

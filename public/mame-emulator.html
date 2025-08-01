@@ -156,7 +156,7 @@
                 {
                     type: "dpad",
                     location: "left",
-                    left: isPortrait ? "8%" : "12%",
+                    left: isPortrait ? "8%" : "40%",  // 横屏时向右移动（30% -> 40%）
                     top: isPortrait ? "68%" : "58%", // 与右侧按钮中心对齐
                     inputValues: [4, 5, 6, 7], // 上下左右
                     size: isPortrait ? 110 : 100
@@ -169,7 +169,7 @@
                     text: "1",
                     id: "btn1",
                     location: "right",
-                    left: isPortrait ? 75 : 72,
+                    left: isPortrait ? 75 : 37,  // 横屏时向左移动（52 -> 37，减少15）
                     top: isPortrait ? 50 : 40,
                     bold: true,
                     input_value: 0, // 按钮1
@@ -182,7 +182,7 @@
                     text: "4",
                     id: "btn4",
                     location: "right",
-                    left: isPortrait ? 58 : 55,
+                    left: isPortrait ? 58 : 20,  // 横屏时向左移动（35 -> 20，减少15）
                     top: isPortrait ? 68 : 58, // 与摇杆中心对齐
                     bold: true,
                     input_value: 9, // 按钮4
@@ -195,7 +195,7 @@
                     text: "2",
                     id: "btn2",
                     location: "right",
-                    left: isPortrait ? 92 : 89,
+                    left: isPortrait ? 92 : 54,  // 横屏时向左移动（69 -> 54，减少15）
                     top: isPortrait ? 68 : 58, // 与摇杆中心对齐
                     bold: true,
                     input_value: 8, // 按钮2
@@ -208,7 +208,7 @@
                     text: "3",
                     id: "btn3",
                     location: "right",
-                    left: isPortrait ? 75 : 72,
+                    left: isPortrait ? 75 : 37,  // 横屏时向左移动（52 -> 37，减少15）
                     top: isPortrait ? 86 : 76,
                     bold: true,
                     input_value: 1, // 按钮3
@@ -292,8 +292,11 @@
             
             // 移动端虚拟手柄配置
             if (isMobileDevice()) {
-                const isPortrait = window.innerHeight > window.innerWidth;
-                window.EJS_VirtualGamepadSettings = getMAMEVirtualGamepadSettings(isPortrait ? 'portrait' : 'landscape');
+                // 优先使用Vue应用设置的配置
+                if (!window.EJS_VirtualGamepadSettings) {
+                    const isPortrait = window.innerHeight > window.innerWidth;
+                    window.EJS_VirtualGamepadSettings = getMAMEVirtualGamepadSettings(isPortrait ? 'portrait' : 'landscape');
+                }
                 window.EJS_noAutoFocus = true;
             }
             

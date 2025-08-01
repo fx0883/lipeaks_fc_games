@@ -181,9 +181,29 @@ const navigateToCategory = (categoryId) => {
 }
 
 const navigateToGame = (gameId) => {
-  // 在新窗口/新标签页中打开游戏
   const baseUrl = window.location.origin
-  window.open(`${baseUrl}/game/${gameId}`, '_blank')
+  const gameUrl = `${baseUrl}/game/${gameId}`
+  
+  // 检测是否为移动设备
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (window.innerWidth <= 768)
+  
+  if (isMobile) {
+    // 移动端：创建隐藏链接并模拟点击，更兼容
+    const link = document.createElement('a')
+    link.href = gameUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } else {
+    // 桌面端：直接使用window.open
+    window.open(gameUrl, '_blank', 'noopener,noreferrer')
+  }
 }
 
 const scrollToGames = () => {
