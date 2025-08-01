@@ -34,11 +34,40 @@ export const useGameStore = defineStore('game', {
       return (id) => state.allGames.get(id) || null
     },
     
-    // 根据分类获取游戏 - 高效筛选
+    // 根据分类获取游戏 - 支持新的平台/子分类结构
     getGamesByCategory: (state) => {
       return (categoryId) => {
         return Array.from(state.allGames.values())
-          .filter(game => game.category === categoryId)
+          .filter(game => {
+            // 支持旧的category字段和新的platform/subCategory字段
+            return game.category === categoryId || 
+                   game.platform === categoryId || 
+                   game.subCategory === categoryId
+          })
+      }
+    },
+
+    // 根据平台获取游戏
+    getGamesByPlatform: (state) => {
+      return (platform) => {
+        return Array.from(state.allGames.values())
+          .filter(game => game.platform === platform)
+      }
+    },
+
+    // 根据平台和子分类获取游戏
+    getGamesByPlatformAndSubCategory: (state) => {
+      return (platform, subCategory) => {
+        return Array.from(state.allGames.values())
+          .filter(game => game.platform === platform && game.subCategory === subCategory)
+      }
+    },
+
+    // 获取所有子分类
+    getSubCategoriesByPlatform: (state) => {
+      return (platform) => {
+        const category = state.categories.find(cat => cat.id === platform)
+        return category ? category.subCategories || [] : []
       }
     },
     
@@ -112,14 +141,29 @@ export const useGameStore = defineStore('game', {
       
       this.loading = true
       try {
-        // 查找分类信息
-        const category = this.getCategoryById(categoryId)
-        if (!category || !category.gamesUrl) {
+        // 查找分类信息（支持主分类和子分类）
+        let category = this.getCategoryById(categoryId)
+        let gamesUrl = null
+        
+        if (category && category.gamesUrl) {
+          // 主分类，直接使用gamesUrl
+          gamesUrl = category.gamesUrl
+        } else {
+          // 可能是子分类，查找父分类
+          const parentCategory = this.categories.find(cat => 
+            cat.subCategories && cat.subCategories.some(sub => sub.id === categoryId)
+          )
+          if (parentCategory) {
+            gamesUrl = parentCategory.gamesUrl
+          }
+        }
+        
+        if (!gamesUrl) {
           throw new Error(`Category not found or missing gamesUrl: ${categoryId}`)
         }
         
-        // 加载分类游戏数据
-        const response = await fetch(category.gamesUrl)
+        // 加载游戏数据
+        const response = await fetch(gamesUrl)
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`)
         }

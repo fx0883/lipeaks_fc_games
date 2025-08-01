@@ -242,14 +242,34 @@ const searchQuery = ref('')
 const sortBy = ref('name')
 const viewMode = ref('grid')
 
-// 获取分类信息
-const category = computed(() => gameStore.getCategoryById(categoryId.value))
+// 获取分类信息（支持主分类和子分类）
+const category = computed(() => {
+  // 首先尝试获取主分类
+  let cat = gameStore.getCategoryById(categoryId.value)
+  if (cat) return cat
+  
+  // 如果不是主分类，查找是否为子分类
+  const parentCategory = gameStore.categories.find(mainCat => 
+    mainCat.subCategories && mainCat.subCategories.some(sub => sub.id === categoryId.value)
+  )
+  
+  if (parentCategory) {
+    const subCategory = parentCategory.subCategories.find(sub => sub.id === categoryId.value)
+    return {
+      ...subCategory,
+      parentCategory: parentCategory
+    }
+  }
+  
+  return null
+})
 
 // 获取分类下的游戏
 const games = computed(() => gameStore.getGamesByCategory(categoryId.value))
 
 // 分类图标映射
 const categoryIcons = {
+  // 原有分类
   'action': '⚔️',
   'adventure': '🗺️',
   'puzzle': '🧩',
@@ -259,7 +279,29 @@ const categoryIcons = {
   'fighting': '🥊',
   'shooting': '🎯',
   'rpg': '🗡️',
-  'strategy': '♟️'
+  'strategy': '♟️',
+  
+  // 新的主分类
+  'fc': '🎮',
+  'arcade': '🕹️',
+  
+  // FC子分类
+  'fc-action': '⚔️',
+  'fc-stg': '🚁',
+  'fc-rpg': '🗡️',
+  'fc-puzzle': '🧩',
+  'fc-spg': '⚽',
+  'fc-tab': '🃏',
+  'fc-etc': '📦',
+  
+  // 街机子分类
+  'arcade-fighting': '🥊',
+  'arcade-shooting': '🎯',
+  'arcade-action': '💥',
+  'arcade-puzzle': '🧩',
+  'arcade-racing': '🏎️',
+  'arcade-sports': '⚽',
+  'arcade-etc': '📦'
 }
 
 const getCategoryIcon = (categoryId) => {

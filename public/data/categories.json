@@ -1,79 +1,110 @@
 [
   {
+    "id": "fc",
+    "name": "FC游戏",
+    "description": "经典红白机游戏合集，包含动作、射击、角色扮演等各类经典游戏",
+    "cover": "/images/categories/fc.png",
+    "gamesUrl": "/data/games/fc.json",
+    "core": "fceumm",
+    "romPath": "/roms/fc/",
+    "imagePath": "/roms/images/fc/",
+    "subCategories": [
+      {
+        "id": "fc-action",
+        "name": "FC动作",
+        "description": "包含平台跳跃、横版射击等需要操作技巧的FC游戏",
+        "cover": "/images/categories/fc-action.png"
+      },
+      {
+        "id": "fc-stg",
+        "name": "FC射击",
+        "description": "以飞行射击、坦克射击为主的FC射击游戏",
+        "cover": "/images/categories/fc-stg.png"
+      },
+      {
+        "id": "fc-rpg",
+        "name": "FC角色",
+        "description": "角色扮演类FC游戏，包含冒险和故事情节",
+        "cover": "/images/categories/fc-rpg.png"
+      },
+      {
+        "id": "fc-puzzle",
+        "name": "FC益智",
+        "description": "需要思考和解谜的FC益智游戏",
+        "cover": "/images/categories/fc-puzzle.png"
+      },
+      {
+        "id": "fc-spg",
+        "name": "FC体育",
+        "description": "体育运动类FC游戏，包含足球、篮球等",
+        "cover": "/images/categories/fc-spg.png"
+      },
+      {
+        "id": "fc-tab",
+        "name": "FC桌游",
+        "description": "棋牌、桌面类FC游戏",
+        "cover": "/images/categories/fc-tab.png"
+      },
+      {
+        "id": "fc-etc",
+        "name": "FC其他",
+        "description": "其他类型的FC游戏",
+        "cover": "/images/categories/fc-etc.png"
+      }
+    ]
+  },
+  {
     "id": "arcade",
-    "name": "街机",
-    "description": "经典街机游戏，包括格斗、射击、动作等各类街机游戏",
+    "name": "街机游戏",
+    "description": "经典街机游戏合集，包含格斗、射击、动作等各类街机游戏",
     "cover": "/images/categories/arcade.png",
-    "gamesUrl": "/data/games/arcade.json"
-  },
-  {
-    "id": "action",
-    "name": "动作",
-    "description": "包含平台跳跃、射击等需要反应和操作的游戏",
-    "cover": "/images/categories/action.png",
-    "gamesUrl": "/data/games/action.json"
-  },
-  {
-    "id": "rpg",
-    "name": "角色",
-    "description": "扮演角色进行冒险和故事发展的游戏",
-    "cover": "/images/categories/rpg.png",
-    "gamesUrl": "/data/games/rpg.json"
-  },
-  {
-    "id": "puzzle",
-    "name": "益智",
-    "description": "需要思考和解谜的游戏",
-    "cover": "/images/categories/puzzle.png",
-    "gamesUrl": "/data/games/puzzle.json"
-  },
-  {
-    "id": "stg",
-    "name": "射击",
-    "description": "以射击为主要玩法的游戏",
-    "cover": "/images/categories/stg.png",
-    "gamesUrl": "/data/games/stg.json"
-  },
-  {
-    "id": "slg",
-    "name": "策略",
-    "description": "需要战略思维和规划的游戏",
-    "cover": "/images/categories/slg.png",
-    "gamesUrl": "/data/games/slg.json"
-  },
-  {
-    "id": "ftg",
-    "name": "格斗",
-    "description": "以格斗对战为主的游戏",
-    "cover": "/images/categories/ftg.png",
-    "gamesUrl": "/data/games/ftg.json"
-  },
-  {
-    "id": "tab",
-    "name": "桌游",
-    "description": "棋牌、桌面类游戏",
-    "cover": "/images/categories/tab.png",
-    "gamesUrl": "/data/games/tab.json"
-  },
-  {
-    "id": "rac",
-    "name": "赛车",
-    "description": "以赛车为主题的游戏",
-    "cover": "/images/categories/rac.png",
-    "gamesUrl": "/data/games/rac.json"
-  },
-  {
-    "id": "spg",
-    "name": "体育",
-    "description": "以体育运动为主题的游戏",
-    "cover": "/images/categories/spg.png",
-    "gamesUrl": "/data/games/spg.json"
-  },
-  {
-    "id": "etc",
-    "name": "其他",
-    "description": "其他类型的游戏",
-    "cover": "/images/categories/etc.png",
-    "gamesUrl": "/data/games/etc.json"
+    "gamesUrl": "/data/games/arcade.json",
+    "core": "mame2003_plus",
+    "romPath": "/roms/arcade/",
+    "imagePath": "/roms/images/arcade/",
+    "subCategories": [
+      {
+        "id": "arcade-fighting",
+        "name": "街机格斗",
+        "description": "经典街机格斗游戏，如拳皇、街霸系列",
+        "cover": "/images/categories/arcade-fighting.png"
+      },
+      {
+        "id": "arcade-shooting",
+        "name": "街机射击",
+        "description": "街机射击游戏，包含飞行射击和光线枪射击",
+        "cover": "/images/categories/arcade-shooting.png"
+      },
+      {
+        "id": "arcade-action",
+        "name": "街机动作",
+        "description": "街机动作冒险游戏，如合金弹头系列",
+        "cover": "/images/categories/arcade-action.png"
+      },
+      {
+        "id": "arcade-puzzle",
+        "name": "街机益智",
+        "description": "街机益智游戏，如俄罗斯方块、泡泡龙等",
+        "cover": "/images/categories/arcade-puzzle.png"
+      },
+      {
+        "id": "arcade-racing",
+        "name": "街机竞速",
+        "description": "街机赛车竞速游戏",
+        "cover": "/images/categories/arcade-racing.png"
+      },
+      {
+        "id": "arcade-sports",
+        "name": "街机体育",
+        "description": "街机体育运动游戏",
+        "cover": "/images/categories/arcade-sports.png"
+      },
+      {
+        "id": "arcade-etc",
+        "name": "街机其他",
+        "description": "其他类型的街机游戏",
+        "cover": "/images/categories/arcade-etc.png"
+      }
+    ]
   }
 ] 

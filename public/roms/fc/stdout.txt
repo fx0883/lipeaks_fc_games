@@ -1,0 +1,24 @@
+Loading J:\FC\NEWFC\501-1000\圣斗士星矢 - 黄金传说 (日版) (动作角色扮演).nes...
+
+ PRG ROM:    8 x 16KiB
+ CHR ROM:   16 x  8KiB
+ ROM CRC32:  0x026c5fca
+ ROM MD5:  0x3842a654804620141bfbf3e148e0cf02
+ Mapper #:  152
+ Mapper name: 
+ Mirroring: Horizontal
+ Battery-backed: No
+ Trained: No
+
+Loading J:\FC\NEWFC\0501-1000\洛克人 (日版) (动作).nes...
+
+ PRG ROM:    8 x 16KiB
+ CHR ROM:    0 x  8KiB
+ ROM CRC32:  0xd31dc910
+ ROM MD5:  0x8d5a61f42d92ee61d05083263a11fca1
+ Mapper #:  2
+ Mapper name: UNROM
+ Mirroring: Vertical
+ Battery-backed: No
+ Trained: No
+
