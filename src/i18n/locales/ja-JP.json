@@ -44,7 +44,18 @@
     "gameStarted": "ゲームが開始されました: {name}",
     "gamePaused": "ゲームが一時停止されました: {name}",
     "gameResumed": "ゲームが再開されました: {name}",
-    "gameError": "ゲームエラーが発生しました"
+    "gameError": "ゲームエラーが発生しました",
+    "controls": "操作説明",
+    "movement": "移動",
+    "buttonA": "Aボタン",
+    "buttonB": "Bボタン",
+    "start": "スタート",
+    "select": "セレクト",
+    "coin": "コイン",
+    "button1": "ボタン1",
+    "button2": "ボタン2",
+    "button3": "ボタン3",
+    "button4": "ボタン4"
   },
   "category": {
     "gamesCount": "合計{count}ゲーム",

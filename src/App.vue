@@ -22,8 +22,8 @@ import { StagewiseToolbar } from '@stagewise/toolbar-vue'
 import VuePlugin from '@stagewise-plugins/vue'
 
 // 配置stagewise，仅在开发环境中启用
-// const isDev = import.meta.env.DEV
-const isDev = false
+const isDev = import.meta.env.DEV
+// const isDev = false
 const stagwiseConfig = {
   plugins: [VuePlugin],
 }

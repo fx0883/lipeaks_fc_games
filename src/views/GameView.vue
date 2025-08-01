@@ -195,25 +195,9 @@
           </h3>
           
           <div class="controls-grid">
-            <div class="control-item">
-              <kbd class="key">↑↓←→</kbd>
-              <span class="control-desc">{{ $t('game.movement') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Z</kbd>
-              <span class="control-desc">{{ $t('game.buttonA') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">X</kbd>
-              <span class="control-desc">{{ $t('game.buttonB') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Enter</kbd>
-              <span class="control-desc">{{ $t('game.start') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Shift</kbd>
-              <span class="control-desc">{{ $t('game.select') }}</span>
+            <div class="control-item" v-for="(control, index) in controlsData" :key="index">
+              <kbd class="key">{{ control.key }}</kbd>
+              <span class="control-desc">{{ control.desc }}</span>
             </div>
           </div>
         </div>
@@ -260,6 +244,35 @@ const getDefaultCore = (category) => {
   }
   return coreMapping[category] || 'fceumm'
 }
+
+// 根据游戏核心类型获取控制说明
+const controlsData = computed(() => {
+  if (!game.value) return []
+  
+  const core = game.value.core || getDefaultCore(game.value.category)
+  
+  // MAME街机游戏的按键说明
+  if (['mame2003_plus', 'mame2003', 'fbneo'].includes(core)) {
+    return [
+      { key: '↑↓←→', desc: t('game.movement') },
+      { key: 'Z', desc: t('game.button1') },
+      { key: 'X', desc: t('game.button2') },
+      { key: 'A', desc: t('game.button3') },
+      { key: 'S', desc: t('game.button4') },
+      { key: 'V', desc: t('game.coin') },
+      { key: 'Enter', desc: t('game.start') }
+    ]
+  }
+  
+  // FC游戏的按键说明 (默认)
+  return [
+    { key: '↑↓←→', desc: t('game.movement') },
+    { key: 'Z', desc: t('game.buttonA') },
+    { key: 'X', desc: t('game.buttonB') },
+    { key: 'Enter', desc: t('game.start') },
+    { key: 'V', desc: t('game.select') }
+  ]
+})
 
 // 计算游戏统计数据
 const gamePlayTime = computed(() => {

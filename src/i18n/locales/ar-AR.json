@@ -44,7 +44,18 @@
     "gameStarted": "بدأت اللعبة: {name}",
     "gamePaused": "تم إيقاف اللعبة مؤقتاً: {name}",
     "gameResumed": "تم استئناف اللعبة: {name}",
-    "gameError": "حدث خطأ في اللعبة"
+    "gameError": "حدث خطأ في اللعبة",
+    "controls": "أدوات التحكم",
+    "movement": "الحركة",
+    "buttonA": "زر أ",
+    "buttonB": "زر ب",
+    "start": "بداية",
+    "select": "اختيار",
+    "coin": "عملة",
+    "button1": "زر 1",
+    "button2": "زر 2",
+    "button3": "زر 3",
+    "button4": "زر 4"
   },
   "category": {
     "gamesCount": "إجمالي {count} ألعاب",
