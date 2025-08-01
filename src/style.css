@@ -750,13 +750,14 @@ html[lang^="zh"] {
 .ejs_virtualGamepad_button.b_start,
 .ejs_virtualGamepad_button.b_coin {
   border-radius: 8px !important; /* 圆角长方形 */
-  width: 55px !important;
+  width: 50px !important; /* 稍微减小宽度 */
   height: 25px !important;
   line-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
   background-color: rgba(255, 255, 255, 0.2) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  transform: translateX(-50%) !important; /* 以自身中心为基准定位 */
 }
 
 /* 按下状态 */
@@ -770,10 +771,23 @@ html[lang^="zh"] {
 /* 移动端竖屏时的尺寸调整 */
 @media (orientation: portrait) and (max-width: 768px) {
   .ejs_virtualGamepad_button.b_select,
-  .ejs_virtualGamepad_button.b_start {
-    width: 60px !important;
-    height: 25px !important;
-    line-height: 25px !important;
-    font-size: 11px !important;
+  .ejs_virtualGamepad_button.b_start,
+  .ejs_virtualGamepad_button.b_coin {
+    width: 55px !important; /* 竖屏时稍大一些 */
+    height: 28px !important;
+    line-height: 28px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* 小屏幕设备额外调整 */
+@media (max-width: 480px) {
+  .ejs_virtualGamepad_button.b_select,
+  .ejs_virtualGamepad_button.b_start,
+  .ejs_virtualGamepad_button.b_coin {
+    width: 45px !important; /* 更小屏幕时进一步减小 */
+    height: 24px !important;
+    line-height: 24px !important;
+    font-size: 9px !important;
   }
 }

@@ -42,7 +42,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
     {
       type: "dpad",
       location: "left",
-      left: isPortrait ? "18%" : "22%",
+      left: isPortrait ? "22%" : "30%",
       top: isPortrait ? "69%" : "59%", 
       inputValues: [4, 5, 6, 7], // 上下左右
       size: isPortrait ? 100 : 90
@@ -55,7 +55,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "Y",
       id: "y",
       location: "right",
-      left: isPortrait ? 75 : 72,
+      left: isPortrait ? 75 : 52,
       top: isPortrait ? 50 : 40,
       bold: true,
       input_value: 9, // Y按钮
@@ -68,7 +68,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "X",
       id: "x",
       location: "right",
-      left: isPortrait ? 58 : 55,
+      left: isPortrait ? 58 : 35,
       top: isPortrait ? 68 : 58, // 与方向键中心对齐
       bold: true,
       input_value: 1, // X按钮
@@ -81,7 +81,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "A",
       id: "a",
       location: "right",
-      left: isPortrait ? 92 : 89,
+      left: isPortrait ? 92 : 69,
       top: isPortrait ? 68 : 58, // 与方向键中心对齐
       bold: true,
       input_value: 8, // A按钮
@@ -94,7 +94,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "B",
       id: "b",
       location: "right",
-      left: isPortrait ? 75 : 72,
+      left: isPortrait ? 75 : 52,
       top: isPortrait ? 86 : 76,
       bold: true,
       input_value: 0, // B按钮
@@ -107,7 +107,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "SELECT",
       id: "select",
       location: "center",
-      left: isPortrait ? 35 : 40,
+      left: isPortrait ? 25 : 30, // 按钮中心位置
       top: isPortrait ? 35 : 20,
       bold: false,
       input_value: 2,
@@ -118,7 +118,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       text: "START",
       id: "start",
       location: "center",
-      left: isPortrait ? 65 : 60,
+      left: isPortrait ? 75 : 70, // 按钮中心位置
       top: isPortrait ? 35 : 20,
       bold: false,
       input_value: 3,
@@ -140,7 +140,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
     {
       type: "dpad",
       location: "left",
-      left: isPortrait ? "18%" : "22%",
+      left: isPortrait ? "22%" : "30%",
       top: isPortrait ? "69%" : "59%", // 与右侧按钮中心对齐
       inputValues: [4, 5, 6, 7], // 上下左右
       size: isPortrait ? 110 : 100
@@ -153,7 +153,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "1",
       id: "btn1",
       location: "right",
-      left: isPortrait ? 45 : 42,
+      left: isPortrait ? 45 : 22,
       top: isPortrait ? 10 : 0,
       bold: true,
       input_value: 0, // 按钮1
@@ -166,7 +166,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "4",
       id: "btn4",
       location: "right",
-      left: isPortrait ? 3 : 0,
+      left: isPortrait ? 3 : -20,
       top: isPortrait ? 50 : 40, // 与摇杆中心对齐
       bold: true,
       input_value: 9, // 按钮4
@@ -179,7 +179,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "2",
       id: "btn2",
       location: "right",
-      left: isPortrait ? 85 : 82,
+      left: isPortrait ? 85 : 62,
       top: isPortrait ? 50 : 40, // 与摇杆中心对齐
       bold: true,
       input_value: 8, // 按钮2
@@ -192,7 +192,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "3",
       id: "btn3",
       location: "right",
-      left: isPortrait ? 45 : 42,
+      left: isPortrait ? 45 : 22,
       top: isPortrait ? 90 : 80,
       bold: true,
       input_value: 1, // 按钮3
@@ -205,7 +205,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "COIN",
       id: "coin",
       location: "center",
-      left: isPortrait ? 25 : 30,
+      left: isPortrait ? 25 : 30, // 按钮中心位置
       top: isPortrait ? 20 : 15,
       bold: false,
       input_value: 2, // SELECT键作为投币
@@ -216,7 +216,7 @@ export function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
       text: "START",
       id: "start",
       location: "center",
-      left: isPortrait ? 75 : 70,
+      left: isPortrait ? 75 : 70, // 按钮中心位置
       top: isPortrait ? 20 : 15,
       bold: false,
       input_value: 3,
