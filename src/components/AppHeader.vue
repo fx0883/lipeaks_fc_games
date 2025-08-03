@@ -17,124 +17,265 @@
 -->
 <template>
   <header class="app-header">
-    <!-- 第一层：Logo + 搜索 + 操作按钮 -->
+    <!-- 第一层：Logo + 搜索 + 操作 -->
     <div class="header-top">
-      <div class="container">
-        <div class="logo">
-          <router-link to="/">
-            <h1>{{ $t('app.title') }}</h1>
+      <div class="header-container">
+        <!-- Logo区域 -->
+        <div class="logo-section">
+          <router-link to="/" class="logo-link">
+            <div class="logo-icon">🎮</div>
+            <div class="logo-text">
+              <h1>{{ $t('app.title') }}</h1>
+              <span class="logo-subtitle">经典游戏平台</span>
+            </div>
           </router-link>
         </div>
-        
-        <div class="search-box desktop-search">
-          <input 
-            type="text" 
-            :placeholder="$t('nav.searchPlaceholder')" 
-            v-model="searchQuery"
-            @keyup.enter="handleSearchInNewTab"
-          >
-          <button @click="handleSearchInNewTab">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="sr-only">{{ $t('nav.searchButton') }}</span>
-          </button>
-        </div>
-        
+
+        <!-- 右侧操作区 -->
         <div class="header-actions">
-          <LanguageSwitcher />
+          <!-- 搜索框 -->
+          <div class="search-container">
+            <div class="search-box" :class="{ 'focused': isSearchFocused }">
+              <div class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                :placeholder="$t('nav.searchPlaceholder')" 
+                v-model="searchQuery"
+                @keyup.enter="handleSearch"
+                @focus="isSearchFocused = true"
+                @blur="isSearchFocused = false"
+                class="search-input"
+              >
+              <button @click="handleSearch" class="search-btn" v-if="searchQuery">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 快捷操作 -->
+          <div class="quick-actions">
+            <button class="action-btn theme-toggle" @click="toggleTheme" title="切换主题">
+              <span class="btn-icon">{{ isDarkTheme ? '🌞' : '🌙' }}</span>
+            </button>
+            <LanguageSwitcher class="language-switcher" />
+          </div>
+
           <!-- 移动端菜单按钮 -->
-          <button class="mobile-menu-btn" @click="toggleMobileMenu" :aria-expanded="isMobileMenuOpen">
+          <button 
+            class="mobile-menu-toggle" 
+            @click="toggleMobileMenu"
+            :class="{ 'active': isMobileMenuOpen }"
+          >
             <span></span>
             <span></span>
             <span></span>
-            <span class="sr-only">菜单</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- 第二层：导航菜单 -->
+    <!-- 第二层：横排导航菜单 -->
     <nav class="header-nav desktop-nav">
-      <div class="container">
-        <div class="nav-categories">
-          <template v-for="category in categories" :key="category.id">
-            <!-- 主分类 -->
-            <div class="category-group">
-              <router-link :to="`/category/${category.id}`" class="main-category">
-                {{ category.name }}
-              </router-link>
-              
-              <!-- 子分类 -->
-              <div class="sub-categories" v-if="category.subCategories && category.subCategories.length > 0">
-                <router-link 
-                  v-for="subCategory in category.subCategories" 
-                  :key="subCategory.id"
-                  :to="`/category/${subCategory.id}`"
-                  class="sub-category"
-                >
-                  {{ subCategory.name }}
-                </router-link>
-              </div>
-            </div>
+      <div class="nav-container">
+        <!-- 第一排：街机游戏主分类 + 所有街机子分类 -->
+        <div class="nav-row first-row">
+          <!-- 街机游戏主分类 -->
+          <router-link 
+            :to="`/category/arcade`" 
+            class="nav-link main-category"
+            :class="{ 'active': isActiveCategory('arcade') }"
+          >
+            <span class="nav-icon">🕹️</span>
+            <span class="nav-text">街机游戏</span>
+          </router-link>
+          
+          <!-- 所有街机子分类 -->
+          <template v-if="arcadeCategory && arcadeCategory.subCategories">
+            <router-link 
+              v-for="subCategory in arcadeCategory.subCategories" 
+              :key="subCategory.id"
+              :to="`/category/${subCategory.id}`" 
+              class="nav-link sub-category"
+              :class="{ 'active': isActiveSubCategory(subCategory.id) }"
+            >
+              <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
+              <span class="nav-text">{{ subCategory.name.replace('街机', '') }}</span>
+            </router-link>
+          </template>
+        </div>
+
+        <!-- 第二排：FC游戏主分类 + 所有FC子分类 -->
+        <div class="nav-row second-row">
+          <!-- FC游戏主分类 -->
+          <router-link 
+            :to="`/category/fc`" 
+            class="nav-link main-category"
+            :class="{ 'active': isActiveCategory('fc') }"
+          >
+            <span class="nav-icon">🎮</span>
+            <span class="nav-text">FC游戏</span>
+          </router-link>
+
+          <!-- 所有FC子分类 -->
+          <template v-if="fcCategory && fcCategory.subCategories">
+            <router-link 
+              v-for="subCategory in fcCategory.subCategories" 
+              :key="subCategory.id"
+              :to="`/category/${subCategory.id}`" 
+              class="nav-link sub-category"
+              :class="{ 'active': isActiveSubCategory(subCategory.id) }"
+            >
+              <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
+              <span class="nav-text">{{ subCategory.name.replace('FC', '') }}</span>
+            </router-link>
           </template>
         </div>
       </div>
     </nav>
-    
+
     <!-- 移动端菜单 -->
-    <div class="mobile-menu" :class="{ 'active': isMobileMenuOpen }">
+    <div class="mobile-menu" :class="{ 'open': isMobileMenuOpen }">
       <div class="mobile-search">
-        <input 
-          type="text" 
-          :placeholder="$t('nav.searchPlaceholder')" 
-          v-model="searchQuery"
-          @keyup.enter="handleMobileSearch"
-        >
-        <button @click="handleMobileSearch">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        <div class="search-box">
+          <div class="search-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            :placeholder="$t('nav.searchPlaceholder')" 
+            v-model="mobileSearchQuery"
+            @keyup.enter="handleMobileSearch"
+            class="search-input"
+          >
+        </div>
       </div>
+      
       <nav class="mobile-nav">
-        <!-- 动态渲染移动端菜单 -->
-        <div v-for="category in categories" :key="category.id" class="mobile-nav-section">
-          <h4 class="nav-section-title">{{ category.name }}</h4>
-          <ul>
-            <!-- 主分类链接 -->
-            <li>
-              <router-link :to="`/category/${category.id}`" @click="closeMobileMenu">
-                全部{{ category.name }}
-              </router-link>
-            </li>
-            
-            <!-- 子分类链接 -->
-            <li v-for="subCategory in category.subCategories" :key="subCategory.id">
-              <router-link :to="`/category/${subCategory.id}`" @click="closeMobileMenu">
-                {{ subCategory.name }}
-              </router-link>
-            </li>
-          </ul>
+        <div v-for="category in categories" :key="category.id" class="mobile-category">
+          <div class="mobile-category-header" @click="toggleMobileCategory(category.id)">
+            <span class="category-icon">{{ getCategoryIcon(category.id) }}</span>
+            <span class="category-name">{{ category.name }}</span>
+            <span class="expand-icon" :class="{ 'expanded': expandedCategories.includes(category.id) }">▼</span>
+          </div>
+          
+          <div class="mobile-subcategories" :class="{ 'expanded': expandedCategories.includes(category.id) }">
+            <router-link 
+              :to="`/category/${category.id}`" 
+              class="mobile-nav-link all-link"
+              @click="closeMobileMenu"
+            >
+              <span class="link-icon">📋</span>
+              <span>全部{{ category.name }}</span>
+            </router-link>
+            <router-link 
+              v-for="subCategory in category.subCategories" 
+              :key="subCategory.id"
+              :to="`/category/${subCategory.id}`" 
+              class="mobile-nav-link"
+              @click="closeMobileMenu"
+            >
+              <span class="link-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
+              <span>{{ subCategory.name }}</span>
+            </router-link>
+          </div>
         </div>
       </nav>
     </div>
+
+    <!-- 移动端遮罩 -->
+    <div 
+      class="mobile-overlay" 
+      :class="{ 'show': isMobileMenuOpen }"
+      @click="closeMobileMenu"
+    ></div>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const router = useRouter()
+const route = useRoute()
 const gameStore = useGameStore()
+
+// 响应式数据
 const searchQuery = ref('')
+const mobileSearchQuery = ref('')
 const categories = ref([])
 const isMobileMenuOpen = ref(false)
+const isSearchFocused = ref(false)
+const expandedCategories = ref([])
+const isDarkTheme = ref(false)
 
-// 加载分类数据
+// 初始化主题
+const initTheme = () => {
+  // 从localStorage读取保存的主题
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) {
+    isDarkTheme.value = savedTheme === 'dark'
+  } else {
+    // 如果没有保存的主题，检测系统偏好
+    isDarkTheme.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+  // 应用主题
+  document.documentElement.setAttribute('data-theme', isDarkTheme.value ? 'dark' : 'light')
+}
+
+// 分类图标映射
+const categoryIcons = {
+  'fc': '🎮',
+  'arcade': '🕹️'
+}
+
+const subCategoryIcons = {
+  // FC子分类
+  'fc-action': '⚔️',
+  'fc-stg': '🚁',
+  'fc-rpg': '🗡️',
+  'fc-puzzle': '🧩',
+  'fc-spg': '⚽',
+  'fc-tab': '🃏',
+  'fc-etc': '📦',
+  
+  // 街机子分类
+  'arcade-fighting': '🥊',
+  'arcade-shooting': '🎯',
+  'arcade-action': '💥',
+  'arcade-puzzle': '🧩',
+  'arcade-racing': '🏎️',
+  'arcade-sports': '⚽',
+  'arcade-etc': '📦'
+}
+
+// 计算属性
+const isActiveCategory = computed(() => (categoryId) => {
+  return route.path.includes(`/category/${categoryId}`)
+})
+
+const isActiveSubCategory = computed(() => (subCategoryId) => {
+  return route.path.includes(`/category/${subCategoryId}`)
+})
+
+const fcCategory = computed(() => {
+  return categories.value.find(cat => cat.id === 'fc')
+})
+
+const arcadeCategory = computed(() => {
+  return categories.value.find(cat => cat.id === 'arcade')
+})
+
+// 方法
 const loadCategories = async () => {
   if (gameStore.categories.length === 0) {
     await gameStore.fetchCategories()
@@ -142,439 +283,908 @@ const loadCategories = async () => {
   categories.value = gameStore.categories
 }
 
+const getCategoryIcon = (categoryId) => {
+  return categoryIcons[categoryId] || '🎲'
+}
+
+const getSubCategoryIcon = (subCategoryId) => {
+  return subCategoryIcons[subCategoryId] || '🎯'
+}
+
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
-    // 跳转到搜索结果页面
     router.push({ 
       path: '/search', 
       query: { q: searchQuery.value.trim() } 
     })
+    searchQuery.value = ''
   }
 }
 
-// 在新标签页中处理搜索（桌面端）
-const handleSearchInNewTab = () => {
-  if (searchQuery.value.trim()) {
-    const baseUrl = window.location.origin
-    window.open(`${baseUrl}/search?q=${encodeURIComponent(searchQuery.value.trim())}`, '_blank')
-  }
-}
-
-// 移动端搜索处理（当前页面导航）
 const handleMobileSearch = () => {
-  if (searchQuery.value.trim()) {
+  if (mobileSearchQuery.value.trim()) {
     router.push({ 
       path: '/search', 
-      query: { q: searchQuery.value.trim() } 
+      query: { q: mobileSearchQuery.value.trim() } 
     })
-    closeMobileMenu() // 关闭移动菜单
+    mobileSearchQuery.value = ''
+    closeMobileMenu()
   }
 }
 
-// 在新标签页打开链接
-const openInNewTab = (path) => {
-  const baseUrl = window.location.origin
-  window.open(baseUrl + path, '_blank')
-}
-
-// 移动端菜单控制
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+  if (isMobileMenuOpen.value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
 }
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
+  document.body.style.overflow = ''
 }
 
-// 组件挂载时加载分类数据
+const toggleMobileCategory = (categoryId) => {
+  const index = expandedCategories.value.indexOf(categoryId)
+  if (index > -1) {
+    expandedCategories.value.splice(index, 1)
+  } else {
+    expandedCategories.value.push(categoryId)
+  }
+}
+
+const toggleTheme = () => {
+  isDarkTheme.value = !isDarkTheme.value
+  // 这里可以添加主题切换逻辑
+  document.documentElement.setAttribute('data-theme', isDarkTheme.value ? 'dark' : 'light')
+  // 保存主题到localStorage
+  localStorage.setItem('theme', isDarkTheme.value ? 'dark' : 'light')
+}
+
+// 生命周期
 onMounted(() => {
+  initTheme() // 初始化主题
   loadCategories()
 })
 </script>
 
 <style scoped>
-/* 隐藏屏幕阅读器文本 */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* CSS变量定义 */
+:root {
+  --header-height: 110px;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --shadow-light: 0 2px 20px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 25px rgba(0, 0, 0, 0.12);
+  --shadow-heavy: 0 8px 40px rgba(0, 0, 0, 0.16);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 主容器 */
 .app-header {
-  background-color: white;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid #e1e5e9;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  background: var(--primary-gradient);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* 深色主题头部适配 */
+[data-theme="dark"] .app-header {
+  --primary-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 浅色主题头部适配 */
+[data-theme="light"] .app-header {
+  --primary-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* 第一层：Logo + 搜索 + 操作 */
 .header-top {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.header-top .container {
+[data-theme="light"] .header-top {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
-  gap: 20px;
+  gap: 32px;
 }
 
-.logo {
+/* Logo区域 */
+.logo-section {
   flex-shrink: 0;
 }
 
-.logo a {
-  text-decoration: none;
-  color: var(--color-text);
-}
-
-.logo h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: -0.02em;
-}
-
-/* 搜索框 */
-.search-box {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  max-width: 400px;
-  margin: 0 20px;
-  background-color: #f8f9fa;
-  border: 2px solid #e9ecef;
-  border-radius: 24px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.search-box:focus-within {
-  border-color: var(--color-primary);
-  background-color: white;
-  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
-}
-
-.search-box input {
-  flex: 1;
-  padding: 12px 16px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  background: transparent;
-  color: var(--color-text);
-}
-
-.search-box input::placeholder {
-  color: #6c757d;
-}
-
-.search-box button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #6c757d;
-  transition: all 0.3s ease;
-}
-
-.search-box button:hover {
-  color: var(--color-primary);
-  background-color: rgba(var(--color-primary-rgb), 0.1);
-}
-
-/* 头部操作区 */
-.header-actions {
+.logo-link {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  color: white;
+  transition: var(--transition);
+}
+
+.logo-link:hover {
+  transform: translateY(-1px);
+}
+
+/* 浅色主题Logo适配 */
+[data-theme="light"] .logo-link {
+  color: var(--color-text);
+}
+
+.logo-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(45deg, #fff, #f0f8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+/* 浅色主题Logo文字适配 */
+[data-theme="light"] .logo-text h1 {
+  background: linear-gradient(45deg, var(--color-text), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-subtitle {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  margin-top: -2px;
+  display: block;
+}
+
+/* 浅色主题Logo副标题适配 */
+[data-theme="light"] .logo-subtitle {
+  color: var(--color-text-light);
+}
+
+/* 右侧操作区 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   flex-shrink: 0;
 }
 
-/* 第二层：导航菜单 */
-.header-nav {
-  background-color: #fafbfc;
+/* 搜索框 */
+.search-container {
+  position: relative;
 }
 
-.header-nav .container {
-  padding: 12px 20px;
-}
-
-.nav-categories {
+.search-box {
   display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 0 16px;
+  transition: var(--transition);
+  width: 280px;
 }
 
-.category-group {
+.search-box.focused {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 浅色主题搜索框适配 */
+[data-theme="light"] .search-box {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .search-box.focused {
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  color: rgba(255, 255, 255, 0.8);
+  margin-right: 12px;
+  transition: var(--transition);
+}
+
+.search-box.focused .search-icon {
+  color: var(--color-primary);
+}
+
+/* 浅色主题搜索图标适配 */
+[data-theme="light"] .search-icon {
+  color: var(--color-text-light);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-box.focused .search-input {
+  color: var(--color-text);
+}
+
+.search-box.focused .search-input::placeholder {
+  color: #999;
+}
+
+/* 浅色主题搜索输入适配 */
+[data-theme="light"] .search-input {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.search-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 浅色主题搜索按钮适配 */
+[data-theme="light"] .search-btn {
+  color: var(--color-text-light);
+}
+
+[data-theme="light"] .search-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 快捷操作 */
+.quick-actions {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 8px;
 }
 
-.main-category {
-  text-decoration: none;
-  color: var(--color-primary);
-  font-weight: 700;
-  font-size: 16px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  background-color: rgba(var(--color-primary-rgb), 0.1);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.main-category:hover {
-  background-color: var(--color-primary);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
-}
-
-.sub-categories {
+.action-btn {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-.sub-category {
-  text-decoration: none;
-  color: var(--color-text);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 14px;
-  background-color: white;
-  border: 1px solid #e9ecef;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.sub-category:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  background-color: rgba(var(--color-primary-rgb), 0.05);
-  transform: translateY(-1px);
+.btn-icon {
+  font-size: 16px;
 }
 
 /* 移动端菜单按钮 */
-.mobile-menu-btn {
+.mobile-menu-toggle {
   display: none;
   flex-direction: column;
+  justify-content: space-between;
   width: 40px;
   height: 40px;
-  background-color: #f8f9fa;
-  border: 2px solid #e9ecef;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   cursor: pointer;
   padding: 8px;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: var(--transition);
 }
 
-.mobile-menu-btn:hover {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+.mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
 }
 
-.mobile-menu-btn span {
+.mobile-menu-toggle span {
   width: 100%;
   height: 2px;
-  background-color: var(--color-text);
-  transition: all 0.3s ease;
+  background: white;
   border-radius: 1px;
+  transition: var(--transition);
 }
 
-.mobile-menu-btn:hover span {
-  background-color: white;
+/* 浅色主题移动端菜单按钮适配 */
+[data-theme="light"] .mobile-menu-toggle {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .mobile-menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .mobile-menu-toggle span {
+  background: var(--color-text);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* 第二层：横排导航菜单 */
+.header-nav {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 导航行 */
+.nav-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+.first-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.second-row {
+  padding-bottom: 12px;
+}
+
+/* 统一的导航链接样式 */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 浅色主题导航链接适配 */
+[data-theme="light"] .nav-link {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--color-text);
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  color: var(--color-primary);
+}
+
+/* 主分类特殊样式 */
+.nav-link.main-category {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 9px 20px;
+}
+
+.nav-link.main-category:hover,
+.nav-link.main-category.active {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* 浅色主题主分类适配 */
+[data-theme="light"] .nav-link.main-category {
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  color: white;
+}
+
+[data-theme="light"] .nav-link.main-category:hover,
+[data-theme="light"] .nav-link.main-category.active {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: white;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+}
+
+/* 子分类样式 */
+.nav-link.sub-category {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 13px;
+  padding: 6px 14px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.nav-link.sub-category:hover,
+.nav-link.sub-category.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* 浅色主题子分类适配 */
+[data-theme="light"] .nav-link.sub-category {
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  color: var(--color-text);
+}
+
+[data-theme="light"] .nav-link.sub-category:hover,
+[data-theme="light"] .nav-link.sub-category.active {
+  background: rgba(79, 70, 229, 0.15);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.nav-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  font-weight: inherit;
 }
 
 /* 移动端菜单 */
 .mobile-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: white;
-  border-top: 1px solid #e9ecef;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  z-index: 1000;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+  position: fixed;
+  top: var(--header-height);
+  right: -100%;
+  width: 320px;
+  height: calc(100vh - var(--header-height));
+  background: white;
+  box-shadow: var(--shadow-heavy);
+  transition: var(--transition);
+  overflow-y: auto;
+  z-index: 999;
 }
 
-.mobile-menu.active {
-  max-height: 80vh;
-  overflow-y: auto;
+.mobile-menu.open {
+  right: 0;
+}
+
+/* 浅色主题移动端菜单适配 */
+[data-theme="dark"] .mobile-menu {
+  background: var(--color-background-soft);
 }
 
 .mobile-search {
-  padding: 16px;
-  border-bottom: 1px solid #e9ecef;
-  background-color: #fafbfc;
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+}
+
+/* 浅色主题移动端搜索区适配 */
+[data-theme="dark"] .mobile-search {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-bottom: 1px solid #475569;
 }
 
 .mobile-search .search-box {
-  margin: 0;
-  max-width: none;
+  background: white;
+  border: 1px solid #e9ecef;
+  width: 100%;
 }
 
-.mobile-nav-section {
-  border-bottom: 1px solid #f0f0f0;
+/* 浅色主题移动端搜索框适配 */
+[data-theme="dark"] .mobile-search .search-box {
+  background: var(--color-background-mute);
+  border: 1px solid var(--color-border);
 }
 
-.nav-section-title {
-  margin: 0;
-  padding: 16px;
-  background-color: #fafbfc;
-  color: var(--color-primary);
-  font-size: 15px;
-  font-weight: 700;
-  border-bottom: 1px solid #e9ecef;
+.mobile-search .search-icon {
+  color: #999;
 }
 
-.mobile-nav ul {
-  list-style: none;
+/* 浅色主题移动端搜索图标适配 */
+[data-theme="dark"] .mobile-search .search-icon {
+  color: var(--color-text-light);
+}
+
+.mobile-search .search-input {
+  color: var(--color-text);
+}
+
+.mobile-search .search-input::placeholder {
+  color: #999;
+}
+
+/* 浅色主题移动端搜索输入适配 */
+[data-theme="dark"] .mobile-search .search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 移动端导航 */
+.mobile-nav {
   padding: 0;
-  margin: 0;
 }
 
-.mobile-nav li {
+.mobile-category {
   border-bottom: 1px solid #f8f9fa;
 }
 
-.mobile-nav a {
-  display: block;
-  padding: 14px 16px 14px 32px;
+/* 浅色主题移动端分类适配 */
+[data-theme="dark"] .mobile-category {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  background: white;
+}
+
+.mobile-category-header:hover {
+  background: #f8f9ff;
+}
+
+/* 浅色主题移动端分类标题适配 */
+[data-theme="dark"] .mobile-category-header {
+  background: var(--color-background-soft);
+}
+
+[data-theme="dark"] .mobile-category-header:hover {
+  background: var(--color-background-mute);
+}
+
+.category-name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.expand-icon {
+  font-size: 12px;
+  color: #999;
+  transition: var(--transition);
+}
+
+/* 浅色主题移动端展开图标适配 */
+[data-theme="dark"] .expand-icon {
+  color: var(--color-text-muted);
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.mobile-subcategories {
+  max-height: 0;
+  overflow: hidden;
+  transition: var(--transition);
+  background: #fafbfc;
+}
+
+/* 浅色主题移动端子分类背景适配 */
+[data-theme="dark"] .mobile-subcategories {
+  background: var(--color-background-mute);
+}
+
+.mobile-subcategories.expanded {
+  max-height: 500px;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px 12px 52px;
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
   font-size: 14px;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.mobile-nav a:hover {
-  background-color: rgba(var(--color-primary-rgb), 0.05);
+.mobile-nav-link:hover {
+  background: white;
+  padding-left: 56px;
   color: var(--color-primary);
-  padding-left: 36px;
+}
+
+/* 浅色主题移动端导航链接适配 */
+[data-theme="dark"] .mobile-nav-link {
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .mobile-nav-link:hover {
+  background: var(--color-background-soft);
+}
+
+.mobile-nav-link.all-link {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin: 8px 16px;
+  border-radius: 8px;
+  padding-left: 20px;
+}
+
+.mobile-nav-link.all-link:hover {
+  padding-left: 24px;
+  transform: translateX(4px);
+}
+
+/* 浅色主题移动端全部链接适配 */
+[data-theme="dark"] .mobile-nav-link.all-link {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+.link-icon {
+  font-size: 16px;
+}
+
+/* 移动端遮罩 */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.mobile-overlay.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
-  .app-header {
-    position: relative;
-  }
-
-  .header-top .container {
-    min-height: 56px;
-    padding: 0 16px;
-  }
-
-  .logo h1 {
-    font-size: 1.4rem;
-  }
-
-  /* 隐藏桌面端元素 */
-  .desktop-nav,
-  .desktop-search {
-    display: none;
-  }
-
-  /* 显示移动端元素 */
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-}
-
 @media (max-width: 1200px) {
-  .nav-categories {
+  .header-container {
     gap: 24px;
+    padding: 0 20px;
   }
-
-  .main-category {
-    font-size: 15px;
+  
+  .nav-container {
+    padding: 0 20px;
+  }
+  
+  .search-box {
+    width: 240px;
+  }
+  
+  .nav-row {
+    gap: 10px;
+  }
+  
+  .nav-link {
     padding: 6px 14px;
+    font-size: 13px;
   }
-
-  .sub-category {
+  
+  .nav-link.main-category {
+    font-size: 14px;
+    padding: 7px 18px;
+  }
+  
+  .nav-link.sub-category {
     font-size: 12px;
-    padding: 3px 10px;
+    padding: 5px 12px;
   }
 }
 
 @media (max-width: 992px) {
-  .nav-categories {
-    gap: 20px;
+  .header-container {
+    gap: 16px;
+    padding: 0 16px;
   }
-
-  .main-category {
-    font-size: 14px;
-    padding: 6px 12px;
+  
+  .nav-container {
+    padding: 0 16px;
   }
-
-  .sub-category {
+  
+  .search-box {
+    width: 200px;
+  }
+  
+  .logo-text h1 {
+    font-size: 18px;
+  }
+  
+  .logo-subtitle {
+    display: none;
+  }
+  
+  .nav-row {
+    gap: 8px;
+  }
+  
+  .nav-link {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+  
+  .nav-link.main-category {
+    font-size: 13px;
+    padding: 6px 16px;
+  }
+  
+  .nav-link.sub-category {
     font-size: 11px;
-    padding: 2px 8px;
+    padding: 4px 10px;
   }
-
-  .search-box {
-    max-width: 300px;
-    margin: 0 10px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .header-top .container {
-    gap: 15px;
-  }
-
-  .search-box {
-    max-width: 250px;
+  
+  .nav-icon {
+    font-size: 14px;
   }
 }
 
-/* 活跃路由样式 */
-.router-link-active.main-category {
-  background-color: var(--color-primary);
-  color: white;
+@media (max-width: 768px) {
+  .header-container {
+    height: 50px;
+    gap: 12px;
+  }
+  
+  .desktop-nav,
+  .search-container,
+  .quick-actions .action-btn {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .logo-icon {
+    font-size: 24px;
+  }
+  
+  .logo-text h1 {
+    font-size: 16px;
+  }
+  
+  :root {
+    --header-height: 50px;
+  }
 }
 
-.router-link-active.sub-category {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  background-color: rgba(var(--color-primary-rgb), 0.1);
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 12px;
+  }
+  
+  .mobile-menu {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .mobile-menu.open {
+    right: 0;
+  }
+}
+
+/* 深色主题支持 */
+[data-theme="dark"] .app-header {
+  --primary-gradient: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+[data-theme="dark"] .header-nav {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 滚动条样式 */
+.mobile-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* 深色主题滚动条适配 */
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track {
+  background: var(--color-background-mute);
+}
+
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%);
 }
 </style> 

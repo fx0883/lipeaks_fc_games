@@ -76,6 +76,53 @@
   --animation-float: 3s;
 }
 
+/* 深色主题变量 */
+[data-theme="dark"] {
+  /* 深色主题颜色变量 */
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-light: #8b5cf6;
+  
+  --color-secondary: #14b8a6;
+  --color-secondary-dark: #0d9488;
+  --color-secondary-light: #2dd4bf;
+  
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --color-accent-light: #fbbf24;
+  
+  --color-background: #0f172a;
+  --color-background-soft: #1e293b;
+  --color-background-mute: #334155;
+  
+  --color-border: #475569;
+  --color-border-hover: #64748b;
+  
+  --color-text: #f1f5f9;
+  --color-text-light: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+  
+  /* 深色主题游戏化颜色 */
+  --color-gaming-gold: #ffd700;
+  --color-gaming-silver: #e2e8f0;
+  --color-gaming-bronze: #f97316;
+  --color-gaming-neon: #00ff41;
+  --color-gaming-purple: #a855f7;
+  
+  /* 深色主题阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  --shadow-gaming: 0 0 20px rgba(255, 215, 0, 0.5);
+  --shadow-neon: 0 0 15px var(--color-gaming-neon);
+}
+
 /* 基础样式 */
 *, *::before, *::after {
   box-sizing: border-box;
