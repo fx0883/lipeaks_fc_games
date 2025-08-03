@@ -149,101 +149,15 @@
         }
         
         function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
-            const isPortrait = orientation === 'portrait';
-            
+            // 使用EmulatorJS标准街机配置（测试文件与主项目保持一致）
             return [
-                // 摇杆 (左侧，与右侧按钮对称)
-                {
-                    type: "dpad",
-                    location: "left",
-                    left: isPortrait ? "8%" : "40%",  // 横屏时向右移动（30% -> 40%）
-                    top: isPortrait ? "68%" : "58%", // 与右侧按钮中心对齐
-                    inputValues: [4, 5, 6, 7], // 上下左右
-                    size: isPortrait ? 110 : 100
-                },
-                
-                // 右侧4按钮布局 (十字形，与左侧摇杆对称)
-                // 上按钮: 1
-                {
-                    type: "button",
-                    text: "1",
-                    id: "btn1",
-                    location: "right",
-                    left: isPortrait ? 75 : 37,  // 横屏时向左移动（52 -> 37，减少15）
-                    top: isPortrait ? 50 : 40,
-                    bold: true,
-                    input_value: 0, // 按钮1
-                    size: isPortrait ? 45 : 42
-                },
-                
-                // 左按钮: 4
-                {
-                    type: "button", 
-                    text: "4",
-                    id: "btn4",
-                    location: "right",
-                    left: isPortrait ? 58 : 20,  // 横屏时向左移动（35 -> 20，减少15）
-                    top: isPortrait ? 68 : 58, // 与摇杆中心对齐
-                    bold: true,
-                    input_value: 9, // 按钮4
-                    size: isPortrait ? 45 : 42
-                },
-                
-                // 右按钮: 2
-                {
-                    type: "button", 
-                    text: "2",
-                    id: "btn2",
-                    location: "right",
-                    left: isPortrait ? 92 : 54,  // 横屏时向左移动（69 -> 54，减少15）
-                    top: isPortrait ? 68 : 58, // 与摇杆中心对齐
-                    bold: true,
-                    input_value: 8, // 按钮2
-                    size: isPortrait ? 45 : 42
-                },
-                
-                // 下按钮: 3
-                {
-                    type: "button",
-                    text: "3",
-                    id: "btn3",
-                    location: "right",
-                    left: isPortrait ? 75 : 37,  // 横屏时向左移动（52 -> 37，减少15）
-                    top: isPortrait ? 86 : 76,
-                    bold: true,
-                    input_value: 1, // 按钮3
-                    size: isPortrait ? 45 : 42
-                },
-                
-                // 系统按钮 (圆角长方形)
-                {
-                    type: "button",
-                    text: "COIN",
-                    id: "coin",
-                    location: "center",
-                    left: isPortrait ? 25 : 30,
-                    top: isPortrait ? 20 : 15,
-                    bold: false,
-                    input_value: 2, // SELECT键作为投币
-                    size: isPortrait ? 35 : 30,
-                    shape: "rounded-rect", // 圆角长方形
-                    width: isPortrait ? 60 : 55,
-                    height: isPortrait ? 25 : 20
-                },
-                {
-                    type: "button",
-                    text: "START",
-                    id: "start",
-                    location: "center",
-                    left: isPortrait ? 75 : 70,
-                    top: isPortrait ? 20 : 15,
-                    bold: false,
-                    input_value: 3,
-                    size: isPortrait ? 35 : 30,
-                    shape: "rounded-rect", // 圆角长方形
-                    width: isPortrait ? 60 : 55,
-                    height: isPortrait ? 25 : 20
-                }
+                { "type": "button", "text": "Y", "id": "y", "location": "right", "left": 40, "bold": true, "input_value": 9 },
+                { "type": "button", "text": "X", "id": "x", "location": "right", "top": 40, "bold": true, "input_value": 1 },
+                { "type": "button", "text": "B", "id": "b", "location": "right", "left": 81, "top": 40, "bold": true, "input_value": 8 },
+                { "type": "button", "text": "A", "id": "a", "location": "right", "left": 40, "top": 80, "bold": true, "input_value": 0 },
+                { "type": "zone", "id": "dpad", "location": "left", "left": "50%", "top": "50%", "joystickInput": false, "inputValues": [4, 5, 6, 7] },
+                { "type": "button", "text": "Start", "id": "start", "location": "center", "left": 60, "fontSize": 15, "block": true, "input_value": 3 },
+                { "type": "button", "text": "Select", "id": "select", "location": "center", "left": -5, "fontSize": 15, "block": true, "input_value": 2 }
             ];
         }
         
