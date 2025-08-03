@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emulatorjs/core-fbalpha2012_cps2": "^4.2.3",
     "pinia": "^3.0.3",
     "vue": "^3.5.17",
     "vue-i18n": "^9.9.1",
