@@ -52,7 +52,7 @@
               >
               <button @click="handleSearch" class="search-btn" v-if="searchQuery">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
             </div>
@@ -559,6 +559,15 @@ onMounted(() => {
   color: var(--color-text-muted);
 }
 
+/* 暗色主题下搜索框获得焦点时的文字颜色 */
+[data-theme="dark"] .search-box.focused .search-input {
+  color: #1f2937; /* 深色文字 */
+}
+
+[data-theme="dark"] .search-box.focused .search-input::placeholder {
+  color: #6b7280; /* 深色占位符 */
+}
+
 .search-btn {
   background: none;
   border: none;
@@ -580,6 +589,16 @@ onMounted(() => {
 
 [data-theme="light"] .search-btn:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色主题下搜索框获得焦点时的按钮颜色 */
+[data-theme="dark"] .search-box.focused .search-btn {
+  color: #374151; /* 深色按钮 */
+}
+
+[data-theme="dark"] .search-box.focused .search-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #1f2937; /* 更深的颜色 */
 }
 
 /* 快捷操作 */
