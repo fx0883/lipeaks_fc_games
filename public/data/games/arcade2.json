@@ -1,0 +1,1322 @@
+{
+  "total_games": 188,
+  "generated_time": "2024-12-19",
+  "games": [
+    {
+      "rom_name": "1941",
+      "english_name": "1941 - Counter Attack (Japan)",
+      "chinese_name": "1941 - 反击战(日版)",
+      "rom_path": "/roms/arcade/cps1/1941.zip",
+      "cover_path": "/roms/images/arcade/1941.bmp"
+    },
+    {
+      "rom_name": "19xx",
+      "english_name": "19XX: The War Against Destiny (Brazil 951218)",
+      "chinese_name": "19XX: 命运否决战(巴西版 951218)",
+      "rom_path": "/roms/arcade/cps2/19xx.zip",
+      "cover_path": "/roms/images/arcade/19XX.bmp"
+    },
+    {
+      "rom_name": "2020bb",
+      "english_name": "2020 Super Baseball",
+      "chinese_name": "2020 超级棒球",
+      "rom_path": "/roms/arcade/neogeo/2020bb.zip",
+      "cover_path": "/roms/images/arcade/2020bb.bmp"
+    },
+    {
+      "rom_name": "3countb",
+      "english_name": "3 Count Bout",
+      "chinese_name": "火线摔跤",
+      "rom_path": "/roms/arcade/neogeo/3countb.zip",
+      "cover_path": "/roms/images/arcade/3countb.bmp"
+    },
+    {
+      "rom_name": "3wonders",
+      "english_name": "Wonder 3 (Japan 910520)",
+      "chinese_name": "三个奇迹(日版 910520)",
+      "rom_path": "/roms/arcade/cps1/3wonders.zip",
+      "cover_path": "/roms/images/arcade/3WONDERS.bmp"
+    },
+    {
+      "rom_name": "alpham2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/alpham2.zip",
+      "cover_path": "/roms/images/arcade/Alpham2.bmp"
+    },
+    {
+      "rom_name": "androdun",
+      "english_name": "Andro Dunos",
+      "chinese_name": "勇者之击",
+      "rom_path": "/roms/arcade/neogeo/androdun.zip",
+      "cover_path": "/roms/images/arcade/Androdun.bmp"
+    },
+    {
+      "rom_name": "aodk",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/aodk.zip",
+      "cover_path": "/roms/images/arcade/Aodk.bmp"
+    },
+    {
+      "rom_name": "aof3",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/aof3.zip",
+      "cover_path": "/roms/images/arcade/Aof3.bmp"
+    },
+    {
+      "rom_name": "armwar",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/armwar.zip",
+      "cover_path": "/roms/images/arcade/ARMWAR.bmp"
+    },
+    {
+      "rom_name": "avsp",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/avsp.zip",
+      "cover_path": "/roms/images/arcade/AVSP.bmp"
+    },
+    {
+      "rom_name": "bakatono",
+      "english_name": "Bakatonosama Mahjong Manyuki",
+      "chinese_name": "傻瓜殿下麻雀漫游记",
+      "rom_path": "/roms/arcade/neogeo/bakatono.zip",
+      "cover_path": "/roms/images/arcade/Bakatono.bmp"
+    },
+    {
+      "rom_name": "bangbead",
+      "english_name": "Bang Bead (decrypted C)",
+      "chinese_name": "碰碰球(C 解密)",
+      "rom_path": "/roms/arcade/neogeo/bangbead.zip",
+      "cover_path": "/roms/images/arcade/Bangbead.bmp"
+    },
+    {
+      "rom_name": "batcir",
+      "english_name": "",
+      "chinese_name": "Battle Circuit (Euro 970319)",
+      "rom_path": "/roms/arcade/cps1/batcir.zip",
+      "cover_path": "/roms/images/arcade/Batcir.bmp"
+    },
+    {
+      "rom_name": "batcirj",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps1/batcirj.zip",
+      "cover_path": "/roms/images/arcade/BATCIRJ.bmp"
+    },
+    {
+      "rom_name": "bjourney",
+      "english_name": "Blue's Journey",
+      "chinese_name": "Blue's Journey",
+      "rom_path": "/roms/arcade/neogeo/bjourney.zip",
+      "cover_path": "/roms/images/arcade/Bjourney.bmp"
+    },
+    {
+      "rom_name": "blazstar",
+      "english_name": "Blazing Star",
+      "chinese_name": "闪亮之星",
+      "rom_path": "/roms/arcade/neogeo/blazstar.zip",
+      "cover_path": "/roms/images/arcade/Blazstar.bmp"
+    },
+    {
+      "rom_name": "breakers",
+      "english_name": "Breakers Revenge",
+      "chinese_name": "爆烈人复仇",
+      "rom_path": "/roms/arcade/neogeo/breakers.zip",
+      "cover_path": "/roms/images/arcade/Breakers.bmp"
+    },
+    {
+      "rom_name": "bstars",
+      "english_name": "Pulstar",
+      "chinese_name": "惑星传",
+      "rom_path": "/roms/arcade/neogeo/bstars.zip",
+      "cover_path": "/roms/images/arcade/Bstars.bmp"
+    },
+    {
+      "rom_name": "bstars2",
+      "english_name": "Baseball Stars 2",
+      "chinese_name": "棒球之星 II",
+      "rom_path": "/roms/arcade/neogeo/bstars2.zip",
+      "cover_path": "/roms/images/arcade/Bstars2.bmp"
+    },
+    {
+      "rom_name": "burningf",
+      "english_name": "Burning Fight (alternate set)",
+      "chinese_name": "热血快打(替换版)",
+      "rom_path": "/roms/arcade/neogeo/burningf.zip",
+      "cover_path": "/roms/images/arcade/Burningf.bmp"
+    },
+    {
+      "rom_name": "captcomm",
+      "english_name": "Captain Commando (Japan 911202)",
+      "chinese_name": "突击队长(日版 911202)",
+      "rom_path": "/roms/arcade/cps1/captcomm.zip",
+      "cover_path": "/roms/images/arcade/CAPTCOMM.bmp"
+    },
+    {
+      "rom_name": "cawing",
+      "english_name": "Giga Wing (Japan 990223)",
+      "chinese_name": "千兆之翼(日版 990223)",
+      "rom_path": "/roms/arcade/cps1/cawing.zip",
+      "cover_path": "/roms/images/arcade/CAWING.bmp"
+    },
+    {
+      "rom_name": "crsword",
+      "english_name": "Magic Sword (Japan 900623)",
+      "chinese_name": "魔法之剑(日版 900623)",
+      "rom_path": "/roms/arcade/neogeo/crsword.zip",
+      "cover_path": "/roms/images/arcade/Crsword.bmp"
+    },
+    {
+      "rom_name": "ctomaday",
+      "english_name": "Captain Tomaday",
+      "chinese_name": "番茄超人",
+      "rom_path": "/roms/arcade/neogeo/ctomaday.zip",
+      "cover_path": "/roms/images/arcade/Ctomaday.bmp"
+    },
+    {
+      "rom_name": "cyberlip",
+      "english_name": "Cyber-Lip",
+      "chinese_name": "战斗边缘",
+      "rom_path": "/roms/arcade/neogeo/cyberlip.zip",
+      "cover_path": "/roms/images/arcade/Cyberlip.bmp"
+    },
+    {
+      "rom_name": "cybots",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/cybots.zip",
+      "cover_path": "/roms/images/arcade/Cybots.bmp"
+    },
+    {
+      "rom_name": "ddsom",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/ddsom.zip",
+      "cover_path": "/roms/images/arcade/DDSOM.bmp"
+    },
+    {
+      "rom_name": "ddtod",
+      "english_name": "",
+      "chinese_name": "龙与地下城:毁灭之塔(欧洲 940412)",
+      "rom_path": "/roms/arcade/cps2/ddtod.zip",
+      "cover_path": "/roms/images/arcade/DDTOD.bmp"
+    },
+    {
+      "rom_name": "diggerma",
+      "english_name": "Diggerman",
+      "chinese_name": "挖地先生",
+      "rom_path": "/roms/arcade/neogeo/diggerma.zip",
+      "cover_path": "/roms/images/arcade/Diggerma.bmp"
+    },
+    {
+      "rom_name": "dino",
+      "english_name": "Cadillacs and Dinosaurs (US 930201)",
+      "chinese_name": "恐龙世纪(美版 930201)",
+      "rom_path": "/roms/arcade/cps1/dino.zip",
+      "cover_path": "/roms/images/arcade/DINO.bmp"
+    },
+    {
+      "rom_name": "doubledr",
+      "english_name": "Double Dragon",
+      "chinese_name": "双截龙格斗",
+      "rom_path": "/roms/arcade/neogeo/doubledr.zip",
+      "cover_path": "/roms/images/arcade/Doubledr.bmp"
+    },
+    {
+      "rom_name": "dstlk",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/dstlk.zip",
+      "cover_path": "/roms/images/arcade/DSTLK.bmp"
+    },
+    {
+      "rom_name": "dynwar",
+      "english_name": "Dynasty Wars (World)",
+      "chinese_name": "吞食天地(国际版)",
+      "rom_path": "/roms/arcade/cps1/dynwar.zip",
+      "cover_path": "/roms/images/arcade/Dynwar.bmp"
+    },
+    {
+      "rom_name": "ecofghtr",
+      "english_name": "Eco Fighters (Asia 931203)",
+      "chinese_name": "扭转战斗机(亚洲版 931203)",
+      "rom_path": "/roms/arcade/cps2/ecofghtr.zip",
+      "cover_path": "/roms/images/arcade/ECOFGHTR.bmp"
+    },
+    {
+      "rom_name": "eightman",
+      "english_name": "Eight Man",
+      "chinese_name": "八超人",
+      "rom_path": "/roms/arcade/neogeo/eightman.zip",
+      "cover_path": "/roms/images/arcade/Eightman.bmp"
+    },
+    {
+      "rom_name": "fatfursp",
+      "english_name": "Fatal Fury Special (set 2)",
+      "chinese_name": "饿狼传说 特别版(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/fatfursp.zip",
+      "cover_path": "/roms/images/arcade/Fatfursp.bmp"
+    },
+    {
+      "rom_name": "fatfury3",
+      "english_name": "Fatal Fury 2",
+      "chinese_name": "俄狼传说III:通向最终胜利的道路",
+      "rom_path": "/roms/arcade/neogeo/fatfury3.zip",
+      "cover_path": "/roms/images/arcade/Fatfury3.bmp"
+    },
+    {
+      "rom_name": "fbfrenzy",
+      "english_name": "Football Frenzy",
+      "chinese_name": "疯狂美式足球",
+      "rom_path": "/roms/arcade/neogeo/fbfrenzy.zip",
+      "cover_path": "/roms/images/arcade/Fbfrenzy.bmp"
+    },
+    {
+      "rom_name": "ffight",
+      "english_name": "Final Fight (Japan 900305)",
+      "chinese_name": "快打旋风(世界)",
+      "rom_path": "/roms/arcade/cps1/ffight.zip",
+      "cover_path": "/roms/images/arcade/FFIGHT.bmp"
+    },
+    {
+      "rom_name": "fightfev",
+      "english_name": "Fight Fever (alternate set)",
+      "chinese_name": "狂热战斗(替换版)",
+      "rom_path": "/roms/arcade/neogeo/fightfev.zip",
+      "cover_path": "/roms/images/arcade/Fightfev.bmp"
+    },
+    {
+      "rom_name": "flipshot",
+      "english_name": "Battle Flip Shot",
+      "chinese_name": "盾牌大战",
+      "rom_path": "/roms/arcade/neogeo/flipshot.zip",
+      "cover_path": "/roms/images/arcade/Flipshot.bmp"
+    },
+    {
+      "rom_name": "forgottn",
+      "english_name": "Forgotten Worlds (US)",
+      "chinese_name": "失落的世界(美版)",
+      "rom_path": "/roms/arcade/cps1/forgottn.zip",
+      "cover_path": "/roms/images/arcade/FORGOTTN.bmp"
+    },
+    {
+      "rom_name": "galaxyfg",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/galaxyfg.zip",
+      "cover_path": "/roms/images/arcade/Galaxyfg.bmp"
+    },
+    {
+      "rom_name": "ganryu",
+      "english_name": "Ganryu (decrypted C)",
+      "chinese_name": "五藏严流记(C 解密)",
+      "rom_path": "/roms/arcade/neogeo/ganryu.zip",
+      "cover_path": "/roms/images/arcade/Ganryu.bmp"
+    },
+    {
+      "rom_name": "garou",
+      "english_name": "Garou: Mark of the Wolves (bootleg)",
+      "chinese_name": "Garou: Mark of the Wolves",
+      "rom_path": "/roms/arcade/neogeo/garou.zip",
+      "cover_path": "/roms/images/arcade/Garou.bmp"
+    },
+    {
+      "rom_name": "ghostlop",
+      "english_name": "Ghostlop (prototype)",
+      "chinese_name": "鬼精灵投球手(工程版)",
+      "rom_path": "/roms/arcade/neogeo/ghostlop.zip",
+      "cover_path": "/roms/images/arcade/Ghostlop.bmp"
+    },
+    {
+      "rom_name": "ghouls",
+      "english_name": "Ghouls'n Ghosts (US)",
+      "chinese_name": "大魔界村(美版)",
+      "rom_path": "/roms/arcade/cps1/ghouls.zip",
+      "cover_path": "/roms/images/arcade/GHOULS.bmp"
+    },
+    {
+      "rom_name": "goalx3",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/goalx3.zip",
+      "cover_path": "/roms/images/arcade/Goalx3.bmp"
+    },
+    {
+      "rom_name": "gowcaizr",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/gowcaizr.zip",
+      "cover_path": "/roms/images/arcade/Gowcaizr.bmp"
+    },
+    {
+      "rom_name": "gpilots",
+      "english_name": "Ghost Pilots",
+      "chinese_name": "魔鬼飞行员",
+      "rom_path": "/roms/arcade/neogeo/gpilots.zip",
+      "cover_path": "/roms/images/arcade/Gpilots.bmp"
+    },
+    {
+      "rom_name": "irrmaze",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/irrmaze.zip",
+      "cover_path": "/roms/images/arcade/Irrmaze.bmp"
+    },
+    {
+      "rom_name": "janshin",
+      "english_name": "Jyanshin Densetsu: Quest of Jongmaster",
+      "chinese_name": "雀神传说",
+      "rom_path": "/roms/arcade/neogeo/janshin.zip",
+      "cover_path": "/roms/images/arcade/Janshin.bmp"
+    },
+    {
+      "rom_name": "jockeygp",
+      "english_name": "Jockey Grandprix",
+      "chinese_name": "赌马",
+      "rom_path": "/roms/arcade/neogeo/jockeygp.zip",
+      "cover_path": "/roms/images/arcade/Jockeygp.bmp"
+    },
+    {
+      "rom_name": "joyjoy",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/joyjoy.zip",
+      "cover_path": "/roms/images/arcade/Joyjoy.bmp"
+    },
+    {
+      "rom_name": "karnovr",
+      "english_name": "Karnov's Revenge",
+      "chinese_name": "斗士的历史",
+      "rom_path": "/roms/arcade/neogeo/karnovr.zip",
+      "cover_path": "/roms/images/arcade/Karnovr.bmp"
+    },
+    {
+      "rom_name": "kizuna",
+      "english_name": "Kizuna Encounter: Super Tag Battle",
+      "chinese_name": "风云默示录: 超级组队战",
+      "rom_path": "/roms/arcade/neogeo/kizuna.zip",
+      "cover_path": "/roms/images/arcade/Kizuna.bmp"
+    },
+    {
+      "rom_name": "knights",
+      "english_name": "Knights of the Round (Hack)",
+      "chinese_name": "圆桌骑士(世界)",
+      "rom_path": "/roms/arcade/cps1/knights.zip",
+      "cover_path": "/roms/images/arcade/KNIGHTS.bmp"
+    },
+    {
+      "rom_name": "kod",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps1/kod.zip",
+      "cover_path": "/roms/images/arcade/KOD.bmp"
+    },
+    {
+      "rom_name": "kof2000",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof2000.zip",
+      "cover_path": "/roms/images/arcade/Kof2000.bmp"
+    },
+    {
+      "rom_name": "kof94",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof94.zip",
+      "cover_path": "/roms/images/arcade/Kof94.bmp"
+    },
+    {
+      "rom_name": "kof95",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof95.zip",
+      "cover_path": "/roms/images/arcade/Kof95.bmp"
+    },
+    {
+      "rom_name": "kof96",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof96.zip",
+      "cover_path": "/roms/images/arcade/Kof96.bmp"
+    },
+    {
+      "rom_name": "kof97",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof97.zip",
+      "cover_path": "/roms/images/arcade/Kof97.bmp"
+    },
+    {
+      "rom_name": "kof98",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof98.zip",
+      "cover_path": "/roms/images/arcade/Kof98.bmp"
+    },
+    {
+      "rom_name": "kof99",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kof99.zip",
+      "cover_path": "/roms/images/arcade/Kof99.bmp"
+    },
+    {
+      "rom_name": "kotm",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kotm.zip",
+      "cover_path": "/roms/images/arcade/Kotm.bmp"
+    },
+    {
+      "rom_name": "kotm2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/kotm2.zip",
+      "cover_path": "/roms/images/arcade/Kotm2.bmp"
+    },
+    {
+      "rom_name": "lastblad",
+      "english_name": "The Last Blade (set 2)",
+      "chinese_name": "月华剑士(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/lastblad.zip",
+      "cover_path": "/roms/images/arcade/Lastblad.bmp"
+    },
+    {
+      "rom_name": "lastbld2",
+      "english_name": "The Last Blade 2",
+      "chinese_name": "月华剑士 2",
+      "rom_path": "/roms/arcade/neogeo/lastbld2.zip",
+      "cover_path": "/roms/images/arcade/Lastbld2.bmp"
+    },
+    {
+      "rom_name": "lbowling",
+      "english_name": "League Bowling",
+      "chinese_name": "联盟保龄球",
+      "rom_path": "/roms/arcade/neogeo/lbowling.zip",
+      "cover_path": "/roms/images/arcade/Lbowling.bmp"
+    },
+    {
+      "rom_name": "legendos",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/legendos.zip",
+      "cover_path": "/roms/images/arcade/Legendos.bmp"
+    },
+    {
+      "rom_name": "lresort",
+      "english_name": "Last Resort",
+      "chinese_name": "终极手段",
+      "rom_path": "/roms/arcade/neogeo/lresort.zip",
+      "cover_path": "/roms/images/arcade/Lresort.bmp"
+    },
+    {
+      "rom_name": "magdrop2",
+      "english_name": "Magical Drop 2",
+      "chinese_name": "魔法气泡 2",
+      "rom_path": "/roms/arcade/neogeo/magdrop2.zip",
+      "cover_path": "/roms/images/arcade/Magdrop2.bmp"
+    },
+    {
+      "rom_name": "magdrop3",
+      "english_name": "Magical Drop 3",
+      "chinese_name": "魔法气泡 3",
+      "rom_path": "/roms/arcade/neogeo/magdrop3.zip",
+      "cover_path": "/roms/images/arcade/Magdrop3.bmp"
+    },
+    {
+      "rom_name": "maglord",
+      "english_name": "Magician Lord (alternate set)",
+      "chinese_name": "幻魔大战(替换版)",
+      "rom_path": "/roms/arcade/neogeo/maglord.zip",
+      "cover_path": "/roms/images/arcade/Maglord.bmp"
+    },
+    {
+      "rom_name": "mahretsu",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mahretsu.zip",
+      "cover_path": "/roms/images/arcade/Mahretsu.bmp"
+    },
+    {
+      "rom_name": "megaman",
+      "english_name": "Eight Man",
+      "chinese_name": "八超人",
+      "rom_path": "/roms/arcade/cps1/megaman.zip",
+      "cover_path": "/roms/images/arcade/MEGAMAN.bmp"
+    },
+    {
+      "rom_name": "megaman2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/megaman2.zip",
+      "cover_path": "/roms/images/arcade/MEGAMAN2.bmp"
+    },
+    {
+      "rom_name": "mercs",
+      "english_name": "Mercs (US 900608)",
+      "chinese_name": "战场之狼 2(美版 900608)",
+      "rom_path": "/roms/arcade/cps1/mercs.zip",
+      "cover_path": "/roms/images/arcade/MERCS.bmp"
+    },
+    {
+      "rom_name": "miexchng",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/miexchng.zip",
+      "cover_path": "/roms/images/arcade/Miexchng.bmp"
+    },
+    {
+      "rom_name": "minasan",
+      "english_name": "Minasan no Okagesama desu!",
+      "chinese_name": "麻雀大富翁",
+      "rom_path": "/roms/arcade/neogeo/minasan.zip",
+      "cover_path": "/roms/images/arcade/Minasan.bmp"
+    },
+    {
+      "rom_name": "mosyougi",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mosyougi.zip",
+      "cover_path": "/roms/images/arcade/Mosyougi.bmp"
+    },
+    {
+      "rom_name": "msh",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/msh.zip",
+      "cover_path": "/roms/images/arcade/MSH.bmp"
+    },
+    {
+      "rom_name": "mshvsf",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/mshvsf.zip",
+      "cover_path": "/roms/images/arcade/MSHVSF.bmp"
+    },
+    {
+      "rom_name": "mslug",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mslug.zip",
+      "cover_path": "/roms/images/arcade/Mslug.bmp"
+    },
+    {
+      "rom_name": "mslug2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mslug2.zip",
+      "cover_path": "/roms/images/arcade/Mslug2.bmp"
+    },
+    {
+      "rom_name": "mslug3",
+      "english_name": "Metal Slug 3 (non encrypted P, decrypted C)",
+      "chinese_name": "合金弹头 3(P 未加密,C 解密)",
+      "rom_path": "/roms/arcade/neogeo/mslug3.zip",
+      "cover_path": "/roms/images/arcade/Mslug3.bmp"
+    },
+    {
+      "rom_name": "mslugx",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mslugx.zip",
+      "cover_path": "/roms/images/arcade/Mslugx.bmp"
+    },
+    {
+      "rom_name": "msword",
+      "english_name": "Magic Sword (Japan 900623)",
+      "chinese_name": "魔法之剑(日版 900623)",
+      "rom_path": "/roms/arcade/cps1/msword.zip",
+      "cover_path": "/roms/images/arcade/MSWORD.bmp"
+    },
+    {
+      "rom_name": "mtwins",
+      "english_name": "Mega Twins (World 900619)",
+      "chinese_name": "双麟儿(国际版 900619)",
+      "rom_path": "/roms/arcade/cps1/mtwins.zip",
+      "cover_path": "/roms/images/arcade/Mtwins.bmp"
+    },
+    {
+      "rom_name": "mutnat",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/mutnat.zip",
+      "cover_path": "/roms/images/arcade/Mutnat.bmp"
+    },
+    {
+      "rom_name": "mvsc",
+      "english_name": "",
+      "chinese_name": "超级漫画英雄对卡普空:超级英雄的碰撞(美版 980123)",
+      "rom_path": "/roms/arcade/cps2/mvsc.zip",
+      "cover_path": "/roms/images/arcade/MVSC.bmp"
+    },
+    {
+      "rom_name": "nam1975",
+      "english_name": "Super Street Fighter II: The Tournament Battle (Japan 930911)",
+      "chinese_name": "超级街头霸王 II : 锦标赛(日版 930911)",
+      "rom_path": "/roms/arcade/neogeo/nam1975.zip",
+      "cover_path": "/roms/images/arcade/Nam1975.bmp"
+    },
+    {
+      "rom_name": "ncombat",
+      "english_name": "Ninja Combat (set 2)",
+      "chinese_name": "忍者大战(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/ncombat.zip",
+      "cover_path": "/roms/images/arcade/Ncombat.bmp"
+    },
+    {
+      "rom_name": "ncommand",
+      "english_name": "Ninja Commando",
+      "chinese_name": "忍者指令",
+      "rom_path": "/roms/arcade/neogeo/ncommand.zip",
+      "cover_path": "/roms/images/arcade/Ncommand.bmp"
+    },
+    {
+      "rom_name": "nemo",
+      "english_name": "Nemo (Japan 901120)",
+      "chinese_name": "梦幻冒险(日版 901120)",
+      "rom_path": "/roms/arcade/cps1/nemo.zip",
+      "cover_path": "/roms/images/arcade/NEMO.bmp"
+    },
+    {
+      "rom_name": "neobombe",
+      "english_name": "Neo Bomberman",
+      "chinese_name": "炸弹人机皇版",
+      "rom_path": "/roms/arcade/neogeo/neobombe.zip",
+      "cover_path": "/roms/images/arcade/Neobombe.bmp"
+    },
+    {
+      "rom_name": "neocup98",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/neocup98.zip",
+      "cover_path": "/roms/images/arcade/Neocup98.bmp"
+    },
+    {
+      "rom_name": "neodrift",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/neodrift.zip",
+      "cover_path": "/roms/images/arcade/Neodrift.bmp"
+    },
+    {
+      "rom_name": "neogeo",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/neogeo.zip",
+      "cover_path": ""
+    },
+    {
+      "rom_name": "neomrdo",
+      "english_name": "Neo Mr. Do!",
+      "chinese_name": "嘟!先生",
+      "rom_path": "/roms/arcade/neogeo/neomrdo.zip",
+      "cover_path": "/roms/images/arcade/Neomrdo.bmp"
+    },
+    {
+      "rom_name": "neonopon",
+      "english_name": "Neo No Panepon",
+      "chinese_name": "NEO 智力方块",
+      "rom_path": "/roms/arcade/neogeo/neonopon.zip",
+      "cover_path": "/roms/images/arcade/Neonopon.bmp"
+    },
+    {
+      "rom_name": "neopong",
+      "english_name": "Neo Pong 1.1",
+      "chinese_name": "NEO 弹球 1.1",
+      "rom_path": "/roms/arcade/neogeo/neopong.zip",
+      "cover_path": "/roms/images/arcade/Neopong.bmp"
+    },
+    {
+      "rom_name": "ninjamas",
+      "english_name": "Ninja Combat (set 2)",
+      "chinese_name": "忍者大战(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/ninjamas.zip",
+      "cover_path": "/roms/images/arcade/Ninjamas.bmp"
+    },
+    {
+      "rom_name": "nitd",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/nitd.zip",
+      "cover_path": "/roms/images/arcade/Nitd.bmp"
+    },
+    {
+      "rom_name": "nwarr",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/nwarr.zip",
+      "cover_path": "/roms/images/arcade/NWARR.bmp"
+    },
+    {
+      "rom_name": "overtop",
+      "english_name": "Over Top",
+      "chinese_name": "跨越巅峰",
+      "rom_path": "/roms/arcade/neogeo/overtop.zip",
+      "cover_path": "/roms/images/arcade/Overtop.bmp"
+    },
+    {
+      "rom_name": "pang3",
+      "english_name": "Pang! 3 (Japan 950511)",
+      "chinese_name": "魔法气泡3(日版 950511)",
+      "rom_path": "/roms/arcade/cps1/pang3.zip",
+      "cover_path": "/roms/images/arcade/PANG3.bmp"
+    },
+    {
+      "rom_name": "panicbom",
+      "english_name": "Panic Bomber",
+      "chinese_name": "炸弹人方块",
+      "rom_path": "/roms/arcade/neogeo/panicbom.zip",
+      "cover_path": "/roms/images/arcade/Panicbom.bmp"
+    },
+    {
+      "rom_name": "pbobbl2n",
+      "english_name": "Puzzle Bobble 2",
+      "chinese_name": "泡泡龙 2",
+      "rom_path": "/roms/arcade/neogeo/pbobbl2n.zip",
+      "cover_path": "/roms/images/arcade/Pbobbl2n.bmp"
+    },
+    {
+      "rom_name": "pbobblen",
+      "english_name": "Puzzle Bobble (set 2)",
+      "chinese_name": "泡泡龙(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/pbobblen.zip",
+      "cover_path": "/roms/images/arcade/Pbobblen.bmp"
+    },
+    {
+      "rom_name": "pgoal",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/pgoal.zip",
+      "cover_path": "/roms/images/arcade/Pgoal.bmp"
+    },
+    {
+      "rom_name": "pnickj",
+      "english_name": "Pnickies (Japan 940608)",
+      "chinese_name": "魔法方块(日版 940608)",
+      "rom_path": "/roms/arcade/cps1/pnickj.zip",
+      "cover_path": "/roms/images/arcade/PNICKJ.bmp"
+    },
+    {
+      "rom_name": "pnyaa",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/pnyaa.zip",
+      "cover_path": "/roms/images/arcade/Pnyaa.bmp"
+    },
+    {
+      "rom_name": "popbounc",
+      "english_name": "Pop 'n Bounce",
+      "chinese_name": "动物方块",
+      "rom_path": "/roms/arcade/neogeo/popbounc.zip",
+      "cover_path": "/roms/images/arcade/Popbounc.bmp"
+    },
+    {
+      "rom_name": "preisle2",
+      "english_name": "Prehistoric Isle 2 (decrypted C)",
+      "chinese_name": "原始岛 2(C 解密)",
+      "rom_path": "/roms/arcade/neogeo/preisle2.zip",
+      "cover_path": "/roms/images/arcade/Preisle2.bmp"
+    },
+    {
+      "rom_name": "pspikes2",
+      "english_name": "Power Spikes 2",
+      "chinese_name": "超级排球 2",
+      "rom_path": "/roms/arcade/neogeo/pspikes2.zip",
+      "cover_path": "/roms/images/arcade/Pspikes2.bmp"
+    },
+    {
+      "rom_name": "pulstar",
+      "english_name": "Pulstar",
+      "chinese_name": "惑星传",
+      "rom_path": "/roms/arcade/neogeo/pulstar.zip",
+      "cover_path": "/roms/images/arcade/Pulstar.bmp"
+    },
+    {
+      "rom_name": "punisher",
+      "english_name": "The Punisher (Japan 930422)",
+      "chinese_name": "惩罚者(日版 930422)",
+      "rom_path": "/roms/arcade/cps1/punisher.zip",
+      "cover_path": "/roms/images/arcade/PUNISHER.bmp"
+    },
+    {
+      "rom_name": "puzzledp",
+      "english_name": "Puzzled",
+      "chinese_name": "PUZZLED 方块",
+      "rom_path": "/roms/arcade/neogeo/puzzledp.zip",
+      "cover_path": "/roms/images/arcade/Puzzledp.bmp"
+    },
+    {
+      "rom_name": "qndream",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/qndream.zip",
+      "cover_path": "/roms/images/arcade/QNDREAM.bmp"
+    },
+    {
+      "rom_name": "ragnagrd",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/ragnagrd.zip",
+      "cover_path": "/roms/images/arcade/Ragnagrd.bmp"
+    },
+    {
+      "rom_name": "rbff1",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/rbff1.zip",
+      "cover_path": "/roms/images/arcade/Rbff1.bmp"
+    },
+    {
+      "rom_name": "rbff2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/rbff2.zip",
+      "cover_path": "/roms/images/arcade/Rbff2.bmp"
+    },
+    {
+      "rom_name": "rbffspec",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/rbffspec.zip",
+      "cover_path": "/roms/images/arcade/Rbffspec.bmp"
+    },
+    {
+      "rom_name": "ridhero",
+      "english_name": "Riding Hero (alternate set) (Misses rasters)",
+      "chinese_name": "风速英雄(缺少光栅效果 替换版)",
+      "rom_path": "/roms/arcade/neogeo/ridhero.zip",
+      "cover_path": "/roms/images/arcade/Ridhero.bmp"
+    },
+    {
+      "rom_name": "ringdest",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/ringdest.zip",
+      "cover_path": "/roms/images/arcade/Ringdest.bmp"
+    },
+    {
+      "rom_name": "roboarmy",
+      "english_name": "Robo Army (alternate set)",
+      "chinese_name": "机甲神兵(替换版)",
+      "rom_path": "/roms/arcade/neogeo/roboarmy.zip",
+      "cover_path": "/roms/images/arcade/Roboarmy.bmp"
+    },
+    {
+      "rom_name": "s1945p",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/s1945p.zip",
+      "cover_path": "/roms/images/arcade/S1945p.bmp"
+    },
+    {
+      "rom_name": "samsho",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/samsho.zip",
+      "cover_path": "/roms/images/arcade/Samsho.bmp"
+    },
+    {
+      "rom_name": "samsho2",
+      "english_name": "",
+      "chinese_name": "Samurai Shodown II",
+      "rom_path": "/roms/arcade/neogeo/samsho2.zip",
+      "cover_path": "/roms/images/arcade/Samsho2.bmp"
+    },
+    {
+      "rom_name": "samsho3",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/samsho3.zip",
+      "cover_path": "/roms/images/arcade/Samsho3.bmp"
+    },
+    {
+      "rom_name": "samsho4",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/samsho4.zip",
+      "cover_path": "/roms/images/arcade/Samsho4.bmp"
+    },
+    {
+      "rom_name": "savagere",
+      "english_name": "Savage Reign",
+      "chinese_name": "Savage Reign",
+      "rom_path": "/roms/arcade/neogeo/savagere.zip",
+      "cover_path": "/roms/images/arcade/Savagere.bmp"
+    },
+    {
+      "rom_name": "sdodgeb",
+      "english_name": "Super Dodge Ball",
+      "chinese_name": "国夫热血斗球传说",
+      "rom_path": "/roms/arcade/neogeo/sdodgeb.zip",
+      "cover_path": "/roms/images/arcade/Sdodgeb.bmp"
+    },
+    {
+      "rom_name": "sengoku",
+      "english_name": "Sengoku 3 (decrypted C)",
+      "chinese_name": "战国传承 3 (C 解密)",
+      "rom_path": "/roms/arcade/neogeo/sengoku.zip",
+      "cover_path": "/roms/images/arcade/Sengoku.bmp"
+    },
+    {
+      "rom_name": "sf2",
+      "english_name": "",
+      "chinese_name": "街头霸王II - 天下斗士(世界 910214)",
+      "rom_path": "/roms/arcade/cps1/sf2.zip",
+      "cover_path": "/roms/images/arcade/sf2.bmp"
+    },
+    {
+      "rom_name": "sf2ce",
+      "english_name": "",
+      "chinese_name": "街头霸王II - 四大天王(世界)",
+      "rom_path": "/roms/arcade/cps1/sf2ce.zip",
+      "cover_path": "/roms/images/arcade/SF2CE.bmp"
+    },
+    {
+      "rom_name": "sfa",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/sfa.zip",
+      "cover_path": "/roms/images/arcade/SFA.bmp"
+    },
+    {
+      "rom_name": "sfa2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/sfa2.zip",
+      "cover_path": "/roms/images/arcade/SFA2.bmp"
+    },
+    {
+      "rom_name": "sfa3",
+      "english_name": "",
+      "chinese_name": "少年街霸III(美版 980904)",
+      "rom_path": "/roms/arcade/cps2/sfa3.zip",
+      "cover_path": "/roms/images/arcade/SFA3.bmp"
+    },
+    {
+      "rom_name": "sfzch",
+      "english_name": "",
+      "chinese_name": "少年街霸 - CPS 转换版 (日版 951020)",
+      "rom_path": "/roms/arcade/cps1/sfzch.zip",
+      "cover_path": "/roms/images/arcade/SFZCH.bmp"
+    },
+    {
+      "rom_name": "sgemf",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/sgemf.zip",
+      "cover_path": "/roms/images/arcade/SGEMF.bmp"
+    },
+    {
+      "rom_name": "shocktr2",
+      "english_name": "Shock Troopers (set 2)",
+      "chinese_name": "突击骑兵(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/shocktr2.zip",
+      "cover_path": "/roms/images/arcade/Shocktr2.bmp"
+    },
+    {
+      "rom_name": "shocktro",
+      "english_name": "Shock Troopers (set 2)",
+      "chinese_name": "突击骑兵(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/shocktro.zip",
+      "cover_path": "/roms/images/arcade/Shocktro.bmp"
+    },
+    {
+      "rom_name": "slammast",
+      "english_name": "Ring of Destruction: Slammasters II (Euro 940902)",
+      "chinese_name": "超级摔角霸王 II : 连环爆裂(欧版 940902)",
+      "rom_path": "/roms/arcade/cps1/slammast.zip",
+      "cover_path": "/roms/images/arcade/SLAMMAST.bmp"
+    },
+    {
+      "rom_name": "socbrawl",
+      "english_name": "Soccer Brawl (alternate set)",
+      "chinese_name": "机器人足球(替换版)",
+      "rom_path": "/roms/arcade/neogeo/socbrawl.zip",
+      "cover_path": "/roms/images/arcade/Socbrawl.bmp"
+    },
+    {
+      "rom_name": "sonicwi2",
+      "english_name": "",
+      "chinese_name": "Aero Fighters 2",
+      "rom_path": "/roms/arcade/neogeo/sonicwi2.zip",
+      "cover_path": "/roms/images/arcade/SONICWI2.bmp"
+    },
+    {
+      "rom_name": "sonicwi3",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/sonicwi3.zip",
+      "cover_path": "/roms/images/arcade/SONICWI3.bmp"
+    },
+    {
+      "rom_name": "spf2t",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/spf2t.zip",
+      "cover_path": "/roms/images/arcade/SPF2T.bmp"
+    },
+    {
+      "rom_name": "spinmast",
+      "english_name": "Spin Master",
+      "chinese_name": "强尼大冒险",
+      "rom_path": "/roms/arcade/neogeo/spinmast.zip",
+      "cover_path": "/roms/images/arcade/Spinmast.bmp"
+    },
+    {
+      "rom_name": "ssf2",
+      "english_name": "",
+      "chinese_name": "超级霸头霸王II:新的挑战者(美版 930911)",
+      "rom_path": "/roms/arcade/cps2/ssf2.zip",
+      "cover_path": "/roms/images/arcade/SSF2.bmp"
+    },
+    {
+      "rom_name": "ssideki",
+      "english_name": "Super Sidekicks",
+      "chinese_name": "得点王",
+      "rom_path": "/roms/arcade/neogeo/ssideki.zip",
+      "cover_path": "/roms/images/arcade/Ssideki.bmp"
+    },
+    {
+      "rom_name": "ssideki2",
+      "english_name": "Super Sidekicks",
+      "chinese_name": "得点王",
+      "rom_path": "/roms/arcade/neogeo/ssideki2.zip",
+      "cover_path": "/roms/images/arcade/Ssideki2.bmp"
+    },
+    {
+      "rom_name": "ssideki3",
+      "english_name": "Super Sidekicks",
+      "chinese_name": "得点王",
+      "rom_path": "/roms/arcade/neogeo/ssideki3.zip",
+      "cover_path": "/roms/images/arcade/Ssideki3.bmp"
+    },
+    {
+      "rom_name": "ssideki4",
+      "english_name": "Super Sidekicks",
+      "chinese_name": "得点王",
+      "rom_path": "/roms/arcade/neogeo/ssideki4.zip",
+      "cover_path": "/roms/images/arcade/Ssideki4.bmp"
+    },
+    {
+      "rom_name": "stakwin",
+      "english_name": "Stakes Winner",
+      "chinese_name": "赛马大亨",
+      "rom_path": "/roms/arcade/neogeo/stakwin.zip",
+      "cover_path": "/roms/images/arcade/Stakwin.bmp"
+    },
+    {
+      "rom_name": "stakwin2",
+      "english_name": "Stakes Winner 2",
+      "chinese_name": "赛马大亨 2",
+      "rom_path": "/roms/arcade/neogeo/stakwin2.zip",
+      "cover_path": "/roms/images/arcade/Stakwin2.bmp"
+    },
+    {
+      "rom_name": "strhoop",
+      "english_name": "Street Hoop",
+      "chinese_name": "街头篮球",
+      "rom_path": "/roms/arcade/neogeo/strhoop.zip",
+      "cover_path": "/roms/images/arcade/Strhoop.bmp"
+    },
+    {
+      "rom_name": "strider",
+      "english_name": "Strider Hiryu (Japan set 2)",
+      "chinese_name": "出击飞龙(日版 版本 2)",
+      "rom_path": "/roms/arcade/cps1/strider.zip",
+      "cover_path": "/roms/images/arcade/STRIDER.bmp"
+    },
+    {
+      "rom_name": "superspy",
+      "english_name": "The Super Spy",
+      "chinese_name": "谍报飞龙",
+      "rom_path": "/roms/arcade/neogeo/superspy.zip",
+      "cover_path": "/roms/images/arcade/Superspy.bmp"
+    },
+    {
+      "rom_name": "tophuntr",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/tophuntr.zip",
+      "cover_path": "/roms/images/arcade/Tophuntr.bmp"
+    },
+    {
+      "rom_name": "tpgolf",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/tpgolf.zip",
+      "cover_path": "/roms/images/arcade/Tpgolf.bmp"
+    },
+    {
+      "rom_name": "trally",
+      "english_name": "Thrash Rally",
+      "chinese_name": "极速英豪",
+      "rom_path": "/roms/arcade/neogeo/trally.zip",
+      "cover_path": "/roms/images/arcade/Trally.bmp"
+    },
+    {
+      "rom_name": "turfmast",
+      "english_name": "Neo Turf Masters (Misses rasters)",
+      "chinese_name": "大赛高尔夫(缺少光栅效果)",
+      "rom_path": "/roms/arcade/neogeo/turfmast.zip",
+      "cover_path": "/roms/images/arcade/Turfmast.bmp"
+    },
+    {
+      "rom_name": "twinspri",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/twinspri.zip",
+      "cover_path": "/roms/images/arcade/Twinspri.bmp"
+    },
+    {
+      "rom_name": "tws96",
+      "english_name": "",
+      "chinese_name": "96 Tecmo 世界杯足球",
+      "rom_path": "/roms/arcade/neogeo/tws96.zip",
+      "cover_path": "/roms/images/arcade/Tws96.bmp"
+    },
+    {
+      "rom_name": "unsquad",
+      "english_name": "U.N. Squadron (US)",
+      "chinese_name": "战区 88(美版)",
+      "rom_path": "/roms/arcade/cps1/unsquad.zip",
+      "cover_path": "/roms/images/arcade/UNSQUAD.bmp"
+    },
+    {
+      "rom_name": "varth",
+      "english_name": "Varth - Operation Thunderstorm (Japan 920714)",
+      "chinese_name": "威虎战机 - 雷雨行动(日版 920714)",
+      "rom_path": "/roms/arcade/cps1/varth.zip",
+      "cover_path": "/roms/images/arcade/VARTH.bmp"
+    },
+    {
+      "rom_name": "vhunt2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/vhunt2.zip",
+      "cover_path": "/roms/images/arcade/Vhunt2.bmp"
+    },
+    {
+      "rom_name": "viewpoin",
+      "english_name": "View Point",
+      "chinese_name": "B 计划",
+      "rom_path": "/roms/arcade/neogeo/viewpoin.zip",
+      "cover_path": "/roms/images/arcade/Viewpoin.bmp"
+    },
+    {
+      "rom_name": "vliner",
+      "english_name": "V Liner (set 2)",
+      "chinese_name": "赌博机(版本 2)",
+      "rom_path": "/roms/arcade/neogeo/vliner.zip",
+      "cover_path": "/roms/images/arcade/Vliner.bmp"
+    },
+    {
+      "rom_name": "vsav",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/vsav.zip",
+      "cover_path": "/roms/images/arcade/VSAV.bmp"
+    },
+    {
+      "rom_name": "vsav2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/vsav2.zip",
+      "cover_path": "/roms/images/arcade/VSAV2.bmp"
+    },
+    {
+      "rom_name": "wakuwak7",
+      "english_name": "Waku Waku 7",
+      "chinese_name": "火热火热七",
+      "rom_path": "/roms/arcade/neogeo/wakuwak7.zip",
+      "cover_path": "/roms/images/arcade/Wakuwak7.bmp"
+    },
+    {
+      "rom_name": "wh1",
+      "english_name": "",
+      "chinese_name": "World Heroes",
+      "rom_path": "/roms/arcade/neogeo/wh1.zip",
+      "cover_path": "/roms/images/arcade/Wh1.bmp"
+    },
+    {
+      "rom_name": "wh2",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/wh2.zip",
+      "cover_path": "/roms/images/arcade/Wh2.bmp"
+    },
+    {
+      "rom_name": "wh2j",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/wh2j.zip",
+      "cover_path": "/roms/images/arcade/Wh2j.bmp"
+    },
+    {
+      "rom_name": "whp",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/neogeo/whp.zip",
+      "cover_path": "/roms/images/arcade/Whp.bmp"
+    },
+    {
+      "rom_name": "willow",
+      "english_name": "Willow (Japan, Japanese)",
+      "chinese_name": "威洛之旅(日版,英语)",
+      "rom_path": "/roms/arcade/cps1/willow.zip",
+      "cover_path": "/roms/images/arcade/WILLOW.bmp"
+    },
+    {
+      "rom_name": "wjammers",
+      "english_name": "Wind Jammers",
+      "chinese_name": "超级飞碟球",
+      "rom_path": "/roms/arcade/neogeo/wjammers.zip",
+      "cover_path": "/roms/images/arcade/Wjammers.bmp"
+    },
+    {
+      "rom_name": "wof",
+      "english_name": "",
+      "chinese_name": "三国志II(世界)",
+      "rom_path": "/roms/arcade/cps1/wof.zip",
+      "cover_path": "/roms/images/arcade/WOF.bmp"
+    },
+    {
+      "rom_name": "xmcota",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/xmcota.zip",
+      "cover_path": "/roms/images/arcade/XMCOTA.bmp"
+    },
+    {
+      "rom_name": "xmvsf",
+      "english_name": "",
+      "chinese_name": "",
+      "rom_path": "/roms/arcade/cps2/xmvsf.zip",
+      "cover_path": "/roms/images/arcade/XMVSF.bmp"
+    },
+    {
+      "rom_name": "zedblade",
+      "english_name": "Zed Blade",
+      "chinese_name": "作战名末日",
+      "rom_path": "/roms/arcade/neogeo/zedblade.zip",
+      "cover_path": "/roms/images/arcade/Zedblade.bmp"
+    },
+    {
+      "rom_name": "zintrckb",
+      "english_name": "Zintrick (Neo CD conversion)",
+      "chinese_name": "Zintrick (Neo CD 转换)",
+      "rom_path": "/roms/arcade/neogeo/zintrckb.zip",
+      "cover_path": "/roms/images/arcade/Zintrckb.bmp"
+    },
+    {
+      "rom_name": "zupapa",
+      "english_name": "Zupapa! (decrypted C)",
+      "chinese_name": "星星大作战(C 解密)",
+      "rom_path": "/roms/arcade/neogeo/zupapa.zip",
+      "cover_path": "/roms/images/arcade/Zupapa.bmp"
+    }
+  ]
+}
