@@ -114,9 +114,11 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
 
   /**
    * 设置EmulatorJS配置
+   * 传递所有官方支持的配置选项到EmulatorJS
    */
   setupEmulatorJSConfig() {
     const globalConfig = {
+      // 基础必需配置
       [`${this.namespace}_player`]: `#${this.containerId}`,
       [`${this.namespace}_gameUrl`]: this.config.romPath.startsWith('/') ? this.config.romPath : `/${this.config.romPath}`,
       [`${this.namespace}_core`]: this.config.core,
@@ -126,8 +128,62 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       [`${this.namespace}_startOnLoaded`]: this.config.startOnLoaded,
       [`${this.namespace}_volume`]: this.config.volume,
       [`${this.namespace}_mute`]: this.config.muted,
+      
+      // 事件回调
       [`${this.namespace}_ready`]: this.handleEmulatorReady,
-      [`${this.namespace}_onGameStart`]: this.handleGameStart
+      [`${this.namespace}_onGameStart`]: this.handleGameStart,
+      
+      // BIOS和ROM相关
+      [`${this.namespace}_biosUrl`]: this.config.biosUrl,
+      [`${this.namespace}_gamePatchUrl`]: this.config.gamePatchUrl,
+      [`${this.namespace}_gameParentUrl`]: this.config.gameParentUrl,
+      [`${this.namespace}_loadStateURL`]: this.config.loadStateURL,
+      [`${this.namespace}_externalFiles`]: this.config.externalFiles,
+      [`${this.namespace}_dontExtractBIOS`]: this.config.dontExtractBIOS,
+      [`${this.namespace}_softLoad`]: this.config.softLoad,
+      
+      // 作弊码功能
+      [`${this.namespace}_cheats`]: this.config.cheats,
+      
+      // 联机功能
+      [`${this.namespace}_netplayServer`]: this.config.netplayUrl,
+      [`${this.namespace}_gameID`]: this.config.gameId,
+      
+      // 广告配置
+      [`${this.namespace}_AdUrl`]: this.config.adUrl,
+      [`${this.namespace}_AdMode`]: this.config.adMode,
+      [`${this.namespace}_AdTimer`]: this.config.adTimer,
+      [`${this.namespace}_AdSize`]: this.config.adSize,
+      
+      // 界面和控制
+      [`${this.namespace}_color`]: this.config.color,
+      [`${this.namespace}_alignStartButton`]: this.config.alignStartButton,
+      [`${this.namespace}_startButtonName`]: this.config.startButtonName,
+      [`${this.namespace}_backgroundImage`]: this.config.backgroundImg,
+      [`${this.namespace}_backgroundBlur`]: this.config.backgroundBlur,
+      [`${this.namespace}_backgroundColor`]: this.config.backgroundColor,
+      [`${this.namespace}_hideSettings`]: this.config.hideSettings,
+      
+      // 虚拟手柄
+      [`${this.namespace}_VirtualGamepadSettings`]: this.config.virtualGamepadSettings,
+      [`${this.namespace}_Buttons`]: this.config.buttonOpts,
+      [`${this.namespace}_defaultControls`]: this.config.defaultControllers,
+      [`${this.namespace}_controlScheme`]: this.config.controlScheme,
+      
+      // 高级选项
+      [`${this.namespace}_fullscreenOnLoaded`]: this.config.fullscreenOnLoad,
+      [`${this.namespace}_paths`]: this.config.filePaths,
+      [`${this.namespace}_CacheLimit`]: this.config.cacheLimit,
+      [`${this.namespace}_defaultOptions`]: this.config.defaultOptions,
+      [`${this.namespace}_threads`]: this.config.threads,
+      [`${this.namespace}_disableCue`]: this.config.disableCue,
+      [`${this.namespace}_screenCapture`]: this.config.capture,
+      [`${this.namespace}_disableDatabases`]: this.config.disableDatabases,
+      [`${this.namespace}_disableLocalStorage`]: this.config.disableLocalStorage,
+      [`${this.namespace}_forceLegacyCores`]: this.config.forceLegacyCores,
+      [`${this.namespace}_noAutoFocus`]: this.config.noAutoFocus,
+      [`${this.namespace}_videoRotation`]: this.config.videoRotation,
+      [`${this.namespace}_shaders`]: this.config.shaders
     }
 
     // 检测移动设备并添加虚拟手柄配置
@@ -143,10 +199,46 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
     }
 
     // 临时设置全局变量（仅在初始化期间）
+    // 只设置有意义的配置值，避免传递空值导致EmulatorJS初始化问题
     Object.keys(globalConfig).forEach(key => {
       const ejsKey = key.replace(this.namespace, 'EJS')
-      window[ejsKey] = globalConfig[key]
+      const value = globalConfig[key]
+      
+      // 跳过空对象、空数组或undefined值（除非是明确的false/0值）
+      if (this.isValidConfigValue(value)) {
+        window[ejsKey] = value
+      }
     })
+  }
+
+  /**
+   * 验证配置值是否有效
+   * @param {*} value 配置值
+   * @returns {boolean} 是否为有效配置值
+   */
+  isValidConfigValue(value) {
+    // null 或 undefined 无效
+    if (value === null || value === undefined) {
+      return false
+    }
+    
+    // 空字符串无效（除非是明确的空字符串配置）
+    if (value === '') {
+      return false
+    }
+    
+    // 空对象无效
+    if (typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0) {
+      return false
+    }
+    
+    // 空数组无效
+    if (Array.isArray(value) && value.length === 0) {
+      return false
+    }
+    
+    // 其他值（包括false、0等）都是有效的
+    return true
   }
 
   /**
@@ -447,6 +539,7 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
    */
   cleanupGlobalVariables() {
     const globalVars = [
+      // 基础变量
       'EJS_emulator',
       'EJS_player', 
       'EJS_gameUrl',
@@ -458,7 +551,46 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
       'EJS_volume',
       'EJS_mute',
       'EJS_ready',
-      'EJS_onGameStart'
+      'EJS_onGameStart',
+      // 高级功能变量
+      'EJS_biosUrl',
+      'EJS_gamePatchUrl',
+      'EJS_gameParentUrl',
+      'EJS_loadStateURL',
+      'EJS_externalFiles',
+      'EJS_dontExtractBIOS',
+      'EJS_softLoad',
+      'EJS_cheats',
+      'EJS_netplayServer',
+      'EJS_gameID',
+      'EJS_AdUrl',
+      'EJS_AdMode',
+      'EJS_AdTimer',
+      'EJS_AdSize',
+      'EJS_color',
+      'EJS_alignStartButton',
+      'EJS_startButtonName',
+      'EJS_backgroundImage',
+      'EJS_backgroundBlur',
+      'EJS_backgroundColor',
+      'EJS_hideSettings',
+      'EJS_VirtualGamepadSettings',
+      'EJS_Buttons',
+      'EJS_defaultControls',
+      'EJS_controlScheme',
+      'EJS_fullscreenOnLoaded',
+      'EJS_paths',
+      'EJS_CacheLimit',
+      'EJS_defaultOptions',
+      'EJS_threads',
+      'EJS_disableCue',
+      'EJS_screenCapture',
+      'EJS_disableDatabases',
+      'EJS_disableLocalStorage',
+      'EJS_forceLegacyCores',
+      'EJS_noAutoFocus',
+      'EJS_videoRotation',
+      'EJS_shaders'
     ]
 
     globalVars.forEach(varName => {
@@ -488,5 +620,201 @@ export class EmulatorJSAdapter extends IEmulatorAdapter {
     this.loadingProgress = 0
     
           // EmulatorJSAdapter: 适配器已销毁 - 生产环境不输出日志
+  }
+
+  // ========== 高级功能方法 ==========
+
+  /**
+   * 获取模拟器实例（用于访问高级功能）
+   * @returns {*} 原生EmulatorJS实例
+   */
+  getEmulatorInstance() {
+    return window.EJS_emulator || this.emulatorInstance
+  }
+
+  /**
+   * 作弊码相关方法
+   */
+
+  /**
+   * 添加作弊码
+   * @param {string} description 作弊码描述
+   * @param {string} code 作弊码内容
+   * @returns {boolean} 是否成功添加
+   */
+  addCheat(description, code) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.cheats) {
+        emulator.cheats.push({
+          desc: description,
+          code: code,
+          checked: false,
+          is_permanent: false
+        })
+        // 更新作弊码UI（如果存在）
+        if (typeof emulator.updateCheatUI === 'function') {
+          emulator.updateCheatUI()
+        }
+        // 保存设置
+        if (typeof emulator.saveSettings === 'function') {
+          emulator.saveSettings()
+        }
+        return true
+      }
+    } catch (error) {
+      console.error('添加作弊码失败:', error)
+    }
+    return false
+  }
+
+  /**
+   * 启用/禁用作弊码
+   * @param {number} index 作弊码索引
+   * @param {boolean} enabled 是否启用
+   * @returns {boolean} 是否成功设置
+   */
+  setCheatEnabled(index, enabled) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.cheats && emulator.cheats[index]) {
+        emulator.cheats[index].checked = enabled
+        // 调用模拟器的作弊码变更方法
+        if (typeof emulator.cheatChanged === 'function') {
+          emulator.cheatChanged(enabled, emulator.cheats[index].code, index)
+        }
+        // 保存设置
+        if (typeof emulator.saveSettings === 'function') {
+          emulator.saveSettings()
+        }
+        return true
+      }
+    } catch (error) {
+      console.error('设置作弊码状态失败:', error)
+    }
+    return false
+  }
+
+  /**
+   * 删除作弊码
+   * @param {number} index 作弊码索引
+   * @returns {boolean} 是否成功删除
+   */
+  removeCheat(index) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.cheats && emulator.cheats[index]) {
+        // 先禁用作弊码
+        if (emulator.cheats[index].checked && typeof emulator.cheatChanged === 'function') {
+          emulator.cheatChanged(false, emulator.cheats[index].code, index)
+        }
+        // 删除作弊码
+        emulator.cheats.splice(index, 1)
+        // 更新UI
+        if (typeof emulator.updateCheatUI === 'function') {
+          emulator.updateCheatUI()
+        }
+        // 保存设置
+        if (typeof emulator.saveSettings === 'function') {
+          emulator.saveSettings()
+        }
+        return true
+      }
+    } catch (error) {
+      console.error('删除作弊码失败:', error)
+    }
+    return false
+  }
+
+  /**
+   * 获取所有作弊码
+   * @returns {Array} 作弊码列表
+   */
+  getCheats() {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.cheats) {
+        return [...emulator.cheats] // 返回副本，避免外部修改
+      }
+    } catch (error) {
+      console.error('获取作弊码列表失败:', error)
+    }
+    return []
+  }
+
+  /**
+   * 高级功能方法
+   */
+
+  /**
+   * 截屏
+   * @returns {Promise<string>} 截图的base64数据
+   */
+  async takeScreenshot() {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.gameManager && typeof emulator.gameManager.screenshot === 'function') {
+        emulator.gameManager.screenshot()
+        // 截图功能通常是异步的，我们返回一个提示
+        return 'Screenshot taken (saved to browser downloads)'
+      }
+    } catch (error) {
+      console.error('截屏失败:', error)
+    }
+    throw new Error('Screenshot functionality not available')
+  }
+
+  /**
+   * 切换快进
+   * @param {boolean} enabled 是否启用快进
+   * @returns {boolean} 是否成功设置
+   */
+  toggleFastForward(enabled) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.gameManager && typeof emulator.gameManager.toggleFastForward === 'function') {
+        emulator.gameManager.toggleFastForward(enabled ? 1 : 0)
+        return true
+      }
+    } catch (error) {
+      console.error('切换快进失败:', error)
+    }
+    return false
+  }
+
+  /**
+   * 设置快进倍率
+   * @param {number} ratio 快进倍率
+   * @returns {boolean} 是否成功设置
+   */
+  setFastForwardRatio(ratio) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.gameManager && typeof emulator.gameManager.setFastForwardRatio === 'function') {
+        emulator.gameManager.setFastForwardRatio(ratio)
+        return true
+      }
+    } catch (error) {
+      console.error('设置快进倍率失败:', error)
+    }
+    return false
+  }
+
+  /**
+   * 切换倒带功能
+   * @param {boolean} enabled 是否启用倒带
+   * @returns {boolean} 是否成功设置
+   */
+  toggleRewind(enabled) {
+    try {
+      const emulator = this.getEmulatorInstance()
+      if (emulator && emulator.gameManager && typeof emulator.gameManager.toggleRewind === 'function') {
+        emulator.gameManager.toggleRewind(enabled ? 1 : 0)
+        return true
+      }
+    } catch (error) {
+      console.error('切换倒带失败:', error)
+    }
+    return false
   }
 } 
