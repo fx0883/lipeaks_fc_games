@@ -4,7 +4,6 @@
     "name": "FC游戏",
     "description": "经典红白机游戏合集，包含动作、射击、角色扮演等各类经典游戏",
     "cover": "/images/categories/fc.png",
-    "gamesUrl": "/data/games/fc.json",
     "core": "fceumm",
     "romPath": "/roms/fc/",
     "imagePath": "/roms/images/fc/",
@@ -13,43 +12,50 @@
         "id": "fc-action",
         "name": "FC动作",
         "description": "包含平台跳跃、横版射击等需要操作技巧的FC游戏",
-        "cover": "/images/categories/fc-action.png"
+        "cover": "/images/categories/fc-action.png",
+        "gamesUrl": "/data/games/fc/fc-action.json"
       },
       {
         "id": "fc-stg",
         "name": "FC射击",
         "description": "以飞行射击、坦克射击为主的FC射击游戏",
-        "cover": "/images/categories/fc-stg.png"
+        "cover": "/images/categories/fc-stg.png",
+        "gamesUrl": "/data/games/fc/fc-stg.json"
       },
       {
         "id": "fc-rpg",
         "name": "FC角色",
         "description": "角色扮演类FC游戏，包含冒险和故事情节",
-        "cover": "/images/categories/fc-rpg.png"
+        "cover": "/images/categories/fc-rpg.png",
+        "gamesUrl": "/data/games/fc/fc-rpg.json"
       },
       {
         "id": "fc-puzzle",
         "name": "FC益智",
         "description": "需要思考和解谜的FC益智游戏",
-        "cover": "/images/categories/fc-puzzle.png"
+        "cover": "/images/categories/fc-puzzle.png",
+        "gamesUrl": "/data/games/fc/fc-puzzle.json"
       },
       {
         "id": "fc-spg",
         "name": "FC体育",
         "description": "体育运动类FC游戏，包含足球、篮球等",
-        "cover": "/images/categories/fc-spg.png"
+        "cover": "/images/categories/fc-spg.png",
+        "gamesUrl": "/data/games/fc/fc-spg.json"
       },
       {
         "id": "fc-tab",
         "name": "FC桌游",
         "description": "棋牌、桌面类FC游戏",
-        "cover": "/images/categories/fc-tab.png"
+        "cover": "/images/categories/fc-tab.png",
+        "gamesUrl": "/data/games/fc/fc-tab.json"
       },
       {
         "id": "fc-etc",
         "name": "FC其他",
         "description": "其他类型的FC游戏",
-        "cover": "/images/categories/fc-etc.png"
+        "cover": "/images/categories/fc-etc.png",
+        "gamesUrl": "/data/games/fc/fc-etc.json"
       }
     ]
   },
@@ -58,7 +64,6 @@
     "name": "街机游戏",
     "description": "经典街机游戏合集，包含格斗、射击、动作等各类街机游戏",
     "cover": "/images/categories/arcade.png",
-    "gamesUrl": "/data/games/arcade.json",
     "core": "mame2003_plus",
     "romPath": "/roms/arcade/",
     "imagePath": "/roms/images/arcade/",
@@ -103,8 +108,9 @@
         "id": "arcade-etc",
         "name": "街机其他",
         "description": "其他类型的街机游戏",
-        "cover": "/images/categories/arcade-etc.png"
+        "cover": "/images/categories/arcade-etc.png",
+        "gamesUrl": "/data/games/arcade/arcade-etc.json"
       }
     ]
   }
-] 
+]
