@@ -1,80 +1,5 @@
 [
   {
-    "id": "arcade-1941",
-    "name": "1941 - 反击战(日版)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/1941.zip",
-    "cover": "/roms/images/arcade/1941.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "1941 - 反击战(日版) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-19xx",
-    "name": "19XX: 命运否决战(巴西版 951218)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps2/19xx.zip",
-    "cover": "/roms/images/arcade/19XX.bmp",
-    "core": "fbalpha2012_cps2",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "19XX: 命运否决战(巴西版 951218) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-2020bb",
-    "name": "2020 超级棒球",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/2020bb.zip",
-    "cover": "/roms/images/arcade/2020bb.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "2020 超级棒球 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-3countb",
-    "name": "火线摔跤",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/3countb.zip",
-    "cover": "/roms/images/arcade/3countb.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "火线摔跤 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-3wonders",
-    "name": "三个奇迹(日版 910520)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/3wonders.zip",
-    "cover": "/roms/images/arcade/3WONDERS.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "三个奇迹(日版 910520) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-alpham2",
     "name": "alpham2",
     "platform": "arcade",
@@ -87,21 +12,6 @@
     "size": "未知",
     "version": "",
     "description": "alpham2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-androdun",
-    "name": "勇者之击",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/androdun.zip",
-    "cover": "/roms/images/arcade/Androdun.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "勇者之击 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -180,36 +90,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-bangbead",
-    "name": "碰碰球(C 解密)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/bangbead.zip",
-    "cover": "/roms/images/arcade/Bangbead.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "碰碰球(C 解密) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-batcir",
-    "name": "Battle Circuit (Euro 970319)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/batcir.zip",
-    "cover": "/roms/images/arcade/Batcir.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "Battle Circuit (Euro 970319) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-batcirj",
     "name": "batcirj",
     "platform": "arcade",
@@ -225,36 +105,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-bjourney",
-    "name": "Blue's Journey",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/bjourney.zip",
-    "cover": "/roms/images/arcade/Bjourney.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "Blue's Journey - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-blazstar",
-    "name": "闪亮之星",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/blazstar.zip",
-    "cover": "/roms/images/arcade/Blazstar.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "闪亮之星 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-breakers",
     "name": "爆烈人复仇",
     "platform": "arcade",
@@ -267,36 +117,6 @@
     "size": "未知",
     "version": "",
     "description": "爆烈人复仇 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-bstars",
-    "name": "惑星传",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/bstars.zip",
-    "cover": "/roms/images/arcade/Bstars.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "惑星传 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-bstars2",
-    "name": "棒球之星 II",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/bstars2.zip",
-    "cover": "/roms/images/arcade/Bstars2.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "棒球之星 II - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -357,21 +177,6 @@
     "size": "未知",
     "version": "",
     "description": "魔法之剑(日版 900623) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-ctomaday",
-    "name": "番茄超人",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/ctomaday.zip",
-    "cover": "/roms/images/arcade/Ctomaday.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "番茄超人 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -465,21 +270,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-doubledr",
-    "name": "双截龙格斗",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/doubledr.zip",
-    "cover": "/roms/images/arcade/Doubledr.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "双截龙格斗 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-dstlk",
     "name": "dstlk",
     "platform": "arcade",
@@ -525,36 +315,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-eightman",
-    "name": "八超人",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/eightman.zip",
-    "cover": "/roms/images/arcade/Eightman.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "八超人 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-fatfursp",
-    "name": "饿狼传说 特别版(版本 2)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/fatfursp.zip",
-    "cover": "/roms/images/arcade/Fatfursp.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "饿狼传说 特别版(版本 2) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-fatfury3",
     "name": "俄狼传说III:通向最终胜利的道路",
     "platform": "arcade",
@@ -567,21 +327,6 @@
     "size": "未知",
     "version": "",
     "description": "俄狼传说III:通向最终胜利的道路 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-fbfrenzy",
-    "name": "疯狂美式足球",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/fbfrenzy.zip",
-    "cover": "/roms/images/arcade/Fbfrenzy.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "疯狂美式足球 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -642,21 +387,6 @@
     "size": "未知",
     "version": "",
     "description": "失落的世界(美版) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-galaxyfg",
-    "name": "galaxyfg",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/galaxyfg.zip",
-    "cover": "/roms/images/arcade/Galaxyfg.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "galaxyfg - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -750,21 +480,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-gpilots",
-    "name": "魔鬼飞行员",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/gpilots.zip",
-    "cover": "/roms/images/arcade/Gpilots.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "魔鬼飞行员 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-irrmaze",
     "name": "irrmaze",
     "platform": "arcade",
@@ -825,21 +540,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-karnovr",
-    "name": "斗士的历史",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/karnovr.zip",
-    "cover": "/roms/images/arcade/Karnovr.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "斗士的历史 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-kizuna",
     "name": "风云默示录: 超级组队战",
     "platform": "arcade",
@@ -855,21 +555,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-knights",
-    "name": "圆桌骑士(世界)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/knights.zip",
-    "cover": "/roms/images/arcade/KNIGHTS.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "圆桌骑士(世界) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-kod",
     "name": "kod",
     "platform": "arcade",
@@ -882,111 +567,6 @@
     "size": "未知",
     "version": "",
     "description": "kod - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof2000",
-    "name": "kof2000",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof2000.zip",
-    "cover": "/roms/images/arcade/Kof2000.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof2000 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof94",
-    "name": "kof94",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof94.zip",
-    "cover": "/roms/images/arcade/Kof94.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof94 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof95",
-    "name": "kof95",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof95.zip",
-    "cover": "/roms/images/arcade/Kof95.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof95 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof96",
-    "name": "kof96",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof96.zip",
-    "cover": "/roms/images/arcade/Kof96.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof96 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof97",
-    "name": "kof97",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof97.zip",
-    "cover": "/roms/images/arcade/Kof97.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof97 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof98",
-    "name": "kof98",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof98.zip",
-    "cover": "/roms/images/arcade/Kof98.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof98 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-kof99",
-    "name": "kof99",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/kof99.zip",
-    "cover": "/roms/images/arcade/Kof99.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "kof99 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1017,51 +597,6 @@
     "size": "未知",
     "version": "",
     "description": "kotm2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-lastblad",
-    "name": "月华剑士(版本 2)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/lastblad.zip",
-    "cover": "/roms/images/arcade/Lastblad.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "月华剑士(版本 2) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-lastbld2",
-    "name": "月华剑士 2",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/lastbld2.zip",
-    "cover": "/roms/images/arcade/Lastbld2.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "月华剑士 2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-lbowling",
-    "name": "联盟保龄球",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/lbowling.zip",
-    "cover": "/roms/images/arcade/Lbowling.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "联盟保龄球 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1152,21 +687,6 @@
     "size": "未知",
     "version": "",
     "description": "mahretsu - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-megaman",
-    "name": "八超人",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/megaman.zip",
-    "cover": "/roms/images/arcade/MEGAMAN.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "八超人 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1305,21 +825,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-mslug3",
-    "name": "合金弹头 3(P 未加密,C 解密)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/mslug3.zip",
-    "cover": "/roms/images/arcade/Mslug3.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "合金弹头 3(P 未加密,C 解密) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-mslugx",
     "name": "mslugx",
     "platform": "arcade",
@@ -1380,21 +885,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-mvsc",
-    "name": "超级漫画英雄对卡普空:超级英雄的碰撞(美版 980123)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps2/mvsc.zip",
-    "cover": "/roms/images/arcade/MVSC.bmp",
-    "core": "fbalpha2012_cps2",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "超级漫画英雄对卡普空:超级英雄的碰撞(美版 980123) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-nam1975",
     "name": "超级街头霸王 II : 锦标赛(日版 930911)",
     "platform": "arcade",
@@ -1407,51 +897,6 @@
     "size": "未知",
     "version": "",
     "description": "超级街头霸王 II : 锦标赛(日版 930911) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-ncombat",
-    "name": "忍者大战(版本 2)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/ncombat.zip",
-    "cover": "/roms/images/arcade/Ncombat.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "忍者大战(版本 2) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-ncommand",
-    "name": "忍者指令",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/ncommand.zip",
-    "cover": "/roms/images/arcade/Ncommand.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "忍者指令 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-nemo",
-    "name": "梦幻冒险(日版 901120)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/nemo.zip",
-    "cover": "/roms/images/arcade/NEMO.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "梦幻冒险(日版 901120) - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1485,21 +930,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-neodrift",
-    "name": "neodrift",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/neodrift.zip",
-    "cover": "/roms/images/arcade/Neodrift.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "neodrift - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-neogeo",
     "name": "neogeo",
     "platform": "arcade",
@@ -1530,21 +960,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-neonopon",
-    "name": "NEO 智力方块",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/neonopon.zip",
-    "cover": "/roms/images/arcade/Neonopon.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "NEO 智力方块 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-neopong",
     "name": "NEO 弹球 1.1",
     "platform": "arcade",
@@ -1557,21 +972,6 @@
     "size": "未知",
     "version": "",
     "description": "NEO 弹球 1.1 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-ninjamas",
-    "name": "忍者大战(版本 2)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/ninjamas.zip",
-    "cover": "/roms/images/arcade/Ninjamas.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "忍者大战(版本 2) - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1635,51 +1035,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-panicbom",
-    "name": "炸弹人方块",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/panicbom.zip",
-    "cover": "/roms/images/arcade/Panicbom.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "炸弹人方块 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-pbobbl2n",
-    "name": "泡泡龙 2",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/pbobbl2n.zip",
-    "cover": "/roms/images/arcade/Pbobbl2n.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "泡泡龙 2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-pbobblen",
-    "name": "泡泡龙(版本 2)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/pbobblen.zip",
-    "cover": "/roms/images/arcade/Pbobblen.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "泡泡龙(版本 2) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-pgoal",
     "name": "pgoal",
     "platform": "arcade",
@@ -1695,21 +1050,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-pnickj",
-    "name": "魔法方块(日版 940608)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/pnickj.zip",
-    "cover": "/roms/images/arcade/PNICKJ.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "魔法方块(日版 940608) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-pnyaa",
     "name": "pnyaa",
     "platform": "arcade",
@@ -1722,21 +1062,6 @@
     "size": "未知",
     "version": "",
     "description": "pnyaa - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-popbounc",
-    "name": "动物方块",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/popbounc.zip",
-    "cover": "/roms/images/arcade/Popbounc.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "动物方块 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1770,21 +1095,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-pulstar",
-    "name": "惑星传",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/pulstar.zip",
-    "cover": "/roms/images/arcade/Pulstar.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "惑星传 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-punisher",
     "name": "惩罚者(日版 930422)",
     "platform": "arcade",
@@ -1797,21 +1107,6 @@
     "size": "未知",
     "version": "",
     "description": "惩罚者(日版 930422) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-puzzledp",
-    "name": "PUZZLED 方块",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/puzzledp.zip",
-    "cover": "/roms/images/arcade/Puzzledp.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "PUZZLED 方块 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -1890,21 +1185,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-ridhero",
-    "name": "风速英雄(缺少光栅效果 替换版)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/ridhero.zip",
-    "cover": "/roms/images/arcade/Ridhero.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "风速英雄(缺少光栅效果 替换版) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-ringdest",
     "name": "ringdest",
     "platform": "arcade",
@@ -1935,21 +1215,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-s1945p",
-    "name": "s1945p",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/s1945p.zip",
-    "cover": "/roms/images/arcade/S1945p.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "s1945p - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-samsho",
     "name": "samsho",
     "platform": "arcade",
@@ -1962,21 +1227,6 @@
     "size": "未知",
     "version": "",
     "description": "samsho - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-samsho2",
-    "name": "Samurai Shodown II",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/samsho2.zip",
-    "cover": "/roms/images/arcade/Samsho2.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "Samurai Shodown II - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -2055,21 +1305,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-sf2",
-    "name": "街头霸王II - 天下斗士(世界 910214)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/sf2.zip",
-    "cover": "/roms/images/arcade/sf2.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "街头霸王II - 天下斗士(世界 910214) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-sf2ce",
     "name": "街头霸王II - 四大天王(世界)",
     "platform": "arcade",
@@ -2112,36 +1347,6 @@
     "size": "未知",
     "version": "",
     "description": "sfa2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-sfa3",
-    "name": "少年街霸III(美版 980904)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps2/sfa3.zip",
-    "cover": "/roms/images/arcade/SFA3.bmp",
-    "core": "fbalpha2012_cps2",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "少年街霸III(美版 980904) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-sfzch",
-    "name": "少年街霸 - CPS 转换版 (日版 951020)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/sfzch.zip",
-    "cover": "/roms/images/arcade/SFZCH.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "少年街霸 - CPS 转换版 (日版 951020) - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -2205,36 +1410,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-socbrawl",
-    "name": "机器人足球(替换版)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/socbrawl.zip",
-    "cover": "/roms/images/arcade/Socbrawl.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "机器人足球(替换版) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-sonicwi2",
-    "name": "Aero Fighters 2",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/sonicwi2.zip",
-    "cover": "/roms/images/arcade/SONICWI2.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "Aero Fighters 2 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-sonicwi3",
     "name": "sonicwi3",
     "platform": "arcade",
@@ -2262,21 +1437,6 @@
     "size": "未知",
     "version": "",
     "description": "spf2t - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-spinmast",
-    "name": "强尼大冒险",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/spinmast.zip",
-    "cover": "/roms/images/arcade/Spinmast.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "强尼大冒险 - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -2385,21 +1545,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-strhoop",
-    "name": "街头篮球",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/strhoop.zip",
-    "cover": "/roms/images/arcade/Strhoop.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "街头篮球 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-strider",
     "name": "出击飞龙(日版 版本 2)",
     "platform": "arcade",
@@ -2445,51 +1590,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-tpgolf",
-    "name": "tpgolf",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/tpgolf.zip",
-    "cover": "/roms/images/arcade/Tpgolf.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "tpgolf - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-trally",
-    "name": "极速英豪",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/trally.zip",
-    "cover": "/roms/images/arcade/Trally.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "极速英豪 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-turfmast",
-    "name": "大赛高尔夫(缺少光栅效果)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/turfmast.zip",
-    "cover": "/roms/images/arcade/Turfmast.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "大赛高尔夫(缺少光栅效果) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-twinspri",
     "name": "twinspri",
     "platform": "arcade",
@@ -2505,21 +1605,6 @@
     "playCount": 0
   },
   {
-    "id": "arcade-tws96",
-    "name": "96 Tecmo 世界杯足球",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/tws96.zip",
-    "cover": "/roms/images/arcade/Tws96.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "96 Tecmo 世界杯足球 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
     "id": "arcade-unsquad",
     "name": "战区 88(美版)",
     "platform": "arcade",
@@ -2532,21 +1617,6 @@
     "size": "未知",
     "version": "",
     "description": "战区 88(美版) - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-varth",
-    "name": "威虎战机 - 雷雨行动(日版 920714)",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/cps1/varth.zip",
-    "cover": "/roms/images/arcade/VARTH.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "威虎战机 - 雷雨行动(日版 920714) - 经典街机游戏",
     "playCount": 0
   },
   {
@@ -2637,21 +1707,6 @@
     "size": "未知",
     "version": "",
     "description": "火热火热七 - 经典街机游戏",
-    "playCount": 0
-  },
-  {
-    "id": "arcade-wh1",
-    "name": "World Heroes",
-    "platform": "arcade",
-    "subCategory": "arcade-etc",
-    "romPath": "/roms/arcade/neogeo/wh1.zip",
-    "cover": "/roms/images/arcade/Wh1.bmp",
-    "core": "mame2003_plus",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "World Heroes - 经典街机游戏",
     "playCount": 0
   },
   {

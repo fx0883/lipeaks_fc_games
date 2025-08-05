@@ -77,9 +77,22 @@ export const useGameStore = defineStore('game', {
         .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
     },
 
-    // 根据分类ID获取分类信息
+    // 根据分类ID获取分类信息（支持主分类和子分类）
     getCategoryById: (state) => {
-      return (id) => state.categories.find(category => category.id === id)
+      return (id) => {
+        // 先查找主分类
+        const mainCategory = state.categories.find(category => category.id === id)
+        if (mainCategory) return mainCategory
+        
+        // 如果没找到主分类，查找子分类
+        for (const category of state.categories) {
+          if (category.subCategories) {
+            const subCategory = category.subCategories.find(sub => sub.id === id)
+            if (subCategory) return subCategory
+          }
+        }
+        return null
+      }
     },
     
     // 获取所有游戏 - 直接转换Map为数组
@@ -142,38 +155,60 @@ export const useGameStore = defineStore('game', {
       this.loading = true
       try {
         // 查找分类信息（支持主分类和子分类）
-        let category = this.getCategoryById(categoryId)
-        let gamesUrl = null
+        const category = this.getCategoryById(categoryId)
         
-        if (category && category.gamesUrl) {
-          // 主分类，直接使用gamesUrl
-          gamesUrl = category.gamesUrl
-        } else {
-          // 可能是子分类，查找父分类
-          const parentCategory = this.categories.find(cat => 
-            cat.subCategories && cat.subCategories.some(sub => sub.id === categoryId)
-          )
-          if (parentCategory) {
-            gamesUrl = parentCategory.gamesUrl
+        if (!category) {
+          throw new Error(`Category not found: ${categoryId}`)
+        }
+        
+        // 如果是子分类且有gamesUrl，直接加载
+        if (category.gamesUrl) {
+          const response = await fetch(category.gamesUrl)
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
           }
+          
+          const games = await response.json()
+          this.addGames(games)
+          this.loadedCategories.add(categoryId)
+          
+          return this.getGamesByCategory(categoryId)
         }
         
-        if (!gamesUrl) {
-          throw new Error(`Category not found or missing gamesUrl: ${categoryId}`)
+        // 如果是主分类（如fc、arcade），需要加载所有子分类
+        if (category.subCategories && category.subCategories.length > 0) {
+          const allGames = []
+          
+          // 并行加载所有子分类
+          const loadPromises = category.subCategories
+            .filter(subCat => subCat.gamesUrl) // 只加载有gamesUrl的子分类
+            .map(async (subCat) => {
+              try {
+                const response = await fetch(subCat.gamesUrl)
+                if (!response.ok) {
+                  console.warn(`Failed to load ${subCat.id}: HTTP ${response.status}`)
+                  return []
+                }
+                const games = await response.json()
+                this.loadedCategories.add(subCat.id) // 标记子分类也已加载
+                return games
+              } catch (error) {
+                console.warn(`Failed to load subcategory ${subCat.id}:`, error)
+                return []
+              }
+            })
+          
+          const results = await Promise.all(loadPromises)
+          results.forEach(games => allGames.push(...games))
+          
+          this.addGames(allGames)
+          this.loadedCategories.add(categoryId)
+          
+          return this.getGamesByCategory(categoryId)
         }
         
-        // 加载游戏数据
-        const response = await fetch(gamesUrl)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
-        }
+        throw new Error(`Category ${categoryId} has no gamesUrl or subCategories`)
         
-        // 解析并添加游戏数据
-        const games = await response.json()
-        this.addGames(games)
-        this.loadedCategories.add(categoryId)
-        
-        return this.getGamesByCategory(categoryId)
       } catch (error) {
         console.error(`Failed to fetch games for category ${categoryId}:`, error)
         return []

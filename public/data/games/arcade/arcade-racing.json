@@ -1,0 +1,32 @@
+[
+  {
+    "id": "arcade-neodrift",
+    "name": "neodrift",
+    "platform": "arcade",
+    "subCategory": "arcade-racing",
+    "romPath": "/roms/arcade/neogeo/neodrift.zip",
+    "cover": "/roms/images/arcade/Neodrift.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "neodrift - 经典街机游戏",
+    "playCount": 0
+  },
+  {
+    "id": "arcade-trally",
+    "name": "极速英豪",
+    "platform": "arcade",
+    "subCategory": "arcade-racing",
+    "romPath": "/roms/arcade/neogeo/trally.zip",
+    "cover": "/roms/images/arcade/Trally.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "极速英豪 - 经典街机游戏",
+    "playCount": 0
+  }
+]

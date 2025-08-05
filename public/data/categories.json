@@ -72,37 +72,43 @@
         "id": "arcade-fighting",
         "name": "街机格斗",
         "description": "经典街机格斗游戏，如拳皇、街霸系列",
-        "cover": "/images/categories/arcade-fighting.png"
+        "cover": "/images/categories/arcade-fighting.png",
+        "gamesUrl": "/data/games/arcade/arcade-fighting.json"
       },
       {
         "id": "arcade-shooting",
         "name": "街机射击",
         "description": "街机射击游戏，包含飞行射击和光线枪射击",
-        "cover": "/images/categories/arcade-shooting.png"
+        "cover": "/images/categories/arcade-shooting.png",
+        "gamesUrl": "/data/games/arcade/arcade-shooting.json"
       },
       {
         "id": "arcade-action",
         "name": "街机动作",
         "description": "街机动作冒险游戏，如合金弹头系列",
-        "cover": "/images/categories/arcade-action.png"
+        "cover": "/images/categories/arcade-action.png",
+        "gamesUrl": "/data/games/arcade/arcade-action.json"
       },
       {
         "id": "arcade-puzzle",
         "name": "街机益智",
         "description": "街机益智游戏，如俄罗斯方块、泡泡龙等",
-        "cover": "/images/categories/arcade-puzzle.png"
+        "cover": "/images/categories/arcade-puzzle.png",
+        "gamesUrl": "/data/games/arcade/arcade-puzzle.json"
       },
       {
         "id": "arcade-racing",
         "name": "街机竞速",
         "description": "街机赛车竞速游戏",
-        "cover": "/images/categories/arcade-racing.png"
+        "cover": "/images/categories/arcade-racing.png",
+        "gamesUrl": "/data/games/arcade/arcade-racing.json"
       },
       {
         "id": "arcade-sports",
         "name": "街机体育",
         "description": "街机体育运动游戏",
-        "cover": "/images/categories/arcade-sports.png"
+        "cover": "/images/categories/arcade-sports.png",
+        "gamesUrl": "/data/games/arcade/arcade-sports.json"
       },
       {
         "id": "arcade-etc",
