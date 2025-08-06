@@ -499,6 +499,10 @@ onMounted(async () => {
 
 .emulator-container {
   padding: 2rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
 }
 
 .emulator-header {
@@ -816,5 +820,28 @@ onMounted(async () => {
   .achievement-badges {
     justify-content: center;
   }
+}
+
+/* 暗模式下的模拟器容器优化 */
+[data-theme="dark"] .emulator-container {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .detail-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .meta-item {
+  background: var(--color-background-mute);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .meta-item:hover {
+  background: var(--color-background);
+  border-color: var(--color-border-hover);
 }
 </style> 
