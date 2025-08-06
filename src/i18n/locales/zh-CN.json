@@ -56,6 +56,72 @@
     "hideRawData": "隐藏原始数据",
     "rawDataTitle": "原始统计数据"
   },
+  "categories": {
+    "fc": {
+      "name": "FC游戏",
+      "description": "经典红白机游戏合集，包含动作、射击、角色扮演等各类经典游戏",
+      "action": {
+        "name": "FC动作",
+        "description": "包含平台跳跃、横版射击等需要操作技巧的FC游戏"
+      },
+      "stg": {
+        "name": "FC射击",
+        "description": "以飞行射击、坦克射击为主的FC射击游戏"
+      },
+      "rpg": {
+        "name": "FC角色",
+        "description": "角色扮演类FC游戏，包含冒险和故事情节"
+      },
+      "puzzle": {
+        "name": "FC益智",
+        "description": "需要思考和解谜的FC益智游戏"
+      },
+      "spg": {
+        "name": "FC体育",
+        "description": "体育运动类FC游戏，包含足球、篮球等"
+      },
+      "tab": {
+        "name": "FC桌游",
+        "description": "棋牌、桌面类FC游戏"
+      },
+      "etc": {
+        "name": "FC其他",
+        "description": "其他类型的FC游戏"
+      }
+    },
+    "arcade": {
+      "name": "街机游戏",
+      "description": "经典街机游戏合集，包含格斗、射击、动作等各类经典街机游戏",
+      "fighting": {
+        "name": "街机格斗",
+        "description": "经典街机格斗游戏，如拳皇、街霸系列"
+      },
+      "shooting": {
+        "name": "街机射击",
+        "description": "街机射击游戏，包含飞行射击和光线枪射击"
+      },
+      "action": {
+        "name": "街机动作",
+        "description": "街机动作冒险游戏，如合金弹头系列"
+      },
+      "puzzle": {
+        "name": "街机益智",
+        "description": "街机益智游戏，如俄罗斯方块、泡泡龙等"
+      },
+      "racing": {
+        "name": "街机竞速",
+        "description": "街机赛车竞速游戏"
+      },
+      "sports": {
+        "name": "街机体育",
+        "description": "街机体育运动游戏"
+      },
+      "etc": {
+        "name": "街机其他",
+        "description": "其他类型的街机游戏"
+      }
+    }
+  },
   "home": {
     "title": "Lipeaks游戏乐园",
     "heroSubtitle": "重温经典，畅享游戏乐趣！探索数百款经典游戏，随时随地开始你的游戏之旅。",

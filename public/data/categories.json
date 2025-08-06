@@ -1,8 +1,8 @@
 [
   {
     "id": "fc",
-    "name": "FC游戏",
-    "description": "经典红白机游戏合集，包含动作、射击、角色扮演等各类经典游戏",
+    "nameKey": "categories.fc.name",
+    "descriptionKey": "categories.fc.description",
     "cover": "/images/categories/fc.png",
     "core": "fceumm",
     "romPath": "/roms/fc/",
@@ -10,50 +10,50 @@
     "subCategories": [
       {
         "id": "fc-action",
-        "name": "FC动作",
-        "description": "包含平台跳跃、横版射击等需要操作技巧的FC游戏",
+        "nameKey": "categories.fc.action.name",
+        "descriptionKey": "categories.fc.action.description",
         "cover": "/images/categories/fc-action.png",
         "gamesUrl": "/data/games/fc/fc-action.json"
       },
       {
         "id": "fc-stg",
-        "name": "FC射击",
-        "description": "以飞行射击、坦克射击为主的FC射击游戏",
+        "nameKey": "categories.fc.stg.name",
+        "descriptionKey": "categories.fc.stg.description",
         "cover": "/images/categories/fc-stg.png",
         "gamesUrl": "/data/games/fc/fc-stg.json"
       },
       {
         "id": "fc-rpg",
-        "name": "FC角色",
-        "description": "角色扮演类FC游戏，包含冒险和故事情节",
+        "nameKey": "categories.fc.rpg.name",
+        "descriptionKey": "categories.fc.rpg.description",
         "cover": "/images/categories/fc-rpg.png",
         "gamesUrl": "/data/games/fc/fc-rpg.json"
       },
       {
         "id": "fc-puzzle",
-        "name": "FC益智",
-        "description": "需要思考和解谜的FC益智游戏",
+        "nameKey": "categories.fc.puzzle.name",
+        "descriptionKey": "categories.fc.puzzle.description",
         "cover": "/images/categories/fc-puzzle.png",
         "gamesUrl": "/data/games/fc/fc-puzzle.json"
       },
       {
         "id": "fc-spg",
-        "name": "FC体育",
-        "description": "体育运动类FC游戏，包含足球、篮球等",
+        "nameKey": "categories.fc.spg.name",
+        "descriptionKey": "categories.fc.spg.description",
         "cover": "/images/categories/fc-spg.png",
         "gamesUrl": "/data/games/fc/fc-spg.json"
       },
       {
         "id": "fc-tab",
-        "name": "FC桌游",
-        "description": "棋牌、桌面类FC游戏",
+        "nameKey": "categories.fc.tab.name",
+        "descriptionKey": "categories.fc.tab.description",
         "cover": "/images/categories/fc-tab.png",
         "gamesUrl": "/data/games/fc/fc-tab.json"
       },
       {
         "id": "fc-etc",
-        "name": "FC其他",
-        "description": "其他类型的FC游戏",
+        "nameKey": "categories.fc.etc.name",
+        "descriptionKey": "categories.fc.etc.description",
         "cover": "/images/categories/fc-etc.png",
         "gamesUrl": "/data/games/fc/fc-etc.json"
       }
@@ -61,7 +61,7 @@
   },
   {
     "id": "arcade",
-    "name": "街机游戏",
+    "nameKey": "categories.arcade.name",
     "description": "经典街机游戏合集，包含格斗、射击、动作等各类街机游戏",
     "cover": "/images/categories/arcade.png",
     "core": "mame2003_plus",
@@ -70,50 +70,50 @@
     "subCategories": [
       {
         "id": "arcade-fighting",
-        "name": "街机格斗",
-        "description": "经典街机格斗游戏，如拳皇、街霸系列",
+        "nameKey": "categories.arcade.fighting.name",
+        "descriptionKey": "categories.arcade.fighting.description",
         "cover": "/images/categories/arcade-fighting.png",
         "gamesUrl": "/data/games/arcade/arcade-fighting.json"
       },
       {
         "id": "arcade-shooting",
-        "name": "街机射击",
-        "description": "街机射击游戏，包含飞行射击和光线枪射击",
+        "nameKey": "categories.arcade.shooting.name",
+        "descriptionKey": "categories.arcade.shooting.description",
         "cover": "/images/categories/arcade-shooting.png",
         "gamesUrl": "/data/games/arcade/arcade-shooting.json"
       },
       {
         "id": "arcade-action",
-        "name": "街机动作",
-        "description": "街机动作冒险游戏，如合金弹头系列",
+        "nameKey": "categories.arcade.action.name",
+        "descriptionKey": "categories.arcade.action.description",
         "cover": "/images/categories/arcade-action.png",
         "gamesUrl": "/data/games/arcade/arcade-action.json"
       },
       {
         "id": "arcade-puzzle",
-        "name": "街机益智",
-        "description": "街机益智游戏，如俄罗斯方块、泡泡龙等",
+        "nameKey": "categories.arcade.puzzle.name",
+        "descriptionKey": "categories.arcade.puzzle.description",
         "cover": "/images/categories/arcade-puzzle.png",
         "gamesUrl": "/data/games/arcade/arcade-puzzle.json"
       },
       {
         "id": "arcade-racing",
-        "name": "街机竞速",
-        "description": "街机赛车竞速游戏",
+        "nameKey": "categories.arcade.racing.name",
+        "descriptionKey": "categories.arcade.racing.description",
         "cover": "/images/categories/arcade-racing.png",
         "gamesUrl": "/data/games/arcade/arcade-racing.json"
       },
       {
         "id": "arcade-sports",
-        "name": "街机体育",
-        "description": "街机体育运动游戏",
+        "nameKey": "categories.arcade.sports.name",
+        "descriptionKey": "categories.arcade.sports.description",
         "cover": "/images/categories/arcade-sports.png",
         "gamesUrl": "/data/games/arcade/arcade-sports.json"
       },
       {
         "id": "arcade-etc",
-        "name": "街机其他",
-        "description": "其他类型的街机游戏",
+        "nameKey": "categories.arcade.etc.name",
+        "descriptionKey": "categories.arcade.etc.description",
         "cover": "/images/categories/arcade-etc.png",
         "gamesUrl": "/data/games/arcade/arcade-etc.json"
       }

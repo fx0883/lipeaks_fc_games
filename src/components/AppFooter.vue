@@ -31,7 +31,7 @@
           <div v-for="category in categories" :key="category.id" class="category-row">
             <!-- 主分类 -->
             <router-link :to="`/category/${category.id}`" class="main-category">
-              {{ category.name }}
+              {{ getCategoryName(category) }}
             </router-link>
             
             <!-- 子分类 -->
@@ -39,7 +39,7 @@
               <template v-for="subCategory in category.subCategories" :key="subCategory.id">
                 <span class="separator">|</span>
                 <router-link :to="`/category/${subCategory.id}`">
-                  {{ subCategory.name }}
+                  {{ getCategoryName(subCategory) }}
                 </router-link>
               </template>
             </template>
@@ -82,9 +82,11 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useGameStore } from '../stores/game'
+import { useCategoryI18n } from '../composables/useCategoryI18n'
 import VisitorStats from './VisitorStats.vue'
 
 const gameStore = useGameStore()
+const { getCategoryName } = useCategoryI18n()
 const categories = ref([])
 const currentYear = computed(() => new Date().getFullYear())
 

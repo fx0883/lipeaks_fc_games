@@ -62,8 +62,8 @@
       <div class="category-grid">
         <div class="category-card" v-for="category in categories" :key="category.id" @click="navigateToCategory(category.id)">
           <div class="category-icon">🎯</div>
-          <h3 class="category-name">{{ category.name }}</h3>
-          <p class="category-desc">{{ category.description || $t('home.categoryDefaultDesc') }}</p>
+          <h3 class="category-name">{{ getCategoryName(category) }}</h3>
+          <p class="category-desc">{{ getCategoryDescription(category) || $t('home.categoryDefaultDesc') }}</p>
           <div class="category-stats">
             <span class="game-count">{{ getCategoryGameCount(category.id) }} {{ $t('home.games') }}</span>
           </div>
@@ -148,9 +148,11 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useCategoryI18n } from '../composables/useCategoryI18n'
 
 const router = useRouter()
 const gameStore = useGameStore()
+const { getCategoryName, getCategoryDescription } = useCategoryI18n()
 const categoriesRef = ref(null)
 const gamesRef = ref(null)
 
@@ -169,11 +171,7 @@ const getCategoryGameCount = (categoryId) => {
   return gameStore.getGamesByCategory(categoryId).length
 }
 
-// 获取分类名称
-const getCategoryName = (categoryId) => {
-  const category = gameStore.getCategoryById(categoryId)
-  return category ? category.name : categoryId
-}
+
 
 // 导航方法
 const navigateToCategory = (categoryId) => {

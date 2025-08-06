@@ -92,7 +92,7 @@
             :class="{ 'active': isActiveCategory('arcade') }"
           >
             <span class="nav-icon">🕹️</span>
-            <span class="nav-text">街机游戏</span>
+            <span class="nav-text">{{ getCategoryName(arcadeCategory) }}</span>
           </router-link>
           
           <!-- 所有街机子分类 -->
@@ -105,7 +105,7 @@
               :class="{ 'active': isActiveSubCategory(subCategory.id) }"
             >
               <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
-              <span class="nav-text">{{ subCategory.name.replace('街机', '') }}</span>
+              <span class="nav-text">{{ getShortSubCategoryName(subCategory, '街机') }}</span>
             </router-link>
           </template>
         </div>
@@ -119,7 +119,7 @@
             :class="{ 'active': isActiveCategory('fc') }"
           >
             <span class="nav-icon">🎮</span>
-            <span class="nav-text">FC游戏</span>
+            <span class="nav-text">{{ getCategoryName(fcCategory) }}</span>
           </router-link>
 
           <!-- 所有FC子分类 -->
@@ -132,7 +132,7 @@
               :class="{ 'active': isActiveSubCategory(subCategory.id) }"
             >
               <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
-              <span class="nav-text">{{ subCategory.name.replace('FC', '') }}</span>
+              <span class="nav-text">{{ getShortSubCategoryName(subCategory, 'FC') }}</span>
             </router-link>
           </template>
         </div>
@@ -162,7 +162,7 @@
         <div v-for="category in categories" :key="category.id" class="mobile-category">
           <div class="mobile-category-header" @click="toggleMobileCategory(category.id)">
             <span class="category-icon">{{ getCategoryIcon(category.id) }}</span>
-            <span class="category-name">{{ category.name }}</span>
+            <span class="category-name">{{ getCategoryName(category) }}</span>
             <span class="expand-icon" :class="{ 'expanded': expandedCategories.includes(category.id) }">▼</span>
           </div>
           
@@ -173,7 +173,7 @@
               @click="closeMobileMenu"
             >
               <span class="link-icon">📋</span>
-              <span>全部{{ category.name }}</span>
+              <span>全部{{ getCategoryName(category) }}</span>
             </router-link>
             <router-link 
               v-for="subCategory in category.subCategories" 
@@ -183,7 +183,7 @@
               @click="closeMobileMenu"
             >
               <span class="link-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
-              <span>{{ subCategory.name }}</span>
+              <span>{{ getCategoryName(subCategory) }}</span>
             </router-link>
           </div>
         </div>
@@ -203,11 +203,13 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useCategoryI18n } from '../composables/useCategoryI18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const router = useRouter()
 const route = useRoute()
 const gameStore = useGameStore()
+const { getCategoryName, getShortSubCategoryName } = useCategoryI18n()
 
 // 响应式数据
 const searchQuery = ref('')

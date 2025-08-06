@@ -56,6 +56,72 @@
     "hideRawData": "Hide Raw Data",
     "rawDataTitle": "Raw Statistics Data"
   },
+  "categories": {
+    "fc": {
+      "name": "FC Games",
+      "description": "Classic Nintendo Entertainment System games collection, including action, shooting, RPG and other classic games",
+      "action": {
+        "name": "FC Action",
+        "description": "Platform jumping, side-scrolling shooting and other skill-based FC games"
+      },
+      "stg": {
+        "name": "FC Shooting",
+        "description": "Flying shooting and tank shooting FC games"
+      },
+      "rpg": {
+        "name": "FC RPG",
+        "description": "Role-playing FC games with adventure and storylines"
+      },
+      "puzzle": {
+        "name": "FC Puzzle",
+        "description": "FC puzzle games that require thinking and problem-solving"
+      },
+      "spg": {
+        "name": "FC Sports",
+        "description": "FC sports games including football, basketball, etc."
+      },
+      "tab": {
+        "name": "FC Table",
+        "description": "FC board and table games"
+      },
+      "etc": {
+        "name": "FC Others",
+        "description": "Other types of FC games"
+      }
+    },
+    "arcade": {
+      "name": "Arcade Games",
+      "description": "Classic arcade games collection, including fighting, shooting, action and other classic arcade games",
+      "fighting": {
+        "name": "Arcade Fighting",
+        "description": "Classic arcade fighting games like King of Fighters, Street Fighter series"
+      },
+      "shooting": {
+        "name": "Arcade Shooting",
+        "description": "Arcade shooting games including flight shooting and light gun shooting"
+      },
+      "action": {
+        "name": "Arcade Action",
+        "description": "Arcade action adventure games like Metal Slug series"
+      },
+      "puzzle": {
+        "name": "Arcade Puzzle",
+        "description": "Arcade puzzle games like Tetris, Puzzle Bobble, etc."
+      },
+      "racing": {
+        "name": "Arcade Racing",
+        "description": "Arcade racing and car games"
+      },
+      "sports": {
+        "name": "Arcade Sports",
+        "description": "Arcade sports and athletic games"
+      },
+      "etc": {
+        "name": "Arcade Others",
+        "description": "Other types of arcade games"
+      }
+    }
+  },
   "home": {
     "title": "Lipeaks Game Paradise",
     "heroSubtitle": "Relive the classics and enjoy gaming fun! Explore hundreds of classic games and start your gaming journey anytime, anywhere.",

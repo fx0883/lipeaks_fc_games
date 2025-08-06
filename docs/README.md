@@ -156,3 +156,6 @@
 现在就开始技术验证，迈出升级的第一步吧！ 
 
 npx @agentdeskai/browser-tools-server@latest
+
+
+在开发环境中，访问 http://localhost:3000/stats 查看统计
