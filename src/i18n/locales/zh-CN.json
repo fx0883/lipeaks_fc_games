@@ -319,5 +319,59 @@
     "searchWithQuery": "搜索\"{query}\" - Lipeaks游戏乐园",
     "stats": "网站统计 - Lipeaks游戏乐园",
     "notFound": "页面未找到 - Lipeaks游戏乐园"
+  },
+  "games": {
+    "noDescription": "暂无描述",
+    "unknownAuthor": "未知",
+    "descriptionTemplate": "{gameName} - {gameType}{platform}游戏",
+    "genericDescription": "经典{platform}游戏",
+    "seoDescription": "{gameName}是一款经典的{platform}游戏，由{author}制作，已被玩过{playCount}次。",
+    "platforms": {
+      "fc": "FC",
+      "arcade": "街机"
+    },
+    "gameTypes": {
+      "动作": "动作",
+      "射击": "射击",
+      "角色扮演": "角色扮演",
+      "益智": "益智",
+      "体育": "体育",
+      "桌游": "桌游",
+      "格斗": "格斗",
+      "竞速": "竞速",
+      "动作射击": "动作射击",
+      "模拟射击": "模拟射击",
+      "动作冒险": "动作冒险",
+      "策略": "策略",
+      "运动": "运动",
+      "竞赛": "竞赛"
+    },
+    "nameRules": {
+      "directMappings": {
+        "恶魔城": "恶魔城",
+        "魂斗罗": "魂斗罗",
+        "超级马里奥": "超级马里奥",
+        "塞尔达传说": "塞尔达传说",
+        "拳皇": "拳皇",
+        "街头霸王": "街头霸王",
+        "合金弹头": "合金弹头"
+      },
+      "versionMarkers": {
+        "(日版)": "(日版)",
+        "(美版)": "(美版)",
+        "(欧版)": "(欧版)",
+        "(亚洲版)": "(亚洲版)",
+        "[汉化]": "[汉化]",
+        "[修改]": "[修改]"
+      },
+      "gameSeries": {
+        "II": "II",
+        "III": "III",
+        "IV": "IV",
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
   }
 } 

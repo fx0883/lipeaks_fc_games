@@ -33,7 +33,7 @@
         </div>
         
         <div class="game-info">
-          <h1 class="game-title">{{ game ? game.name : $t('game.loading') }}</h1>
+          <h1 class="game-title">{{ game ? getGameName(game) : $t('game.loading') }}</h1>
           
           <div class="game-meta" v-if="game">
             <div class="meta-item animate-slide-left animate-delay-100">
@@ -130,7 +130,7 @@
             <span class="title-icon">📝</span>
             {{ $t('game.description') }}
           </h3>
-          <p class="game-description">{{ game.description || $t('game.noDescription') }}</p>
+          <p class="game-description">{{ getGameDescription(game) }}</p>
           
           <div class="game-specs" v-if="game.version || game.region">
             <div class="spec-item" v-if="game.version">
@@ -217,11 +217,13 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
 import FCEmulator from '../components/FCEmulator.vue'
 
 const route = useRoute()
 const { t } = useI18n()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
 const gameId = computed(() => route.params.id)
 const game = computed(() => gameStore.currentGame)
 const loading = computed(() => gameStore.loading)

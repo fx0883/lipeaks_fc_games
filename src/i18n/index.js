@@ -64,8 +64,9 @@ function getInitialLanguage() {
     return savedLanguage
   }
   
-  // 2. 检测浏览器语言
-  return getBrowserLanguage()
+  // 2. 默认使用英文，体现国际化特色
+  // 用户可以通过语言切换器选择其他语言
+  return 'en-US'
 }
 
 // 语言包映射

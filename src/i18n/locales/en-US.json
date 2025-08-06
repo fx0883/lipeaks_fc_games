@@ -319,5 +319,65 @@
     "searchWithQuery": "Search \"{query}\" - Lipeaks Game Paradise",
     "stats": "Site Statistics - Lipeaks Game Paradise",
     "notFound": "Page Not Found - Lipeaks Game Paradise"
+  },
+  "games": {
+    "noDescription": "No description available",
+    "unknownAuthor": "Unknown",
+    "descriptionTemplate": "{gameName} - Classic {gameType} {platform} Game",
+    "genericDescription": "Classic {platform} Game",
+    "seoDescription": "{gameName} is a classic {platform} game created by {author}, played {playCount} times.",
+    "platforms": {
+      "fc": "NES",
+      "arcade": "Arcade"
+    },
+    "gameTypes": {
+      "动作": "Action",
+      "射击": "Shooting",
+      "角色扮演": "RPG",
+      "益智": "Puzzle",
+      "体育": "Sports",
+      "桌游": "Board Game",
+      "格斗": "Fighting",
+      "竞速": "Racing",
+      "动作射击": "Action Shooting",
+      "模拟射击": "Simulation Shooting",
+      "动作冒险": "Action Adventure",
+      "策略": "Strategy",
+      "运动": "Sports",
+      "竞赛": "Racing"
+    },
+    "nameRules": {
+      "directMappings": {
+        "恶魔城": "Castlevania",
+        "魂斗罗": "Contra",
+        "超级马里奥": "Super Mario",
+        "塞尔达传说": "The Legend of Zelda",
+        "拳皇": "The King of Fighters",
+        "街头霸王": "Street Fighter",
+        "合金弹头": "Metal Slug",
+        "坦克大战": "Battle City",
+        "双截龙": "Double Dragon",
+        "忍者神龟": "Teenage Mutant Ninja Turtles",
+        "洛克人": "Mega Man",
+        "最终幻想": "Final Fantasy",
+        "勇者斗恶龙": "Dragon Quest"
+      },
+      "versionMarkers": {
+        "(日版)": "(Japanese)",
+        "(美版)": "(US)",
+        "(欧版)": "(European)",
+        "(亚洲版)": "(Asian)",
+        "[汉化]": "[Chinese]",
+        "[修改]": "[Modified]"
+      },
+      "gameSeries": {
+        "II": "II",
+        "III": "III",
+        "IV": "IV",
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
   }
 } 

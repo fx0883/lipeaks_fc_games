@@ -94,8 +94,8 @@
             </div>
             </div>
             <div class="game-info">
-            <h3 class="game-title">{{ game.name }}</h3>
-            <p class="game-description">{{ game.description || $t('home.noDescription') }}</p>
+            <h3 class="game-title">{{ getGameName(game) }}</h3>
+            <p class="game-description">{{ getGameDescription(game) }}</p>
             <div class="game-stats">
               <span class="play-count">🎮 {{ game.playCount || 0 }} {{ $t('home.plays') }}</span>
               <span class="game-category">📂 {{ getCategoryName(game.category) }}</span>
@@ -141,6 +141,8 @@
       </div>
     </div>
     </section>
+    
+
   </div>
 </template>
 
@@ -149,10 +151,12 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
+import { useGameI18n } from '../composables/useGameI18n'
 
 const router = useRouter()
 const gameStore = useGameStore()
 const { getCategoryName, getCategoryDescription } = useCategoryI18n()
+const { getGameName, getGameDescription } = useGameI18n()
 const categoriesRef = ref(null)
 const gamesRef = ref(null)
 

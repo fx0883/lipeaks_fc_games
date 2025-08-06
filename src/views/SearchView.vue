@@ -11,12 +11,12 @@
             <img :src="game.cover" :alt="game.name">
           </div>
           <div class="game-info">
-            <h3>{{ game.name }}</h3>
+            <h3>{{ getGameName(game) }}</h3>
             <div class="game-meta">
               <span class="category" v-if="getCategoryName(game.category)">{{ getCategoryName(game.category) }}</span>
               <span class="author" v-if="game.author">{{ game.author }}</span>
             </div>
-            <p>{{ game.description }}</p>
+            <p>{{ getGameDescription(game) }}</p>
           </div>
       </div>
     </div>
@@ -36,10 +36,12 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
 
 const searchQuery = computed(() => route.query.q || '')
 const searchResults = computed(() => gameStore.searchResults)

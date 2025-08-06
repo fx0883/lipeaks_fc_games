@@ -169,8 +169,8 @@
           </div>
           
           <div class="game-info">
-            <h3 class="game-title">{{ game.name }}</h3>
-            <p class="game-description">{{ game.description || $t('category.noDescription') }}</p>
+            <h3 class="game-title">{{ getGameName(game) }}</h3>
+            <p class="game-description">{{ getGameDescription(game) }}</p>
             
             <div class="game-meta">
               <div class="meta-item" v-if="game.author">
@@ -243,11 +243,13 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
 import Pagination from '../components/Pagination.vue'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
 const categoryId = computed(() => route.params.id)
 const loading = computed(() => gameStore.loading)
 
