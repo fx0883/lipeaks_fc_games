@@ -844,4 +844,14 @@ onMounted(async () => {
   background: var(--color-background);
   border-color: var(--color-border-hover);
 }
+
+/* 暗模式下的按键样式优化 */
+[data-theme="dark"] .key {
+  background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+  border: 2px solid #ccc;
+  color: #333333;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
 </style> 
