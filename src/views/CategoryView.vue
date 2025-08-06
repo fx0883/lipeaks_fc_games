@@ -126,14 +126,17 @@
           {{ $t('category.gamesInCategory') }}
         </h2>
         <div class="results-count">
-          <span class="count-text">{{ $t('category.showingResults', { count: filteredGames.length, total: games.length }) }}</span>
+          <span class="count-text">{{ $t('category.showingResults', { count: paginatedGames.length, total: filteredGames.length }) }}</span>
+          <span class="total-count" v-if="filteredGames.length !== games.length">
+            ({{ $t('category.totalGames', { total: games.length }) }})
+          </span>
         </div>
       </div>
       
       <div class="game-list" :class="{ 'list-view': viewMode === 'list', 'grid-view': viewMode === 'grid' }">
         <div 
           class="game-card" 
-          v-for="(game, index) in filteredGames" 
+          v-for="(game, index) in paginatedGames" 
           :key="game.id"
           :class="{ 'animate-slide-up': true, [`animate-delay-${Math.min(index * 100, 500)}`]: true }"
           @click="navigateToGame(game.id)"
@@ -197,6 +200,16 @@
           </div>
         </div>
       </div>
+      
+      <!-- 分页组件 -->
+      <Pagination
+        v-if="filteredGames.length > 0"
+        :current-page="currentPage"
+        :total-items="filteredGames.length"
+        :items-per-page="itemsPerPage"
+        @page-change="handlePageChange"
+        @items-per-page-change="handleItemsPerPageChange"
+      />
     </section>
 
     <!-- 空状态 -->
@@ -230,6 +243,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import Pagination from '../components/Pagination.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -241,6 +255,10 @@ const loading = computed(() => gameStore.loading)
 const searchQuery = ref('')
 const sortBy = ref('name')
 const viewMode = ref('grid')
+
+// 分页状态
+const currentPage = ref(1)
+const itemsPerPage = ref(24)
 
 // 获取分类信息（支持主分类和子分类）
 const category = computed(() => {
@@ -348,6 +366,13 @@ const filteredGames = computed(() => {
   return filtered
 })
 
+// 分页后的游戏列表
+const paginatedGames = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return filteredGames.value.slice(start, end)
+})
+
 // 导航到游戏页面
 const navigateToGame = (gameId) => {
   const baseUrl = window.location.origin
@@ -384,7 +409,28 @@ const showGameInfo = (game) => {
 // 清除搜索
 const clearSearch = () => {
   searchQuery.value = ''
+  currentPage.value = 1
 }
+
+// 分页处理
+const handlePageChange = (page) => {
+  currentPage.value = page
+  // 滚动到游戏列表顶部
+  const gamesSection = document.querySelector('.games-section')
+  if (gamesSection) {
+    gamesSection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
+const handleItemsPerPageChange = (newItemsPerPage) => {
+  itemsPerPage.value = newItemsPerPage
+  currentPage.value = 1 // 重置到第一页
+}
+
+// 监听筛选条件变化，重置到第一页
+watch([searchQuery, sortBy], () => {
+  currentPage.value = 1
+})
 
 // 加载数据
 const loadData = async () => {

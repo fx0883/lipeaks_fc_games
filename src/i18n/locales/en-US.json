@@ -111,6 +111,7 @@
     "listView": "List View",
     "gamesInCategory": "Category Games",
     "showingResults": "Showing {count} / {total} games",
+    "totalGamesAdded": "Total {total} games",
     "hotBadge": "Hot",
     "topBadge": "Top",
     "noDescription": "No description available",
@@ -122,6 +123,19 @@
     "noGamesDescription": "No games available in this category yet, please check other categories",
     "clearSearch": "Clear Search",
     "backToHome": "Back to Home"
+  },
+  "pagination": {
+    "showing": "Showing {start}-{end} of {total}",
+    "perPage": "per page",
+    "firstPage": "First page",
+    "lastPage": "Last page", 
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "prev": "Prev",
+    "next": "Next",
+    "goToPage": "Go to page",
+    "pageNumber": "Page number",
+    "go": "Go"
   },
   "search": {
     "resultsTitle": "Search Results: \"{query}\"",
