@@ -785,6 +785,7 @@ onMounted(() => {
   transition: all var(--transition-normal);
   cursor: pointer;
   position: relative;
+  border: 1px solid var(--color-border);
 }
 
 .game-card:hover {
@@ -978,15 +979,33 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: white;
-  text-decoration: none;
-  border: none;
-  border-radius: var(--border-radius-lg);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-normal);
+}
+
+/* 暗模式下的游戏卡片优化 */
+[data-theme="dark"] .game-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .game-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+  transform: translateY(-8px);
+}
+
+[data-theme="dark"] .game-info {
+  background: var(--color-background-soft);
+}
+
+[data-theme="dark"] .info-btn {
+  background: var(--color-background-mute);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .info-btn:hover {
+  background: var(--color-background);
+  border-color: var(--color-primary);
 }
 
 .empty-action:hover {

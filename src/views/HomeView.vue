@@ -543,6 +543,22 @@ onMounted(async () => {
   text-transform: uppercase;
 }
 
+/* 暗模式下的游戏卡片优化 */
+[data-theme="dark"] .game-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .game-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+}
+
+[data-theme="dark"] .game-info {
+  background: var(--color-background-soft);
+}
+
 /* 游戏网格样式 */
 .games-grid {
   display: grid;
@@ -557,6 +573,7 @@ onMounted(async () => {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
 }
 
 .game-card:hover {
