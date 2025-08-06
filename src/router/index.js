@@ -22,6 +22,7 @@ const HomeView = () => import('../views/HomeView.vue')
 const GameView = () => import('../views/GameView.vue')
 const CategoryView = () => import('../views/CategoryView.vue')
 const SearchView = () => import('../views/SearchView.vue')
+const StatsView = () => import('../views/StatsView.vue')
 const NotFoundView = () => import('../views/NotFoundView.vue')
 
 
@@ -50,6 +51,12 @@ const routes = [
     name: 'search',
     component: SearchView,
     meta: { titleKey: 'routes.search' }
+  },
+  {
+    path: '/stats',
+    name: 'stats',
+    component: StatsView,
+    meta: { titleKey: 'routes.stats' }
   },
   {
     path: '/:pathMatch(.*)*',

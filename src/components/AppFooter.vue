@@ -50,6 +50,12 @@
           <h3>{{ $t('footer.contactUs') }}</h3>
           <p>{{ $t('footer.email') }}</p>
         </div>
+        
+        <!-- 访客统计 -->
+        <div class="footer-section">
+          <h3>{{ $t('footer.siteStats') }}</h3>
+          <VisitorStats :compact="true" />
+        </div>
       </div>
       
       <div class="footer-bottom">
@@ -76,6 +82,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useGameStore } from '../stores/game'
+import VisitorStats from './VisitorStats.vue'
 
 const gameStore = useGameStore()
 const categories = ref([])

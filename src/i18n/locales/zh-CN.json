@@ -21,9 +21,40 @@
     "quickLinks": "快速链接",
     "contactUs": "联系我们",
     "email": "邮箱: contact[at]fcgame.com",
+    "siteStats": "网站统计",
     "copyright": "© {year} Lipeaks. 保留所有权利。",
     "licensedUnder": "根据 {licenseName} 许可证授权。",
     "sourceCode": "源代码"
+  },
+  "stats": {
+    "visitorStatistics": "访客统计",
+    "totalVisitors": "总访客",
+    "todayVisitors": "今日访客",
+    "yesterdayVisitors": "昨日访客",
+    "daysOnline": "运行天数",
+    "welcomeNewVisitor": "欢迎新朋友！感谢您的访问 🎮",
+    "pageSubtitle": "了解网站访问情况和技术信息",
+    "multiPlatform": "多平台",
+    "platformSupport": "平台支持",
+    "freeForever": "永久免费",
+    "serviceType": "服务类型",
+    "techInfo": "技术栈",
+    "frontendFramework": "前端框架",
+    "styling": "样式系统",
+    "progressiveWebApp": "渐进式应用",
+    "buildTool": "构建工具",
+    "privacyTitle": "隐私保护",
+    "localStorage": "本地存储",
+    "localStorageDesc": "访问数据仅存储在您的浏览器本地，不会上传到服务器",
+    "noCookies": "无Cookie",
+    "noCookiesDesc": "我们不使用任何追踪Cookie，完全保护您的隐私",
+    "anonymousData": "匿名统计",
+    "anonymousDataDesc": "所有统计数据都是匿名的，不收集任何个人信息",
+    "developerOptions": "开发者选项",
+    "resetStats": "重置统计",
+    "showRawData": "显示原始数据",
+    "hideRawData": "隐藏原始数据",
+    "rawDataTitle": "原始统计数据"
   },
   "home": {
     "title": "Lipeaks游戏乐园",
@@ -220,6 +251,7 @@
     "category": "分类 - Lipeaks游戏乐园",
     "search": "搜索结果 - Lipeaks游戏乐园",
     "searchWithQuery": "搜索\"{query}\" - Lipeaks游戏乐园",
+    "stats": "网站统计 - Lipeaks游戏乐园",
     "notFound": "页面未找到 - Lipeaks游戏乐园"
   }
 } 
