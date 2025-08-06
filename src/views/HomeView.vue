@@ -416,14 +416,15 @@ onMounted(async () => {
 
 .category-card {
   position: relative;
-  background: white;
+  background: var(--color-background);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
+  border: 1px solid var(--color-border);
 }
 
 .category-card::before {
@@ -443,7 +444,7 @@ onMounted(async () => {
 
 .category-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
 }
 
 .category-icon {
@@ -475,23 +476,71 @@ onMounted(async () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-  color: white;
+  background: linear-gradient(135deg, 
+    rgba(79, 70, 229, 0.95) 0%, 
+    rgba(16, 185, 129, 0.95) 50%, 
+    rgba(59, 130, 246, 0.95) 100%
+  );
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 20px;
+  /* 增强暗模式下文字可见性 */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.5);
+  font-weight: 800;
+  backdrop-filter: blur(4px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .category-card:hover .category-overlay {
-  opacity: 0.95;
+  opacity: 1;
+}
+
+/* 暗模式下的特别优化 */
+[data-theme="dark"] .category-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .category-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+}
+
+[data-theme="dark"] .category-overlay {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.95) 0%, 
+    rgba(20, 184, 166, 0.95) 50%, 
+    rgba(168, 85, 247, 0.95) 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px) saturate(1.3);
+}
+
+[data-theme="dark"] .play-text {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 12px rgba(0, 0, 0, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .play-text {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 800;
+  /* 最大化文字可见性 */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 1),
+    0 0 10px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.9);
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
 }
 
 /* 游戏网格样式 */
@@ -502,17 +551,17 @@ onMounted(async () => {
 }
 
 .game-card {
-  background: white;
+  background: var(--color-background);
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .game-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
 }
 
 .game-image-container {
@@ -580,6 +629,7 @@ onMounted(async () => {
 
 .game-info {
   padding: 1.5rem;
+  background: var(--color-background);
 }
 
 .game-title {
@@ -618,11 +668,11 @@ onMounted(async () => {
 }
 
 .feature-card {
-  background: white;
+  background: var(--color-background);
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   transition: transform 0.3s ease;
 }
 
