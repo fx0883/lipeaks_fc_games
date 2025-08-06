@@ -24,8 +24,8 @@
         window.EJS_player = '#emulator';
         window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
         window.EJS_system = 'nes';
-        window.EJS_pathtodata = '/emulatorjs/data/';
-        window.EJS_gameName = '魂斗罗';
+        window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
+        window.EJS_gameName = '魂斗�?;
         
         // 显示配置
         document.getElementById('config').innerHTML = `
@@ -35,7 +35,7 @@
             Path: ${window.EJS_pathtodata}
         `;
         
-        // 状态更新函数
+        // 状态更新函�?
         function updateStatus(message, isError = false) {
             const statusEl = document.getElementById('status');
             statusEl.textContent = message;
@@ -57,25 +57,25 @@
         updateStatus('加载EmulatorJS...');
         
         const script = document.createElement('script');
-        script.src = '/emulatorjs/data/loader.js';
+        script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
         script.onload = () => {
-            updateStatus('EmulatorJS已加载，等待初始化...');
+            updateStatus('EmulatorJS已加载，等待初始�?..');
         };
         script.onerror = () => {
-            updateStatus('EmulatorJS加载失败！', true);
+            updateStatus('EmulatorJS加载失败�?, true);
         };
         
         document.head.appendChild(script);
         
-        // 检查EmulatorJS初始化
+        // 检查EmulatorJS初始�?
         let checkCount = 0;
         const checkInit = setInterval(() => {
             checkCount++;
             if (window.EJS_emulator) {
-                updateStatus('✅ EmulatorJS已初始化！');
+                updateStatus('�?EmulatorJS已初始化�?);
                 clearInterval(checkInit);
-            } else if (checkCount > 100) { // 10秒后停止检查
-                updateStatus('⚠️ EmulatorJS初始化超时', true);
+            } else if (checkCount > 100) { // 10秒后停止检�?
+                updateStatus('⚠️ EmulatorJS初始化超�?, true);
                 clearInterval(checkInit);
             }
         }, 100);

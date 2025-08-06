@@ -57,10 +57,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔄 虚拟手柄对称性测试</h1>
+        <h1>🔄 虚拟手柄对称性测�?/h1>
         
         <div class="test-info">
-            <h2>📱 当前配置检测</h2>
+            <h2>📱 当前配置检�?/h2>
             <div id="device-info"></div>
             <div id="config-info"></div>
         </div>
@@ -74,7 +74,7 @@
         
         <div class="test-info">
             <h2>🎮 测试链接</h2>
-            <p><a href="/mobile-test.html?t=<?= time() ?>" style="color: #4CAF50;">移动端测试 (带时间戳)</a></p>
+            <p><a href="/mobile-test.html?t=<?= time() ?>" style="color: #4CAF50;">移动端测�?(带时间戳)</a></p>
             <p><a href="/fc-emulator.html?t=<?= time() ?>" style="color: #4CAF50;">FC游戏测试 (带时间戳)</a></p>
             <p><a href="/mame-emulator.html?t=<?= time() ?>" style="color: #4CAF50;">MAME游戏测试 (带时间戳)</a></p>
         </div>
@@ -101,27 +101,27 @@
         function analyzeCoordinates() {
             const isPortrait = window.innerHeight > window.innerWidth;
             
-            // 当前配置的坐标
+            // 当前配置的坐�?
             const dpadLeft = isPortrait ? 8 : 12;
             const dpadTop = isPortrait ? 68 : 58;
             
             const btnCenterLeft = isPortrait ? 75 : 72;
             const btnCenterTop = isPortrait ? 68 : 58;
             
-            // 计算对称性
+            // 计算对称�?
             const isSymmetric = dpadTop === btnCenterTop;
             const horizontalDistance = Math.abs(dpadLeft - (100 - btnCenterLeft));
             
             document.getElementById('coordinates').innerHTML = `
                 <div class="coordinates">
-                    左侧方向键位置: (${dpadLeft}%, ${dpadTop}%)
+                    左侧方向键位�? (${dpadLeft}%, ${dpadTop}%)
                     右侧按钮中心: (${btnCenterLeft}%, ${btnCenterTop}%)
                     
-                    垂直对齐: ${isSymmetric ? '✅ 已对齐' : '❌ 未对齐'}
-                    水平距离差: ${horizontalDistance.toFixed(1)}%
+                    垂直对齐: ${isSymmetric ? '�?已对�? : '�?未对�?}
+                    水平距离�? ${horizontalDistance.toFixed(1)}%
                 </div>
                 <div class="status ${isSymmetric ? 'success' : 'error'}">
-                    ${isSymmetric ? '✅ 配置正确：左右控制元素已在同一水平线' : '❌ 配置错误：左右控制元素未对齐'}
+                    ${isSymmetric ? '�?配置正确：左右控制元素已在同一水平�? : '�?配置错误：左右控制元素未对齐'}
                 </div>
             `;
         }
@@ -129,32 +129,32 @@
         function checkConfiguration() {
             // 检查是否有缓存问题
             const timestamp = new Date().getTime();
-            const cacheInfo = localStorage.getItem('gamepad-config') || '无缓存';
+            const cacheInfo = localStorage.getItem('gamepad-config') || '无缓�?;
             
             document.getElementById('config-info').innerHTML = `
                 <div class="status warning">
-                    ⏰ 页面加载时间: ${new Date().toLocaleTimeString()}
+                    �?页面加载时间: ${new Date().toLocaleTimeString()}
                 </div>
                 <div class="status warning">
-                    💾 浏览器缓存: ${cacheInfo}
+                    💾 浏览器缓�? ${cacheInfo}
                 </div>
                 <div style="margin: 10px 0;">
-                    <strong>如果看到的布局还没有更新，请:</strong><br>
-                    1. 按 Ctrl+F5 强制刷新<br>
-                    2. 清除浏览器缓存<br>
+                    <strong>如果看到的布局还没有更新，�?</strong><br>
+                    1. �?Ctrl+F5 强制刷新<br>
+                    2. 清除浏览器缓�?br>
                     3. 使用隐私/无痕模式访问
                 </div>
             `;
         }
         
-        // 页面加载时执行检测
+        // 页面加载时执行检�?
         window.onload = function() {
             updateDeviceInfo();
             analyzeCoordinates();
             checkConfiguration();
         };
         
-        // 屏幕旋转时重新检测
+        // 屏幕旋转时重新检�?
         window.onresize = function() {
             setTimeout(() => {
                 updateDeviceInfo();

@@ -89,7 +89,7 @@
     <div class="game-grid">
         <!-- FC游戏：魂斗罗 -->
         <div class="game-card">
-            <div class="game-title">🔥 魂斗罗 (Contra)</div>
+            <div class="game-title">🔥 魂斗�?(Contra)</div>
             <div class="game-info">
                 <strong>平台:</strong> FC/NES<br>
                 <strong>核心:</strong> fceumm<br>
@@ -97,14 +97,14 @@
                 <strong>分类:</strong> 动作
             </div>
             <div class="game-description">
-                魂斗罗是Konami公司于1987年推出的经典横版射击游戏。玩家操控比尔和兰斯两名战士，使用各种武器对抗外星人入侵。
+                魂斗罗是Konami公司�?987年推出的经典横版射击游戏。玩家操控比尔和兰斯两名战士，使用各种武器对抗外星人入侵�?
             </div>
             <button class="play-button" onclick="testFC()">测试FC游戏</button>
             <a href="/fc-emulator.html" class="direct-link">直接测试页面</a>
             <a href="/game/contra-fc" class="direct-link">Vue游戏页面</a>
         </div>
         
-        <!-- 街机游戏：19XX -->
+        <!-- 街机游戏�?9XX -->
         <div class="game-card">
             <div class="game-title">✈️ 19XX: The War Against Destiny</div>
             <div class="game-info">
@@ -114,7 +114,7 @@
                 <strong>分类:</strong> 街机
             </div>
             <div class="game-description">
-                19XX是Capcom于1995年推出的经典纵版射击街机游戏。设定在1999年，玩家驾驶先进战机对抗邪恶势力。
+                19XX是Capcom�?995年推出的经典纵版射击街机游戏。设定在1999年，玩家驾驶先进战机对抗邪恶势力�?
             </div>
             <button class="play-button" onclick="testMAME()">测试街机游戏</button>
             <a href="/mame-emulator.html" class="direct-link">直接测试页面</a>
@@ -123,13 +123,13 @@
     </div>
     
     <div style="text-align: center; margin: 40px 0;">
-        <h2>快速测试链接</h2>
-        <a href="/test-simple.html" class="direct-link" style="margin: 0 10px;">简单测试</a>
+        <h2>快速测试链�?/h2>
+        <a href="/test-simple.html" class="direct-link" style="margin: 0 10px;">简单测�?/a>
         <a href="/debug-detailed.html" class="direct-link" style="margin: 0 10px;">详细调试</a>
-        <a href="/mobile-test.html" class="direct-link" style="margin: 0 10px;">📱 移动端测试</a>
+        <a href="/mobile-test.html" class="direct-link" style="margin: 0 10px;">📱 移动端测�?/a>
         <a href="/emulator-controls-guide.html" class="direct-link" style="margin: 0 10px;">🎮 控制说明</a>
         <a href="/button-position-guide.html" class="direct-link" style="margin: 0 10px;">🔧 位置调整</a>
-        <a href="/" class="direct-link" style="margin: 0 10px;">Vue主应用</a>
+        <a href="/" class="direct-link" style="margin: 0 10px;">Vue主应�?/a>
     </div>
 
     <script>
@@ -150,16 +150,16 @@
             fetch('/roms/Contra1(U)30.nes', { method: 'HEAD' })
                 .then(response => {
                     if (response.ok) {
-                        showStatus('✅ FC ROM文件可访问，正在跳转测试页面...', 'success');
+                        showStatus('�?FC ROM文件可访问，正在跳转测试页面...', 'success');
                         setTimeout(() => {
                             window.open('/fc-emulator.html', '_blank');
                         }, 1000);
                     } else {
-                        showStatus('❌ FC ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
+                        showStatus('�?FC ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
                     }
                 })
                 .catch(error => {
-                    showStatus('❌ FC ROM文件访问失败: ' + error.message, 'error');
+                    showStatus('�?FC ROM文件访问失败: ' + error.message, 'error');
                 });
         }
 
@@ -170,34 +170,34 @@
             fetch('/roms/19xx.zip', { method: 'HEAD' })
                 .then(response => {
                     if (response.ok) {
-                        showStatus('✅ MAME ROM文件可访问，正在跳转测试页面...', 'success');
+                        showStatus('�?MAME ROM文件可访问，正在跳转测试页面...', 'success');
                         setTimeout(() => {
                             window.open('/mame-emulator.html', '_blank');
                         }, 1000);
                     } else {
-                        showStatus('❌ MAME ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
+                        showStatus('�?MAME ROM文件无法访问 (状态码: ' + response.status + ')', 'error');
                     }
                 })
                 .catch(error => {
-                    showStatus('❌ MAME ROM文件访问失败: ' + error.message, 'error');
+                    showStatus('�?MAME ROM文件访问失败: ' + error.message, 'error');
                 });
         }
 
         // 页面加载时检查EmulatorJS文件
         window.addEventListener('load', () => {
             Promise.all([
-                fetch('/emulatorjs/loader.js', { method: 'HEAD' }),
-                fetch('/emulatorjs/cores/fceumm-wasm.data', { method: 'HEAD' }),
-                fetch('/emulatorjs/cores/mame2003_plus-wasm.data', { method: 'HEAD' })
+                fetch('https://cdn.emulatorjs.org/4.2.3/data/loader.js', { method: 'HEAD' }),
+                fetch('https://cdn.emulatorjs.org/4.2.3/data/cores/fceumm-wasm.data', { method: 'HEAD' }),
+                fetch('https://cdn.emulatorjs.org/4.2.3/data/cores/mame2003_plus-wasm.data', { method: 'HEAD' })
             ]).then(responses => {
                 const allOk = responses.every(r => r.ok);
                 if (allOk) {
-                    showStatus('✅ EmulatorJS文件检查通过', 'success');
+                    showStatus('�?EmulatorJS文件检查通过', 'success');
                 } else {
                     showStatus('⚠️ 部分EmulatorJS文件可能缺失', 'error');
                 }
             }).catch(error => {
-                showStatus('❌ EmulatorJS文件检查失败', 'error');
+                showStatus('�?EmulatorJS文件检查失�?, 'error');
             });
         });
     </script>

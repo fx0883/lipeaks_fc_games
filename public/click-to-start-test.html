@@ -36,9 +36,9 @@
     <div id="overlay" class="overlay">
         <div class="info">
             <h1>🎮 EmulatorJS 测试</h1>
-            <p>由于浏览器安全策略，需要用户交互才能启动游戏</p>
-            <p><strong>游戏：</strong>魂斗罗 (FC/NES)</p>
-            <p><strong>核心：</strong>fceumm</p>
+            <p>由于浏览器安全策略，需要用户交互才能启动游�?/p>
+            <p><strong>游戏�?/strong>魂斗�?(FC/NES)</p>
+            <p><strong>核心�?/strong>fceumm</p>
         </div>
         <button id="startButton" class="start-button" onclick="startEmulator()">
             🚀 点击启动游戏
@@ -83,27 +83,27 @@
                 window.EJS_player = '#emulator';
                 window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
                 window.EJS_system = 'nes';
-                window.EJS_pathtodata = '/emulatorjs/data/';
-                window.EJS_gameName = '魂斗罗';
-                window.EJS_startOnLoaded = true; // 自动开始游戏
+                window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
+                window.EJS_gameName = '魂斗�?;
+                window.EJS_startOnLoaded = true; // 自动开始游�?
                 
                 updateStatus('📦 正在加载EmulatorJS核心...');
                 
                 // 监听错误
                 window.addEventListener('error', (e) => {
-                    updateStatus('❌ 发生错误: ' + (e.error?.message || e.message), true);
+                    updateStatus('�?发生错误: ' + (e.error?.message || e.message), true);
                 });
                 
                 window.addEventListener('unhandledrejection', (e) => {
-                    updateStatus('❌ Promise错误: ' + e.reason, true);
+                    updateStatus('�?Promise错误: ' + e.reason, true);
                 });
                 
                 // 加载EmulatorJS
                 const script = document.createElement('script');
-                script.src = '/emulatorjs/data/loader.js';
+                script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
                 
                 script.onload = () => {
-                    updateStatus('✅ EmulatorJS加载成功', false, '等待初始化...');
+                    updateStatus('�?EmulatorJS加载成功', false, '等待初始�?..');
                     
                     // 检查初始化进度
                     let checkCount = 0;
@@ -117,31 +117,31 @@
                             // 监听可能的EmulatorJS事件
                             if (window.EJS_emulator.on) {
                                 window.EJS_emulator.on('ready', () => {
-                                    updateStatus('🎮 游戏准备就绪！');
+                                    updateStatus('🎮 游戏准备就绪�?);
                                 });
                                 
                                 window.EJS_emulator.on('start', () => {
-                                    updateStatus('🕹️ 游戏已开始运行！');
+                                    updateStatus('🕹�?游戏已开始运行！');
                                 });
                             }
                             
                         } else if (checkCount > 50) { // 5秒后超时
-                            updateStatus('⚠️ EmulatorJS初始化超时', true);
+                            updateStatus('⚠️ EmulatorJS初始化超�?, true);
                             clearInterval(checkInit);
                         } else {
-                            updateStatus('⏳ 正在初始化EmulatorJS...', false, `${checkCount}/50`);
+                            updateStatus('�?正在初始化EmulatorJS...', false, `${checkCount}/50`);
                         }
                     }, 100);
                 };
                 
                 script.onerror = () => {
-                    updateStatus('❌ EmulatorJS加载失败！', true, '请检查文件路径');
+                    updateStatus('�?EmulatorJS加载失败�?, true, '请检查文件路�?);
                 };
                 
                 document.head.appendChild(script);
                 
             } catch (error) {
-                updateStatus('❌ 启动失败: ' + error.message, true);
+                updateStatus('�?启动失败: ' + error.message, true);
                 console.error('Startup error:', error);
             }
         }

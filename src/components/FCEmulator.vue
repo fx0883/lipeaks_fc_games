@@ -99,10 +99,10 @@ const props = defineProps({
       type: String,
       default: 'emulator'
     },
-    dataPath: {
-      type: String,
-      default: '/emulatorjs/'
-  },
+      dataPath: {
+    type: String,
+    default: 'https://cdn.emulatorjs.org/4.2.3/data/'
+},
   gameName: {
     type: String,
     default: 'NES Game'

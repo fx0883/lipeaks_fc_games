@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>精简版 EmulatorJS 测试</title>
+    <title>精简�?EmulatorJS 测试</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,12 +26,12 @@
         }
         .emulator-container {
             width: 100%;
-            height: 600px;  /* 从400px增加到600px */
+            height: 600px;  /* �?00px增加�?00px */
             border: 2px solid #333;
             border-radius: 5px;
             background: #000;
             margin: 15px 0;
-            min-height: 600px;  /* 添加最小高度 */
+            min-height: 600px;  /* 添加最小高�?*/
         }
         button {
             margin: 5px;
@@ -91,40 +91,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎮 精简版 EmulatorJS 测试</h1>
+        <h1>🎮 精简�?EmulatorJS 测试</h1>
         
         <div class="info">
-            <strong>测试说明：</strong>此页面用于测试精简版EmulatorJS，只包含FC/NES (fceumm) 和 MAME2003 两个核心。
-            <br><strong>模拟器尺寸：</strong>已增大到 600px 高度，便于观察游戏运行状态。
+            <strong>测试说明�?/strong>此页面用于测试精简版EmulatorJS，只包含FC/NES (fceumm) �?MAME2003 两个核心�?
+            <br><strong>模拟器尺寸：</strong>已增大到 600px 高度，便于观察游戏运行状态�?
         </div>
 
         <!-- 添加调试信息区域 -->
         <div class="test-section">
             <h2>🔍 调试信息</h2>
-            <button onclick="checkFiles()">检查文件状态</button>
+            <button onclick="checkFiles()">检查文件状�?/button>
             <button onclick="clearDebugLog()">清空调试日志</button>
-            <button onclick="checkEmulatorStatus()">检查模拟器状态</button>
-            <div id="debug-log" class="debug">点击"检查文件状态"开始诊断...</div>
+            <button onclick="checkEmulatorStatus()">检查模拟器状�?/button>
+            <div id="debug-log" class="debug">点击"检查文件状�?开始诊�?..</div>
         </div>
 
         <div class="test-section">
-            <h2>🕹️ FC/NES 测试</h2>
+            <h2>🕹�?FC/NES 测试</h2>
             <button onclick="testFC()">测试 FC/NES 游戏</button>
-            <button onclick="clearEmulator()">清空模拟器</button>
+            <button onclick="clearEmulator()">清空模拟�?/button>
             <div id="fc-status" class="info">准备测试 FC/NES 游戏</div>
         </div>
 
         <div class="test-section">
             <h2>🎰 MAME 测试</h2>
             <button onclick="testMAME()">测试 MAME 街机游戏</button>
-            <button onclick="clearEmulator()">清空模拟器</button>
+            <button onclick="clearEmulator()">清空模拟�?/button>
             <div id="mame-status" class="info">准备测试 MAME 街机游戏</div>
         </div>
 
         <div id="emulator" class="emulator-container"></div>
         
         <div id="general-status" class="info">
-            <strong>状态：</strong>页面已加载，可以开始测试
+            <strong>状态：</strong>页面已加载，可以开始测�?
         </div>
     </div>
 
@@ -152,7 +152,7 @@
         
         async function checkFiles() {
             clearDebugLog();
-            addDebugLog('🔍 开始检查文件状态...');
+            addDebugLog('🔍 开始检查文件状�?..');
             
             // 检查ROM文件
             const romFiles = ['/roms/Contra1(U)30.nes', '/roms/19xx.zip'];
@@ -160,49 +160,49 @@
                 try {
                     const response = await fetch(romFile, { method: 'HEAD' });
                     if (response.ok) {
-                        addDebugLog(`✅ ROM文件存在: ${romFile}`);
+                        addDebugLog(`�?ROM文件存在: ${romFile}`);
                     } else {
-                        addDebugLog(`❌ ROM文件访问失败: ${romFile} (状态码: ${response.status})`);
+                        addDebugLog(`�?ROM文件访问失败: ${romFile} (状态码: ${response.status})`);
                     }
                 } catch (error) {
-                    addDebugLog(`❌ ROM文件检查出错: ${romFile} - ${error.message}`);
+                    addDebugLog(`�?ROM文件检查出�? ${romFile} - ${error.message}`);
                 }
             }
             
             // 检查EmulatorJS文件
             const ejsFiles = [
-                '/emulatorjs/data/loader.js',
-                '/emulatorjs/data/emulator.min.js',
-                '/emulatorjs/data/emulator.min.css'
+                'https://cdn.emulatorjs.org/4.2.3/data/loader.js',
+                'https://cdn.emulatorjs.org/4.2.3/data/emulator.min.js',
+                'https://cdn.emulatorjs.org/4.2.3/data/emulator.min.css'
             ];
             for (const ejsFile of ejsFiles) {
                 try {
                     const response = await fetch(ejsFile, { method: 'HEAD' });
                     if (response.ok) {
-                        addDebugLog(`✅ EmulatorJS文件存在: ${ejsFile}`);
+                        addDebugLog(`�?EmulatorJS文件存在: ${ejsFile}`);
                     } else {
-                        addDebugLog(`❌ EmulatorJS文件访问失败: ${ejsFile} (状态码: ${response.status})`);
+                        addDebugLog(`�?EmulatorJS文件访问失败: ${ejsFile} (状态码: ${response.status})`);
                     }
                 } catch (error) {
-                    addDebugLog(`❌ EmulatorJS文件检查出错: ${ejsFile} - ${error.message}`);
+                    addDebugLog(`�?EmulatorJS文件检查出�? ${ejsFile} - ${error.message}`);
                 }
             }
             
-            // 检查核心文件
+            // 检查核心文�?
             const coreFiles = [
-                '/emulatorjs/data/cores/reports/fceumm.json',
-                '/emulatorjs/data/cores/reports/mame2003.json'
+                'https://cdn.emulatorjs.org/4.2.3/data/cores/reports/fceumm.json',
+                'https://cdn.emulatorjs.org/4.2.3/data/cores/reports/mame2003.json'
             ];
             for (const coreFile of coreFiles) {
                 try {
                     const response = await fetch(coreFile, { method: 'HEAD' });
                     if (response.ok) {
-                        addDebugLog(`✅ 核心报告文件存在: ${coreFile}`);
+                        addDebugLog(`�?核心报告文件存在: ${coreFile}`);
                     } else {
-                        addDebugLog(`❌ 核心报告文件访问失败: ${coreFile} (状态码: ${response.status})`);
+                        addDebugLog(`�?核心报告文件访问失败: ${coreFile} (状态码: ${response.status})`);
                     }
                 } catch (error) {
-                    addDebugLog(`❌ 核心报告文件检查出错: ${coreFile} - ${error.message}`);
+                    addDebugLog(`�?核心报告文件检查出�? ${coreFile} - ${error.message}`);
                 }
             }
             
@@ -233,22 +233,22 @@
             scripts.forEach(script => script.remove());
             
             addDebugLog('🧹 模拟器已清空');
-            updateStatus('general-status', '模拟器已清空，可以重新测试', 'info');
+            updateStatus('general-status', '模拟器已清空，可以重新测�?, 'info');
         }
         
         function testFC() {
             clearEmulator();
-            addDebugLog('🕹️ 开始测试FC/NES...');
-            updateStatus('fc-status', '正在初始化 FC/NES 模拟器...', 'info');
-            updateStatus('general-status', '加载 FC/NES 核心中...', 'info');
+            addDebugLog('🕹�?开始测试FC/NES...');
+            updateStatus('fc-status', '正在初始�?FC/NES 模拟�?..', 'info');
+            updateStatus('general-status', '加载 FC/NES 核心�?..', 'info');
             
             try {
                 // 设置 EmulatorJS 配置 - FC/NES
                 window.EJS_player = '#emulator';
                 window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
                 window.EJS_system = 'nes';
-                window.EJS_pathtodata = '/emulatorjs/data/';
-                window.EJS_gameName = 'FC 魂斗罗测试';
+                window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
+                window.EJS_gameName = 'FC 魂斗罗测�?;
                 
                 const config = {
                     player: window.EJS_player,
@@ -262,23 +262,23 @@
                 
                 // 加载 EmulatorJS
                 const script = document.createElement('script');
-                script.src = '/emulatorjs/data/loader.js';
+                script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
                 script.onload = () => {
-                    addDebugLog('✅ EmulatorJS loader.js 加载成功');
-                    updateStatus('fc-status', 'FC/NES 模拟器加载成功！请等待游戏启动...', 'success');
+                    addDebugLog('�?EmulatorJS loader.js 加载成功');
+                    updateStatus('fc-status', 'FC/NES 模拟器加载成功！请等待游戏启�?..', 'success');
                     updateStatus('general-status', 'FC/NES 模拟器运行中', 'success');
                 };
                 script.onerror = (error) => {
-                    addDebugLog('❌ EmulatorJS loader.js 加载失败: ' + error);
+                    addDebugLog('�?EmulatorJS loader.js 加载失败: ' + error);
                     updateStatus('fc-status', 'FC/NES 模拟器加载失败！', 'error');
-                    updateStatus('general-status', '加载失败，请检查文件路径', 'error');
+                    updateStatus('general-status', '加载失败，请检查文件路�?, 'error');
                 };
                 document.head.appendChild(script);
                 
             } catch (error) {
-                addDebugLog('❌ FC初始化异常: ' + error.message);
+                addDebugLog('�?FC初始化异�? ' + error.message);
                 updateStatus('fc-status', 'FC/NES 模拟器初始化错误: ' + error.message, 'error');
-                updateStatus('general-status', '初始化失败: ' + error.message, 'error');
+                updateStatus('general-status', '初始化失�? ' + error.message, 'error');
                 console.error('FC init error:', error);
             }
         }
@@ -286,15 +286,15 @@
         function testMAME() {
             clearEmulator();
             addDebugLog('🎰 开始测试MAME2003...');
-            updateStatus('mame-status', '正在初始化 MAME2003 模拟器...', 'info');
-            updateStatus('general-status', '加载 MAME2003 核心中...', 'info');
+            updateStatus('mame-status', '正在初始�?MAME2003 模拟�?..', 'info');
+            updateStatus('general-status', '加载 MAME2003 核心�?..', 'info');
             
             try {
                 // 设置 EmulatorJS 配置 - MAME
                 window.EJS_player = '#emulator';
                 window.EJS_gameUrl = '/roms/19xx.zip';
                 window.EJS_system = 'mame';
-                window.EJS_pathtodata = '/emulatorjs/data/';
+                window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
                 window.EJS_gameName = 'MAME 街机测试';
                 
                 const config = {
@@ -309,62 +309,62 @@
                 
                 // 加载 EmulatorJS
                 const script = document.createElement('script');
-                script.src = '/emulatorjs/data/loader.js';
+                script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
                 script.onload = () => {
-                    addDebugLog('✅ EmulatorJS loader.js 加载成功');
-                    updateStatus('mame-status', 'MAME2003 模拟器加载成功！请等待游戏启动...', 'success');
+                    addDebugLog('�?EmulatorJS loader.js 加载成功');
+                    updateStatus('mame-status', 'MAME2003 模拟器加载成功！请等待游戏启�?..', 'success');
                     updateStatus('general-status', 'MAME2003 模拟器运行中', 'success');
                 };
                 script.onerror = (error) => {
-                    addDebugLog('❌ EmulatorJS loader.js 加载失败: ' + error);
+                    addDebugLog('�?EmulatorJS loader.js 加载失败: ' + error);
                     updateStatus('mame-status', 'MAME2003 模拟器加载失败！', 'error');
-                    updateStatus('general-status', '加载失败，请检查文件路径', 'error');
+                    updateStatus('general-status', '加载失败，请检查文件路�?, 'error');
                 };
                 document.head.appendChild(script);
                 
             } catch (error) {
-                addDebugLog('❌ MAME初始化异常: ' + error.message);
+                addDebugLog('�?MAME初始化异�? ' + error.message);
                 updateStatus('mame-status', 'MAME2003 模拟器初始化错误: ' + error.message, 'error');
-                updateStatus('general-status', '初始化失败: ' + error.message, 'error');
+                updateStatus('general-status', '初始化失�? ' + error.message, 'error');
                 console.error('MAME init error:', error);
             }
         }
         
         function checkEmulatorStatus() {
-            addDebugLog('🔍 检查模拟器状态...');
+            addDebugLog('🔍 检查模拟器状�?..');
             
             const emulatorEl = document.getElementById('emulator');
-            addDebugLog(`模拟器容器: ${emulatorEl ? '存在' : '不存在'}`);
+            addDebugLog(`模拟器容�? ${emulatorEl ? '存在' : '不存�?}`);
             
             if (emulatorEl) {
-                addDebugLog(`模拟器容器内容: ${emulatorEl.innerHTML ? '有内容' : '空的'}`);
+                addDebugLog(`模拟器容器内�? ${emulatorEl.innerHTML ? '有内�? : '空的'}`);
                 addDebugLog(`模拟器子元素数量: ${emulatorEl.children.length}`);
                 
                 // 检查canvas元素
                 const canvas = emulatorEl.querySelector('canvas');
                 if (canvas) {
-                    addDebugLog(`✅ 找到Canvas元素: ${canvas.width}x${canvas.height}`);
+                    addDebugLog(`�?找到Canvas元素: ${canvas.width}x${canvas.height}`);
                 } else {
-                    addDebugLog('❌ 未找到Canvas元素');
+                    addDebugLog('�?未找到Canvas元素');
                 }
                 
                 // 检查iframe元素
                 const iframe = emulatorEl.querySelector('iframe');
                 if (iframe) {
-                    addDebugLog(`✅ 找到iframe元素: ${iframe.src}`);
+                    addDebugLog(`�?找到iframe元素: ${iframe.src}`);
                 } else {
-                    addDebugLog('❌ 未找到iframe元素');
+                    addDebugLog('�?未找到iframe元素');
                 }
             }
             
             // 检查全局EmulatorJS变量
             if (window.EJS_emulator) {
-                addDebugLog('✅ 全局EJS_emulator存在');
+                addDebugLog('�?全局EJS_emulator存在');
             } else {
-                addDebugLog('❌ 全局EJS_emulator不存在');
+                addDebugLog('�?全局EJS_emulator不存�?);
             }
             
-            // 检查当前配置
+            // 检查当前配�?
             const config = {
                 player: window.EJS_player,
                 gameUrl: window.EJS_gameUrl,
@@ -378,19 +378,19 @@
         // 页面加载完成
         window.addEventListener('load', () => {
             addDebugLog('📄 页面加载完成');
-            updateStatus('general-status', '✅ 精简版 EmulatorJS 测试页面就绪', 'success');
+            updateStatus('general-status', '�?精简�?EmulatorJS 测试页面就绪', 'success');
         });
         
         // 监听全局错误
         window.addEventListener('error', (e) => {
-            addDebugLog('❌ 全局错误: ' + e.error?.message || e.message);
+            addDebugLog('�?全局错误: ' + e.error?.message || e.message);
             updateStatus('general-status', '发生错误: ' + (e.error?.message || e.message), 'error');
             console.error('Global error:', e.error || e);
         });
         
         // 监听未处理的Promise错误
         window.addEventListener('unhandledrejection', (e) => {
-            addDebugLog('❌ Promise错误: ' + e.reason);
+            addDebugLog('�?Promise错误: ' + e.reason);
             updateStatus('general-status', 'Promise错误: ' + e.reason, 'error');
             console.error('Unhandled promise rejection:', e.reason);
         });
@@ -398,7 +398,7 @@
         // 添加EmulatorJS事件监听
         window.addEventListener('message', (e) => {
             if (e.data && e.data.type) {
-                addDebugLog(`📨 接收到消息: ${e.data.type} - ${JSON.stringify(e.data)}`);
+                addDebugLog(`📨 接收到消�? ${e.data.type} - ${JSON.stringify(e.data)}`);
             }
         });
     </script>

@@ -8,7 +8,7 @@ const defaultConfig = {
   // 模拟器配置
   emulator: {
     defaultCore: 'fceumm',
-    dataPath: '/emulatorjs/',
+    dataPath: 'https://cdn.emulatorjs.org/4.2.3/data/',
     defaultVolume: 100,
     autoSave: true,
     saveInterval: 30000, // 30秒自动保存间隔
@@ -52,8 +52,8 @@ const defaultConfig = {
   resources: {
     romBaseUrl: '/roms/',
     dataBaseUrl: '/data/',
-    cdnEnabled: false,
-    cdnBaseUrl: 'https://cdn.emulatorjs.org/stable/data/',
+    cdnEnabled: true,
+    cdnBaseUrl: 'https://cdn.emulatorjs.org/4.2.3/data/',
     compressionEnabled: true,
     preloadResources: []
   },

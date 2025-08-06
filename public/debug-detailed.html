@@ -58,9 +58,9 @@
             addLog('🔧 手动触发EmulatorJS启动', 'info');
             if (window.EJS_emulator && window.EJS_emulator.startButtonClicked) {
                 window.EJS_emulator.startButtonClicked({});
-                addLog('✅ 手动调用startButtonClicked', 'success');
+                addLog('�?手动调用startButtonClicked', 'success');
             } else {
-                addLog('❌ EJS_emulator或startButtonClicked不存在', 'error');
+                addLog('�?EJS_emulator或startButtonClicked不存�?, 'error');
             }
         }
         
@@ -69,16 +69,15 @@
         window.EJS_player = '#emulator';
         window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
         window.EJS_core = 'fceumm';  // 修正：使用EJS_core而不是EJS_system
-        window.EJS_pathtodata = '/emulatorjs/';  // 修正：使用正确的路径
-        window.EJS_gameName = '魂斗罗详细调试';
+        window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';  // 修正：使用正确的路径
+        window.EJS_gameName = '魂斗罗详细调�?;
         window.EJS_startOnLoaded = true; // 尝试自动启动
         window.EJS_DEBUG_XX = true; // 启用调试模式
         window.EJS_disableDatabases = true; // 禁用数据库以加快加载
         
         addLog(`配置完成: core=${window.EJS_core}, startOnLoaded=${window.EJS_startOnLoaded}`, 'info');
         
-        // 劫持console方法来捕获EmulatorJS的内部日志
-        const originalLog = console.log;
+        // 劫持console方法来捕获EmulatorJS的内部日�?        const originalLog = console.log;
         const originalWarn = console.warn;
         const originalError = console.error;
         
@@ -115,31 +114,28 @@
         addLog('📦 开始加载EmulatorJS...', 'info');
         
         const script = document.createElement('script');
-        script.src = '/emulatorjs/loader.js';  // 修正：使用正确的路径
+        script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';  // 修正：使用正确的路径
         
         script.onload = () => {
-            addLog('✅ loader.js加载成功', 'success');
+            addLog('�?loader.js加载成功', 'success');
             
-            // 监控EmulatorJS对象的创建
-            let checkCount = 0;
+            // 监控EmulatorJS对象的创�?            let checkCount = 0;
             const checkEmulator = setInterval(() => {
                 checkCount++;
                 
                 if (window.EJS_emulator) {
                     addLog('🎯 EJS_emulator对象已创建！', 'success');
                     
-                    // 检查EmulatorJS的重要方法
-                    const methods = ['startButtonClicked', 'downloadGameCore', 'getCore'];
+                    // 检查EmulatorJS的重要方�?                    const methods = ['startButtonClicked', 'downloadGameCore', 'getCore'];
                     methods.forEach(method => {
                         if (window.EJS_emulator[method]) {
-                            addLog(`✅ 方法存在: ${method}`, 'success');
+                            addLog(`�?方法存在: ${method}`, 'success');
                         } else {
-                            addLog(`❌ 方法缺失: ${method}`, 'error');
+                            addLog(`�?方法缺失: ${method}`, 'error');
                         }
                     });
                     
-                    // 检查核心检测
-                    if (window.EJS_emulator.getCore) {
+                    // 检查核心检�?                    if (window.EJS_emulator.getCore) {
                         const core = window.EJS_emulator.getCore();
                         addLog(`🎮 检测到核心: ${core}`, 'info');
                     }
@@ -155,25 +151,25 @@
                         });
                         
                         window.EJS_emulator.on('start', () => {
-                            addLog('🕹️ start事件触发 - 游戏开始！', 'success');
+                            addLog('🕹�?start事件触发 - 游戏开始！', 'success');
                         });
                         
-                        addLog('📡 已注册EmulatorJS事件监听器', 'info');
+                        addLog('📡 已注册EmulatorJS事件监听�?, 'info');
                     }
                     
                     clearInterval(checkEmulator);
                     
                 } else if (checkCount > 100) {
-                    addLog('⏰ EmulatorJS初始化超时', 'error');
+                    addLog('�?EmulatorJS初始化超�?, 'error');
                     clearInterval(checkEmulator);
                 } else if (checkCount % 10 === 0) {
-                    addLog(`⏳ 等待EmulatorJS初始化... (${checkCount}/100)`, 'info');
+                    addLog(`�?等待EmulatorJS初始�?.. (${checkCount}/100)`, 'info');
                 }
             }, 100);
         };
         
         script.onerror = () => {
-            addLog('❌ loader.js加载失败！', 'error');
+            addLog('�?loader.js加载失败�?, 'error');
         };
         
         document.head.appendChild(script);

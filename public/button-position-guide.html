@@ -237,17 +237,17 @@
         <h1>🔧 虚拟手柄按钮位置调整指南</h1>
         
         <div class="intro">
-            <p><strong>说明：</strong>本指南将详细介绍如何修改虚拟手柄按钮的位置、大小和布局。所有配置都在 <span class="highlight">src/utils/mobileDetection.js</span> 文件中。</p>
+            <p><strong>说明�?/strong>本指南将详细介绍如何修改虚拟手柄按钮的位置、大小和布局。所有配置都�?<span class="highlight">src/utils/mobileDetection.js</span> 文件中�?/p>
         </div>
 
-        <!-- 主配置文件 -->
+        <!-- 主配置文�?-->
         <div class="file-section">
-            <h2 class="file-title">📁 主配置文件: src/utils/mobileDetection.js</h2>
+            <h2 class="file-title">📁 主配置文�? src/utils/mobileDetection.js</h2>
             
-            <p>这是虚拟手柄配置的核心文件，包含以下两个主要函数：</p>
+            <p>这是虚拟手柄配置的核心文件，包含以下两个主要函数�?/p>
             <ul style="margin: 15px 0; padding-left: 30px;">
-                <li><code>getFCVirtualGamepadSettings(orientation)</code> - FC/NES游戏的按钮配置</li>
-                <li><code>getMAMEVirtualGamepadSettings(orientation)</code> - MAME街机游戏的按钮配置</li>
+                <li><code>getFCVirtualGamepadSettings(orientation)</code> - FC/NES游戏的按钮配�?/li>
+                <li><code>getMAMEVirtualGamepadSettings(orientation)</code> - MAME街机游戏的按钮配�?/li>
             </ul>
             
             <div class="code-block">
@@ -255,7 +255,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
   const isPortrait = orientation === 'portrait'
   
   return [
-    // 方向键 (左侧)
+    // 方向�?(左侧)
     {
       type: "dpad",
       location: "left",
@@ -271,8 +271,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
       type: "button",
       text: "Y",
       location: "right",
-      <span class="highlight">left: isPortrait ? 65 : 60,</span>           // 水平位置 (百分比)
-      <span class="highlight">top: isPortrait ? 60 : 50,</span>            // 垂直位置 (百分比)
+      <span class="highlight">left: isPortrait ? 65 : 60,</span>           // 水平位置 (百分�?
+      <span class="highlight">top: isPortrait ? 60 : 50,</span>            // 垂直位置 (百分�?
       input_value: 9,
       <span class="highlight">size: isPortrait ? 50 : 45</span>            // 按钮大小
     },
@@ -301,29 +301,29 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
             </div>
         </div>
 
-        <!-- 按钮属性说明 -->
+        <!-- 按钮属性说�?-->
         <div class="file-section">
-            <h2 class="file-title">⚙️ 按钮属性详解</h2>
+            <h2 class="file-title">⚙️ 按钮属性详�?/h2>
             
             <table class="table">
                 <thead>
                     <tr>
-                        <th>属性</th>
+                        <th>属�?/th>
                         <th>类型</th>
                         <th>说明</th>
-                        <th>示例值</th>
+                        <th>示例�?/th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>left</td>
-                        <td>数字/字符串</td>
+                        <td>数字/字符�?/td>
                         <td>水平位置，可以是百分比或像素</td>
                         <td>60, "12%"</td>
                     </tr>
                     <tr>
                         <td>top</td>
-                        <td>数字/字符串</td>
+                        <td>数字/字符�?/td>
                         <td>垂直位置，可以是百分比或像素</td>
                         <td>50, "70%"</td>
                     </tr>
@@ -335,8 +335,8 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
                     </tr>
                     <tr>
                         <td>location</td>
-                        <td>字符串</td>
-                        <td>按钮区域："left", "right", "center"</td>
+                        <td>字符�?/td>
+                        <td>按钮区域�?left", "right", "center"</td>
                         <td>"right"</td>
                     </tr>
                     <tr>
@@ -361,13 +361,13 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
             </ul>
             
             <div class="code-block">
-// 示例：右下角的按钮
+// 示例：右下角的按�?
 {
   type: "button",
   text: "A",
   location: "right",
-  left: 85,           // 距离左边85%的位置
-  top: 70,            // 距离顶部70%的位置  
+  left: 85,           // 距离左边85%的位�?
+  top: 70,            // 距离顶部70%的位�? 
   size: 45            // 按钮大小45像素
 }
             </div>
@@ -379,7 +379,7 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
             
             <div class="warning">
                 <h4>⚠️ 修改前请备份</h4>
-                <p>在修改配置前，建议先备份 <code>src/utils/mobileDetection.js</code> 文件。</p>
+                <p>在修改配置前，建议先备份 <code>src/utils/mobileDetection.js</code> 文件�?/p>
             </div>
             
             <h3 style="color: #e74c3c; margin: 20px 0 10px;">1. 调整按钮位置</h3>
@@ -392,20 +392,20 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
   top: isPortrait ? 80 : 70,
 }
 
-// 向左移动：减少 left 值
+// 向左移动：减�?left �?
 {
   type: "button", 
   text: "A",
-  left: isPortrait ? 75 : 70,    // 从 85/80 改为 75/70
+  left: isPortrait ? 75 : 70,    // �?85/80 改为 75/70
   top: isPortrait ? 80 : 70,
 }
 
-// 向上移动：减少 top 值
+// 向上移动：减�?top �?
 {
   type: "button",
   text: "A", 
   left: isPortrait ? 85 : 80,
-  top: isPortrait ? 70 : 60,     // 从 80/70 改为 70/60
+  top: isPortrait ? 70 : 60,     // �?80/70 改为 70/60
 }
             </div>
             
@@ -418,18 +418,18 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
   size: isPortrait ? 50 : 45
 }
 
-// 增大按钮：增加 size 值
+// 增大按钮：增�?size �?
 {
   type: "button",
   text: "A", 
-  size: isPortrait ? 60 : 55     // 从 50/45 改为 60/55
+  size: isPortrait ? 60 : 55     // �?50/45 改为 60/55
 }
 
-// 缩小按钮：减少 size 值
+// 缩小按钮：减�?size �?
 {
   type: "button",
   text: "A",
-  size: isPortrait ? 40 : 35     // 从 50/45 改为 40/35
+  size: isPortrait ? 40 : 35     // �?50/45 改为 40/35
 }
             </div>
             
@@ -437,17 +437,17 @@ export function getFCVirtualGamepadSettings(orientation = 'landscape') {
             <div class="code-block">
 // 增加按钮间的水平距离
 // Y按钮位置
-left: isPortrait ? 60 : 55,    // 从 65/60 改为 60/55 (向左移)
+left: isPortrait ? 60 : 55,    // �?65/60 改为 60/55 (向左�?
 
 // X按钮位置  
-left: isPortrait ? 90 : 85,    // 从 85/80 改为 90/85 (向右移)
+left: isPortrait ? 90 : 85,    // �?85/80 改为 90/85 (向右�?
 
 // 增加按钮间的垂直距离
 // 上排按钮
-top: isPortrait ? 55 : 45,     // 从 60/50 改为 55/45 (向上移)
+top: isPortrait ? 55 : 45,     // �?60/50 改为 55/45 (向上�?
 
 // 下排按钮
-top: isPortrait ? 85 : 75,     // 从 80/70 改为 85/75 (向下移)
+top: isPortrait ? 85 : 75,     // �?80/70 改为 85/75 (向下�?
             </div>
         </div>
 
@@ -458,7 +458,7 @@ top: isPortrait ? 85 : 75,     // 从 80/70 改为 85/75 (向下移)
             <p>修改 <code>src/utils/mobileDetection.js</code> 后，还需要同步更新以下测试页面：</p>
             
             <div class="code-block">
-📁 需要同步更新的文件：
+📁 需要同步更新的文件�?
 ├── public/fc-emulator.html
 ├── public/mame-emulator.html  
 ├── public/mobile-test.html
@@ -466,19 +466,19 @@ top: isPortrait ? 85 : 75,     // 从 80/70 改为 85/75 (向下移)
             </div>
             
             <div class="tips">
-                <h4>💡 自动同步技巧</h4>
+                <h4>💡 自动同步技�?/h4>
                 <ul>
                     <li>修改主配置文件后，Vue应用会自动使用新配置</li>
                     <li>测试页面需要手动复制相同的配置函数</li>
-                    <li>建议保持所有文件的配置一致性</li>
-                    <li>每次修改后在移动设备上测试效果</li>
+                    <li>建议保持所有文件的配置一致�?/li>
+                    <li>每次修改后在移动设备上测试效�?/li>
                 </ul>
             </div>
         </div>
 
-        <!-- 按钮映射值 -->
+        <!-- 按钮映射�?-->
         <div class="file-section">
-            <h2 class="file-title">🎮 按钮映射值参考</h2>
+            <h2 class="file-title">🎮 按钮映射值参�?/h2>
             
             <table class="table">
                 <thead>
@@ -491,39 +491,39 @@ top: isPortrait ? 85 : 75,     // 从 80/70 改为 85/75 (向下移)
                 </thead>
                 <tbody>
                     <tr><td>0</td><td>Button 1 / B</td><td>B按钮 (跑步/取消)</td><td>按钮1 (射击/轻拳)</td></tr>
-                    <tr><td>1</td><td>Button 2 / X</td><td>X按钮 (未使用)</td><td>按钮3 (重拳)</td></tr>
+                    <tr><td>1</td><td>Button 2 / X</td><td>X按钮 (未使�?</td><td>按钮3 (重拳)</td></tr>
                     <tr><td>8</td><td>Button 3 / A</td><td>A按钮 (跳跃/确认)</td><td>按钮2 (中拳)</td></tr>
-                    <tr><td>9</td><td>Button 4 / Y</td><td>Y按钮 (未使用)</td><td>按钮4 (轻腿)</td></tr>
-                    <tr><td>2</td><td>SELECT</td><td>选择键</td><td>投币 (COIN)</td></tr>
-                    <tr><td>3</td><td>START</td><td>开始键</td><td>开始游戏</td></tr>
-                    <tr><td>4</td><td>UP</td><td>上方向</td><td>上方向</td></tr>
-                    <tr><td>5</td><td>DOWN</td><td>下方向</td><td>下方向</td></tr>
-                    <tr><td>6</td><td>LEFT</td><td>左方向</td><td>左方向</td></tr>
-                    <tr><td>7</td><td>RIGHT</td><td>右方向</td><td>右方向</td></tr>
+                    <tr><td>9</td><td>Button 4 / Y</td><td>Y按钮 (未使�?</td><td>按钮4 (轻腿)</td></tr>
+                    <tr><td>2</td><td>SELECT</td><td>选择�?/td><td>投币 (COIN)</td></tr>
+                    <tr><td>3</td><td>START</td><td>开始键</td><td>开始游�?/td></tr>
+                    <tr><td>4</td><td>UP</td><td>上方�?/td><td>上方�?/td></tr>
+                    <tr><td>5</td><td>DOWN</td><td>下方�?/td><td>下方�?/td></tr>
+                    <tr><td>6</td><td>LEFT</td><td>左方�?/td><td>左方�?/td></tr>
+                    <tr><td>7</td><td>RIGHT</td><td>右方�?/td><td>右方�?/td></tr>
                 </tbody>
             </table>
         </div>
 
         <!-- 常见问题 -->
         <div class="file-section">
-            <h2 class="file-title">❓ 常见问题解决</h2>
+            <h2 class="file-title">�?常见问题解决</h2>
             
             <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 按钮位置重叠怎么办？</h3>
-            <p><strong>A:</strong> 调整 <code>left</code> 和 <code>top</code> 值，确保按钮之间有足够间距。一般建议水平间距至少20%，垂直间距至少15%。</p>
+            <p><strong>A:</strong> 调整 <code>left</code> �?<code>top</code> 值，确保按钮之间有足够间距。一般建议水平间距至�?0%，垂直间距至�?5%�?/p>
             
             <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 按钮显示在屏幕外面？</h3>
-            <p><strong>A:</strong> 检查 <code>left</code> 和 <code>top</code> 值，确保不超过100。考虑按钮大小，实际可用范围约为5%-95%。</p>
+            <p><strong>A:</strong> 检�?<code>left</code> �?<code>top</code> 值，确保不超�?00。考虑按钮大小，实际可用范围约�?%-95%�?/p>
             
             <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 横屏和竖屏效果不一致？</h3>
-            <p><strong>A:</strong> 分别调整 <code>isPortrait ? 竖屏值 : 横屏值</code> 的两个数值，根据实际设备测试效果。</p>
+            <p><strong>A:</strong> 分别调整 <code>isPortrait ? 竖屏�?: 横屏�?/code> 的两个数值，根据实际设备测试效果�?/p>
             
-            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 修改后不生效？</h3>
-            <p><strong>A:</strong> 清除浏览器缓存，重启开发服务器，或者强制刷新页面 (Ctrl+F5)。</p>
+            <h3 style="color: #e74c3c; margin: 15px 0 10px;">Q: 修改后不生效�?/h3>
+            <p><strong>A:</strong> 清除浏览器缓存，重启开发服务器，或者强制刷新页�?(Ctrl+F5)�?/p>
         </div>
 
         <div style="text-align: center;">
-            <a href="/test-games.html" class="back-link">← 返回测试页面</a>
-            <a href="/mobile-test.html" class="back-link">📱 移动端测试</a>
+            <a href="/test-games.html" class="back-link">�?返回测试页面</a>
+            <a href="/mobile-test.html" class="back-link">📱 移动端测�?/a>
             <a href="/emulator-controls-guide.html" class="back-link">🎮 控制说明</a>
             <a href="/" class="back-link">🏠 返回主页</a>
         </div>

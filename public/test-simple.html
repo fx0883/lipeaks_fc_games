@@ -18,19 +18,19 @@
         <button onclick="loadMAME()">加载MAME游戏</button>
         <button onclick="reset()">重置</button>
     </div>
-    <div id="status" class="status">点击按钮开始测试</div>
+    <div id="status" class="status">点击按钮开始测�?/div>
     <div id="game"></div>
 
     <script>
         function updateStatus(msg) {
             document.getElementById('status').textContent = msg;
-            console.log('状态:', msg);
+            console.log('状�?', msg);
         }
 
         function reset() {
             document.getElementById('game').innerHTML = '';
             if (window.EJS_emulator) delete window.EJS_emulator;
-            updateStatus('已重置');
+            updateStatus('已重�?);
         }
 
         function loadFC() {
@@ -41,19 +41,19 @@
             window.EJS_player = '#game';
             window.EJS_gameUrl = '/roms/Contra1(U)30.nes';
             window.EJS_core = 'fceumm';
-            window.EJS_pathtodata = '/emulatorjs/';
+            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
             window.EJS_gameName = 'Contra';
             window.EJS_startOnLoaded = true;
             window.EJS_DEBUG_XX = true;
 
             // 设置回调
-            window.EJS_ready = () => updateStatus('FC模拟器就绪!');
-            window.EJS_onGameStart = () => updateStatus('FC游戏开始!');
+            window.EJS_ready = () => updateStatus('FC模拟器就�?');
+            window.EJS_onGameStart = () => updateStatus('FC游戏开�?');
 
             // 加载脚本
             const script = document.createElement('script');
-            script.src = '/emulatorjs/loader.js';
-            script.onload = () => updateStatus('FC loader已加载');
+            script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
+            script.onload = () => updateStatus('FC loader已加�?);
             script.onerror = () => updateStatus('FC loader加载失败!');
             document.head.appendChild(script);
         }
@@ -66,19 +66,19 @@
             window.EJS_player = '#game';
             window.EJS_gameUrl = '/roms/19xx.zip';
             window.EJS_core = 'mame2003_plus';
-            window.EJS_pathtodata = '/emulatorjs/';
+            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/4.2.3/data/';
             window.EJS_gameName = '19XX';
             window.EJS_startOnLoaded = true;
             window.EJS_DEBUG_XX = true;
 
             // 设置回调
-            window.EJS_ready = () => updateStatus('MAME模拟器就绪!');
-            window.EJS_onGameStart = () => updateStatus('MAME游戏开始!');
+            window.EJS_ready = () => updateStatus('MAME模拟器就�?');
+            window.EJS_onGameStart = () => updateStatus('MAME游戏开�?');
 
             // 加载脚本
             const script = document.createElement('script');
-            script.src = '/emulatorjs/loader.js';
-            script.onload = () => updateStatus('MAME loader已加载');
+            script.src = 'https://cdn.emulatorjs.org/4.2.3/data/loader.js';
+            script.onload = () => updateStatus('MAME loader已加�?);
             script.onerror = () => updateStatus('MAME loader加载失败!');
             document.head.appendChild(script);
         }
