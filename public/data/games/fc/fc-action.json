@@ -1,19 +1,5 @@
 [
-  {
-    "id": "fc-100-emocheng1wudiban",
-    "name": "恶魔城1",
-    "platform": "fc",
-    "subCategory": "fc-action",
-    "romPath": "/roms/fc/100-emocheng1wudiban.nes",
-    "cover": "/roms/images/fc/emocheng1wudiban-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "未知",
-    "version": "",
-    "description": "恶魔城1 - 动作FC游戏",
-    "playCount": 0
-  },
+
   {
     "id": "fc-101-emocheng1-renwukulouban",
     "name": "恶魔城1（人物骷髅版",
@@ -5159,36 +5145,8 @@
     "description": "超级魂斗罗 (版本2) (v2)[星空汉化](US) - 动作FC游戏",
     "playCount": 0
   },
-  {
-    "id": "fc-luyu-37",
-    "name": "超级魂斗罗X[孔雀天汉化](CN)",
-    "platform": "fc",
-    "subCategory": "fc-action",
-    "romPath": "/roms/fc/roms/luyu(37).nes",
-    "cover": "/roms/images/fc/snaps/luyu(37)-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "4Mb",
-    "version": "",
-    "description": "超级魂斗罗X[孔雀天汉化](CN) - 动作FC游戏",
-    "playCount": 0
-  },
-  {
-    "id": "fc-luyu-38",
-    "name": "超级魂斗罗[FlameCyclone汉化](JP)",
-    "platform": "fc",
-    "subCategory": "fc-action",
-    "romPath": "/roms/fc/roms/luyu(38).nes",
-    "cover": "/roms/images/fc/snaps/luyu(38)-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "3Mb",
-    "version": "",
-    "description": "超级魂斗罗[FlameCyclone汉化](JP) - 动作FC游戏",
-    "playCount": 0
-  },
+
+
   {
     "id": "fc-luyu-39",
     "name": "超级魂斗罗[王大可汉化](US)",
@@ -5204,21 +5162,7 @@
     "description": "超级魂斗罗[王大可汉化](US) - 动作FC游戏",
     "playCount": 0
   },
-  {
-    "id": "fc-luyu-40",
-    "name": "超级魂斗罗[樱组汉化](JP)",
-    "platform": "fc",
-    "subCategory": "fc-action",
-    "romPath": "/roms/fc/roms/luyu(40).nes",
-    "cover": "/roms/images/fc/snaps/luyu(40)-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "2Mb",
-    "version": "",
-    "description": "超级魂斗罗[樱组汉化](JP) - 动作FC游戏",
-    "playCount": 0
-  },
+
   {
     "id": "fc-luyu-42",
     "name": "超级玛莉[PKome汉化](JUE)",

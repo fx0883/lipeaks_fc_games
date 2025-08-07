@@ -71,10 +71,30 @@ export const useGameStore = defineStore('game', {
       }
     },
     
-    // 热门游戏 - 简化逻辑，直接排序
+    // 推荐游戏 - 随机选择：FC游戏6个 + 街机游戏3个
     popularGames: (state) => {
-      return Array.from(state.allGames.values())
-        .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
+      const allGames = Array.from(state.allGames.values())
+      const fcGames = allGames.filter(game => game.platform === 'fc')
+      const arcadeGames = allGames.filter(game => game.platform === 'arcade')
+      
+      // 随机打乱数组的函数
+      const shuffleArray = (array) => {
+        const shuffled = [...array]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
+        return shuffled
+      }
+      
+      // 随机选择FC游戏6个
+      const selectedFcGames = shuffleArray(fcGames).slice(0, 6)
+      
+      // 随机选择街机游戏3个
+      const selectedArcadeGames = shuffleArray(arcadeGames).slice(0, 3)
+      
+      // 合并并再次随机打乱显示顺序
+      return shuffleArray([...selectedFcGames, ...selectedArcadeGames])
     },
 
     // 根据分类ID获取分类信息（支持主分类和子分类）

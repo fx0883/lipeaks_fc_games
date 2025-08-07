@@ -28,9 +28,9 @@
   "home": {
     "title": "Lipeaksゲームパラダイス",
     "gameCategories": "ゲームカテゴリ",
-    "popularGames": "人気ゲーム",
-    "loadingPopularGames": "人気ゲームを読み込み中...",
-    "noPopularGames": "人気ゲームがありません"
+    "recommendedGames": "おすすめゲーム",
+    "loadingRecommendedGames": "おすすめゲームを読み込み中...",
+    "noRecommendedGames": "おすすめゲームがありません"
   },
   "game": {
     "loading": "読み込み中...",

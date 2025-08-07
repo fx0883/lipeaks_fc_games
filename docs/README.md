@@ -189,3 +189,6 @@ npx @agentdeskai/browser-tools-server@latest
 恶魔城1
 吃豆小精灵[MS汉化](JP)
 导弹坦克[烟山科技修改](JP)
+超级魂斗罗X[孔雀天汉化](CN)
+超级魂斗罗[FlameCyclone汉化](JP)
+超级魂斗罗[樱组汉化](JP)

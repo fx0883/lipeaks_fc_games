@@ -4364,21 +4364,7 @@
     "description": "仓库世家 & 动脑筋[小霸王](CN) - 益智FC游戏",
     "playCount": 0
   },
-  {
-    "id": "fc-luyu-67",
-    "name": "吃豆小精灵[MS汉化](JP)",
-    "platform": "fc",
-    "subCategory": "fc-puzzle",
-    "romPath": "/roms/fc/roms/luyu(67).nes",
-    "cover": "/roms/images/fc/snaps/luyu(67)-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "0.18Mb",
-    "version": "",
-    "description": "吃豆小精灵[MS汉化](JP) - 益智FC游戏",
-    "playCount": 0
-  },
+
   {
     "id": "fc-luyu-68",
     "name": "吃豆小精灵[叶枫汉化](JP)",

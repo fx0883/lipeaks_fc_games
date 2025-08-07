@@ -74,14 +74,14 @@
     </div>
     </section>
     
-    <!-- 热门游戏区域 -->
-    <section class="popular-games-section" ref="gamesRef">
+    <!-- 推荐游戏区域 -->
+    <section class="recommended-games-section" ref="gamesRef">
       <div class="section-header">
-        <h2 class="section-title">{{ $t('home.popularGames') }}</h2>
-        <p class="section-subtitle">{{ $t('home.popularGamesSubtitle') }}</p>
+        <h2 class="section-title">{{ $t('home.recommendedGames') }}</h2>
+        <p class="section-subtitle">{{ $t('home.recommendedGamesSubtitle') }}</p>
       </div>
       <div class="games-grid" v-if="popularGames.length > 0">
-        <div class="game-card" v-for="game in popularGames.slice(0, 8)" :key="game.id" @click="navigateToGame(game.id)">
+        <div class="game-card" v-for="game in popularGames" :key="game.id" @click="navigateToGame(game.id)">
           <div class="game-image-container">
             <img :src="game.cover || '/placeholder.png'" :alt="game.name" class="game-image">
             <div class="game-overlay">
@@ -105,11 +105,11 @@
       </div>
       <div class="loading-state" v-else-if="loading">
         <div class="loading-spinner"></div>
-        <p>{{ $t('home.loadingPopularGames') }}</p>
+        <p>{{ $t('home.loadingRecommendedGames') }}</p>
       </div>
       <div class="empty-state" v-else>
         <div class="empty-icon">🎮</div>
-        <p>{{ $t('home.noPopularGames') }}</p>
+        <p>{{ $t('home.noRecommendedGames') }}</p>
       </div>
     </section>
 
@@ -377,7 +377,7 @@ onMounted(async () => {
 
 /* 通用区域样式 */
 .categories-section,
-.popular-games-section,
+.recommended-games-section,
 .features-section {
   padding: 5rem 2rem;
   max-width: 1200px;
@@ -763,7 +763,7 @@ onMounted(async () => {
   }
   
   .categories-section,
-  .popular-games-section,
+  .recommended-games-section,
   .features-section {
     padding: 3rem 1rem;
   }

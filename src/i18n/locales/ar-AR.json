@@ -28,9 +28,9 @@
   "home": {
     "title": "جنة ألعاب Lipeaks",
     "gameCategories": "فئات الألعاب",
-    "popularGames": "الألعاب الشائعة",
-    "loadingPopularGames": "جارٍ تحميل الألعاب الشائعة...",
-    "noPopularGames": "لا توجد ألعاب شائعة متاحة"
+    "recommendedGames": "الألعاب الموصى بها",
+    "loadingRecommendedGames": "جارٍ تحميل الألعاب الموصى بها...",
+    "noRecommendedGames": "لا توجد ألعاب موصى بها متاحة"
   },
   "game": {
     "loading": "جارٍ التحميل...",

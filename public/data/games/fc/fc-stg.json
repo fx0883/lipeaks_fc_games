@@ -1919,19 +1919,5 @@
     "description": "导弹坦克 (v1.0)[九班汉化](JP) - 射击FC游戏",
     "playCount": 0
   },
-  {
-    "id": "fc-luyu-111",
-    "name": "导弹坦克[烟山科技修改](JP)",
-    "platform": "fc",
-    "subCategory": "fc-stg",
-    "romPath": "/roms/fc/roms/luyu(111).nes",
-    "cover": "/roms/images/fc/snaps/luyu(111)-0.png",
-    "core": "fceumm",
-    "author": "未知",
-    "region": "CN",
-    "size": "0.31Mb",
-    "version": "",
-    "description": "导弹坦克[烟山科技修改](JP) - 射击FC游戏",
-    "playCount": 0
-  }
+
 ]
