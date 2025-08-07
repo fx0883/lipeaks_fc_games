@@ -1,3 +1,10 @@
 {
-  "type": "commonjs"
+  "type": "module",
+  "name": "lipeaks-seo-scripts",
+  "version": "1.0.0",
+  "description": "SEO and sitemap generation scripts for Lipeaks FC Games",
+  "scripts": {
+    "generate-sitemaps": "node generate-sitemaps.js",
+    "validate-sitemaps": "node validate-sitemaps.js"
+  }
 } 

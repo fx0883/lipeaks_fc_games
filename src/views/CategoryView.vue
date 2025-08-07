@@ -142,7 +142,13 @@
           @click="navigateToGame(game.id)"
         >
           <div class="game-image-container">
-            <img :src="game.cover || '/placeholder.png'" :alt="game.name" class="game-image">
+            <img 
+              :src="game.cover || '/placeholder.png'" 
+              :alt="game.name" 
+              class="game-image"
+              loading="lazy"
+              decoding="async"
+            >
             <div class="game-overlay">
               <div class="play-button">
                 <span class="play-icon">▶</span>
