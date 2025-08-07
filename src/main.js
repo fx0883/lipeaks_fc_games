@@ -17,7 +17,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router'
-import i18n from './i18n'
+import i18n, { updateHreflangTags } from './i18n'
 import App from './App.vue'
 import './style.css'
 import { initToolbar } from '@stagewise/toolbar'
@@ -43,3 +43,6 @@ if (import.meta.env.DEV) {
 
 // 挂载应用
 app.mount('#app')
+
+// 初始化hreflang标签
+updateHreflangTags()
