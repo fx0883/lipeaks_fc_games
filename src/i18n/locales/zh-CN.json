@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Lipeaks游戏乐园",
+    "title": "Lipeaks",
+    "subtitle": "经典游戏平台",
     "loading": "加载中...",
     "error": "错误",
     "retry": "重试",

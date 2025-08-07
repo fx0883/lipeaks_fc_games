@@ -19,5 +19,15 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin'
     }
   },
+  build: {
+    // 确保构建产物包含SPA路由回退配置
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['vue', 'vue-router', 'pinia', 'vue-i18n']
+        }
+      }
+    }
+  },
   publicDir: 'public'
 })

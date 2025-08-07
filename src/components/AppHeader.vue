@@ -23,10 +23,12 @@
         <!-- Logo区域 -->
         <div class="logo-section">
           <router-link to="/" class="logo-link">
-            <div class="logo-icon">🎮</div>
+            <div class="logo-icon">
+              <img :src="logoSvg" alt="Lipeaks Logo" />
+            </div>
             <div class="logo-text">
               <h1>{{ $t('app.title') }}</h1>
-              <span class="logo-subtitle">经典游戏平台</span>
+              <span class="logo-subtitle">{{ $t('app.subtitle') }}</span>
             </div>
           </router-link>
         </div>
@@ -205,6 +207,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import logoSvg from '../assets/logo.svg'
 
 const router = useRouter()
 const route = useRoute()
@@ -435,8 +438,15 @@ onMounted(() => {
 }
 
 .logo-icon {
-  font-size: 28px;
+  width: 28px;
+  height: 28px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .logo-text h1 {
@@ -1142,7 +1152,8 @@ onMounted(() => {
   }
   
   .logo-icon {
-    font-size: 24px;
+    width: 24px;
+    height: 24px;
   }
   
   .logo-text h1 {

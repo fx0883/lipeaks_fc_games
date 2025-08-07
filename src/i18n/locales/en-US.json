@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Lipeaks Game Paradise",
+    "title": "Lipeaks",
+    "subtitle": "Classic Gaming Platform",
     "loading": "Loading...",
     "error": "Error",
     "retry": "Retry",

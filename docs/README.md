@@ -183,3 +183,9 @@ npx @agentdeskai/browser-tools-server@latest
 威洛之旅(日版,英语)
 战区 88(美版)
 
+
+
+不能玩 fc
+恶魔城1
+吃豆小精灵[MS汉化](JP)
+导弹坦克[烟山科技修改](JP)

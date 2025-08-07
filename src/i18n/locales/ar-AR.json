@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "جنة ألعاب Lipeaks",
+    "title": "Lipeaks",
+    "subtitle": "منصة الألعاب الكلاسيكية",
     "loading": "جارٍ التحميل...",
     "error": "خطأ",
     "retry": "إعادة المحاولة",
