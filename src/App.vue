@@ -39,14 +39,18 @@ import AppFooter from './components/AppFooter.vue'
 </template>
 
 <style>
-.app {
+.app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 最小高度，允许内容超出时滚动 */
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* 防止水平滚动 */
+  position: relative;
 }
 
 .main-content {
   flex: 1;
+  width: 100%;
 }
 
 /* 页面过渡动画 */

@@ -158,11 +158,13 @@ import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
 import { useGameI18n } from '../composables/useGameI18n'
+import { useGameStats } from '../composables/useGameStats'
 
 const router = useRouter()
 const gameStore = useGameStore()
 const { getCategoryName, getCategoryDescription } = useCategoryI18n()
 const { getGameName, getGameDescription } = useGameI18n()
+const { totalPlayCount, initializeGameStats } = useGameStats()
 const categoriesRef = ref(null)
 const gamesRef = ref(null)
 
@@ -172,9 +174,7 @@ const loading = computed(() => gameStore.loading)
 
 // 计算统计数据
 const totalGames = computed(() => gameStore.getAllGames.length)
-const totalPlays = computed(() => {
-  return gameStore.getAllGames.reduce((total, game) => total + (game.playCount || 0), 0)
-})
+const totalPlays = computed(() => totalPlayCount.value)
 
 // 获取分类游戏数量
 const getCategoryGameCount = (categoryId) => {
@@ -231,6 +231,8 @@ const loadInitialData = async () => {
 }
 
 onMounted(async () => {
+  // 初始化游戏统计
+  initializeGameStats()
   await loadInitialData()
 })
 </script>
@@ -244,6 +246,7 @@ onMounted(async () => {
 .hero-section {
   position: relative;
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -262,6 +265,8 @@ onMounted(async () => {
 
 .gaming-particles {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-image: 
@@ -269,25 +274,33 @@ onMounted(async () => {
     radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
     radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 100px 100px, 150px 150px, 120px 120px;
-  animation: particles-float 20s infinite linear;
+  /* animation: particles-float 20s infinite linear; */ /* 暂时禁用以测试 */
+  pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes particles-float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-100px) rotate(360deg); }
+  0% { transform: translateY(100px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
 .floating-icons {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 .game-icon {
   position: absolute;
   font-size: 2rem;
   opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
+  animation: home-float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 .game-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
@@ -296,9 +309,9 @@ onMounted(async () => {
 .game-icon:nth-child(4) { top: 70%; right: 25%; animation-delay: 3s; }
 .game-icon:nth-child(5) { top: 45%; left: 50%; animation-delay: 4s; }
 
-@keyframes float {
+@keyframes home-float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
 }
 
 .hero-content {
