@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Lipeaksゲームパラダイス",
+    "title": "Lipeaks",
+    "subtitle": "クラシックゲームプラットフォーム",
     "loading": "読み込み中...",
     "error": "エラー",
     "retry": "再試行",
@@ -19,7 +20,7 @@
     "aboutUsDesc": "Lipeaksゲームパラダイスは、懐かしいレトロゲームのオンラインプラットフォームで、クラシックゲームの楽しさを再体験できます。",
     "quickLinks": "クイックリンク",
     "contactUs": "お問い合わせ",
-    "email": "メール: contact@fcgame.com",
+    "email": "メール: contact[at]fcgame.com",
     "copyright": "© {year} Lipeaks. 全著作権所有。",
     "licensedUnder": "{licenseName} の下でライセンスされています。",
     "sourceCode": "ソースコード"
@@ -27,9 +28,9 @@
   "home": {
     "title": "Lipeaksゲームパラダイス",
     "gameCategories": "ゲームカテゴリ",
-    "popularGames": "人気ゲーム",
-    "loadingPopularGames": "人気ゲームを読み込み中...",
-    "noPopularGames": "人気ゲームがありません"
+    "recommendedGames": "おすすめゲーム",
+    "loadingRecommendedGames": "おすすめゲームを読み込み中...",
+    "noRecommendedGames": "おすすめゲームがありません"
   },
   "game": {
     "loading": "読み込み中...",
@@ -44,7 +45,18 @@
     "gameStarted": "ゲームが開始されました: {name}",
     "gamePaused": "ゲームが一時停止されました: {name}",
     "gameResumed": "ゲームが再開されました: {name}",
-    "gameError": "ゲームエラーが発生しました"
+    "gameError": "ゲームエラーが発生しました",
+    "controls": "操作説明",
+    "movement": "移動",
+    "buttonA": "Aボタン",
+    "buttonB": "Bボタン",
+    "start": "スタート",
+    "select": "セレクト",
+    "coin": "コイン",
+    "button1": "ボタン1",
+    "button2": "ボタン2",
+    "button3": "ボタン3",
+    "button4": "ボタン4"
   },
   "category": {
     "gamesCount": "合計{count}ゲーム",
@@ -135,5 +147,125 @@
     "search": "検索結果 - Lipeaksゲームパラダイス",
     "searchWithQuery": "検索\"{query}\" - Lipeaksゲームパラダイス",
     "notFound": "ページが見つかりません - Lipeaksゲームパラダイス"
+  },
+  "categories": {
+    "fc": {
+      "name": "FCゲーム",
+      "description": "クラシックなファミリーコンピュータゲーム集、アクション、シューティング、RPGなど各種クラシックゲーム",
+      "action": {
+        "name": "FCアクション",
+        "description": "プラットフォームジャンプ、横スクロールシューティングなど操作技巧が必要なFCゲーム"
+      },
+      "stg": {
+        "name": "FCシューティング",
+        "description": "フライトシューティング、タンクシューティングを中心としたFCシューティングゲーム"
+      },
+      "rpg": {
+        "name": "FCロールプレイング",
+        "description": "ロールプレイング系FCゲーム、冒険とストーリーを含む"
+      },
+      "puzzle": {
+        "name": "FCパズル",
+        "description": "思考と謎解きが必要なFCパズルゲーム"
+      },
+      "spg": {
+        "name": "FCスポーツ",
+        "description": "サッカー、バスケットボールなどを含むFCスポーツゲーム"
+      },
+      "tab": {
+        "name": "FCテーブルゲーム",
+        "description": "カードゲーム、テーブルゲーム系FCゲーム"
+      },
+      "etc": {
+        "name": "FCその他",
+        "description": "その他のタイプのFCゲーム"
+      }
+    },
+    "arcade": {
+      "name": "アーケードゲーム",
+      "description": "クラシックアーケードゲーム集、格闘、シューティング、アクションなど各種クラシックアーケードゲーム",
+      "fighting": {
+        "name": "アーケード格闘",
+        "description": "キング・オブ・ファイターズ、ストリートファイターシリーズなどクラシックアーケード格闘ゲーム"
+      },
+      "shooting": {
+        "name": "アーケードシューティング",
+        "description": "フライトシューティングとライトガンシューティングを含むアーケードシューティングゲーム"
+      },
+      "action": {
+        "name": "アーケードアクション",
+        "description": "メタルスラッグシリーズなどアーケードアクションアドベンチャーゲーム"
+      },
+      "puzzle": {
+        "name": "アーケードパズル",
+        "description": "テトリス、パズルボブルなどアーケードパズルゲーム"
+      },
+      "racing": {
+        "name": "アーケードレーシング",
+        "description": "アーケードレーシングカーゲーム"
+      },
+      "sports": {
+        "name": "アーケードスポーツ",
+        "description": "アーケードスポーツ運動ゲーム"
+      },
+      "etc": {
+        "name": "アーケードその他",
+        "description": "その他のタイプのアーケードゲーム"
+      }
+    }
+  },
+  "games": {
+    "noDescription": "説明がありません",
+    "unknownAuthor": "不明",
+    "descriptionTemplate": "{gameName} - クラシック{gameType}{platform}ゲーム",
+    "genericDescription": "クラシック{platform}ゲーム",
+    "seoDescription": "{gameName}は{author}によって作られたクラシック{platform}ゲームで、{playCount}回プレイされています。",
+    "platforms": {
+      "fc": "ファミコン",
+      "arcade": "アーケード"
+    },
+    "gameTypes": {
+      "动作": "アクション",
+      "射击": "シューティング",
+      "角色扮演": "RPG",
+      "益智": "パズル",
+      "体育": "スポーツ",
+      "桌游": "ボードゲーム",
+      "格斗": "格闘",
+      "竞速": "レーシング",
+      "动作射击": "アクションシューティング",
+      "模拟射击": "シミュレーションシューティング",
+      "动作冒险": "アクションアドベンチャー",
+      "策略": "ストラテジー",
+      "运动": "スポーツ",
+      "竞赛": "レーシング"
+    },
+    "nameRules": {
+      "directMappings": {
+        "恶魔城": "悪魔城ドラキュラ",
+        "魂斗罗": "魂斗羅",
+        "超级马里奥": "スーパーマリオ",
+        "塞尔达传说": "ゼルダの伝説",
+        "拳皇": "ザ・キング・オブ・ファイターズ",
+        "街头霸王": "ストリートファイター",
+        "合金弹头": "メタルスラッグ"
+      },
+      "versionMarkers": {
+        "(日版)": "(日本版)",
+        "(美版)": "(アメリカ版)",
+        "(欧版)": "(ヨーロッパ版)",
+        "(亚洲版)": "(アジア版)",
+        "[汉化]": "[中国語化]",
+        "[修改]": "[改造]"
+      },
+      "gameSeries": {
+        "II": "II",
+        "III": "III",
+        "IV": "IV",
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
   }
 } 

@@ -33,7 +33,7 @@
         </div>
         
         <div class="game-info">
-          <h1 class="game-title">{{ game ? game.name : $t('game.loading') }}</h1>
+          <h1 class="game-title">{{ game ? getGameName(game) : $t('game.loading') }}</h1>
           
           <div class="game-meta" v-if="game">
             <div class="meta-item animate-slide-left animate-delay-100">
@@ -108,6 +108,7 @@
         <FCEmulator 
           :rom-path="game.romPath" 
           :game-name="game.name"
+          :core="game.core || getDefaultCore(game.category)"
           :show-controls="true"
           :show-status-info="true"
           @game-loaded="onGameLoaded"
@@ -129,7 +130,7 @@
             <span class="title-icon">📝</span>
             {{ $t('game.description') }}
           </h3>
-          <p class="game-description">{{ game.description || $t('game.noDescription') }}</p>
+          <p class="game-description">{{ getGameDescription(game) }}</p>
           
           <div class="game-specs" v-if="game.version || game.region">
             <div class="spec-item" v-if="game.version">
@@ -194,25 +195,9 @@
           </h3>
           
           <div class="controls-grid">
-            <div class="control-item">
-              <kbd class="key">↑↓←→</kbd>
-              <span class="control-desc">{{ $t('game.movement') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Z</kbd>
-              <span class="control-desc">{{ $t('game.buttonA') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">X</kbd>
-              <span class="control-desc">{{ $t('game.buttonB') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Enter</kbd>
-              <span class="control-desc">{{ $t('game.start') }}</span>
-            </div>
-            <div class="control-item">
-              <kbd class="key">Shift</kbd>
-              <span class="control-desc">{{ $t('game.select') }}</span>
+            <div class="control-item" v-for="(control, index) in controlsData" :key="index">
+              <kbd class="key">{{ control.key }}</kbd>
+              <span class="control-desc">{{ control.desc }}</span>
             </div>
           </div>
         </div>
@@ -228,15 +213,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
 import FCEmulator from '../components/FCEmulator.vue'
 
 const route = useRoute()
 const { t } = useI18n()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
+const { setGameSEO } = useSEO()
 const gameId = computed(() => route.params.id)
 const game = computed(() => gameStore.currentGame)
 const loading = computed(() => gameStore.loading)
@@ -247,6 +236,46 @@ const categoryName = computed(() => {
   if (!game.value || !game.value.category) return ''
   const category = gameStore.getCategoryById(game.value.category)
   return category ? category.name : game.value.category
+})
+
+// 根据游戏分类获取默认核心
+const getDefaultCore = (category) => {
+  const coreMapping = {
+    'action': 'fceumm',  // FC动作游戏默认用fceumm
+    'arcade': 'mame2003_plus',  // 街机游戏默认用mame2003_plus
+    'nes': 'fceumm',
+    'mame': 'mame2003_plus'
+  }
+  return coreMapping[category] || 'fceumm'
+}
+
+// 根据游戏核心类型获取控制说明
+const controlsData = computed(() => {
+  if (!game.value) return []
+  
+  const core = game.value.core || getDefaultCore(game.value.category)
+  
+  // MAME街机游戏的按键说明
+  if (['mame2003_plus', 'mame2003', 'fbneo'].includes(core)) {
+    return [
+      { key: '↑↓←→', desc: t('game.movement') },
+      { key: 'Z', desc: t('game.button1') },
+      { key: 'X', desc: t('game.button2') },
+      { key: 'A', desc: t('game.button3') },
+      { key: 'S', desc: t('game.button4') },
+      { key: 'V', desc: t('game.coin') },
+      { key: 'Enter', desc: t('game.start') }
+    ]
+  }
+  
+  // FC游戏的按键说明 (默认)
+  return [
+    { key: '↑↓←→', desc: t('game.movement') },
+    { key: 'Z', desc: t('game.buttonA') },
+    { key: 'X', desc: t('game.buttonB') },
+    { key: 'Enter', desc: t('game.start') },
+    { key: 'V', desc: t('game.select') }
+  ]
 })
 
 // 计算游戏统计数据
@@ -319,6 +348,13 @@ onMounted(async () => {
   // 加载游戏数据
   await gameStore.fetchGameById(gameId.value)
 })
+
+// 监听游戏数据变化，更新SEO
+watch(game, (newGame) => {
+  if (newGame) {
+    setGameSEO(newGame)
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -472,6 +508,10 @@ onMounted(async () => {
 
 .emulator-container {
   padding: 2rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
 }
 
 .emulator-header {
@@ -789,5 +829,38 @@ onMounted(async () => {
   .achievement-badges {
     justify-content: center;
   }
+}
+
+/* 暗模式下的模拟器容器优化 */
+[data-theme="dark"] .emulator-container {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .detail-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .meta-item {
+  background: var(--color-background-mute);
+  border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .meta-item:hover {
+  background: var(--color-background);
+  border-color: var(--color-border-hover);
+}
+
+/* 暗模式下的按键样式优化 */
+[data-theme="dark"] .key {
+  background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+  border: 2px solid #ccc;
+  color: #333333;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style> 

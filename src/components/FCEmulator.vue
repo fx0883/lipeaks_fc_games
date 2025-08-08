@@ -101,11 +101,15 @@ const props = defineProps({
     },
     dataPath: {
       type: String,
-      default: '/emulatorjs/data/'
+      default: '/emulatorjs/'
   },
   gameName: {
     type: String,
     default: 'NES Game'
+  },
+  core: {
+    type: String,
+    default: 'fceumm'
   },
   showControls: {
     type: Boolean,
@@ -203,7 +207,8 @@ const initEmulator = async () => {
       dataPath: props.dataPath,
       gameName: props.gameName,
       volume: volume.value / 100,
-      muted: isMuted.value
+      muted: isMuted.value,
+      core: props.core
     })
     
     // 初始化服务

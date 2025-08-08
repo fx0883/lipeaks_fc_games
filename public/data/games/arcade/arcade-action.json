@@ -1,0 +1,32 @@
+[
+  {
+    "id": "arcade-3wonders",
+    "name": "三个奇迹(日版 910520)",
+    "platform": "arcade",
+    "subCategory": "arcade-action",
+    "romPath": "/roms/arcade/cps1/3wonders.zip",
+    "cover": "/roms/images/arcade/3WONDERS.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "三个奇迹(日版 910520) - 经典街机游戏",
+    "playCount": 0
+  },
+  {
+    "id": "arcade-knights",
+    "name": "圆桌骑士(世界)",
+    "platform": "arcade",
+    "subCategory": "arcade-action",
+    "romPath": "/roms/arcade/cps1/knights.zip",
+    "cover": "/roms/images/arcade/KNIGHTS.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "圆桌骑士(世界) - 经典街机游戏",
+    "playCount": 0
+  }
+]

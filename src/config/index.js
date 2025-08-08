@@ -8,7 +8,7 @@ const defaultConfig = {
   // 模拟器配置
   emulator: {
     defaultCore: 'fceumm',
-    dataPath: '/emulatorjs/data/',
+    dataPath: '/emulatorjs/',
     defaultVolume: 100,
     autoSave: true,
     saveInterval: 30000, // 30秒自动保存间隔

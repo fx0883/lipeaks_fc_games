@@ -26,19 +26,75 @@ export const EmulatorStatus = {
 
 /**
  * 模拟器配置接口
+ * 支持所有EmulatorJS官方配置选项
  */
 export class EmulatorConfig {
   constructor({
+    // === 基础配置 ===
     containerId,
     romPath,
     core = 'fceumm',
-    dataPath = '/emulatorjs/data/',
+    dataPath = '/emulatorjs/',
     gameName = 'NES Game',
     language = '',
     startOnLoaded = true,
     volume = 1,
-    muted = false
+    muted = false,
+    
+    // === 高级功能配置 ===
+    // BIOS和ROM相关
+    biosUrl = '',
+    gamePatchUrl = '',
+    gameParentUrl = '',
+    loadStateURL = '',
+    externalFiles = [],
+    dontExtractBIOS = false,
+    softLoad = false,
+    
+    // 作弊码功能
+    cheats = [],
+    
+    // 联机功能
+    netplayUrl = '',
+    gameId = null,
+    
+    // 广告配置
+    adUrl = '',
+    adMode = 0,
+    adTimer = 15,
+    adSize = { width: 728, height: 90 },
+    
+    // 界面和控制
+    color = '#74A0FF',
+    alignStartButton = 'center',
+    startButtonName = 'Start Game',
+    backgroundImg = '',
+    backgroundBlur = false,
+    backgroundColor = '',
+    hideSettings = false,
+    
+    // 虚拟手柄
+    virtualGamepadSettings = {},
+    buttonOpts = {},
+    defaultControllers = {},
+    controlScheme = {},
+    
+    // 高级选项
+    fullscreenOnLoad = false,
+    filePaths = {},
+    cacheLimit = 1024,
+    defaultOptions = {},
+    threads = false,
+    disableCue = false,
+    capture = {},
+    disableDatabases = false,
+    disableLocalStorage = false,
+    forceLegacyCores = false,
+    noAutoFocus = false,
+    videoRotation = 0,
+    shaders = {}
   } = {}) {
+    // 基础配置
     this.containerId = containerId
     this.romPath = romPath
     this.core = core
@@ -48,6 +104,52 @@ export class EmulatorConfig {
     this.startOnLoaded = startOnLoaded
     this.volume = volume
     this.muted = muted
+    
+    // 高级功能配置
+    this.biosUrl = biosUrl
+    this.gamePatchUrl = gamePatchUrl
+    this.gameParentUrl = gameParentUrl
+    this.loadStateURL = loadStateURL
+    this.externalFiles = externalFiles
+    this.dontExtractBIOS = dontExtractBIOS
+    this.softLoad = softLoad
+    
+    this.cheats = cheats
+    
+    this.netplayUrl = netplayUrl
+    this.gameId = gameId
+    
+    this.adUrl = adUrl
+    this.adMode = adMode
+    this.adTimer = adTimer
+    this.adSize = adSize
+    
+    this.color = color
+    this.alignStartButton = alignStartButton
+    this.startButtonName = startButtonName
+    this.backgroundImg = backgroundImg
+    this.backgroundBlur = backgroundBlur
+    this.backgroundColor = backgroundColor
+    this.hideSettings = hideSettings
+    
+    this.virtualGamepadSettings = virtualGamepadSettings
+    this.buttonOpts = buttonOpts
+    this.defaultControllers = defaultControllers
+    this.controlScheme = controlScheme
+    
+    this.fullscreenOnLoad = fullscreenOnLoad
+    this.filePaths = filePaths
+    this.cacheLimit = cacheLimit
+    this.defaultOptions = defaultOptions
+    this.threads = threads
+    this.disableCue = disableCue
+    this.capture = capture
+    this.disableDatabases = disableDatabases
+    this.disableLocalStorage = disableLocalStorage
+    this.forceLegacyCores = forceLegacyCores
+    this.noAutoFocus = noAutoFocus
+    this.videoRotation = videoRotation
+    this.shaders = shaders
   }
 
   validate() {
@@ -171,6 +273,95 @@ export class IEmulatorAdapter {
    */
   async destroy() {
     throw new Error('destroy method must be implemented')
+  }
+
+  /**
+   * 作弊码相关方法
+   */
+  
+  /**
+   * 添加作弊码
+   * @param {string} description 作弊码描述
+   * @param {string} code 作弊码内容
+   * @returns {boolean} 是否成功添加
+   */
+  addCheat(description, code) {
+    throw new Error('addCheat method must be implemented')
+  }
+
+  /**
+   * 启用/禁用作弊码
+   * @param {number} index 作弊码索引
+   * @param {boolean} enabled 是否启用
+   * @returns {boolean} 是否成功设置
+   */
+  setCheatEnabled(index, enabled) {
+    throw new Error('setCheatEnabled method must be implemented')
+  }
+
+  /**
+   * 删除作弊码
+   * @param {number} index 作弊码索引
+   * @returns {boolean} 是否成功删除
+   */
+  removeCheat(index) {
+    throw new Error('removeCheat method must be implemented')
+  }
+
+  /**
+   * 获取所有作弊码
+   * @returns {Array} 作弊码列表
+   */
+  getCheats() {
+    throw new Error('getCheats method must be implemented')
+  }
+
+  /**
+   * 高级功能方法
+   */
+
+  /**
+   * 截屏
+   * @returns {Promise<string>} 截图的base64数据
+   */
+  async takeScreenshot() {
+    throw new Error('takeScreenshot method must be implemented')
+  }
+
+  /**
+   * 切换快进
+   * @param {boolean} enabled 是否启用快进
+   * @returns {boolean} 是否成功设置
+   */
+  toggleFastForward(enabled) {
+    throw new Error('toggleFastForward method must be implemented')
+  }
+
+  /**
+   * 设置快进倍率
+   * @param {number} ratio 快进倍率
+   * @returns {boolean} 是否成功设置
+   */
+  setFastForwardRatio(ratio) {
+    throw new Error('setFastForwardRatio method must be implemented')
+  }
+
+  /**
+   * 切换倒带功能
+   * @param {boolean} enabled 是否启用倒带
+   * @returns {boolean} 是否成功设置
+   */
+  toggleRewind(enabled) {
+    throw new Error('toggleRewind method must be implemented')
+  }
+
+  /**
+   * 获取模拟器实例（用于访问高级功能）
+   * 注意：这个方法应该谨慎使用，主要用于访问适配器未封装的高级功能
+   * @returns {*} 原生模拟器实例
+   */
+  getEmulatorInstance() {
+    throw new Error('getEmulatorInstance method must be implemented')
   }
 
   /**

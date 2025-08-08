@@ -1,0 +1,47 @@
+[
+  {
+    "id": "arcade-1941",
+    "name": "1941 - 反击战(日版)",
+    "platform": "arcade",
+    "subCategory": "arcade-shooting",
+    "romPath": "/roms/arcade/cps1/1941.zip",
+    "cover": "/roms/images/arcade/1941.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "1941 - 反击战(日版) - 经典街机游戏",
+    "playCount": 0
+  },
+  {
+    "id": "arcade-19xx",
+    "name": "19XX: 命运否决战(巴西版 951218)",
+    "platform": "arcade",
+    "subCategory": "arcade-shooting",
+    "romPath": "/roms/arcade/cps2/19xx.zip",
+    "cover": "/roms/images/arcade/19XX.bmp",
+    "core": "fbalpha2012_cps2",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "19XX: 命运否决战(巴西版 951218) - 经典街机游戏",
+    "playCount": 0
+  },
+  {
+    "id": "arcade-varth",
+    "name": "威虎战机 - 雷雨行动(日版 920714)",
+    "platform": "arcade",
+    "subCategory": "arcade-shooting",
+    "romPath": "/roms/arcade/cps1/varth.zip",
+    "cover": "/roms/images/arcade/VARTH.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "威虎战机 - 雷雨行动(日版 920714) - 经典街机游戏",
+    "playCount": 0
+  }
+]

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAME街机模拟器 - EmulatorJS 4.2.3</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+        }
+        
+        .game-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        select, button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            background: #16213e;
+            color: #fff;
+            border: 1px solid #0f3460;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        select:hover, button:hover {
+            background: #0f3460;
+        }
+        
+        #emulator {
+            width: 100%;
+            height: 600px;
+            background: #000;
+            border: 2px solid #0f3460;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info {
+            background: #16213e;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #0f3460;
+        }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .status.loading { background: #f39c12; color: #000; }
+        .status.ready { background: #27ae60; color: #fff; }
+        .status.error { background: #e74c3c; color: #fff; }
+        
+        .arcade-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕹️ MAME街机模拟器</h1>
+        
+        <div class="info">
+            <h3>支持的街机游戏</h3>
+            <p>当前支持MAME2003和MAME2003-Plus核心的街机游戏</p>
+        </div>
+        
+        <div class="game-selector">
+            <label for="gameSelect">选择游戏:</label>
+            <select id="gameSelect">
+                <option value="">请选择游戏...</option>
+                <option value="19xx.zip">19XX: The War Against Destiny</option>
+            </select>
+            
+            <label for="coreSelect">选择核心:</label>
+            <select id="coreSelect">
+                <option value="mame2003_plus">MAME2003-Plus (推荐)</option>
+                <option value="mame2003">MAME2003</option>
+            </select>
+            
+            <button onclick="loadGame()">加载游戏</button>
+            <button onclick="resetEmulator()">重置</button>
+        </div>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div id="emulator"></div>
+        
+        <div class="arcade-controls">
+            <div class="info">
+                <h3>玩家1操作</h3>
+                <ul>
+                    <li>方向键：摇杆</li>
+                    <li>Ctrl：按钮1</li>
+                    <li>Alt：按钮2</li>
+                    <li>Space：按钮3</li>
+                    <li>Shift：按钮4</li>
+                    <li>Z：按钮5</li>
+                    <li>X：按钮6</li>
+                </ul>
+            </div>
+            <div class="info">
+                <h3>系统操作</h3>
+                <ul>
+                    <li>5：投币</li>
+                    <li>1：1P开始</li>
+                    <li>2：2P开始</li>
+                    <li>Tab：菜单</li>
+                    <li>P：暂停</li>
+                    <li>F2：重置</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let emulatorLoaded = false;
+        
+        // 移动设备检测和虚拟手柄配置函数
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (window.innerWidth <= 768);
+        }
+        
+        function getMAMEVirtualGamepadSettings(orientation = 'landscape') {
+            // 使用EmulatorJS标准街机配置（测试文件与主项目保持一致）
+            return [
+                { "type": "button", "text": "Y", "id": "y", "location": "right", "left": 40, "bold": true, "input_value": 9 },
+                { "type": "button", "text": "X", "id": "x", "location": "right", "top": 40, "bold": true, "input_value": 1 },
+                { "type": "button", "text": "B", "id": "b", "location": "right", "left": 81, "top": 40, "bold": true, "input_value": 8 },
+                { "type": "button", "text": "A", "id": "a", "location": "right", "left": 40, "top": 80, "bold": true, "input_value": 0 },
+                { "type": "zone", "id": "dpad", "location": "left", "left": "50%", "top": "50%", "joystickInput": false, "inputValues": [4, 5, 6, 7] },
+                { "type": "button", "text": "Start", "id": "start", "location": "center", "left": 60, "fontSize": 15, "block": true, "input_value": 3 },
+                { "type": "button", "text": "Select", "id": "select", "location": "center", "left": -5, "fontSize": 15, "block": true, "input_value": 2 }
+            ];
+        }
+        
+        function showStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            document.getElementById('status').style.display = 'none';
+        }
+        
+        function loadGame() {
+            const gameSelect = document.getElementById('gameSelect');
+            const coreSelect = document.getElementById('coreSelect');
+            
+            const gameName = gameSelect.value;
+            const core = coreSelect.value;
+            
+            if (!gameName) {
+                alert('请选择一个游戏！');
+                return;
+            }
+            
+            showStatus('正在加载街机游戏...', 'loading');
+            
+            // 清理之前的实例
+            resetEmulator();
+            
+            // 设置EmulatorJS全局配置
+            window.EJS_player = '#emulator';
+            window.EJS_gameUrl = `/roms/${gameName}`;
+            window.EJS_core = core;
+            window.EJS_pathtodata = '/emulatorjs/';
+            window.EJS_gameName = gameName.replace('.zip', '');
+            window.EJS_startOnLoaded = true;
+            window.EJS_DEBUG_XX = false;
+            window.EJS_disableDatabases = true;
+            window.EJS_volume = 0.8;
+            
+            // 街机特定配置
+            window.EJS_lightgun = false;
+            window.EJS_mouse = false;
+            
+            // 移动端虚拟手柄配置
+            if (isMobileDevice()) {
+                // 优先使用Vue应用设置的配置
+                if (!window.EJS_VirtualGamepadSettings) {
+                    const isPortrait = window.innerHeight > window.innerWidth;
+                    window.EJS_VirtualGamepadSettings = getMAMEVirtualGamepadSettings(isPortrait ? 'portrait' : 'landscape');
+                }
+                window.EJS_noAutoFocus = true;
+            }
+            
+            // 设置事件监听
+            window.EJS_ready = function() {
+                showStatus('街机模拟器就绪！请投币开始游戏', 'ready');
+                setTimeout(hideStatus, 4000);
+            };
+            
+            window.EJS_onGameStart = function() {
+                showStatus('街机游戏开始！', 'ready');
+                setTimeout(hideStatus, 2000);
+            };
+            
+            // 加载EmulatorJS
+            const script = document.createElement('script');
+            script.src = '/emulatorjs/loader.js';
+            script.onload = function() {
+                console.log('MAME EmulatorJS loader 加载成功');
+                emulatorLoaded = true;
+            };
+            script.onerror = function() {
+                showStatus('加载街机模拟器失败！', 'error');
+                console.error('MAME EmulatorJS loader 加载失败');
+            };
+            
+            document.head.appendChild(script);
+        }
+        
+        function resetEmulator() {
+            // 清理DOM
+            const emulatorEl = document.getElementById('emulator');
+            emulatorEl.innerHTML = '';
+            
+            // 清理全局变量
+            if (window.EJS_emulator) {
+                delete window.EJS_emulator;
+            }
+            
+            // 移除之前的脚本
+            const scripts = document.querySelectorAll('script[src*="loader.js"]');
+            scripts.forEach(script => script.remove());
+            
+            emulatorLoaded = false;
+            hideStatus();
+        }
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MAME模拟器页面已加载');
+        });
+    </script>
+</body>
+</html> 

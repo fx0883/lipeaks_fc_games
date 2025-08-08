@@ -26,17 +26,35 @@
         
         <div class="footer-section">
           <h3>{{ $t('footer.quickLinks') }}</h3>
-          <ul>
-            <li><router-link to="/">{{ $t('nav.home') }}</router-link></li>
-            <li><router-link to="/category/action">动作游戏</router-link></li>
-            <li><router-link to="/category/adventure">冒险游戏</router-link></li>
-            <li><router-link to="/category/puzzle">益智游戏</router-link></li>
-          </ul>
+          
+          <!-- 动态渲染分类菜单 -->
+          <div v-for="category in categories" :key="category.id" class="category-row">
+            <!-- 主分类 -->
+            <router-link :to="`/category/${category.id}`" class="main-category">
+              {{ getCategoryName(category) }}
+            </router-link>
+            
+            <!-- 子分类 -->
+            <template v-if="category.subCategories && category.subCategories.length > 0">
+              <template v-for="subCategory in category.subCategories" :key="subCategory.id">
+                <span class="separator">|</span>
+                <router-link :to="`/category/${subCategory.id}`">
+                  {{ getCategoryName(subCategory) }}
+                </router-link>
+              </template>
+            </template>
+          </div>
         </div>
         
         <div class="footer-section">
           <h3>{{ $t('footer.contactUs') }}</h3>
           <p>{{ $t('footer.email') }}</p>
+        </div>
+        
+        <!-- 访客统计 -->
+        <div class="footer-section">
+          <h3>{{ $t('footer.siteStats') }}</h3>
+          <VisitorStats :compact="true" />
         </div>
       </div>
       
@@ -62,9 +80,28 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { useGameStore } from '../stores/game'
+import { useCategoryI18n } from '../composables/useCategoryI18n'
+import VisitorStats from './VisitorStats.vue'
 
+const gameStore = useGameStore()
+const { getCategoryName } = useCategoryI18n()
+const categories = ref([])
 const currentYear = computed(() => new Date().getFullYear())
+
+// 加载分类数据
+const loadCategories = async () => {
+  if (gameStore.categories.length === 0) {
+    await gameStore.fetchCategories()
+  }
+  categories.value = gameStore.categories
+}
+
+// 组件挂载时加载分类数据
+onMounted(() => {
+  loadCategories()
+})
 </script>
 
 <style scoped>
@@ -108,6 +145,37 @@ const currentYear = computed(() => new Date().getFullYear())
   margin-bottom: 10px;
 }
 
+.category-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.category-row a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.category-row a:hover {
+  color: var(--color-primary);
+}
+
+.category-row .main-category {
+  font-weight: bold;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.category-row .separator {
+  margin: 0 8px;
+  color: var(--color-border);
+  user-select: none;
+}
+
 .footer-section a {
   color: var(--color-text-light);
   text-decoration: none;
@@ -145,6 +213,21 @@ const currentYear = computed(() => new Date().getFullYear())
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
+  }
+  
+  .category-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .category-row .separator {
+    display: none;
+  }
+  
+  .category-row a {
+    display: block;
+    padding: 4px 0;
   }
 }
 </style> 

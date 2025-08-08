@@ -34,23 +34,85 @@ export const useGameStore = defineStore('game', {
       return (id) => state.allGames.get(id) || null
     },
     
-    // 根据分类获取游戏 - 高效筛选
+    // 根据分类获取游戏 - 支持新的平台/子分类结构
     getGamesByCategory: (state) => {
       return (categoryId) => {
         return Array.from(state.allGames.values())
-          .filter(game => game.category === categoryId)
+          .filter(game => {
+            // 支持旧的category字段和新的platform/subCategory字段
+            return game.category === categoryId || 
+                   game.platform === categoryId || 
+                   game.subCategory === categoryId
+          })
+      }
+    },
+
+    // 根据平台获取游戏
+    getGamesByPlatform: (state) => {
+      return (platform) => {
+        return Array.from(state.allGames.values())
+          .filter(game => game.platform === platform)
+      }
+    },
+
+    // 根据平台和子分类获取游戏
+    getGamesByPlatformAndSubCategory: (state) => {
+      return (platform, subCategory) => {
+        return Array.from(state.allGames.values())
+          .filter(game => game.platform === platform && game.subCategory === subCategory)
+      }
+    },
+
+    // 获取所有子分类
+    getSubCategoriesByPlatform: (state) => {
+      return (platform) => {
+        const category = state.categories.find(cat => cat.id === platform)
+        return category ? category.subCategories || [] : []
       }
     },
     
-    // 热门游戏 - 简化逻辑，直接排序
+    // 推荐游戏 - 随机选择：FC游戏6个 + 街机游戏3个
     popularGames: (state) => {
-      return Array.from(state.allGames.values())
-        .sort((a, b) => (b.playCount || 0) - (a.playCount || 0))
+      const allGames = Array.from(state.allGames.values())
+      const fcGames = allGames.filter(game => game.platform === 'fc')
+      const arcadeGames = allGames.filter(game => game.platform === 'arcade')
+      
+      // 随机打乱数组的函数
+      const shuffleArray = (array) => {
+        const shuffled = [...array]
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        }
+        return shuffled
+      }
+      
+      // 随机选择FC游戏6个
+      const selectedFcGames = shuffleArray(fcGames).slice(0, 6)
+      
+      // 随机选择街机游戏3个
+      const selectedArcadeGames = shuffleArray(arcadeGames).slice(0, 3)
+      
+      // 合并并再次随机打乱显示顺序
+      return shuffleArray([...selectedFcGames, ...selectedArcadeGames])
     },
 
-    // 根据分类ID获取分类信息
+    // 根据分类ID获取分类信息（支持主分类和子分类）
     getCategoryById: (state) => {
-      return (id) => state.categories.find(category => category.id === id)
+      return (id) => {
+        // 先查找主分类
+        const mainCategory = state.categories.find(category => category.id === id)
+        if (mainCategory) return mainCategory
+        
+        // 如果没找到主分类，查找子分类
+        for (const category of state.categories) {
+          if (category.subCategories) {
+            const subCategory = category.subCategories.find(sub => sub.id === id)
+            if (subCategory) return subCategory
+          }
+        }
+        return null
+      }
     },
     
     // 获取所有游戏 - 直接转换Map为数组
@@ -112,24 +174,61 @@ export const useGameStore = defineStore('game', {
       
       this.loading = true
       try {
-        // 查找分类信息
+        // 查找分类信息（支持主分类和子分类）
         const category = this.getCategoryById(categoryId)
-        if (!category || !category.gamesUrl) {
-          throw new Error(`Category not found or missing gamesUrl: ${categoryId}`)
+        
+        if (!category) {
+          throw new Error(`Category not found: ${categoryId}`)
         }
         
-        // 加载分类游戏数据
-        const response = await fetch(category.gamesUrl)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
+        // 如果是子分类且有gamesUrl，直接加载
+        if (category.gamesUrl) {
+          const response = await fetch(category.gamesUrl)
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+          }
+          
+          const games = await response.json()
+          this.addGames(games)
+          this.loadedCategories.add(categoryId)
+          
+          return this.getGamesByCategory(categoryId)
         }
         
-        // 解析并添加游戏数据
-        const games = await response.json()
-        this.addGames(games)
-        this.loadedCategories.add(categoryId)
+        // 如果是主分类（如fc、arcade），需要加载所有子分类
+        if (category.subCategories && category.subCategories.length > 0) {
+          const allGames = []
+          
+          // 并行加载所有子分类
+          const loadPromises = category.subCategories
+            .filter(subCat => subCat.gamesUrl) // 只加载有gamesUrl的子分类
+            .map(async (subCat) => {
+              try {
+                const response = await fetch(subCat.gamesUrl)
+                if (!response.ok) {
+                  console.warn(`Failed to load ${subCat.id}: HTTP ${response.status}`)
+                  return []
+                }
+                const games = await response.json()
+                this.loadedCategories.add(subCat.id) // 标记子分类也已加载
+                return games
+              } catch (error) {
+                console.warn(`Failed to load subcategory ${subCat.id}:`, error)
+                return []
+              }
+            })
+          
+          const results = await Promise.all(loadPromises)
+          results.forEach(games => allGames.push(...games))
+          
+          this.addGames(allGames)
+          this.loadedCategories.add(categoryId)
+          
+          return this.getGamesByCategory(categoryId)
+        }
         
-        return this.getGamesByCategory(categoryId)
+        throw new Error(`Category ${categoryId} has no gamesUrl or subCategories`)
+        
       } catch (error) {
         console.error(`Failed to fetch games for category ${categoryId}:`, error)
         return []
@@ -159,7 +258,7 @@ export const useGameStore = defineStore('game', {
           
           // 尝试加载每个分类的游戏，直到找到目标游戏
           for (const category of this.categories) {
-            if (!this.categoryGames[category.id]) {
+            if (!this.isCategoryLoaded(category.id)) {
               await this.fetchGamesByCategory(category.id)
               game = this.getGameById(id)
               if (game) break

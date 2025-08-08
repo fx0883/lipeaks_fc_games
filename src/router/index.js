@@ -15,13 +15,14 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import { createRouter, createWebHistory } from 'vue-router'
-import i18n from '../i18n'
+import i18n, { setLanguage, URL_LANG_MAP } from '../i18n'
 
 // 导入视图组件
 const HomeView = () => import('../views/HomeView.vue')
 const GameView = () => import('../views/GameView.vue')
 const CategoryView = () => import('../views/CategoryView.vue')
 const SearchView = () => import('../views/SearchView.vue')
+const StatsView = () => import('../views/StatsView.vue')
 const NotFoundView = () => import('../views/NotFoundView.vue')
 
 
@@ -52,6 +53,12 @@ const routes = [
     meta: { titleKey: 'routes.search' }
   },
   {
+    path: '/stats',
+    name: 'stats',
+    component: StatsView,
+    meta: { titleKey: 'routes.stats' }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView,
@@ -65,9 +72,19 @@ const router = createRouter({
   routes
 })
 
-// 全局前置守卫，用于设置页面标题
+// 全局前置守卫，用于语言检测和页面标题设置
 router.beforeEach((to, from, next) => {
   const { t } = i18n.global
+  
+  // 检查URL语言参数
+  const langParam = to.query.lang
+  if (langParam && URL_LANG_MAP[langParam]) {
+    // 如果URL有有效的语言参数，切换语言但不更新URL（避免无限循环）
+    const targetLanguage = URL_LANG_MAP[langParam]
+    if (i18n.global.locale.value !== targetLanguage) {
+      setLanguage(targetLanguage, false) // false表示不更新URL
+    }
+  }
   
   // 为搜索页面动态设置标题
   if (to.name === 'search' && to.query.q) {
@@ -77,6 +94,7 @@ router.beforeEach((to, from, next) => {
   } else {
     document.title = t('app.title')
   }
+  
   next()
 })
 

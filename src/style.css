@@ -76,6 +76,53 @@
   --animation-float: 3s;
 }
 
+/* 深色主题变量 */
+[data-theme="dark"] {
+  /* 深色主题颜色变量 */
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-light: #8b5cf6;
+  
+  --color-secondary: #14b8a6;
+  --color-secondary-dark: #0d9488;
+  --color-secondary-light: #2dd4bf;
+  
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --color-accent-light: #fbbf24;
+  
+  --color-background: #0f172a;
+  --color-background-soft: #1e293b;
+  --color-background-mute: #334155;
+  
+  --color-border: #475569;
+  --color-border-hover: #64748b;
+  
+  --color-text: #f1f5f9;
+  --color-text-light: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+  
+  /* 深色主题游戏化颜色 */
+  --color-gaming-gold: #ffd700;
+  --color-gaming-silver: #e2e8f0;
+  --color-gaming-bronze: #f97316;
+  --color-gaming-neon: #00ff41;
+  --color-gaming-purple: #a855f7;
+  
+  /* 深色主题阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  --shadow-gaming: 0 0 20px rgba(255, 215, 0, 0.5);
+  --shadow-neon: 0 0 15px var(--color-gaming-neon);
+}
+
 /* 基础样式 */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -741,5 +788,53 @@ html[lang^="zh"] {
   html.rtl .language-switcher-container {
     left: 15px;
     right: auto;
+  }
+}
+
+/* EmulatorJS 虚拟按钮自定义样式 */
+/* SELECT、START 和 COIN 按钮设置为圆角长方形 */
+.ejs_virtualGamepad_button.b_select,
+.ejs_virtualGamepad_button.b_start,
+.ejs_virtualGamepad_button.b_coin {
+  border-radius: 8px !important; /* 圆角长方形 */
+  width: 50px !important; /* 稍微减小宽度 */
+  height: 25px !important;
+  line-height: 25px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  transform: translateX(-50%) !important; /* 以自身中心为基准定位 */
+}
+
+/* 按下状态 */
+.ejs_virtualGamepad_button.b_select.ejs_virtualGamepad_button_down,
+.ejs_virtualGamepad_button.b_start.ejs_virtualGamepad_button_down,
+.ejs_virtualGamepad_button.b_coin.ejs_virtualGamepad_button_down {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 移动端竖屏时的尺寸调整 */
+@media (orientation: portrait) and (max-width: 768px) {
+  .ejs_virtualGamepad_button.b_select,
+  .ejs_virtualGamepad_button.b_start,
+  .ejs_virtualGamepad_button.b_coin {
+    width: 55px !important; /* 竖屏时稍大一些 */
+    height: 28px !important;
+    line-height: 28px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* 小屏幕设备额外调整 */
+@media (max-width: 480px) {
+  .ejs_virtualGamepad_button.b_select,
+  .ejs_virtualGamepad_button.b_start,
+  .ejs_virtualGamepad_button.b_coin {
+    width: 45px !important; /* 更小屏幕时进一步减小 */
+    height: 24px !important;
+    line-height: 24px !important;
+    font-size: 9px !important;
   }
 }

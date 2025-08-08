@@ -17,9 +17,10 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import router from './router'
-import i18n from './i18n'
+import i18n, { updateHreflangTags } from './i18n'
 import App from './App.vue'
 import './style.css'
+import { initToolbar } from '@stagewise/toolbar'
 
 // 创建应用实例
 const app = createApp(App)
@@ -33,5 +34,15 @@ app.use(router)
 // 使用Vue I18n
 app.use(i18n)
 
+// 初始化 Stagewise 工具栏 (仅在开发模式)
+if (import.meta.env.DEV) {
+  initToolbar({
+    plugins: [],
+  })
+}
+
 // 挂载应用
 app.mount('#app')
+
+// 初始化hreflang标签
+updateHreflangTags()

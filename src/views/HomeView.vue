@@ -62,8 +62,8 @@
       <div class="category-grid">
         <div class="category-card" v-for="category in categories" :key="category.id" @click="navigateToCategory(category.id)">
           <div class="category-icon">🎯</div>
-          <h3 class="category-name">{{ category.name }}</h3>
-          <p class="category-desc">{{ category.description || $t('home.categoryDefaultDesc') }}</p>
+          <h3 class="category-name">{{ getCategoryName(category) }}</h3>
+          <p class="category-desc">{{ getCategoryDescription(category) || $t('home.categoryDefaultDesc') }}</p>
           <div class="category-stats">
             <span class="game-count">{{ getCategoryGameCount(category.id) }} {{ $t('home.games') }}</span>
           </div>
@@ -74,16 +74,22 @@
     </div>
     </section>
     
-    <!-- 热门游戏区域 -->
-    <section class="popular-games-section" ref="gamesRef">
+    <!-- 推荐游戏区域 -->
+    <section class="recommended-games-section" ref="gamesRef">
       <div class="section-header">
-        <h2 class="section-title">{{ $t('home.popularGames') }}</h2>
-        <p class="section-subtitle">{{ $t('home.popularGamesSubtitle') }}</p>
+        <h2 class="section-title">{{ $t('home.recommendedGames') }}</h2>
+        <p class="section-subtitle">{{ $t('home.recommendedGamesSubtitle') }}</p>
       </div>
       <div class="games-grid" v-if="popularGames.length > 0">
-        <div class="game-card" v-for="game in popularGames.slice(0, 8)" :key="game.id" @click="navigateToGame(game.id)">
+        <div class="game-card" v-for="game in popularGames" :key="game.id" @click="navigateToGame(game.id)">
           <div class="game-image-container">
-            <img :src="game.cover || '/placeholder.png'" :alt="game.name" class="game-image">
+            <img 
+              :src="game.cover || '/placeholder.png'" 
+              :alt="game.name" 
+              class="game-image"
+              loading="lazy"
+              decoding="async"
+            >
             <div class="game-overlay">
               <div class="play-button">
                 <span class="play-icon">▶</span>
@@ -94,8 +100,8 @@
             </div>
             </div>
             <div class="game-info">
-            <h3 class="game-title">{{ game.name }}</h3>
-            <p class="game-description">{{ game.description || $t('home.noDescription') }}</p>
+            <h3 class="game-title">{{ getGameName(game) }}</h3>
+            <p class="game-description">{{ getGameDescription(game) }}</p>
             <div class="game-stats">
               <span class="play-count">🎮 {{ game.playCount || 0 }} {{ $t('home.plays') }}</span>
               <span class="game-category">📂 {{ getCategoryName(game.category) }}</span>
@@ -105,11 +111,11 @@
       </div>
       <div class="loading-state" v-else-if="loading">
         <div class="loading-spinner"></div>
-        <p>{{ $t('home.loadingPopularGames') }}</p>
+        <p>{{ $t('home.loadingRecommendedGames') }}</p>
       </div>
       <div class="empty-state" v-else>
         <div class="empty-icon">🎮</div>
-        <p>{{ $t('home.noPopularGames') }}</p>
+        <p>{{ $t('home.noRecommendedGames') }}</p>
       </div>
     </section>
 
@@ -141,6 +147,8 @@
       </div>
     </div>
     </section>
+    
+
   </div>
 </template>
 
@@ -148,9 +156,13 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useCategoryI18n } from '../composables/useCategoryI18n'
+import { useGameI18n } from '../composables/useGameI18n'
 
 const router = useRouter()
 const gameStore = useGameStore()
+const { getCategoryName, getCategoryDescription } = useCategoryI18n()
+const { getGameName, getGameDescription } = useGameI18n()
 const categoriesRef = ref(null)
 const gamesRef = ref(null)
 
@@ -169,11 +181,7 @@ const getCategoryGameCount = (categoryId) => {
   return gameStore.getGamesByCategory(categoryId).length
 }
 
-// 获取分类名称
-const getCategoryName = (categoryId) => {
-  const category = gameStore.getCategoryById(categoryId)
-  return category ? category.name : categoryId
-}
+
 
 // 导航方法
 const navigateToCategory = (categoryId) => {
@@ -181,7 +189,29 @@ const navigateToCategory = (categoryId) => {
 }
 
 const navigateToGame = (gameId) => {
-  router.push(`/game/${gameId}`)
+  const baseUrl = window.location.origin
+  const gameUrl = `${baseUrl}/game/${gameId}`
+  
+  // 检测是否为移动设备
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (window.innerWidth <= 768)
+  
+  if (isMobile) {
+    // 移动端：创建隐藏链接并模拟点击，更兼容
+    const link = document.createElement('a')
+    link.href = gameUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } else {
+    // 桌面端：直接使用window.open
+    window.open(gameUrl, '_blank', 'noopener,noreferrer')
+  }
 }
 
 const scrollToGames = () => {
@@ -353,7 +383,7 @@ onMounted(async () => {
 
 /* 通用区域样式 */
 .categories-section,
-.popular-games-section,
+.recommended-games-section,
 .features-section {
   padding: 5rem 2rem;
   max-width: 1200px;
@@ -392,14 +422,15 @@ onMounted(async () => {
 
 .category-card {
   position: relative;
-  background: white;
+  background: var(--color-background);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
+  border: 1px solid var(--color-border);
 }
 
 .category-card::before {
@@ -419,7 +450,7 @@ onMounted(async () => {
 
 .category-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
 }
 
 .category-icon {
@@ -451,23 +482,87 @@ onMounted(async () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
-  color: white;
+  background: linear-gradient(135deg, 
+    rgba(79, 70, 229, 0.95) 0%, 
+    rgba(16, 185, 129, 0.95) 50%, 
+    rgba(59, 130, 246, 0.95) 100%
+  );
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 20px;
+  /* 增强暗模式下文字可见性 */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.5);
+  font-weight: 800;
+  backdrop-filter: blur(4px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .category-card:hover .category-overlay {
-  opacity: 0.95;
+  opacity: 1;
+}
+
+/* 暗模式下的特别优化 */
+[data-theme="dark"] .category-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .category-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+}
+
+[data-theme="dark"] .category-overlay {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.95) 0%, 
+    rgba(20, 184, 166, 0.95) 50%, 
+    rgba(168, 85, 247, 0.95) 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px) saturate(1.3);
+}
+
+[data-theme="dark"] .play-text {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 12px rgba(0, 0, 0, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .play-text {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 800;
+  /* 最大化文字可见性 */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 1),
+    0 0 10px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.9);
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* 暗模式下的游戏卡片优化 */
+[data-theme="dark"] .game-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .game-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+}
+
+[data-theme="dark"] .game-info {
+  background: var(--color-background-soft);
 }
 
 /* 游戏网格样式 */
@@ -478,17 +573,18 @@ onMounted(async () => {
 }
 
 .game-card {
-  background: white;
+  background: var(--color-background);
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
 }
 
 .game-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
 }
 
 .game-image-container {
@@ -556,6 +652,7 @@ onMounted(async () => {
 
 .game-info {
   padding: 1.5rem;
+  background: var(--color-background);
 }
 
 .game-title {
@@ -594,11 +691,11 @@ onMounted(async () => {
 }
 
 .feature-card {
-  background: white;
+  background: var(--color-background);
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   transition: transform 0.3s ease;
 }
 
@@ -672,7 +769,7 @@ onMounted(async () => {
   }
   
   .categories-section,
-  .popular-games-section,
+  .recommended-games-section,
   .features-section {
     padding: 3rem 1rem;
   }

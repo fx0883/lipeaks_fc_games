@@ -13,29 +13,49 @@ export const SUPPORTED_LANGUAGES = {
     nativeName: 'English',
     flag: '🇺🇸',
     rtl: false,
-    emulatorjsCode: 'en-US'
+    emulatorjsCode: 'en-US',
+    urlCode: 'en'
   },
   'zh-CN': {
     name: 'Chinese (Simplified)',
     nativeName: '简体中文',
     flag: '🇨🇳',
     rtl: false,
-    emulatorjsCode: 'zh-CN'
+    emulatorjsCode: 'zh-CN',
+    urlCode: 'zh'
   },
   'ja-JP': {
     name: 'Japanese',
     nativeName: '日本語',
     flag: '🇯🇵',
     rtl: false,
-    emulatorjsCode: 'ja-JA'
+    emulatorjsCode: 'ja-JA',
+    urlCode: 'ja'
   },
   'ar-AR': {
     name: 'Arabic',
     nativeName: 'العربية',
     flag: '🇸🇦',
     rtl: true,
-    emulatorjsCode: 'ar-AR'
+    emulatorjsCode: 'ar-AR',
+    urlCode: 'ar'
   }
+}
+
+// URL参数到语言代码的映射
+export const URL_LANG_MAP = {
+  'en': 'en-US',
+  'zh': 'zh-CN',
+  'ja': 'ja-JP',
+  'ar': 'ar-AR'
+}
+
+// 语言代码到URL参数的映射
+export const LANG_URL_MAP = {
+  'en-US': 'en',
+  'zh-CN': 'zh',
+  'ja-JP': 'ja',
+  'ar-AR': 'ar'
 }
 
 // 浏览器语言检测
@@ -56,16 +76,41 @@ function getBrowserLanguage() {
   return matchedLang || 'en-US'
 }
 
+// 从URL参数获取语言
+function getLanguageFromURL() {
+  // 检查当前页面的URL参数
+  const urlParams = new URLSearchParams(window.location.search)
+  const langParam = urlParams.get('lang')
+  
+  if (langParam && URL_LANG_MAP[langParam]) {
+    return URL_LANG_MAP[langParam]
+  }
+  
+  return null
+}
+
 // 获取初始语言
 function getInitialLanguage() {
-  // 1. 从localStorage获取用户偏好
+  // 1. 优先从URL参数获取语言
+  const urlLanguage = getLanguageFromURL()
+  if (urlLanguage) {
+    return urlLanguage
+  }
+  
+  // 2. 从localStorage获取用户偏好
   const savedLanguage = localStorage.getItem('fc-game-language')
   if (savedLanguage && SUPPORTED_LANGUAGES[savedLanguage]) {
     return savedLanguage
   }
   
-  // 2. 检测浏览器语言
-  return getBrowserLanguage()
+  // 3. 使用浏览器语言检测
+  const browserLanguage = getBrowserLanguage()
+  if (browserLanguage) {
+    return browserLanguage
+  }
+
+  // 4. 默认英语
+  return 'en-US'
 }
 
 // 语言包映射
@@ -88,7 +133,7 @@ const i18n = createI18n({
 })
 
 // 语言切换函数
-export function setLanguage(locale) {
+export function setLanguage(locale, updateUrl = true) {
   if (!SUPPORTED_LANGUAGES[locale]) {
     console.warn(`Unsupported language: ${locale}`)
     return
@@ -105,6 +150,70 @@ export function setLanguage(locale) {
   
   // 更新EmulatorJS语言
   updateEmulatorJSLanguage(locale)
+  
+  // 更新URL参数
+  if (updateUrl) {
+    updateURLLanguageParam(locale)
+  }
+}
+
+// 更新URL语言参数
+function updateURLLanguageParam(locale) {
+  const urlParams = new URLSearchParams(window.location.search)
+  const langCode = LANG_URL_MAP[locale]
+  
+  if (langCode === 'en') {
+    // 英语是默认语言，移除lang参数
+    urlParams.delete('lang')
+  } else {
+    // 其他语言设置lang参数
+    urlParams.set('lang', langCode)
+  }
+  
+  // 更新URL但不刷新页面
+  const newUrl = urlParams.toString() ? 
+    `${window.location.pathname}?${urlParams.toString()}` : 
+    window.location.pathname
+  
+  window.history.replaceState({}, '', newUrl)
+  
+  // 更新hreflang标签
+  updateHreflangTags()
+}
+
+// 生成hreflang标签
+export function updateHreflangTags() {
+  // 移除现有的hreflang标签
+  const existingTags = document.querySelectorAll('link[rel="alternate"][hreflang]')
+  existingTags.forEach(tag => tag.remove())
+  
+  // 获取当前路径（不包含查询参数）
+  const currentPath = window.location.pathname
+  const baseUrl = window.location.origin
+  
+  // 为每种语言生成hreflang标签
+  Object.entries(LANG_URL_MAP).forEach(([locale, urlCode]) => {
+    const link = document.createElement('link')
+    link.rel = 'alternate'
+    link.hreflang = urlCode
+    
+    if (urlCode === 'en') {
+      // 英语默认不带参数
+      link.href = `${baseUrl}${currentPath}`
+    } else {
+      // 其他语言带参数
+      link.href = `${baseUrl}${currentPath}?lang=${urlCode}`
+    }
+    
+    document.head.appendChild(link)
+  })
+  
+  // 添加x-default（默认英语）
+  const defaultLink = document.createElement('link')
+  defaultLink.rel = 'alternate'
+  defaultLink.hreflang = 'x-default'
+  defaultLink.href = `${baseUrl}${currentPath}`
+  document.head.appendChild(defaultLink)
 }
 
 // 更新HTML属性

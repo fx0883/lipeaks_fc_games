@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟手柄控制说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .game-section {
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-title {
+            color: #e74c3c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        
+        .controls-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .control-group h4 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .button {
+            background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+            border: 2px solid #bbb;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .button.action {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            color: white;
+            border-color: #c44242;
+        }
+        
+        .button.kick {
+            background: linear-gradient(145deg, #4ecdc4, #45b7aa);
+            color: white;
+            border-color: #369087;
+        }
+        
+        .button.fc {
+            background: linear-gradient(145deg, #95e1d3, #67d5c4);
+            color: #2c3e50;
+            border-color: #4a9d8e;
+        }
+        
+        .button.system {
+            background: linear-gradient(145deg, #feca57, #ff9ff3);
+            color: #2c3e50;
+            border-color: #f19c3e;
+        }
+        
+        .dpad {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #34495e, #2c3e50);
+            border-radius: 8px;
+            position: relative;
+            margin: 0 auto 15px;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dpad::before, .dpad::after {
+            content: '';
+            position: absolute;
+            background: #ecf0f1;
+            border-radius: 2px;
+        }
+        
+        .dpad::before {
+            width: 60%;
+            height: 20%;
+            top: 40%;
+            left: 20%;
+        }
+        
+        .dpad::after {
+            width: 20%;
+            height: 60%;
+            top: 20%;
+            left: 40%;
+        }
+        
+        .mapping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .mapping-table th,
+        .mapping-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mapping-table th {
+            background: #3498db;
+            color: white;
+        }
+        
+        .mapping-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tips {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            margin-top: 20px;
+        }
+        
+        .tips h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .controls-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 移动端虚拟手柄控制说明</h1>
+        
+        <div class="intro">
+            <p><strong>说明：</strong>在移动设备上全屏游玩时，会自动显示虚拟手柄。不同类型的游戏有不同的按钮布局，以下是详细说明。</p>
+        </div>
+
+        <!-- FC游戏控制 -->
+        <div class="game-section">
+            <h2 class="game-title">🕹️ FC/NES 游戏控制 (如：魂斗罗)</h2>
+            
+            <div class="controls-layout">
+                <div class="control-group">
+                    <h4>方向控制</h4>
+                    <div class="dpad"></div>
+                    <p style="text-align: center;">虚拟摇杆</p>
+                </div>
+                
+                <div class="control-group">
+                    <h4>动作按钮</h4>
+                    <div class="button-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="button fc">B</div>
+                        <div class="button fc">A</div>
+                    </div>
+                    <div class="button-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="button system">SELECT</div>
+                        <div class="button system">START</div>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th>按钮</th>
+                        <th>功能</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>方向键</td><td>移动角色</td><td>上下左右移动</td></tr>
+                    <tr><td>A按钮</td><td>主要动作</td><td>射击、跳跃、确认</td></tr>
+                    <tr><td>B按钮</td><td>次要动作</td><td>奔跑、取消</td></tr>
+                    <tr><td>START</td><td>开始/暂停</td><td>开始游戏或暂停</td></tr>
+                    <tr><td>SELECT</td><td>选择</td><td>切换选项或武器</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MAME游戏控制 -->
+        <div class="game-section">
+            <h2 class="game-title">🥊 街机游戏控制 (如：19XX、Street Fighter)</h2>
+            
+            <div class="controls-layout">
+                <div class="control-group">
+                    <h4>方向控制</h4>
+                    <div class="dpad"></div>
+                    <p style="text-align: center;">8方向摇杆</p>
+                </div>
+                
+                <div class="control-group">
+                    <h4>6按钮格斗布局</h4>
+                    <div class="button-grid">
+                        <div class="button action">LP</div>
+                        <div class="button action">MP</div>
+                        <div class="button action">HP</div>
+                    </div>
+                    <div class="button-grid">
+                        <div class="button kick">LK</div>
+                        <div class="button kick">MK</div>
+                        <div class="button kick">HK</div>
+                    </div>
+                    <div class="button-grid" style="grid-template-columns: 1fr 1fr; margin-top: 10px;">
+                        <div class="button system">COIN</div>
+                        <div class="button system">START</div>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th>按钮</th>
+                        <th>功能</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>摇杆</td><td>移动/招式方向</td><td>8方向移动，配合按钮出招</td></tr>
+                    <tr><td>LP (轻拳)</td><td>快速拳击</td><td>速度快，伤害小</td></tr>
+                    <tr><td>MP (中拳)</td><td>中等拳击</td><td>平衡的速度和伤害</td></tr>
+                    <tr><td>HP (重拳)</td><td>强力拳击</td><td>速度慢，伤害大</td></tr>
+                    <tr><td>LK (轻腿)</td><td>快速踢击</td><td>速度快，伤害小</td></tr>
+                    <tr><td>MK (中腿)</td><td>中等踢击</td><td>平衡的速度和伤害</td></tr>
+                    <tr><td>HK (重腿)</td><td>强力踢击</td><td>速度慢，伤害大</td></tr>
+                    <tr><td>COIN</td><td>投币</td><td>街机投币，部分游戏需要</td></tr>
+                    <tr><td>START</td><td>开始</td><td>开始游戏</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="tips">
+                <h4>💡 格斗游戏技巧</h4>
+                <ul>
+                    <li><strong>连招组合：</strong>可以组合不同的拳腿按钮打出连续技</li>
+                    <li><strong>特殊招式：</strong>摇杆+按钮组合可以释放特殊招式</li>
+                    <li><strong>防御：</strong>向后拉摇杆可以防御攻击</li>
+                    <li><strong>投币：</strong>某些街机游戏需要先按COIN投币才能开始</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 技术说明 -->
+        <div class="game-section">
+            <h2 class="game-title">⚙️ 技术说明</h2>
+            
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th>游戏类型</th>
+                        <th>核心</th>
+                        <th>按钮数量</th>
+                        <th>特殊功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>FC/NES游戏</td><td>fceumm, nestopia</td><td>4个 (A,B,START,SELECT)</td><td>横版动作、射击</td></tr>
+                    <tr><td>MAME街机</td><td>mame2003, mame2003_plus</td><td>8个 (6动作+COIN+START)</td><td>格斗、射击</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="tips">
+                <h4>🔧 自动适配功能</h4>
+                <ul>
+                    <li><strong>设备检测：</strong>自动检测移动设备并启用虚拟手柄</li>
+                    <li><strong>方向适应：</strong>根据屏幕方向自动调整按钮布局</li>
+                    <li><strong>核心适配：</strong>根据游戏核心自动选择正确的按钮配置</li>
+                    <li><strong>性能优化：</strong>在移动端自动启用性能优化选项</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/test-games.html" class="back-link">← 返回游戏测试页面</a>
+            <a href="/mobile-test.html" class="back-link">📱 移动端专用测试</a>
+            <a href="/" class="back-link">🏠 返回主页</a>
+        </div>
+    </div>
+</body>
+</html> 

@@ -18,17 +18,12 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
-import { StagewiseToolbar } from '@stagewise/toolbar-vue'
-import VuePlugin from '@stagewise-plugins/vue'
 
-// 配置stagewise，仅在开发环境中启用
-const isDev = import.meta.env.DEV
-const stagwiseConfig = {
-  plugins: [VuePlugin],
-}
+
 </script>
 
 <template>
+
   <div class="app-container">
     <AppHeader />
     
@@ -40,9 +35,6 @@ const stagwiseConfig = {
       </router-view>
     </main>
     <AppFooter />
-    
-    <!-- 仅在开发环境中显示stagewise工具栏 -->
-    <StagewiseToolbar v-if="isDev" :config="stagwiseConfig" />
   </div>
 </template>
 

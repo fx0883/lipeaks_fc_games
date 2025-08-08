@@ -126,20 +126,29 @@
           {{ $t('category.gamesInCategory') }}
         </h2>
         <div class="results-count">
-          <span class="count-text">{{ $t('category.showingResults', { count: filteredGames.length, total: games.length }) }}</span>
+          <span class="count-text">{{ $t('category.showingResults', { count: paginatedGames.length, total: filteredGames.length }) }}</span>
+          <span class="total-count" v-if="filteredGames.length !== games.length">
+            ({{ $t('category.totalGames', { total: games.length }) }})
+          </span>
         </div>
       </div>
       
       <div class="game-list" :class="{ 'list-view': viewMode === 'list', 'grid-view': viewMode === 'grid' }">
         <div 
           class="game-card" 
-          v-for="(game, index) in filteredGames" 
+          v-for="(game, index) in paginatedGames" 
           :key="game.id"
           :class="{ 'animate-slide-up': true, [`animate-delay-${Math.min(index * 100, 500)}`]: true }"
           @click="navigateToGame(game.id)"
         >
           <div class="game-image-container">
-            <img :src="game.cover || '/placeholder.png'" :alt="game.name" class="game-image">
+            <img 
+              :src="game.cover || '/placeholder.png'" 
+              :alt="game.name" 
+              class="game-image"
+              loading="lazy"
+              decoding="async"
+            >
             <div class="game-overlay">
               <div class="play-button">
                 <span class="play-icon">▶</span>
@@ -166,8 +175,8 @@
           </div>
           
           <div class="game-info">
-            <h3 class="game-title">{{ game.name }}</h3>
-            <p class="game-description">{{ game.description || $t('category.noDescription') }}</p>
+            <h3 class="game-title">{{ getGameName(game) }}</h3>
+            <p class="game-description">{{ getGameDescription(game) }}</p>
             
             <div class="game-meta">
               <div class="meta-item" v-if="game.author">
@@ -197,6 +206,16 @@
           </div>
         </div>
       </div>
+      
+      <!-- 分页组件 -->
+      <Pagination
+        v-if="filteredGames.length > 0"
+        :current-page="currentPage"
+        :total-items="filteredGames.length"
+        :items-per-page="itemsPerPage"
+        @page-change="handlePageChange"
+        @items-per-page-change="handleItemsPerPageChange"
+      />
     </section>
 
     <!-- 空状态 -->
@@ -230,10 +249,15 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
+import Pagination from '../components/Pagination.vue'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
+const { setCategorySEO } = useSEO()
 const categoryId = computed(() => route.params.id)
 const loading = computed(() => gameStore.loading)
 
@@ -242,14 +266,38 @@ const searchQuery = ref('')
 const sortBy = ref('name')
 const viewMode = ref('grid')
 
-// 获取分类信息
-const category = computed(() => gameStore.getCategoryById(categoryId.value))
+// 分页状态
+const currentPage = ref(1)
+const itemsPerPage = ref(24)
+
+// 获取分类信息（支持主分类和子分类）
+const category = computed(() => {
+  // 首先尝试获取主分类
+  let cat = gameStore.getCategoryById(categoryId.value)
+  if (cat) return cat
+  
+  // 如果不是主分类，查找是否为子分类
+  const parentCategory = gameStore.categories.find(mainCat => 
+    mainCat.subCategories && mainCat.subCategories.some(sub => sub.id === categoryId.value)
+  )
+  
+  if (parentCategory) {
+    const subCategory = parentCategory.subCategories.find(sub => sub.id === categoryId.value)
+    return {
+      ...subCategory,
+      parentCategory: parentCategory
+    }
+  }
+  
+  return null
+})
 
 // 获取分类下的游戏
 const games = computed(() => gameStore.getGamesByCategory(categoryId.value))
 
 // 分类图标映射
 const categoryIcons = {
+  // 原有分类
   'action': '⚔️',
   'adventure': '🗺️',
   'puzzle': '🧩',
@@ -259,7 +307,29 @@ const categoryIcons = {
   'fighting': '🥊',
   'shooting': '🎯',
   'rpg': '🗡️',
-  'strategy': '♟️'
+  'strategy': '♟️',
+  
+  // 新的主分类
+  'fc': '🎮',
+  'arcade': '🕹️',
+  
+  // FC子分类
+  'fc-action': '⚔️',
+  'fc-stg': '🚁',
+  'fc-rpg': '🗡️',
+  'fc-puzzle': '🧩',
+  'fc-spg': '⚽',
+  'fc-tab': '🃏',
+  'fc-etc': '📦',
+  
+  // 街机子分类
+  'arcade-fighting': '🥊',
+  'arcade-shooting': '🎯',
+  'arcade-action': '💥',
+  'arcade-puzzle': '🧩',
+  'arcade-racing': '🏎️',
+  'arcade-sports': '⚽',
+  'arcade-etc': '📦'
 }
 
 const getCategoryIcon = (categoryId) => {
@@ -306,9 +376,38 @@ const filteredGames = computed(() => {
   return filtered
 })
 
+// 分页后的游戏列表
+const paginatedGames = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return filteredGames.value.slice(start, end)
+})
+
 // 导航到游戏页面
 const navigateToGame = (gameId) => {
-  router.push(`/game/${gameId}`)
+  const baseUrl = window.location.origin
+  const gameUrl = `${baseUrl}/game/${gameId}`
+  
+  // 检测是否为移动设备
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (window.innerWidth <= 768)
+  
+  if (isMobile) {
+    // 移动端：创建隐藏链接并模拟点击，更兼容
+    const link = document.createElement('a')
+    link.href = gameUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } else {
+    // 桌面端：直接使用window.open
+    window.open(gameUrl, '_blank', 'noopener,noreferrer')
+  }
 }
 
 // 显示游戏详情（可以实现为模态框）
@@ -320,7 +419,28 @@ const showGameInfo = (game) => {
 // 清除搜索
 const clearSearch = () => {
   searchQuery.value = ''
+  currentPage.value = 1
 }
+
+// 分页处理
+const handlePageChange = (page) => {
+  currentPage.value = page
+  // 滚动到游戏列表顶部
+  const gamesSection = document.querySelector('.games-section')
+  if (gamesSection) {
+    gamesSection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
+const handleItemsPerPageChange = (newItemsPerPage) => {
+  itemsPerPage.value = newItemsPerPage
+  currentPage.value = 1 // 重置到第一页
+}
+
+// 监听筛选条件变化，重置到第一页
+watch([searchQuery, sortBy], () => {
+  currentPage.value = 1
+})
 
 // 加载数据
 const loadData = async () => {
@@ -343,6 +463,13 @@ watch(categoryId, () => {
 onMounted(() => {
   loadData()
 })
+
+// 监听分类和游戏数据变化，更新SEO
+watch([category, filteredGames], ([newCategory, newGames]) => {
+  if (newCategory && newGames) {
+    setCategorySEO(newCategory, newGames.length)
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -673,6 +800,7 @@ onMounted(() => {
   transition: all var(--transition-normal);
   cursor: pointer;
   position: relative;
+  border: 1px solid var(--color-border);
 }
 
 .game-card:hover {
@@ -866,15 +994,33 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: white;
-  text-decoration: none;
-  border: none;
-  border-radius: var(--border-radius-lg);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-normal);
+}
+
+/* 暗模式下的游戏卡片优化 */
+[data-theme="dark"] .game-card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .game-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
+  transform: translateY(-8px);
+}
+
+[data-theme="dark"] .game-info {
+  background: var(--color-background-soft);
+}
+
+[data-theme="dark"] .info-btn {
+  background: var(--color-background-mute);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .info-btn:hover {
+  background: var(--color-background);
+  border-color: var(--color-primary);
 }
 
 .empty-action:hover {

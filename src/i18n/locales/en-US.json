@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Lipeaks Game Paradise",
+    "title": "Lipeaks",
+    "subtitle": "Classic Gaming Platform",
     "loading": "Loading...",
     "error": "Error",
     "retry": "Retry",
@@ -20,10 +21,107 @@
     "aboutUsDesc": "Lipeaks Game Paradise is a nostalgic retro game online platform, allowing you to relive the joy of classic games.",
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",
-    "email": "Email: contact@fcgame.com",
+    "email": "Email: contact[at]fcgame.com", 
+    "siteStats": "Site Statistics",
     "copyright": "© {year} Lipeaks. All rights reserved.",
     "licensedUnder": "Licensed under the {licenseName}.",
     "sourceCode": "Source Code"
+  },
+  "stats": {
+    "visitorStatistics": "Visitor Statistics",
+    "totalVisitors": "Total Visitors",
+    "todayVisitors": "Today's Visitors",
+    "yesterdayVisitors": "Yesterday's Visitors",
+    "daysOnline": "Days Online",
+    "welcomeNewVisitor": "Welcome new friend! Thanks for visiting 🎮",
+    "pageSubtitle": "Understand website traffic and technical information",
+    "multiPlatform": "Multi-Platform",
+    "platformSupport": "Platform Support",
+    "freeForever": "Free Forever",
+    "serviceType": "Service Type",
+    "techInfo": "Technology Stack",
+    "frontendFramework": "Frontend Framework",
+    "styling": "Styling System",
+    "progressiveWebApp": "Progressive Web App",
+    "buildTool": "Build Tool",
+    "privacyTitle": "Privacy Protection",
+    "localStorage": "Local Storage",
+    "localStorageDesc": "Visit data is only stored locally in your browser and never uploaded to servers",
+    "noCookies": "No Cookies",
+    "noCookiesDesc": "We don't use any tracking cookies, fully protecting your privacy",
+    "anonymousData": "Anonymous Statistics",
+    "anonymousDataDesc": "All statistics are anonymous, no personal information is collected",
+    "developerOptions": "Developer Options",
+    "resetStats": "Reset Statistics",
+    "showRawData": "Show Raw Data",
+    "hideRawData": "Hide Raw Data",
+    "rawDataTitle": "Raw Statistics Data"
+  },
+  "categories": {
+    "fc": {
+      "name": "FC Games",
+      "description": "Classic Nintendo Entertainment System games collection, including action, shooting, RPG and other classic games",
+      "action": {
+        "name": "FC Action",
+        "description": "Platform jumping, side-scrolling shooting and other skill-based FC games"
+      },
+      "stg": {
+        "name": "FC Shooting",
+        "description": "Flying shooting and tank shooting FC games"
+      },
+      "rpg": {
+        "name": "FC RPG",
+        "description": "Role-playing FC games with adventure and storylines"
+      },
+      "puzzle": {
+        "name": "FC Puzzle",
+        "description": "FC puzzle games that require thinking and problem-solving"
+      },
+      "spg": {
+        "name": "FC Sports",
+        "description": "FC sports games including football, basketball, etc."
+      },
+      "tab": {
+        "name": "FC Table",
+        "description": "FC board and table games"
+      },
+      "etc": {
+        "name": "FC Others",
+        "description": "Other types of FC games"
+      }
+    },
+    "arcade": {
+      "name": "Arcade Games",
+      "description": "Classic arcade games collection, including fighting, shooting, action and other classic arcade games",
+      "fighting": {
+        "name": "Arcade Fighting",
+        "description": "Classic arcade fighting games like King of Fighters, Street Fighter series"
+      },
+      "shooting": {
+        "name": "Arcade Shooting",
+        "description": "Arcade shooting games including flight shooting and light gun shooting"
+      },
+      "action": {
+        "name": "Arcade Action",
+        "description": "Arcade action adventure games like Metal Slug series"
+      },
+      "puzzle": {
+        "name": "Arcade Puzzle",
+        "description": "Arcade puzzle games like Tetris, Puzzle Bobble, etc."
+      },
+      "racing": {
+        "name": "Arcade Racing",
+        "description": "Arcade racing and car games"
+      },
+      "sports": {
+        "name": "Arcade Sports",
+        "description": "Arcade sports and athletic games"
+      },
+      "etc": {
+        "name": "Arcade Others",
+        "description": "Other types of arcade games"
+      }
+    }
   },
   "home": {
     "title": "Lipeaks Game Paradise",
@@ -37,12 +135,12 @@
     "categoryDefaultDesc": "Carefully selected quality games for the best gaming experience",
     "games": "games",
     "playNow": "Play Now",
-    "popularGames": "Popular Games",
-    "popularGamesSubtitle": "The most popular classic games, chosen by millions of players",
+    "recommendedGames": "Recommended Games",
+    "recommendedGamesSubtitle": "Carefully selected classic games for the best gaming experience",
     "noDescription": "No description available",
     "plays": "plays",
-    "loadingPopularGames": "Loading popular games...",
-    "noPopularGames": "No popular games available",
+    "loadingRecommendedGames": "Loading recommended games...",
+    "noRecommendedGames": "No recommended games available",
     "features": "Platform Features",
     "instantPlay": "Instant Play",
     "instantPlayDesc": "No download required, play classic games directly in your browser",
@@ -85,6 +183,11 @@
     "buttonB": "B Button",
     "start": "Start",
     "select": "Select",
+    "coin": "Coin",
+    "button1": "Button 1",
+    "button2": "Button 2",
+    "button3": "Button 3", 
+    "button4": "Button 4",
     "noDescription": "No description available"
   },
   "category": {
@@ -106,6 +209,7 @@
     "listView": "List View",
     "gamesInCategory": "Category Games",
     "showingResults": "Showing {count} / {total} games",
+    "totalGamesAdded": "Total {total} games",
     "hotBadge": "Hot",
     "topBadge": "Top",
     "noDescription": "No description available",
@@ -117,6 +221,19 @@
     "noGamesDescription": "No games available in this category yet, please check other categories",
     "clearSearch": "Clear Search",
     "backToHome": "Back to Home"
+  },
+  "pagination": {
+    "showing": "Showing {start}-{end} of {total}",
+    "perPage": "per page",
+    "firstPage": "First page",
+    "lastPage": "Last page", 
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "prev": "Prev",
+    "next": "Next",
+    "goToPage": "Go to page",
+    "pageNumber": "Page number",
+    "go": "Go"
   },
   "search": {
     "resultsTitle": "Search Results: \"{query}\"",
@@ -201,6 +318,67 @@
     "category": "Category - Lipeaks Game Paradise",
     "search": "Search Results - Lipeaks Game Paradise",
     "searchWithQuery": "Search \"{query}\" - Lipeaks Game Paradise",
+    "stats": "Site Statistics - Lipeaks Game Paradise",
     "notFound": "Page Not Found - Lipeaks Game Paradise"
+  },
+  "games": {
+    "noDescription": "No description available",
+    "unknownAuthor": "Unknown",
+    "descriptionTemplate": "{gameName} - Classic {gameType} {platform} Game",
+    "genericDescription": "Classic {platform} Game",
+    "seoDescription": "{gameName} is a classic {platform} game created by {author}, played {playCount} times.",
+    "platforms": {
+      "fc": "NES",
+      "arcade": "Arcade"
+    },
+    "gameTypes": {
+      "动作": "Action",
+      "射击": "Shooting",
+      "角色扮演": "RPG",
+      "益智": "Puzzle",
+      "体育": "Sports",
+      "桌游": "Board Game",
+      "格斗": "Fighting",
+      "竞速": "Racing",
+      "动作射击": "Action Shooting",
+      "模拟射击": "Simulation Shooting",
+      "动作冒险": "Action Adventure",
+      "策略": "Strategy",
+      "运动": "Sports",
+      "竞赛": "Racing"
+    },
+    "nameRules": {
+      "directMappings": {
+        "恶魔城": "Castlevania",
+        "魂斗罗": "Contra",
+        "超级马里奥": "Super Mario",
+        "塞尔达传说": "The Legend of Zelda",
+        "拳皇": "The King of Fighters",
+        "街头霸王": "Street Fighter",
+        "合金弹头": "Metal Slug",
+        "坦克大战": "Battle City",
+        "双截龙": "Double Dragon",
+        "忍者神龟": "Teenage Mutant Ninja Turtles",
+        "洛克人": "Mega Man",
+        "最终幻想": "Final Fantasy",
+        "勇者斗恶龙": "Dragon Quest"
+      },
+      "versionMarkers": {
+        "(日版)": "(Japanese)",
+        "(美版)": "(US)",
+        "(欧版)": "(European)",
+        "(亚洲版)": "(Asian)",
+        "[汉化]": "[Chinese]",
+        "[修改]": "[Modified]"
+      },
+      "gameSeries": {
+        "II": "II",
+        "III": "III",
+        "IV": "IV",
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
   }
 } 

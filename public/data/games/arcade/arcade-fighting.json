@@ -1,0 +1,17 @@
+[
+  {
+    "id": "arcade-sf2",
+    "name": "街头霸王II - 天下斗士(世界 910214)",
+    "platform": "arcade",
+    "subCategory": "arcade-fighting",
+    "romPath": "/roms/arcade/cps1/sf2.zip",
+    "cover": "/roms/images/arcade/sf2.bmp",
+    "core": "mame2003_plus",
+    "author": "未知",
+    "region": "CN",
+    "size": "未知",
+    "version": "",
+    "description": "街头霸王II - 天下斗士(世界 910214) - 经典街机游戏",
+    "playCount": 0
+  }
+]

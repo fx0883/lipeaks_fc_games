@@ -6,20 +6,18 @@
     </div>
 
     <div class="search-results" v-if="searchResults.length > 0">
-      <div class="game-card" v-for="game in searchResults" :key="game.id">
-        <router-link :to="`/game/${game.id}`">
+      <div class="game-card" v-for="game in searchResults" :key="game.id" @click="navigateToGame(game.id)">
           <div class="game-image">
             <img :src="game.cover" :alt="game.name">
           </div>
           <div class="game-info">
-            <h3>{{ game.name }}</h3>
+            <h3>{{ getGameName(game) }}</h3>
             <div class="game-meta">
               <span class="category" v-if="getCategoryName(game.category)">{{ getCategoryName(game.category) }}</span>
               <span class="author" v-if="game.author">{{ game.author }}</span>
             </div>
-            <p>{{ game.description }}</p>
+            <p>{{ getGameDescription(game) }}</p>
           </div>
-        </router-link>
       </div>
     </div>
 
@@ -38,10 +36,14 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
+import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
+const { getGameName, getGameDescription } = useGameI18n()
+const { setSEO } = useSEO()
 
 const searchQuery = computed(() => route.query.q || '')
 const searchResults = computed(() => gameStore.searchResults)
@@ -52,6 +54,33 @@ const getCategoryName = (categoryId) => {
   if (!categoryId) return ''
   const category = gameStore.getCategoryById(categoryId)
   return category ? category.name : categoryId
+}
+
+// 导航到游戏页面
+const navigateToGame = (gameId) => {
+  const baseUrl = window.location.origin
+  const gameUrl = `${baseUrl}/game/${gameId}`
+  
+  // 检测是否为移动设备
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (navigator.maxTouchPoints > 0) ||
+                   (window.innerWidth <= 768)
+  
+  if (isMobile) {
+    // 移动端：创建隐藏链接并模拟点击，更兼容
+    const link = document.createElement('a')
+    link.href = gameUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } else {
+    // 桌面端：直接使用window.open
+    window.open(gameUrl, '_blank', 'noopener,noreferrer')
+  }
 }
 
 // 执行搜索
@@ -70,6 +99,27 @@ watch(() => route.query.q, () => {
 onMounted(() => {
   performSearch()
 })
+
+// 监听搜索查询和结果变化，更新SEO
+watch([searchQuery, searchResults], ([query, results]) => {
+  const title = query 
+    ? `Search Results for "${query}" | Lipeaks`
+    : 'Search Games | Lipeaks'
+  
+  const description = query
+    ? `Found ${results ? results.length : 0} games matching "${query}". Search and play classic games online for free.`
+    : 'Search through hundreds of classic NES and arcade games. Find your favorite retro games to play online for free.'
+  
+  const keywords = query
+    ? [`${query} games`, 'game search', 'classic games', 'retro gaming']
+    : ['game search', 'classic games', 'NES games', 'arcade games', 'retro gaming']
+  
+  setSEO({
+    title,
+    description,
+    keywords
+  })
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -102,6 +152,7 @@ onMounted(() => {
 
 .game-card:hover {
   transform: translateY(-5px);
+  cursor: pointer;
 }
 
 .game-image img {
