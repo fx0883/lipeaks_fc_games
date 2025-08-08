@@ -24,7 +24,7 @@
         <div class="logo-section">
           <router-link to="/" class="logo-link">
             <div class="logo-icon">
-              <img :src="logoSvg" alt="Lipeaks Logo" />
+              <DynamicLogo :size="32" />
             </div>
             <div class="logo-text">
               <h1>{{ $t('app.title') }}</h1>
@@ -207,7 +207,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
-import logoSvg from '../assets/logo.svg'
+import DynamicLogo from './DynamicLogo.vue'
 
 const router = useRouter()
 const route = useRoute()

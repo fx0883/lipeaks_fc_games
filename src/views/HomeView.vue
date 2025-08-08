@@ -246,6 +246,7 @@ onMounted(async () => {
 .hero-section {
   position: relative;
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,6 +265,8 @@ onMounted(async () => {
 
 .gaming-particles {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-image: 
@@ -271,25 +274,33 @@ onMounted(async () => {
     radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
     radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 100px 100px, 150px 150px, 120px 120px;
-  animation: particles-float 20s infinite linear;
+  /* animation: particles-float 20s infinite linear; */ /* 暂时禁用以测试 */
+  pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes particles-float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-100px) rotate(360deg); }
+  0% { transform: translateY(100px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
 .floating-icons {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 .game-icon {
   position: absolute;
   font-size: 2rem;
   opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
+  animation: home-float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 .game-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
@@ -298,9 +309,9 @@ onMounted(async () => {
 .game-icon:nth-child(4) { top: 70%; right: 25%; animation-delay: 3s; }
 .game-icon:nth-child(5) { top: 45%; left: 50%; animation-delay: 4s; }
 
-@keyframes float {
+@keyframes home-float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
 }
 
 .hero-content {
