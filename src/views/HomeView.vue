@@ -158,11 +158,13 @@ import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
 import { useGameI18n } from '../composables/useGameI18n'
+import { useGameStats } from '../composables/useGameStats'
 
 const router = useRouter()
 const gameStore = useGameStore()
 const { getCategoryName, getCategoryDescription } = useCategoryI18n()
 const { getGameName, getGameDescription } = useGameI18n()
+const { totalPlayCount, initializeGameStats } = useGameStats()
 const categoriesRef = ref(null)
 const gamesRef = ref(null)
 
@@ -172,9 +174,7 @@ const loading = computed(() => gameStore.loading)
 
 // 计算统计数据
 const totalGames = computed(() => gameStore.getAllGames.length)
-const totalPlays = computed(() => {
-  return gameStore.getAllGames.reduce((total, game) => total + (game.playCount || 0), 0)
-})
+const totalPlays = computed(() => totalPlayCount.value)
 
 // 获取分类游戏数量
 const getCategoryGameCount = (categoryId) => {
@@ -231,6 +231,8 @@ const loadInitialData = async () => {
 }
 
 onMounted(async () => {
+  // 初始化游戏统计
+  initializeGameStats()
   await loadInitialData()
 })
 </script>

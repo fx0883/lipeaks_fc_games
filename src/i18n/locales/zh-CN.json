@@ -188,6 +188,7 @@
     "button2": "按钮2", 
     "button3": "按钮3",
     "button4": "按钮4",
+    "loadingTip": "小提示：如果画面没有loading，请用鼠标点击一下模拟器屏幕。",
     "noDescription": "暂无游戏介绍"
   },
   "category": {

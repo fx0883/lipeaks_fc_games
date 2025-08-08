@@ -155,7 +155,7 @@
             <div class="stat-item">
               <div class="stat-icon">🎮</div>
               <div class="stat-info">
-                <div class="stat-value gaming-score">{{ game.playCount || 0 }}</div>
+                <div class="stat-value gaming-score">{{ individualPlayCount }}</div>
                 <div class="stat-label">{{ $t('game.totalPlays') }}</div>
               </div>
             </div>
@@ -204,6 +204,16 @@
       </div>
     </section>
 
+    <!-- 游戏加载提示 -->
+    <section class="loading-tip-section" v-if="game">
+      <div class="detail-card card">
+        <div class="loading-tip">
+          <span class="tip-icon">💡</span>
+          <span class="tip-text">{{ $t('game.loadingTip') }}</span>
+        </div>
+      </div>
+    </section>
+
     <!-- 加载状态 -->
     <div class="loading-state animate-pulse" v-else>
       <div class="loading-spinner"></div>
@@ -219,6 +229,7 @@ import { useI18n } from 'vue-i18n'
 import { useGameStore } from '../stores/game'
 import { useGameI18n } from '../composables/useGameI18n'
 import { useSEO } from '../composables/useSEO'
+import { useGameStats } from '../composables/useGameStats'
 import FCEmulator from '../components/FCEmulator.vue'
 
 const route = useRoute()
@@ -226,6 +237,12 @@ const { t } = useI18n()
 const gameStore = useGameStore()
 const { getGameName, getGameDescription } = useGameI18n()
 const { setGameSEO } = useSEO()
+const { 
+  incrementGamePlayCount, 
+  incrementIndividualGamePlayCount,
+  individualGameStats,
+  initializeGameStats
+} = useGameStats()
 const gameId = computed(() => route.params.id)
 const game = computed(() => gameStore.currentGame)
 const loading = computed(() => gameStore.loading)
@@ -278,12 +295,22 @@ const controlsData = computed(() => {
   ]
 })
 
+// 获取当前游戏的统计数据
+const currentGameStats = computed(() => {
+  if (!gameId.value) return { playCount: 0, totalPlayTime: 0, lastPlayed: null }
+  return individualGameStats.value.get(gameId.value) || { playCount: 0, totalPlayTime: 0, lastPlayed: null }
+})
+
 // 计算游戏统计数据
 const gamePlayTime = computed(() => {
-  // 模拟游戏时长计算
-  const playCount = game.value?.playCount || 0
-  const avgTime = 15 // 假设平均每次游玩15分钟
-  return Math.round(playCount * avgTime) + 'min'
+  const stats = currentGameStats.value
+  const minutes = stats.totalPlayTime
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60)
+    const remainingMinutes = minutes % 60
+    return remainingMinutes > 0 ? `${hours}h${remainingMinutes}min` : `${hours}h`
+  }
+  return `${minutes}min`
 })
 
 const gameRank = computed(() => {
@@ -298,9 +325,17 @@ const gameRank = computed(() => {
 })
 
 const completionRate = computed(() => {
-  // 模拟完成度计算
-  const playCount = game.value?.playCount || 0
-  return Math.min(Math.round(playCount / 10), 100)
+  const stats = currentGameStats.value
+  if (!stats || stats.totalPlayTime === 0) return 0
+  
+  // 完成度 = 游戏时长 / 10000，最大100%
+  const completion = Math.min((stats.totalPlayTime / 10000) * 100, 100)
+  return Math.round(completion)
+})
+
+// 获取单个游戏的播放次数
+const individualPlayCount = computed(() => {
+  return currentGameStats.value.playCount
 })
 
 // 游戏事件处理
@@ -310,7 +345,11 @@ const onGameLoaded = () => {
 }
 
 const onGameStarted = () => {
-  // 游戏开始时增加播放次数
+  // 游戏开始时增加全局播放次数
+  incrementGamePlayCount()
+  // 增加单个游戏的详细统计（新的统计系统）
+  incrementIndividualGamePlayCount(gameId.value)
+  // 同时增加游戏store中的播放次数（保持兼容性）
   gameStore.incrementPlayCount(gameId.value)
   isGameActive.value = true
   // 游戏开始 - 生产环境不输出日志
@@ -340,6 +379,9 @@ const onStateChanged = (stateChange) => {
 
 // 加载游戏数据
 onMounted(async () => {
+  // 初始化游戏统计数据
+  initializeGameStats()
+  
   // 如果分类数据为空，先加载分类数据
   if (gameStore.categories.length === 0) {
     await gameStore.fetchCategories()
@@ -691,6 +733,31 @@ watch(game, (newGame) => {
   gap: 1rem;
 }
 
+/* 游戏加载提示 */
+.loading-tip-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.loading-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.tip-icon {
+  font-size: 1.2rem;
+}
+
+.tip-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
 .control-item {
   display: flex;
   align-items: center;
@@ -813,6 +880,10 @@ watch(game, (newGame) => {
   .controls-grid {
     grid-template-columns: 1fr;
   }
+  
+  .tip-text {
+    font-size: 0.875rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -863,4 +934,6 @@ watch(game, (newGame) => {
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+
 </style> 
