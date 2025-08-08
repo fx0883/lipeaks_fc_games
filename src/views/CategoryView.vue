@@ -250,12 +250,14 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
 import Pagination from '../components/Pagination.vue'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
 const { getGameName, getGameDescription } = useGameI18n()
+const { setCategorySEO } = useSEO()
 const categoryId = computed(() => route.params.id)
 const loading = computed(() => gameStore.loading)
 
@@ -461,6 +463,13 @@ watch(categoryId, () => {
 onMounted(() => {
   loadData()
 })
+
+// 监听分类和游戏数据变化，更新SEO
+watch([category, filteredGames], ([newCategory, newGames]) => {
+  if (newCategory && newGames) {
+    setCategorySEO(newCategory, newGames.length)
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>

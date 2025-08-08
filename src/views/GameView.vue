@@ -213,17 +213,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useGameStore } from '../stores/game'
 import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
 import FCEmulator from '../components/FCEmulator.vue'
 
 const route = useRoute()
 const { t } = useI18n()
 const gameStore = useGameStore()
 const { getGameName, getGameDescription } = useGameI18n()
+const { setGameSEO } = useSEO()
 const gameId = computed(() => route.params.id)
 const game = computed(() => gameStore.currentGame)
 const loading = computed(() => gameStore.loading)
@@ -346,6 +348,13 @@ onMounted(async () => {
   // 加载游戏数据
   await gameStore.fetchGameById(gameId.value)
 })
+
+// 监听游戏数据变化，更新SEO
+watch(game, (newGame) => {
+  if (newGame) {
+    setGameSEO(newGame)
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>

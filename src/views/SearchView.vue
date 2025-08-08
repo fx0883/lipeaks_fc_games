@@ -37,11 +37,13 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGameStore } from '../stores/game'
 import { useGameI18n } from '../composables/useGameI18n'
+import { useSEO } from '../composables/useSEO'
 
 const route = useRoute()
 const router = useRouter()
 const gameStore = useGameStore()
 const { getGameName, getGameDescription } = useGameI18n()
+const { setSEO } = useSEO()
 
 const searchQuery = computed(() => route.query.q || '')
 const searchResults = computed(() => gameStore.searchResults)
@@ -97,6 +99,27 @@ watch(() => route.query.q, () => {
 onMounted(() => {
   performSearch()
 })
+
+// 监听搜索查询和结果变化，更新SEO
+watch([searchQuery, searchResults], ([query, results]) => {
+  const title = query 
+    ? `Search Results for "${query}" | Lipeaks`
+    : 'Search Games | Lipeaks'
+  
+  const description = query
+    ? `Found ${results ? results.length : 0} games matching "${query}". Search and play classic games online for free.`
+    : 'Search through hundreds of classic NES and arcade games. Find your favorite retro games to play online for free.'
+  
+  const keywords = query
+    ? [`${query} games`, 'game search', 'classic games', 'retro gaming']
+    : ['game search', 'classic games', 'NES games', 'arcade games', 'retro gaming']
+  
+  setSEO({
+    title,
+    description,
+    keywords
+  })
+}, { immediate: true })
 </script>
 
 <style scoped>
