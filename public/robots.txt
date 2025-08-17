@@ -1,48 +1,15 @@
-# Robots.txt for Lipeaks FC Games
-# Allow all crawlers to access the site
-
 User-agent: *
 Allow: /
 
-# Disallow crawling of admin/private areas (if any)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /_redirects
-Disallow: /.htaccess
-
-# Allow crawling of ROM directory but limit frequency
-User-agent: *
-Crawl-delay: 1
-
-# Sitemap location
+# 网站地图位置
 Sitemap: https://games.espressox.online/sitemap.xml
+Sitemap: https://games.espressox.online/sitemap-index.xml
 Sitemap: https://games.espressox.online/sitemap-games.xml
 Sitemap: https://games.espressox.online/sitemap-categories.xml
-Sitemap: https://games.espressox.online/sitemap-content.xml
 Sitemap: https://games.espressox.online/sitemap-images.xml
 
-# Special rules for search engine bots
-User-agent: Googlebot
-Allow: /
+# 允许搜索引擎爬取所有页面
+Disallow:
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: BaiduSpider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# Block AI training crawlers (optional)
-User-agent: CCBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
+# 爬取延迟（可选）
+Crawl-delay: 1

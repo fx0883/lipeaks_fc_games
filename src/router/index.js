@@ -25,6 +25,23 @@ const SearchView = () => import('../views/SearchView.vue')
 const StatsView = () => import('../views/StatsView.vue')
 const NotFoundView = () => import('../views/NotFoundView.vue')
 
+// 静态文件路径列表，这些路径不应该被Vue Router处理
+const STATIC_PATHS = [
+  '/sitemap.xml',
+  '/sitemap-index.xml',
+  '/sitemap-games.xml',
+  '/sitemap-categories.xml',
+  '/sitemap-content.xml',
+  '/sitemap-images.xml',
+  '/robots.txt',
+  '/favicon.ico',
+  '/404.html'
+]
+
+// 检查是否为静态文件路径
+function isStaticPath(path) {
+  return STATIC_PATHS.some(staticPath => path.startsWith(staticPath))
+}
 
 // 路由配置
 const routes = [
@@ -62,7 +79,16 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: NotFoundView,
-    meta: { titleKey: 'routes.notFound' }
+    meta: { titleKey: 'routes.notFound' },
+    // 添加beforeEnter守卫，排除静态文件路径
+    beforeEnter: (to, from, next) => {
+      if (isStaticPath(to.path)) {
+        // 如果是静态文件路径，不进行路由处理
+        next(false)
+        return
+      }
+      next()
+    }
   }
 ]
 
@@ -74,6 +100,13 @@ const router = createRouter({
 
 // 全局前置守卫，用于语言检测和页面标题设置
 router.beforeEach((to, from, next) => {
+  // 检查是否为静态文件路径
+  if (isStaticPath(to.path)) {
+    // 静态文件路径不进行Vue应用处理
+    next(false)
+    return
+  }
+
   const { t } = i18n.global
   
   // 检查URL语言参数

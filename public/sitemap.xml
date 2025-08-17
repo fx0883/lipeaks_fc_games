@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://games.espressox.online/</loc>
-    <lastmod>2025-08-07</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://games.espressox.online/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://games.espressox.online/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://games.espressox.online/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://games.espressox.online/" />
   </url>
   <url>
-    <loc>https://games.espressox.online/stats</loc>
-    <lastmod>2025-08-07</lastmod>
+    <loc>https://games.espressox.online/category/fc</loc>
+    <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/stats" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://games.espressox.online/stats?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://games.espressox.online/stats?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://games.espressox.online/stats?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://games.espressox.online/stats" />
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://games.espressox.online/category/arcade</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://games.espressox.online/search</loc>
-    <lastmod>2025-08-07</lastmod>
+    <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/search" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://games.espressox.online/search?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://games.espressox.online/search?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://games.espressox.online/search?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://games.espressox.online/search" />
+    <priority>0.6</priority>
   </url>
 </urlset>

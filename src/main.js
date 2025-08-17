@@ -22,27 +22,65 @@ import App from './App.vue'
 import './style.css'
 import { initToolbar } from '@stagewise/toolbar'
 
-// 创建应用实例
-const app = createApp(App)
+// 静态文件路径列表，这些路径不应该启动Vue应用
+const STATIC_PATHS = [
+  '/sitemap.xml',
+  '/sitemap-index.xml',
+  '/sitemap-games.xml',
+  '/sitemap-categories.xml',
+  '/sitemap-content.xml',
+  '/sitemap-images.xml',
+  '/robots.txt',
+  '/favicon.ico',
+  '/404.html'
+]
 
-// 使用Pinia状态管理
-app.use(createPinia())
-
-// 使用Vue Router
-app.use(router)
-
-// 使用Vue I18n
-app.use(i18n)
-
-// 初始化 Stagewise 工具栏 (仅在开发模式)
-if (import.meta.env.DEV) {
-  initToolbar({
-    plugins: [],
-  })
+// 检查是否为静态文件路径
+function isStaticPath(path) {
+  return STATIC_PATHS.some(staticPath => path.startsWith(staticPath))
 }
 
-// 挂载应用
-app.mount('#app')
+// 检查当前路径是否为静态文件
+const currentPath = window.location.pathname
+if (isStaticPath(currentPath)) {
+  // 如果是静态文件路径，不启动Vue应用
+  console.log(`Static file path detected: ${currentPath}, skipping Vue app initialization`)
+  
+  // 设置页面标题
+  if (currentPath.includes('sitemap')) {
+    document.title = 'Sitemap - Lipeaks FC Games'
+  } else if (currentPath.includes('robots')) {
+    document.title = 'Robots.txt - Lipeaks FC Games'
+  }
+  
+  // 阻止Vue应用启动
+  process.exit = () => {} // 防止process.exit报错
+} else {
+  // 正常启动Vue应用
+  console.log(`Starting Vue app for path: ${currentPath}`)
+  
+  // 创建应用实例
+  const app = createApp(App)
 
-// 初始化hreflang标签
-updateHreflangTags()
+  // 使用Pinia状态管理
+  app.use(createPinia())
+
+  // 使用Vue Router
+  app.use(router)
+
+  // 使用Vue I18n
+  app.use(i18n)
+
+  // 初始化 Stagewise 工具栏 (仅在开发模式)
+  if (import.meta.env.DEV) {
+    initToolbar({
+      plugins: [],
+    })
+  }
+
+  // 挂载应用
+  app.mount('#app')
+
+  // 初始化hreflang标签
+  updateHreflangTags()
+}

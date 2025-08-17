@@ -17,8 +17,16 @@ export default defineConfig({
     headers: {
       'Cross-Origin-Embedder-Policy': 'credentialless',
       'Cross-Origin-Opener-Policy': 'same-origin'
+    },
+    // 添加静态文件路由处理
+    fs: {
+      // 允许访问public目录外的文件
+      allow: ['..']
     }
   },
+  // 添加静态文件处理规则
+  publicDir: 'public',
+  // 确保sitemap.xml等文件不被Vue应用拦截
   build: {
     // 确保构建产物包含SPA路由回退配置
     target: 'es2015',
@@ -57,6 +65,5 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     // 启用 sourcemap 在开发时（生产时可关闭）
     sourcemap: false,
-  },
-  publicDir: 'public'
+  }
 })
