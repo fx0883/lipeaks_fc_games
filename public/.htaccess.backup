@@ -1,0 +1,15 @@
+# Simple .htaccess for cPanel - XML files priority
+RewriteEngine On
+
+# Force XML files to be served as XML
+<Files "*.xml">
+  ForceType application/xml
+</Files>
+
+# Handle XML files first
+RewriteRule \.xml$ - [L]
+
+# Vue Router fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

@@ -1,0 +1,13 @@
+# Force XML handling for cPanel
+RewriteEngine On
+
+# Block direct access to XML files to prevent Vue Router interference
+RewriteRule \.xml$ - [F]
+
+# Redirect sitemap.xml to PHP version
+RewriteRule ^sitemap\.xml$ /sitemap.xml.php [R=301,L]
+
+# Vue Router fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

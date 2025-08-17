@@ -1,0 +1,18 @@
+# Precise .htaccess for cPanel - Handle sitemap files specifically
+RewriteEngine On
+
+# Handle sitemap files first - prevent Vue Router interference
+RewriteRule ^sitemap\.xml$ /sitemap.html [L]
+RewriteRule ^sitemap\.xml\.php$ /sitemap.html [L]
+
+# Handle other specific files
+RewriteRule ^robots\.txt$ - [L]
+RewriteRule ^test\.php$ - [L]
+
+# Block Vue Router from handling these files
+RewriteRule ^(sitemap|robots|test)\.(xml|txt|php|html)$ - [L]
+
+# Vue Router fallback for everything else
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

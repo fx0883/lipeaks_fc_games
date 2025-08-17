@@ -1,0 +1,13 @@
+# Simple .htaccess for cPanel - Force sitemap.xml to PHP
+RewriteEngine On
+
+# Force sitemap.xml to use PHP version
+RewriteRule ^sitemap\.xml$ /sitemap.xml.php [L]
+
+# Handle XML files first
+RewriteRule \.xml$ - [L]
+
+# Vue Router fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
