@@ -128,6 +128,14 @@ router.beforeEach((to, from, next) => {
     document.title = t('app.title')
   }
   
+  // Google Analytics 页面浏览跟踪
+  if (typeof gtag !== 'undefined') {
+    gtag('config', 'G-MHXR0NTN69', {
+      page_path: to.fullPath,
+      page_title: document.title
+    })
+  }
+  
   next()
 })
 

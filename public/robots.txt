@@ -1,15 +1,18 @@
 User-agent: *
 Allow: /
 
-# 网站地图位置
+# Sitemaps
 Sitemap: https://games.espressox.online/sitemap.xml
 Sitemap: https://games.espressox.online/sitemap-index.xml
-Sitemap: https://games.espressox.online/sitemap-games.xml
-Sitemap: https://games.espressox.online/sitemap-categories.xml
-Sitemap: https://games.espressox.online/sitemap-images.xml
 
-# 允许搜索引擎爬取所有页面
-Disallow:
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
 
-# 爬取延迟（可选）
-Crawl-delay: 1
+# Allow important pages
+Allow: /
+Allow: /game/
+Allow: /category/
+Allow: /search/
+Allow: /stats/

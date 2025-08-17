@@ -27,3 +27,4 @@ public/data/roms/
 4.2.3/
 public/roms/
 /.vite
+*.tar
