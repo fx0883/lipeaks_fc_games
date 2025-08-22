@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://games.espressox.online/</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/" />
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://games.espressox.online/stats</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/stats" />
@@ -24,7 +24,7 @@
   </url>
   <url>
     <loc>https://games.espressox.online/search</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://games.espressox.online/search" />

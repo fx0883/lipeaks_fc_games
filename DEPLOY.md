@@ -39,23 +39,23 @@ location / {
 }
 ```
 
-## 部署步骤
+## 部署步骤（SPA 流程）
 
-1. **构建项目**：
+1. 构建项目：
    ```bash
    npm run build
    ```
 
-2. **上传文件**：
+2. 上传文件：
    - 将 `dist/` 目录下的所有文件上传到服务器
    - 确保 `_redirects` 和 `.htaccess` 文件也被上传
 
-3. **配置服务器**：
-   - **Netlify**: 自动识别 `_redirects` 文件
-   - **Apache**: 确保 `.htaccess` 文件在网站根目录
-   - **Nginx**: 使用提供的 `nginx.conf` 配置
+3. 配置服务器：
+   - Netlify: 自动识别 `_redirects` 文件
+   - Apache: 确保 `.htaccess` 文件在网站根目录
+   - Nginx: 使用提供的 `nginx.conf` 配置
 
-## 验证
+## 验证（SPA）
 部署完成后，应该可以直接访问：
 - 首页: `https://games.espressox.online/`
 - 游戏页面: `https://games.espressox.online/game/fc-101-emocheng1-renwukulouban`
@@ -67,3 +67,51 @@ location / {
   - `Cross-Origin-Opener-Policy: same-origin`
 - ROM文件和数据文件路径要正确
 - 检查游戏数据文件是否正确上传到 `/data/games/` 目录
+
+---
+
+## Nuxt 3 SSR 在 cPanel（Node.js + Passenger）部署
+
+> 本项目已集成 Nuxt 3（SSR + SEO）。推荐在 cPanel 的 Node.js 环境下运行服务端渲染。
+
+### 1) 准备与环境变量
+- cPanel → Setup Node.js App：创建/编辑应用，Node 18+
+- 环境变量：
+  - `NUXT_PUBLIC_BASE_URL=https://games.espressox.online`
+
+### 2) 安装与构建
+```bash
+npm ci
+npm run nuxt:build
+```
+
+### 3) 启动配置（Passenger）
+- Application Startup File：`.output/server/index.mjs`
+- Document Root（可选静态托管）：指向 `.output/public`
+- 启动命令（如需手动）：
+```bash
+npm run nuxt:start
+```
+
+### 4) 缓存与静态资源
+- 已在 `nuxt.config.ts` 配置：
+  - `/_nuxt/**` 静态资源：`public, max-age=31536000, immutable`
+  - `/api/**` 接口：`swr` 缓存（`maxAge: 300`）
+- 如需进一步加速，可在 cPanel/服务商层启用 CDN/缓存。
+
+### 5) 验证（SSR）
+- `https://games.espressox.online/` 查看源代码应有完整 HTML 内容
+- 分类/游戏/搜索页面首屏含数据（SSR 输出）
+- `robots.txt`、`sitemap.xml`、`hreflang`、`canonical` 生效
+
+### 6) 常用命令
+```bash
+# 本地开发（SSR）
+npm run nuxt:dev
+
+# 生产构建
+npm run nuxt:build
+
+# 生产启动（本地或服务器）
+npm run nuxt:start
+```

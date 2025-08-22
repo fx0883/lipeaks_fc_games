@@ -60,6 +60,9 @@ export const LANG_URL_MAP = {
 
 // 浏览器语言检测
 function getBrowserLanguage() {
+  if (typeof navigator === 'undefined') {
+    return 'en-US'
+  }
   const browserLang = navigator.language || navigator.userLanguage
   
   // 精确匹配
@@ -78,6 +81,9 @@ function getBrowserLanguage() {
 
 // 从URL参数获取语言
 function getLanguageFromURL() {
+  if (typeof window === 'undefined') {
+    return null
+  }
   // 检查当前页面的URL参数
   const urlParams = new URLSearchParams(window.location.search)
   const langParam = urlParams.get('lang')
@@ -98,7 +104,7 @@ function getInitialLanguage() {
   }
   
   // 2. 从localStorage获取用户偏好
-  const savedLanguage = localStorage.getItem('fc-game-language')
+  const savedLanguage = typeof localStorage !== 'undefined' ? localStorage.getItem('fc-game-language') : null
   if (savedLanguage && SUPPORTED_LANGUAGES[savedLanguage]) {
     return savedLanguage
   }
@@ -113,18 +119,39 @@ function getInitialLanguage() {
   return 'en-US'
 }
 
-// 语言包映射
+// 规范化语言包，确保所有叶子节点为字符串
+function normalizeMessages(obj) {
+  if (!obj || typeof obj !== 'object') return obj
+  const out = Array.isArray(obj) ? [] : {}
+  for (const key of Object.keys(obj)) {
+    const val = obj[key]
+    if (val && typeof val === 'object' && !Array.isArray(val)) {
+      out[key] = normalizeMessages(val)
+    } else if (typeof val === 'string') {
+      out[key] = val
+    } else if (val == null) {
+      out[key] = ''
+    } else if (Array.isArray(val)) {
+      out[key] = val.join(', ')
+    } else {
+      out[key] = String(val)
+    }
+  }
+  return out
+}
+
+// 语言包映射（已规范化）
 const messages = {
-  'en-US': enUS,
-  'zh-CN': zhCN,
-  'ja-JP': jaJP,
-  'ar-AR': arAR
+  'en-US': normalizeMessages(enUS),
+  'zh-CN': normalizeMessages(zhCN),
+  'ja-JP': normalizeMessages(jaJP),
+  'ar-AR': normalizeMessages(arAR)
 }
 
 // 创建i18n实例
 const i18n = createI18n({
   legacy: false,
-  locale: getInitialLanguage(),
+  locale: typeof window === 'undefined' ? 'en-US' : getInitialLanguage(),
   fallbackLocale: 'en-US',
   messages,
   globalInjection: true,
@@ -143,7 +170,9 @@ export function setLanguage(locale, updateUrl = true) {
   i18n.global.locale.value = locale
   
   // 保存到localStorage
-  localStorage.setItem('fc-game-language', locale)
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('fc-game-language', locale)
+  }
   
   // 更新HTML属性
   updateHtmlAttributes(locale)
@@ -159,6 +188,9 @@ export function setLanguage(locale, updateUrl = true) {
 
 // 更新URL语言参数
 function updateURLLanguageParam(locale) {
+  if (typeof window === 'undefined') {
+    return
+  }
   const urlParams = new URLSearchParams(window.location.search)
   const langCode = LANG_URL_MAP[locale]
   
@@ -183,6 +215,9 @@ function updateURLLanguageParam(locale) {
 
 // 生成hreflang标签
 export function updateHreflangTags() {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return
+  }
   // 移除现有的hreflang标签
   const existingTags = document.querySelectorAll('link[rel="alternate"][hreflang]')
   existingTags.forEach(tag => tag.remove())
@@ -218,6 +253,9 @@ export function updateHreflangTags() {
 
 // 更新HTML属性
 function updateHtmlAttributes(locale) {
+  if (typeof document === 'undefined') {
+    return
+  }
   const html = document.documentElement
   const config = SUPPORTED_LANGUAGES[locale]
   
@@ -234,6 +272,9 @@ function updateHtmlAttributes(locale) {
 
 // 更新EmulatorJS语言
 function updateEmulatorJSLanguage(locale) {
+  if (typeof window === 'undefined') {
+    return
+  }
   const config = SUPPORTED_LANGUAGES[locale]
   const emulatorjsLang = config.emulatorjsCode
   
@@ -249,7 +290,9 @@ export function getCurrentLanguageConfig() {
   return SUPPORTED_LANGUAGES[currentLocale]
 }
 
-// 初始化HTML属性
-updateHtmlAttributes(getInitialLanguage())
+// 初始化HTML属性（仅客户端）
+if (typeof window !== 'undefined') {
+  updateHtmlAttributes(getInitialLanguage())
+}
 
 export default i18n 

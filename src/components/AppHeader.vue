@@ -22,7 +22,7 @@
       <div class="header-container">
         <!-- Logo区域 -->
         <div class="logo-section">
-          <router-link to="/" class="logo-link">
+          <NuxtLink to="/" class="logo-link">
             <div class="logo-icon">
               <DynamicLogo :size="32" />
             </div>
@@ -30,7 +30,7 @@
               <h1>{{ $t('app.title') }}</h1>
               <span class="logo-subtitle">{{ $t('app.subtitle') }}</span>
             </div>
-          </router-link>
+          </NuxtLink>
         </div>
 
         <!-- 右侧操作区 -->
@@ -88,18 +88,18 @@
         <!-- 第一排：街机游戏主分类 + 所有街机子分类 -->
         <div class="nav-row first-row">
           <!-- 街机游戏主分类 -->
-          <router-link 
+          <NuxtLink 
             :to="`/category/arcade`" 
             class="nav-link main-category"
             :class="{ 'active': isActiveCategory('arcade') }"
           >
             <span class="nav-icon">🕹️</span>
             <span class="nav-text">{{ getCategoryName(arcadeCategory) }}</span>
-          </router-link>
+          </NuxtLink>
           
           <!-- 所有街机子分类 -->
           <template v-if="arcadeCategory && arcadeCategory.subCategories">
-            <router-link 
+            <NuxtLink 
               v-for="subCategory in arcadeCategory.subCategories" 
               :key="subCategory.id"
               :to="`/category/${subCategory.id}`" 
@@ -108,25 +108,25 @@
             >
               <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
               <span class="nav-text">{{ getShortSubCategoryName(subCategory, '街机') }}</span>
-            </router-link>
+            </NuxtLink>
           </template>
         </div>
 
         <!-- 第二排：FC游戏主分类 + 所有FC子分类 -->
         <div class="nav-row second-row">
           <!-- FC游戏主分类 -->
-          <router-link 
+          <NuxtLink 
             :to="`/category/fc`" 
             class="nav-link main-category"
             :class="{ 'active': isActiveCategory('fc') }"
           >
             <span class="nav-icon">🎮</span>
             <span class="nav-text">{{ getCategoryName(fcCategory) }}</span>
-          </router-link>
+          </NuxtLink>
 
           <!-- 所有FC子分类 -->
           <template v-if="fcCategory && fcCategory.subCategories">
-            <router-link 
+            <NuxtLink 
               v-for="subCategory in fcCategory.subCategories" 
               :key="subCategory.id"
               :to="`/category/${subCategory.id}`" 
@@ -135,7 +135,7 @@
             >
               <span class="nav-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
               <span class="nav-text">{{ getShortSubCategoryName(subCategory, 'FC') }}</span>
-            </router-link>
+            </NuxtLink>
           </template>
         </div>
       </div>
@@ -169,15 +169,15 @@
           </div>
           
           <div class="mobile-subcategories" :class="{ 'expanded': expandedCategories.includes(category.id) }">
-            <router-link 
+            <NuxtLink 
               :to="`/category/${category.id}`" 
               class="mobile-nav-link all-link"
               @click="closeMobileMenu"
             >
               <span class="link-icon">📋</span>
               <span>全部{{ getCategoryName(category) }}</span>
-            </router-link>
-            <router-link 
+            </NuxtLink>
+            <NuxtLink 
               v-for="subCategory in category.subCategories" 
               :key="subCategory.id"
               :to="`/category/${subCategory.id}`" 
@@ -186,7 +186,7 @@
             >
               <span class="link-icon">{{ getSubCategoryIcon(subCategory.id) }}</span>
               <span>{{ getCategoryName(subCategory) }}</span>
-            </router-link>
+            </NuxtLink>
           </div>
         </div>
       </nav>
@@ -203,10 +203,10 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+
 import { useGameStore } from '../stores/game'
 import { useCategoryI18n } from '../composables/useCategoryI18n'
-import LanguageSwitcher from './LanguageSwitcher.vue'
+import { defineAsyncComponent } from 'vue'
 import DynamicLogo from './DynamicLogo.vue'
 
 const router = useRouter()

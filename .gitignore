@@ -28,3 +28,4 @@ public/data/roms/
 public/roms/
 /.vite
 *.tar
+.output

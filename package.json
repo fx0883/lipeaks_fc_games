@@ -6,8 +6,12 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "spa:build": "vite build",
+    "spa:preview": "vite preview",
+    "nuxt:dev": "nuxt dev",
+    "nuxt:build": "nuxt build",
+    "nuxt:start": "nuxt start",
+    "nuxt:preview": "nuxt preview",
     "screenshots": "node scripts/take-screenshots.js",
     "screenshots:install": "npm install puppeteer",
     "generate-logos": "node scripts/generate-logo-pngs.js",
@@ -20,10 +24,15 @@
   },
   "dependencies": {
     "@emulatorjs/core-fbalpha2012_cps2": "^4.2.3",
+    "@nuxtjs/i18n": "^10.0.6",
+    "@nuxtjs/robots": "^5.5.0",
+    "@nuxtjs/sitemap": "^7.4.3",
+    "@pinia/nuxt": "^0.11.2",
+    "nuxt": "^4.0.3",
     "pinia": "^3.0.3",
     "require": "^2.4.20",
     "vue": "^3.5.17",
-    "vue-i18n": "^9.9.1",
+    "vue-i18n": "^9.14.1",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {

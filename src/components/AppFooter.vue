@@ -30,17 +30,17 @@
           <!-- 动态渲染分类菜单 -->
           <div v-for="category in categories" :key="category.id" class="category-row">
             <!-- 主分类 -->
-            <router-link :to="`/category/${category.id}`" class="main-category">
+            <NuxtLink :to="`/category/${category.id}`" class="main-category">
               {{ getCategoryName(category) }}
-            </router-link>
+            </NuxtLink>
             
             <!-- 子分类 -->
             <template v-if="category.subCategories && category.subCategories.length > 0">
               <template v-for="subCategory in category.subCategories" :key="subCategory.id">
                 <span class="separator">|</span>
-                <router-link :to="`/category/${subCategory.id}`">
+                <NuxtLink :to="`/category/${subCategory.id}`">
                   {{ getCategoryName(subCategory) }}
-                </router-link>
+                </NuxtLink>
               </template>
             </template>
           </div>

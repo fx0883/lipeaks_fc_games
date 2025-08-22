@@ -2,7 +2,7 @@
 // Copyright (C) 2024 Lipeaks FC Games
 
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+
 
 /**
  * 分类国际化组合函数
@@ -18,14 +18,14 @@ export function useCategoryI18n() {
    */
   const getCategoryName = (category) => {
     if (!category) return ''
-    
-    // 如果有 nameKey，使用国际化
-    if (category.nameKey) {
+
+    // 如果有 nameKey，使用国际化（确保为字符串）
+    if (typeof category.nameKey === 'string' && category.nameKey.length > 0) {
       return t(category.nameKey)
     }
-    
-    // 向后兼容：如果没有 nameKey，回退到 name 字段
-    return category.name || ''
+
+    // 向后兼容：如果没有 nameKey，回退到 name 字段（确保为字符串）
+    return typeof category.name === 'string' ? category.name : ''
   }
 
   /**
@@ -35,14 +35,14 @@ export function useCategoryI18n() {
    */
   const getCategoryDescription = (category) => {
     if (!category) return ''
-    
-    // 如果有 descriptionKey，使用国际化
-    if (category.descriptionKey) {
+
+    // 如果有 descriptionKey，使用国际化（确保为字符串）
+    if (typeof category.descriptionKey === 'string' && category.descriptionKey.length > 0) {
       return t(category.descriptionKey)
     }
-    
-    // 向后兼容：如果没有 descriptionKey，回退到 description 字段
-    return category.description || ''
+
+    // 向后兼容：如果没有 descriptionKey，回退到 description 字段（确保为字符串）
+    return typeof category.description === 'string' ? category.description : ''
   }
 
   /**
@@ -117,7 +117,7 @@ export function useCategoryI18n() {
    * @returns {string} 简短的子分类名称
    */
   const getShortSubCategoryName = (subCategory, mainCategoryPrefix = '') => {
-    const fullName = getCategoryName(subCategory)
+    const fullName = String(getCategoryName(subCategory) || '')
     
     if (!mainCategoryPrefix) {
       // 自动检测前缀
